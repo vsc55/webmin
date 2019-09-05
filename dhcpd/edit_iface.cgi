@@ -99,7 +99,6 @@ if (&foreign_check("net")) {
 	$sz = scalar(@ifaces);
     my @iface_sel;
 	foreach $i (@ifaces) {
-		$n = $i->{'fullname'};
         push(@iface_sel,[$i,$i." (".&net::iface_type($i).")", ($got{$i} ? 'selected' : '') ]);
 		}
     $val = &ui_select("iface",undef,\@iface_sel,$sz,1);
