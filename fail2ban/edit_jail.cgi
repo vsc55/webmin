@@ -83,18 +83,12 @@ my $atable = &ui_columns_start([
 		]);
 my $i = 0;
 foreach my $a (@{$actionlist->{'words'}}, undef) {
-	my $action;
-	my %opts;
-	if ($a && $a =~ /^(\S.*\S)\[(.*)\]$/) {
-		$action = $1;
-		%opts = map { my ($n, $v) = split(/=/, $_);
-			      $v =~ s/^"(.*)"/$1/;
-			      ($n, $v) } split(/,\s+/, $2);
-		}
-	else {
-		$action = $a;
-		}
-	my @oopts = grep { !/^(name|port|protocol)$/ } (keys %opts);
+	my ($action, $opts) = $a ? &parse_action_definition($a) : (undef, []);
+	my %opts = map { ($_->[0], $_->[1]) } @$opts;
+	my @oopts = grep { $_->[0] !~ /^(name|port|protocol)$/ } @$opts;
+	my $others = join("", map { $_->[2] } @oopts);
+	$others =~ s/^\s*,?\s*//;
+	$others =~ s/\s*,?\s*$//;
 	$atable .= &ui_columns_row([
 		&ui_select("action_$i", $action,
 		   [ [ "", "&nbsp;" ],
@@ -107,8 +101,7 @@ foreach my $a (@{$actionlist->{'words'}}, undef) {
 			     [ 'tcp', 'TCP' ],
 			     [ 'udp', 'UDP' ],
 			     [ 'icmp', 'ICMP' ] ]),
-		&ui_textbox("others_$i",
-			join(" ", map { $_."=".$opts{$_} } @oopts), 40),
+		&ui_textbox("others_$i", $others, 40),
 		]);
 	$i++;
 	}

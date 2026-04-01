@@ -222,6 +222,122 @@ while($v =~ /\S/) {
 $dir->{'words'} = \@w;
 }
 
+# parse_action_definition(string)
+# Splits an action definition into a name and list of option triples,
+# each containing a name, parsed value and raw text chunk
+sub parse_action_definition
+{
+my ($str) = @_;
+return (undef, []) if (!defined($str));
+if ($str =~ /^(\S.*\S)\[(.*)\]$/) {
+	return ($1, [ &parse_action_options($2) ]);
+	}
+return ($str, []);
+}
+
+# parse_action_options(string)
+# Parses action options, handling quoted values and comma/space separators
+sub parse_action_options
+{
+my ($str) = @_;
+my @rv;
+my $len = length($str);
+my $i = 0;
+while ($i < $len) {
+	while ($i < $len) {
+		my $ch = substr($str, $i, 1);
+		last if ($ch !~ /[\s,]/);
+		$i++;
+		}
+	last if ($i >= $len);
+	my $start = $i;
+
+	my $name = "";
+	while ($i < $len) {
+		my $ch = substr($str, $i, 1);
+		last if ($ch eq "=" || $ch =~ /[\s,]/);
+		$name .= $ch;
+		$i++;
+		}
+	last if (!length($name));
+
+	while ($i < $len && substr($str, $i, 1) =~ /\s/) {
+		$i++;
+		}
+
+	# Support option names without values, although most action
+	# parameters are expected to be name=value pairs.
+	if ($i >= $len || substr($str, $i, 1) ne "=") {
+		while ($i < $len && substr($str, $i, 1) =~ /\s/) {
+			$i++;
+			}
+		$i++ if ($i < $len && substr($str, $i, 1) eq ",");
+		push(@rv, [ $name, undef, substr($str, $start, $i - $start) ]);
+		next;
+		}
+
+	$i++;
+	while ($i < $len && substr($str, $i, 1) =~ /\s/) {
+		$i++;
+		}
+
+	my ($value, $ni) = &parse_action_option_value($str, $i);
+	push(@rv, [ $name, $value, substr($str, $start, $ni - $start) ]);
+	$i = $ni;
+	}
+return @rv;
+}
+
+# parse_action_option_value(string, index)
+# Returns an option value and the next parse position
+sub parse_action_option_value
+{
+my ($str, $i) = @_;
+my $len = length($str);
+my $value = "";
+if ($i < $len) {
+	my $quote = substr($str, $i, 1);
+	if ($quote eq "'" || $quote eq "\"") {
+		$i++;
+		while ($i < $len) {
+			my $ch = substr($str, $i, 1);
+			if ($ch eq "\\") {
+				if ($i+1 < $len) {
+					my $next = substr($str, $i+1, 1);
+					if ($next eq $quote || $next eq "\\") {
+						$value .= $next;
+						$i += 2;
+						next;
+						}
+					}
+				$value .= $ch;
+				$i++;
+				next;
+				}
+			if ($ch eq $quote) {
+				$i++;
+				last;
+				}
+			$value .= $ch;
+			$i++;
+			}
+		}
+	else {
+		while ($i < $len) {
+			my $ch = substr($str, $i, 1);
+			last if ($ch eq "," || $ch =~ /\s/);
+			$value .= $ch;
+			$i++;
+			}
+		}
+	}
+while ($i < $len && substr($str, $i, 1) =~ /\s/) {
+	$i++;
+	}
+$i++ if ($i < $len && substr($str, $i, 1) eq ",");
+return ($value, $i);
+}
+
 # create_section(file, &section)
 # Add a new section to a file
 sub create_section

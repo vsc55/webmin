@@ -1,5 +1,8 @@
 ## Changelog
 
+#### 2.631 (April, 2026)
+* Fix to correctly preserve full quoted action parameters in the Fail2Ban jail editor [#2647](https://github.com/webmin/webmin/issues/2647)
+
 #### 2.630 (March 24, 2026)
 * Add improvements to user input validation across all modules
 * Update Authentic theme to the latest version with various improvements and fixes:

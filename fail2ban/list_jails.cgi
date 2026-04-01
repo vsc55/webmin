@@ -28,7 +28,7 @@ foreach my $j (@jails) {
 	my $action_dir = &find("action", $j);
 	my $action = "";
 	if ($action_dir) {
-		$action = join("&nbsp;|&nbsp;",
+		$action = join(",&nbsp;",
 			map { /^([^\[]+)/; &html_escape("$1") }
 			    @{$action_dir->{'words'}});
 		}
