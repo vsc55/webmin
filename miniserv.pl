@@ -1721,7 +1721,8 @@ if ($header{'user-agent'} =~ /webmin/i ||
 # Check for SSL authentication
 my $trust_ssl = $config{'trust_real_ip'} && !$config{'no_trust_ssl'};
 if ($use_ssl && $verified_client ||
-    $trust_ssl && $header{'x-ssl-client-dn'}) {
+    $trust_ssl && $header{'x-ssl-client-dn'} &&
+                  $header{'x-ssl-client-verifiy'} !~ /^(failed|none)/i) {
 	if ($use_ssl && $verified_client) {
 		$peername = Net::SSLeay::X509_NAME_oneline(
 				Net::SSLeay::X509_get_subject_name(
