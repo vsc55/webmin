@@ -341,7 +341,7 @@ local $ptable = &ui_columns_start([
 	$noquote ? ( ) : ( $text{'edit_quote'} ),
 	$text{'edit_must'},
 	], 100, 0, undef, undef);
-local @a = (@{$cmd->{'args'}}, { });
+local @a = (@{$cmd->{'args'}}, { 'quote' => 1 });
 for(my $i=0; $i<@a; $i++) {
 	local @cols;
 	push(@cols, &ui_textbox("name_$i", $a[$i]->{'name'}, 10));
