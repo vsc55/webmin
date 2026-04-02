@@ -3179,7 +3179,11 @@ if ($user) {
 	push(@headers, [ "Authorization", "Basic $auth" ]);
 	}
 foreach my $hname (keys %$headers) {
-	push(@headers, [ $hname, $headers->{$hname} ]);
+	my $hv = $headers->{$hname};
+	$hv = [ $hv ] if (!ref($hv));
+	foreach my $v (@$hv) {
+		push(@headers, [ $hname, $v ]);
+		}
 	}
 
 # Actually download it
@@ -3393,7 +3397,11 @@ if ($user) {
 	}
 @headers = grep { !$headers->{$_->[0]} } @headers;
 foreach my $hname (keys %$headers) {
-	push(@headers, [ $hname, $headers->{$hname} ]);
+	my $hv = $headers->{$hname};
+	$hv = [ $hv ] if (!ref($hv));
+	foreach my $v (@$hv) {
+		push(@headers, [ $hname, $v ]);
+		}
 	}
 
 # Actually download it
