@@ -91,7 +91,7 @@ if (!$gconfig{'tempdir'} && &foreign_available("webmin")) {
 	foreach my $disk (sort { length($b->{'dir'}) <=>
 				 length($a->{'dir'}) } @$disks) {
 		if (&is_under_directory($disk->{'dir'}, $tmp)) {
-			if ($disk->{'total'} <= $small) {
+			if ($disk->{'total'} && $disk->{'total'} <= $small) {
 				# Too small
 				push(@rv, { 'type' => 'warning',
 					    'level' => 'info',
