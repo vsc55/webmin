@@ -14,6 +14,8 @@ if (!%pinfo) {
 	exit;
 	}
 
+print &ui_form_start("renice_proc.cgi");
+print &ui_hidden("pid", $ARGV[0]);
 print &ui_table_start($text{'edit_title'}, "width=100%", 4,
 		      [ "width=20%", "width=30%", "width=20%", "width=30%" ]);
 
@@ -49,16 +51,29 @@ print &ui_table_row($text{'size'}, $pinfo{'bytes'} ? &nice_size($pinfo{'bytes'})
 print &ui_table_row($text{'runtime'}, $pinfo{'time'});
 
 # Nice level
-print &ui_form_start("renice_proc.cgi");
-print &ui_hidden("pid", $ARGV[0]);
+local $nice_value = $pinfo{'nice'};
+$nice_value =~ s/^\s+// if (defined($nice_value));
+$nice_value =~ s/\s+$// if (defined($nice_value));
+$nice_value =~ s/^\+// if (defined($nice_value));
+local $submitjs =
+	"onchange='this.parentNode.getElementsByTagName(\"input\")[0].click()'";
+local $l = scalar(@nice_range);
 print &ui_table_row(&hlink($text{'nice'},"nice"),
-	&indexof($pinfo{nice}, @nice_range) < 0 ? $pinfo{nice} :
-		&nice_selector("nice", $pinfo{nice}).
-		&ui_submit($text{'proc_submit'}), 3);
+	&ui_select("nice", $nice_value,
+	  [ map { [ $_, $_.($_ == $nice_range[0] ? " ($text{'edit_prihigh'})" :
+		    $_ == 0 ? " ($text{'edit_pridef'})" :
+		    $_ == $nice_range[$l-1]
+		    	? " ($text{'edit_prilow'})"
+			: "") ] } @nice_range ],
+		   1, 0, 1, 0, $submitjs).
+	&ui_submit("", "nice_submit_hidden", 0, "style='display:none'"), 3);
 
 # IO scheduling class, if support
-if (defined(&os_list_scheduling_classes) &&
-    (@classes = &os_list_scheduling_classes())) {
+local @classes;
+local ($class, $prio);
+local $has_sched = defined(&os_list_scheduling_classes) &&
+		   (@classes = &os_list_scheduling_classes());
+if ($has_sched) {
 	($class, $prio) = &os_get_scheduling_class($pinfo{'pid'});
 	($got) = grep { $_->[0] == $class } @classes;
 	if (!$got) {
@@ -66,13 +81,17 @@ if (defined(&os_list_scheduling_classes) &&
 		unshift(@classes, [ $class, $text{'default'} ]);
 		}
 	print &ui_table_row(&hlink($text{'sclass'},"sclass"),
-		&ui_select("sclass", $class, \@classes));
+		&ui_select("sclass", $class, \@classes, 1, 0, 0, 0,
+			   $submitjs).
+		&ui_submit("", "sclass_submit_hidden", 0,
+			   "style='display:none'"));
 	print &ui_table_row(&hlink($text{'sprio'},"sprio"),
 		&ui_select("sprio", $prio,
-			   [ &os_list_scheduling_priorities() ], 1, 0, 1));
+			   [ &os_list_scheduling_priorities() ], 1, 0, 1, 0,
+			   $submitjs).
+		&ui_submit("", "sprio_submit_hidden", 0,
+			   "style='display:none'"));
 	}
-
-print &ui_form_end();
 
 # Extra OS-specific info
 foreach $k (keys %pinfo) {
@@ -81,6 +100,7 @@ foreach $k (keys %pinfo) {
 		}
 	}
 print &ui_table_end();
+print &ui_form_end();
 
 print "<table width=100%><tr>\n";
 if ($access{'simple'}) {
