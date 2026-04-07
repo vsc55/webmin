@@ -4,6 +4,8 @@
 
 require './status-lib.pl';
 $access{'sched'} || &error($text{'sched_ecannot'});
+&foreign_require("mailboxes");
+my %mconfig = &foreign_config("mailboxes");
 &ui_print_header(undef, $text{'sched_title'}, "");
 
 print &ui_form_start("save_sched.cgi", "post");
@@ -52,21 +54,33 @@ print &ui_table_row($text{'sched_warn'},
 
 # Send email to
 my $e = $config{'sched_email'};
-my @opts = ( [ 1, $text{'sched_none'} ],
-	     [ 0, &ui_textbox("email", $e eq '*' ? undef : $e, 30) ] );
+my $edef = (!$e || $e eq '*' && !$gconfig{'webmin_email_to'}) ? 1 :
+	   $e eq '*' ? 2 : 0;
+my $edis = &js_disable_inputs([ "email" ], [ ], "onClick");
+my $een = &js_disable_inputs([ ], [ "email" ], "onClick");
+my @opts = (
+	[ 1, $text{'sched_none'}."<br>", $edis ],
+	[ 0, $text{'sched_email_custom'}." ".
+	     &ui_textbox("email", $e eq '*'
+	     	? undef
+		: $e, 30, $edef != 0), $een
+	] );
 if ($gconfig{'webmin_email_to'}) {
 	splice(@opts, 1, 0, [ 2, &text('sched_email_def',
-				   "<tt>$gconfig{'webmin_email_to'}</tt>") ]);
+				 "<tt>$gconfig{'webmin_email_to'}</tt>")."<br>",
+			    $edis ]);
 	}
 print &ui_table_row($text{'sched_email'},
-	&ui_radio("email_def",
-		  !$e ? 1 : $e eq '*' ? 2 : 0,
-		  \@opts));
+		    &ui_radio("email_def", $edef, \@opts));
 
 # From: address
+my $fromdef = $mconfig{'webmin_from'} =~ /\@/ ? $mconfig{'webmin_from'} :
+	      !$mconfig{'webmin_from'}
+	      	? "webmin-noreply\@".&mailboxes::get_from_domain()
+		: "$mconfig{'webmin_from'}\@".&mailboxes::get_from_domain();
 print &ui_table_row($text{'sched_from'},
 	&ui_opt_textbox("from", $config{'sched_from'}, 30,
-		        "$text{'default'} (webmin)"), 3);
+		        &text('sched_from_def', "<tt>$fromdef</tt>")), 3);
 
 # SMTP server
 print &ui_table_row($text{'sched_smtp'},
