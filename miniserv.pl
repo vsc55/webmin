@@ -1818,7 +1818,7 @@ if ($config{'session'} && !$deny_authentication &&
 				}
 			&run_logout_script($louser, $sid,
 					   $loghost, $localip);
-			&write_logout_utmp($louser, $actphost);
+			&write_logout_utmp($louser, $acpthost);
 			}
 		}
 	elsif ($in{'session'}) {
