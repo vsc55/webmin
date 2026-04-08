@@ -18,7 +18,8 @@ if (@tmpls) {
 		$msg = $tmpl->{'email'};
 		$msg = substr($msg, 0, 80)." ..." if (length($msg) > 80);
 		print &ui_checked_columns_row(
-			[ &ui_link("edit_tmpl.cgi?id=$tmpl->{'id'}","$tmpl->{'desc'}"), &html_escape($msg) ],
+			[ &ui_link("edit_tmpl.cgi?id=$tmpl->{'id'}",
+				   &html_escape($tmpl->{'desc'})), &html_escape($msg) ],
 		      	\@tds, "d", $tmpl->{'id'});
 		}
 	print &ui_columns_end();
