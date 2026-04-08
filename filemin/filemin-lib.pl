@@ -108,21 +108,21 @@ sub get_paths {
 	@WebminCore::remote_user_info = @remote_user_info;
     }
     elsif ($access{'work_as_dir'}) {
-	# User is based on the directory
-	my $switchto;
-	foreach my $du (split(/\s+/, $access{'work_as_dir'})) {
-		my ($user, $dir) = split(/:/, $du, 2);
-		if (&is_under_directory($dir, $path)) {
-			$switchto = $user;
-			last;
-		}
-	}
-	$switchto ||= $access{'work_as_user'};
-        @remote_user_info = getpwnam($switchto);
-        @remote_user_info ||
-            &error("Unix user $switchto does not exist!");
-        &switch_to_unix_user(\@remote_user_info);
-	@WebminCore::remote_user_info = @remote_user_info;
+        # User is based on the directory
+        my $switchto;
+        foreach my $du (split(/\s+/, $access{'work_as_dir'})) {
+            my ($user, $dir) = split(/:/, $du, 2);
+            if (&is_under_directory($dir, $path)) {
+                $switchto = $user;
+                last;
+            }
+        }
+        $switchto ||= $access{'work_as_user'};
+            @remote_user_info = getpwnam($switchto);
+            @remote_user_info ||
+                &error("Unix user $switchto does not exist!");
+            &switch_to_unix_user(\@remote_user_info);
+        @WebminCore::remote_user_info = @remote_user_info;
     }
     elsif ($access{'work_as_user'}) {
         # A specific user
