@@ -133,32 +133,7 @@ sub get_paths {
     }
 
     # Get and check allowed paths
-    @allowed_paths = split(/\s+/, $access{'allowed_paths'});
-    if (&get_product_name() eq 'usermin') {
-        # Add paths from Usermin config
-        push(@allowed_paths, split(/\t+/, $config{'allowed_paths'}));
-    }
-    if ($remote_user_info[0] eq 'root' && @allowed_paths == 1 &&
-        ($allowed_paths[0] eq '$HOME' || $allowed_paths[0] eq '$ROOT')) {
-	# If the user is running as root and the only allowed path is $HOME
-	# or $ROOT, assume that all files are allowed
-        $base = "/";
-        @allowed_paths = ( $base );
-    } else {
-	# Resolve actual allowed paths
-        @allowed_paths = map { $_ eq '$HOME' ? @remote_user_info[7] :
-			       $_ eq '$ROOT' ? '/' : $_ } @allowed_paths;
-        @allowed_paths = map { s/\$USER/$remote_user/g; $_ } @allowed_paths;
-        @allowed_paths = &unique(@allowed_paths);
-	@allowed_paths = map { my $p = $_; $p =~ s/\/\.\//\//; $p }
-			     @allowed_paths;
-        if (scalar(@allowed_paths) == 1) {
-            $base = $allowed_paths[0];
-        } else {
-            $base = '/';
-        }
-    }
-    @allowed_paths = map { &simplify_path($_) } &unique(@allowed_paths);
+    @allowed_paths = &get_allowed_paths();
     
     # Work out max upload size
     if (&get_product_name() eq 'usermin') {
@@ -197,6 +172,38 @@ sub get_paths {
         &read_file_cached("$confdir/.config", \%userconfig);
     }
     &load_module_preferences(&get_module_name(), \%userconfig);
+}
+
+sub get_allowed_paths {
+    my @paths;
+    @paths = split(/\s+/, $access{'allowed_paths'});
+    my @rui = $remote_user ? getpwnam($remote_user)
+		    	   : getpwuid($<);
+    if (&get_product_name() eq 'usermin') {
+        # Add paths from Usermin config
+        push(@paths, split(/\t+/, $config{'allowed_paths'}));
+    }
+    if ($rui[0] eq 'root' && @paths == 1 &&
+        ($allowed_paths[0] eq '$HOME' || $allowed_paths[0] eq '$ROOT')) {
+	# If the user is running as root and the only allowed path is $HOME
+	# or $ROOT, assume that all files are allowed
+        $base = "/";
+        @paths = ( $base );
+    } else {
+	# Resolve actual allowed paths
+        @paths = map { $_ eq '$HOME' ? @rui[7] :
+			       $_ eq '$ROOT' ? '/' : $_ } @paths;
+        @paths = map { s/\$USER/$remote_user/g; $_ } @paths;
+        @paths = &unique(@paths);
+	@paths = map { my $p = $_; $p =~ s/\/\.\//\//; $p }
+			     @paths;
+        if (scalar(@paths) == 1) {
+            $base = $allowed_paths[0];
+        } else {
+            $base = '/';
+        }
+    }
+    return map { &simplify_path($_) } &unique(@paths);
 }
 
 sub print_template {
