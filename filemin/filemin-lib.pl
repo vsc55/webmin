@@ -9,6 +9,11 @@ use Encode qw(decode encode);
 use File::Basename;
 eval "use File::MimeInfo";
 
+our ($path, $quote_escaped_path, $urlized_path, $base, $cwd, $upload_max,
+     $confdir, $template_name, $bookmarks, $page, $pagelimit, $edit_icon,
+     $rename_icon, $extract_icon, $goto_icon, $root_icon, $head);
+our (%access, %userconfig, %allowed_for_edit);
+our (@allowed_paths, @allowed_for_edit, @remote_user_info);
 
 sub get_acls_status {
   return has_command('getfacl');
