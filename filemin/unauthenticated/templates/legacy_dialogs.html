@@ -142,12 +142,15 @@
 <div id="downFromUrlDialog" class="modal">
   <form id="downFromUrlForm" action="http_download.cgi" method="post">
     <div class="form-group">
-      <label>$text{'dialog_file_url'}</label>
-      <input name="link" type="url"><br>
-      <label>$text{'dialog_user_name'}</label>
-      <input name="username" type="text"><br>
-      <label>$text{'dialog_user_pass'}</label>
-      <input name="password" type="password">
+        <label style="display: block;">$text{'dialog_file_url'} <sup class="text-danger">&nbsp;*</sup><br>
+            <input name="link" type="url" data-placement="top" data-content="$text{'provide_url'}" data-trigger="manual" autocomplete="url" style="font-weight: normal;">
+        </label>
+        <label style="display: block;">$text{'dialog_user_name'}<br>
+            <input name="username" type="text" autocomplete="off" style="font-weight: normal;">
+        </label>
+        <label style="display: block;">$text{'dialog_user_pass'}<br>
+            <input name="password" type="password" autocomplete="new-password" style="font-weight: normal;">
+        </label>
       <input type='hidden' name='path' value='$quote_escaped_path'>
     </div>
   </form>
