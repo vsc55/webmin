@@ -8,7 +8,10 @@ $access{'sched'} || &error($text{'sched_ecannot'});
 &error_setup($text{'sched_err'});
 
 # Parse and save inputs
-if ($in{'email_def'} == 1) {
+if ($in{'email_def'} == 2 && !$gconfig{'webmin_email_to'}) {
+	$in{'email_def'} = 1;
+	}
+if ($in{'email_def'} == 0) {
 	$in{'email'} =~ /\S/ || &error($text{'sched_eemail'});
 	}
 $config{'sched_email'} = $in{'email_def'} == 1 ? '' :
