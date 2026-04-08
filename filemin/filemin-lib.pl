@@ -138,7 +138,7 @@ sub get_paths {
     }
 
     # Get and check allowed paths
-    @allowed_paths = &get_allowed_paths();
+    @allowed_paths = &get_allowed_paths($path);
     
     # Work out max upload size
     if (&get_product_name() eq 'usermin') {
@@ -180,30 +180,63 @@ sub get_paths {
 }
 
 sub get_allowed_paths {
-    my @paths;
-    @paths = split(/\s+/, $access{'allowed_paths'});
-    my @rui = $remote_user ? getpwnam($remote_user)
-		    	   : getpwuid($<);
+    my ($path) = @_;
+    if (!defined($access{'allowed_paths'})) {
+        %access = &get_module_acl();
+    }
+
+    my @paths = split(/\s+/, $access{'allowed_paths'});
+    my @rui;
+    if (&get_product_name() eq 'usermin') {
+        @rui = $remote_user ? getpwnam($remote_user)
+                            : getpwuid($<);
+    }
+    elsif ($access{'work_as_root'}) {
+        @rui = getpwnam('root');
+    }
+    elsif ($access{'work_as_dir'}) {
+        my $switchto;
+        foreach my $du (split(/\s+/, $access{'work_as_dir'})) {
+            my ($user, $dir) = split(/:/, $du, 2);
+            if (&is_under_directory($dir, $path)) {
+                $switchto = $user;
+                last;
+            }
+        }
+        $switchto ||= $access{'work_as_user'};
+        @rui = getpwnam($switchto);
+        @rui || &error("Unix user $switchto does not exist!");
+    }
+    elsif ($access{'work_as_user'}) {
+        @rui = getpwnam($access{'work_as_user'});
+        @rui || &error("Unix user $access{'work_as_user'} does not exist!");
+    }
+    else {
+        @rui = $remote_user ? getpwnam($remote_user)
+                            : getpwuid($<);
+    }
     if (&get_product_name() eq 'usermin') {
         # Add paths from Usermin config
         push(@paths, split(/\t+/, $config{'allowed_paths'}));
     }
     if ($rui[0] eq 'root' && @paths == 1 &&
-        ($allowed_paths[0] eq '$HOME' || $allowed_paths[0] eq '$ROOT')) {
-	# If the user is running as root and the only allowed path is $HOME
-	# or $ROOT, assume that all files are allowed
+        ($paths[0] eq '$HOME' || $paths[0] eq '$ROOT')) {
+        # If the user is running as root and the only allowed path is $HOME
+        # or $ROOT, assume that all files are allowed
         $base = "/";
         @paths = ( $base );
     } else {
-	# Resolve actual allowed paths
-        @paths = map { $_ eq '$HOME' ? @rui[7] :
-			       $_ eq '$ROOT' ? '/' : $_ } @paths;
+        # Resolve actual allowed paths
+        @paths = map { $_ eq '$HOME'
+            ? $rui[7]
+            : $_ eq '$ROOT'
+                ? '/'
+                : $_ } @paths;
         @paths = map { s/\$USER/$remote_user/g; $_ } @paths;
         @paths = &unique(@paths);
-	@paths = map { my $p = $_; $p =~ s/\/\.\//\//; $p }
-			     @paths;
+	    @paths = map { my $p = $_; $p =~ s/\/\.\//\//; $p } @paths;
         if (scalar(@paths) == 1) {
-            $base = $allowed_paths[0];
+            $base = $paths[0];
         } else {
             $base = '/';
         }
