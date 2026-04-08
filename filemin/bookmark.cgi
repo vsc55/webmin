@@ -6,9 +6,9 @@ require './filemin-lib.pl';
 
 &get_paths();
 
-if(!-e "$confdir/.bookmarks") {
-    utime time, time, "$configdir/.bookmarks";
-}
+if (!-e "$confdir/.bookmarks") {
+	utime time, time, "$configdir/.bookmarks";
+	}
 
 $bookmarks = &read_file_lines($confdir.'/.bookmarks');
 push @$bookmarks, $path;

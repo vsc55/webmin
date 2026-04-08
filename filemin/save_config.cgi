@@ -8,17 +8,24 @@ get_paths();
 
 $columns = $in{'columns'};
 $columns =~ s/\0/,/g;
-&error("$text{'config_per_page'} $text{'error_numeric'}") unless($in{'per_page'} eq int($in{'per_page'}));
+&error("$text{'config_per_page'} $text{'error_numeric'}")
+	unless ($in{'per_page'} eq int($in{'per_page'}));
+my $detect_encoding =
+	$in{'config_portable_module_filemanager_editor_detect_encoding'};
+my $show_dot_files =
+	$in{'config_portable_module_filemanager_show_dot_files'};
 %config = (
-    'columns' => $columns,
-    'per_page' => $in{'per_page'},
-    'config_portable_module_filemanager_editor_detect_encoding' => $in{'config_portable_module_filemanager_editor_detect_encoding'},
-    'config_portable_module_filemanager_show_dot_files' => $in{'config_portable_module_filemanager_show_dot_files'},
-);
+	'columns' => $columns,
+	'per_page' => $in{'per_page'},
+	'config_portable_module_filemanager_editor_detect_encoding' =>
+		$detect_encoding,
+	'config_portable_module_filemanager_show_dot_files' =>
+		$show_dot_files,
+	);
 my $max_allowed = $in{'max_allowed'};
-if($max_allowed) {
-    $config{'max_allowed'} = $max_allowed;
-}
+if ($max_allowed) {
+	$config{'max_allowed'} = $max_allowed;
+	}
 
 &write_file("$confdir/.config", \%config);
 &save_module_preferences($module_name, \%config);

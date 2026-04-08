@@ -11,8 +11,8 @@ print $fh "$path\n";
 #$info = "Copied ".scalar(@list)." files to buffer";
 
 foreach $name (split(/\0/, $in{'name'})) {
-    print $fh "$name\n";
-}
+	print $fh "$name\n";
+	}
 
 close($fh);
 
