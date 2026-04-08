@@ -11,7 +11,8 @@ foreach my $l (&get_all_mysqld_files()) {
 	&lock_file($l);
 	}
 $conf = &get_mysql_config();
-($mysqld) = grep { $_->{'name'} eq 'mysqld' } @$conf;
+($mysqld) = grep { $_->{'name'} eq 'mysqld' ||
+		   $_->{'name'} eq 'mariadb' } @$conf;
 $mysqld || &error($text{'cnf_emysqld'});
 
 if ($in{'gen'}) {

@@ -13,7 +13,8 @@ if (!$conf) {
 	&ui_print_footer("", $text{'index_return'});
 	exit;
 	}
-($mysqld) = grep { $_->{'name'} eq 'mysqld' } @$conf;
+($mysqld) = grep { $_->{'name'} eq 'mysqld' ||
+		   $_->{'name'} eq 'mariadb' } @$conf;
 $mysqld || &error($text{'cnf_emysqld'});
 $mems = $mysqld->{'members'};
 
