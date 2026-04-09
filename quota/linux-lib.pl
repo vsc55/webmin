@@ -93,6 +93,9 @@ if ($_[0]->[2] =~ /^bind/ ||
 	return 0;
 	}
 
+my $hidden = &hidden_ext_quota_mode($_[0]->[0], $_[0]);
+return $hidden if ($hidden);
+
 return ( $_[1]->[3] =~ /usrquota|usrjquota/ || $_[0]->[3] =~ /usrquota|usrjquota/ ? 1 : 0 ) +
        ( $_[1]->[3] =~ /grpquota|grpjquota/      || $_[0]->[3] =~ /grpquota|grpjquota/ ? 2 : 0 );
 }
@@ -117,6 +120,7 @@ local $dir = $_[0]->[0];
 local %opts = map { $_, 1 } split(/,/, $_[0]->[3]);
 local $ufile = $_[1]->[3] =~ /(usrquota|usrjquota)=([^, ]+)/ ? $2 : undef;
 local $gfile = $_[1]->[3] =~ /(grpquota|grpjquota)=([^, ]+)/ ? $2 : undef;
+local $hidden = &hidden_ext_quota_mode($dir, $_[0]);
 if ($_[0]->[2] eq "xfs") {
 	# For XFS, assume enabled if setup in mtab
 	$rv += 1 if ($opts{'quota'} || $opts{'usrquota'} ||
@@ -125,9 +129,10 @@ if ($_[0]->[2] eq "xfs") {
 		     $opts{'gquota'});
 	return $rv + 4;
 	}
-if ($_[0]->[4]%2 == 1) {
+if ($hidden & 1 || $_[0]->[4]%2 == 1) {
 	# test user quotas
-	if (-r "$dir/quota.user" || -r "$dir/aquota.user" ||
+	if ($hidden & 1 ||
+	    -r "$dir/quota.user" || -r "$dir/aquota.user" ||
 	    $ufile && -r "$dir/$ufile") {
 		local $stout = &supports_status($dir, "user");
 		if ($stout =~ /is\s+(on|off|enabled|disabled)/) {
@@ -158,9 +163,10 @@ if ($_[0]->[4]%2 == 1) {
 			}
 		}
 	}
-if ($_[0]->[4] > 1) {
+if ($hidden & 2 || $_[0]->[4] > 1) {
 	# test group quotas
-	if (-r "$dir/quota.group" || -r "$dir/aquota.group" ||
+	if ($hidden & 2 ||
+	    -r "$dir/quota.group" || -r "$dir/aquota.group" ||
 	    $gfile && -r "$dir/$gfile") {
 		local $stout = &supports_status($dir, "group");
 		if ($stout =~ /is\s+(on|off|enabled|disabled)/) {
@@ -284,10 +290,11 @@ if ($out =~ /\s(\d+\.\d+)/) {
 &system_logged("modprobe quota_v2 >/dev/null 2>&1");
 
 local $fmt = $version >= 2 ? "vfsv0" : "vfsold";
+local $hidden = &hidden_ext_quota_mode($_[0]);
 if ($_[1]%2 == 1) {
 	# turn on user quotas
 	local $qf = $version >= 2 ? "aquota.user" : "quota.user";
-	if (!-s "$_[0]/$qf") {
+	if (!-s "$_[0]/$qf" && !($hidden & 1)) {
 		# Setting up for the first time
 		local $ok = 0;
 		if (&has_command("convertquota") && $version >= 2) {
@@ -311,7 +318,7 @@ if ($_[1]%2 == 1) {
 			&run_quotacheck($_[0]) ||
 				&run_quotacheck($_[0], "-u -f") ||
 				&run_quotacheck($_[0], "-u -f -m") ||
-				&run_quotacheck($_[0], "-u -f -m -c");
+				&run_quotacheck($_[0], "-u -f -m -c") ||
 				&run_quotacheck($_[0], "-u -f -m -c -F $fmt");
 			}
 		}
@@ -322,7 +329,7 @@ if ($_[1]%2 == 1) {
 if ($_[1] > 1) {
 	# turn on group quotas
 	local $qf = $version >= 2 ? "aquota.group" : "quota.group";
-	if (!-s "$_[0]/$qf") {
+	if (!-s "$_[0]/$qf" && !($hidden & 2)) {
 		# Setting up for the first time
 		local $ok = 0;
 		if (!$ok && &has_command("convertquota") && $version >= 2) {
@@ -749,6 +756,10 @@ or undef on failure. The mode must be one of :
 sub quotacheck
 {
 local $out;
+if (&hidden_ext_quota_mode($_[0])) {
+	return "Quota checking is not required on ext filesystems ".
+	       "using hidden quota inodes.\n";
+	}
 if ($_[1] == 0 || $_[1] == 1) {
 	&unlink_file("$_[0]/aquota.user.new");
 	}
@@ -765,8 +776,11 @@ if ($?) {
 		"$cmd $flag -f -m ".quotemeta($_[0])." 2>&1");
 	if ($?) {
 		# Try with the -F option
-		$out = &backquote_logged(
-			"$config{'quotacheck_command'} $flag -F ".quotemeta($_[0])." 2>&1");
+		foreach my $fmt ("vfsv1", "vfsv0", "vfsold") {
+			$out = &backquote_logged(
+				"$cmd $flag -f -m -F $fmt ".quotemeta($_[0])." 2>&1");
+			last if (!$?);
+			}
 		}
 	return $out if ($?);
 	}
@@ -999,6 +1013,27 @@ if (!$get_fs_cache{$fs}) {
 return $get_fs_cache{$fs} eq "xfs";
 }
 
+sub hidden_ext_quota_mode
+{
+my ($fs, $mnt) = @_;
+return $hidden_ext_quota_mode_cache{$fs}
+	if (defined($hidden_ext_quota_mode_cache{$fs}));
+$mnt ||= (grep { $_->[0] eq $fs } &mount::list_mounted())[0];
+return $hidden_ext_quota_mode_cache{$fs} = 0
+	if (!$mnt || $mnt->[2] !~ /^ext\d+$/ || !&has_command("tune2fs"));
+my $dev = $mnt->[3] =~ /(?:^|,)loop=([^,]+)/ ? $1 : $mnt->[1];
+$dev = &resolve_and_simplify($dev);
+&clean_language();
+my $out = &backquote_command("tune2fs -l ".quotemeta($dev)." 2>/dev/null");
+&reset_environment();
+my $rv = 0;
+if ($out =~ /^Filesystem features:\s+.*\bquota\b/m) {
+	$rv += 1 if ($out =~ /^User quota inode:\s+(\d+)/mi && $1 > 0);
+	$rv += 2 if ($out =~ /^Group quota inode:\s+(\d+)/mi && $1 > 0);
+	}
+return $hidden_ext_quota_mode_cache{$fs} = $rv;
+}
+
 =head2 can_set_user_quota(fs)
 
 Returns 1 for XFS, because different quota setting commands are needed
@@ -1057,7 +1092,7 @@ Returns 1 if some FS supports quota checking
 sub can_quotacheck
 {
 my ($fs) = @_;
-return !&is_xfs_fs($fs);
+return !&is_xfs_fs($fs) && !&hidden_ext_quota_mode($fs);
 }
 
 1;
