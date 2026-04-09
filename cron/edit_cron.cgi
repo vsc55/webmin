@@ -39,7 +39,7 @@ else {
 		}
 	}
 
-print &ui_form_start("save_cron.cgi");
+print &ui_form_start("save_cron.cgi", undef, undef, "id='edit_cron_form'");
 print &ui_hidden("new", $in{'new'});
 print &ui_hidden("idx", $in{'idx'});
 print &ui_hidden("search", $in{'search'});
@@ -122,41 +122,34 @@ if ($rangeable) {
 	}
 
 if (!$in{'new'}) {
-	# Save button
-	print &ui_submit($text{'save'});
-	print &ui_submit($text{'edit_saverun'}, 'saverun');
-	print &ui_form_end();
-
-	# Run button
-	print "<table class='ui_table_end_submit_right'><tr>\n";
+	my @rightbuttons;
 	if (!$rpd) {
-		print "<td>";
-		print &ui_form_start("exec_cron.cgi");
-		print &ui_hidden("idx", $in{'idx'});
-		print &ui_submit($text{'edit_run'});
-		print &ui_form_end();
-		print "</td>\n";
+		push(@rightbuttons,
+		     &ui_form_start("exec_cron.cgi").
+		     &ui_hidden("idx", $in{'idx'}).
+		     &ui_submit($text{'edit_run'}).
+		     &ui_form_end(undef, undef, 1));
 		}
 
-	# Clone button
-	print "<td>";
-	print &ui_form_start("edit_cron.cgi");
-	print &ui_hidden("clone", $in{'idx'});
-	print &ui_hidden("new", 1);
-	print &ui_submit($text{'edit_clone'});
-	print &ui_form_end();
-	print "</td>";
+	push(@rightbuttons,
+	     &ui_form_start("edit_cron.cgi").
+	     &ui_hidden("clone", $in{'idx'}).
+	     &ui_hidden("new", 1).
+	     &ui_submit($text{'edit_clone'}).
+	     &ui_form_end(undef, undef, 1));
 
-	# Delete button
 	if ($access{'delete'}) {
-		print "<td>";
-		print &ui_form_start("delete_cron.cgi");
-		print &ui_hidden("idx", $in{'idx'});
-		print &ui_submit($text{'delete'});
-		print &ui_form_end();
-		print "</td>\n";
+		push(@rightbuttons,
+		     &ui_form_start("delete_cron.cgi").
+		     &ui_hidden("idx", $in{'idx'}).
+		     &ui_submit($text{'delete'}).
+		     &ui_form_end(undef, undef, 1));
 		}
-	print "</tr></table>\n";
+	print &ui_form_end_side_by_side(
+		"edit_cron_form",
+		[ [ undef, $text{'save'} ],
+		  [ 'saverun', $text{'edit_saverun'} ] ],
+		\@rightbuttons);
 	}
 else {
 	print &ui_form_end([ [ undef, $text{'create'} ] ]);
