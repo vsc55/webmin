@@ -9,6 +9,9 @@ use Getopt::Long qw(:config no_ignore_case permute pass_through);
 use Term::ANSIColor qw(color);
 use Pod::Usage;
 
+# %ansi_specs
+# Map logical color names to preferred Term::ANSIColor specs and
+# compatibility fallbacks for older versions.
 my %ansi_specs = (
 	reset         => [ 'reset' ],
 	red           => [ 'red' ],
@@ -22,6 +25,9 @@ my %ansi_specs = (
 );
 my %ansi_cache;
 
+# ansi(name)
+# Resolve a named color to an ANSI escape sequence, with fallbacks
+# for older Term::ANSIColor versions that may not support newer names.
 sub ansi
 {
 my ($name) = @_;
@@ -33,6 +39,9 @@ foreach my $spec (@{ $ansi_specs{$name} || [] }) {
 return $ansi_cache{$name} = "";
 }
 
+# print_line(line)
+# Print a full line without relying on Perl's say syntax,
+# which is rejected by some older Perl parsers in this script.
 sub print_line
 {
 print @_;
@@ -50,6 +59,8 @@ if ($> != 0) {
 
 my $a0 = $ARGV[0];
 
+# main()
+# Parse global options and dispatch the requested Webmin CLI action.
 sub main
 {
 my ( %opt, $subcmd );
@@ -263,9 +274,9 @@ exit 0;
 }
 exit main( \@ARGV ) if !caller(0);
 
-# run_command - Run a subcommand 
-# $optref is a reference to an options object passed down from global options
-# like --help or a --config path.
+# run_command(optref, subcmd, remainref)
+# Run a subcommand with the resolved Webmin config and pass through
+# its exit status.
 sub run_command
 {
 my ( $optref, $subcmd, $remainref ) = @_;
@@ -301,6 +312,9 @@ else {
 	}
 }
 
+# get_command_path(root, subcmd, optref)
+# Resolve a CLI command name to an executable path under Webmin's
+# global or module-specific bin directories.
 sub get_command_path
 {
 my ($root, $subcmd, $optref) = @_;
@@ -359,6 +373,9 @@ else {
 	}
 }
 
+# list_commands(optref)
+# Enumerate available global and module CLI commands, optionally
+# rendering each command's DESCRIPTION section.
 sub list_commands
 {
 my ($optref) = @_;
@@ -421,7 +438,9 @@ if (wantarray) {
 	}
 }
 
-# Display either a short usage message (--help) or a full manual (--man)
+
+# man_command(optref, subcmd)
+# Display usage message.
 sub man_command
 {
 my ($optref, $subcmd) = @_;
@@ -442,6 +461,8 @@ else {
 close($PAGER);
 }
 
+# root(config)
+# Read the configured Webmin installation root from miniserv.conf.
 sub root
 {
 my ($config) = @_;
@@ -469,10 +490,9 @@ else {
 return $root;
 }
 
-# loadlibs - Load libraries from the Webmin vendor dir
-# as those may not be installed as dependency, because
-# Webmin already provides them from package manager
-# perspective.
+# loadlibs(optref)
+# Load bundled libraries from the Webmin vendor dir when they are not
+# available from system package dependencies.
 sub loadlibs
 {
 my ($optref) = @_;
