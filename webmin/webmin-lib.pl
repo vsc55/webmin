@@ -23,23 +23,27 @@ use Socket;
 
 our @cs_codes = ( 'cs_page', 'cs_text', 'cs_table', 'cs_header', 'cs_link' );
 our @cs_names = map { $text{$_} } @cs_codes;
+my $can_http_ssl = &can_use_http_ssl();
+my $http_proto = $can_http_ssl ? "https" : "http";
 
 our $osdn_host = "prdownloads.sourceforge.net";
 our $osdn_port = 80;
 
 our $update_host = "download.webmin.com";
-our $update_port = 80;
+our $update_ssl = $can_http_ssl;
+our $update_port = $update_ssl ? 443 : 80;
 our $update_page = "/updates/updates.txt";
-our $update_url = "http://$update_host:$update_port$update_page";
-our $redirect_host = "www.webmin.com";
-our $redirect_url = "http://$redirect_host/cgi-bin/redirect.cgi";
+our $update_url = "$http_proto://$update_host:$update_port$update_page";
+our $redirect_host = "webmin.com";
+our $redirect_url = "$http_proto://$redirect_host/cgi-bin/redirect.cgi";
 our $update_cache = "$module_config_directory/update-cache";
 if (!-r $update_cache) {
 	$update_cache = "$module_var_directory/update-cache";
 	}
 
-our $primary_host = "www.webmin.com";
-our $primary_port = 80;
+our $primary_host = "webmin.com";
+our $primary_ssl = $can_http_ssl;
+our $primary_port = $primary_ssl ? 443 : 80;
 
 our $webmin_key_email = "jcameron\@webmin.com";
 our $webmin_key_fingerprint = "1719 003A CE3E 5A41 E2DE  70DF D97A 3AE9 11F6 3C51";
@@ -53,12 +57,12 @@ our $authentic_key_fingerprint = "EC60 F3DA 9CB7 9ADC CF56  0D1F 121E 166D D9C8 
 our $standard_host = $primary_host;
 our $standard_port = $primary_port;
 our $standard_page = "/download/modules/standard.txt";
-our $standard_ssl = 0;
+our $standard_ssl = $primary_ssl;
 
 our $third_host = $primary_host;
 our $third_port = $primary_port;
 our $third_page = "/cgi-bin/third.cgi";
-our $third_ssl = 0;
+our $third_ssl = $primary_ssl;
 
 our $default_key_size = "2048";
 
@@ -776,7 +780,7 @@ return (0);
 =head2 list_standard_modules
 
 Returns a list containing the short names, URLs and descriptions of the
-standard Webmin modules from www.webmin.com. If an error occurs, returns the
+standard Webmin modules from webmin.com. If an error occurs, returns the
 message instead.
 
 =cut
@@ -2488,7 +2492,7 @@ return wantarray ? (\%installed, \@changed) : \%installed;
 
 =head2 get_latest_webmin_version
 
-Returns 1 and the latest version of Webmin available on www.webmin.com, or
+Returns 1 and the latest version of Webmin available on webmin.com, or
 0 and an error message
 
 =cut
@@ -2496,7 +2500,8 @@ sub get_latest_webmin_version
 {
 my $file = &transname();
 my ($error, $version, $release);
-&http_download($primary_host, $primary_port, '/', $file, \$error, undef, 0,
+&http_download($primary_host, $primary_port, '/', $file, \$error, undef,
+	       $primary_ssl,
 	       undef, undef, 5);
 return (0, $error) if ($error);
 open(FILE, "<".$file);

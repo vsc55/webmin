@@ -14,8 +14,8 @@ if ($in{'source'} == 0) {
 	$config{'upsource'} = undef;
 	}
 else {
-	$in{'other'} =~ /^http:\/\/([^:\/]+)(:(\d+))?(\/\S+)$/ ||
-		&error($text{'update_eurl'});
+	my ($host, $port, $page, $ssl) = &parse_http_url($in{'other'});
+	$host && $ssl != 2 || &error($text{'update_eurl'});
 	$config{'upsource'} = $in{'other'};
 	}
 $config{'update'} = $in{'enabled'};

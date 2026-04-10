@@ -187,7 +187,10 @@ if ($in{'sig'}) {
 			if ($in{'source'} == 2) {
 				# Download the key for this tar.gz
 				my ($sigtemp, $sigerror);
-				&http_download($update_host, $update_port, "/download/sigs/webmin-${full}${mini_type}.tar.gz-sig.asc", \$sigtemp, \$sigerror);
+				&http_download($update_host, $update_port,
+					       "/download/sigs/webmin-${full}${mini_type}.tar.gz-sig.asc",
+					       \$sigtemp, \$sigerror,
+					       undef, $update_ssl);
 				if ($sigerror) {
 					$ec = 4;
 					$emsg = &text('upgrade_edownsig',

@@ -48,7 +48,10 @@ elsif ($in{'source'} == 2) {
 	# find latest version at webmin.com by looking at index page
 	&error_setup($text{'upgrade_err3'});
 	$file = &transname();
-	&http_download('webmin.com', 80, '/index6.html', $file, \$error);
+	my ($index_host, $index_port, $index_page, $index_ssl) =
+		&parse_http_url($latest_page_url);
+	&http_download($index_host, $index_port, $index_page, $file, \$error,
+		       undef, $index_ssl);
 	$error && &inst_error($error);
 	open(FILE, "<$file");
 	while(<FILE>) {
@@ -150,7 +153,7 @@ $qfile = quotemeta($file);
 # Get list of updates
 $updatestemp = &transname();
 &http_download($update_host, $update_port, $update_page, $updatestemp,
-               \$updates_error);
+               \$updates_error, undef, $update_ssl);
 
 if ($in{'mode'} eq 'rpm') {
 	# Check if it is an RPM package

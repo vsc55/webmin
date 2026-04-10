@@ -9456,6 +9456,21 @@ else {
 	}
 }
 
+=head2 can_use_http_ssl()
+
+Returns 1 if this Webmin process can make outbound HTTPS connections, or 0
+if the required Net::SSLeay Perl module is not available.
+
+=cut
+my $can_use_http_ssl_cache;
+sub can_use_http_ssl
+{
+return $can_use_http_ssl_cache if (defined($can_use_http_ssl_cache));
+eval "use Net::SSLeay";
+$can_use_http_ssl_cache = $@ ? 0 : 1;
+return $can_use_http_ssl_cache;
+}
+
 =head2 make_http_connection(host, port, ssl, method, page, [&headers],
 			    [&certreqs])
 
@@ -9497,8 +9512,7 @@ if (&is_readonly_mode()) {
 my $rv = { 'fh' => time().$$ };
 if ($ssl) {
 	# Connect using SSL
-	eval "use Net::SSLeay";
-	$@ && return $text{'link_essl'};
+	&can_use_http_ssl() || return $text{'link_essl'};
 	eval "Net::SSLeay::SSLeay_add_ssl_algorithms()";
 	eval "Net::SSLeay::OpenSSL_add_all_algorithms()";
 	eval "Net::SSLeay::load_error_strings()";

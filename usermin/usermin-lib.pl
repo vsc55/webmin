@@ -25,17 +25,21 @@ if (!defined($gconfig{'noselfwebminup'})) {
 else {
 	$access{'upgrade'} = !$gconfig{'noselfwebminup'};
 	}
+my $can_http_ssl = &can_use_http_ssl();
+my $http_proto = $can_http_ssl ? "https" : "http";
 
 $usermin_miniserv_config = "$config{'usermin_dir'}/miniserv.conf";
 $usermin_config = "$config{'usermin_dir'}/config";
 
-$update_host = "www.webmin.com";
-$update_port = 80;
+$update_host = "webmin.com";
+$update_ssl = $can_http_ssl;
+$update_port = $update_ssl ? 443 : 80;
 $update_page = "/uupdates/uupdates.txt";
 
 $standard_usermin_dir = "/etc/usermin";
-$latest_rpm = "http://www.webmin.com/download/usermin-latest.noarch.rpm";
-$latest_tgz = "http://www.webmin.com/download/usermin-latest.tar.gz";
+$latest_page_url = "$http_proto://$update_host/index6.html";
+$latest_rpm = "$http_proto://$update_host/download/usermin-latest.noarch.rpm";
+$latest_tgz = "$http_proto://$update_host/download/usermin-latest.tar.gz";
 
 $default_key_size = 2048;
 

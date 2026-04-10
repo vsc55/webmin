@@ -8,14 +8,13 @@ if (!-r "$config{'usermin_dir'}/miniserv.conf") {
 	# Usermin not installed
 	exit(0);
 	}
+my $ssl = $update_ssl;
 
 # Get the update source
 if ($config{'upsource'}) {
-	$config{'upsource'} =~ /^http:\/\/([^:\/]+)(:(\d+))?(\/\S+)$/ ||
-		die "Invalid update source URL!";
-	$host = $1;
-	$port = $2 ? $3 : 80;
-	$page = $4;
+	($host, $port, $page, $ssl) =
+		&parse_http_url($config{'upsource'});
+	$host && $ssl != 2 || die "Invalid update source URL!";
 	}
 else {
 	$host = $update_host;
@@ -25,7 +24,7 @@ else {
 
 # Retrieve the updates list (format is  module version url support description )
 $temp = &transname();
-&http_download($host, $port, $page, $temp);
+&http_download($host, $port, $page, $temp, undef, undef, $ssl);
 open(UPDATES, "<".$temp);
 while(<UPDATES>) {
 	if (/^([^\t]+)\t+([^\t]+)\t+([^\t]+)\t+([^\t]+)\t+(.*)/) {
@@ -73,23 +72,33 @@ foreach $u (@updates) {
 		$rv .= &text('update_mok', $u->[0], $u->[1])."\n".
 		       $text{'update_fixes'}." : ".$u->[4]."\n\n";
 		if ($u->[2] =~ /^http:\/\/([^:\/]+)(:(\d+))?(\/\S+)$/) {
+			$mssl = 0;
 			$mhost = $1;
 			$mport = $2 ? $3 : 80;
 			$mpage = $4;
 			}
+		elsif ($u->[2] =~ /^https:\/\/([^:\/]+)(:(\d+))?(\/\S+)$/) {
+			$mssl = 1;
+			$mhost = $1;
+			$mport = $2 ? $3 : 443;
+			$mpage = $4;
+			}
 		elsif ($u->[2] =~ /^\/\S+$/) {
+			$mssl = $ssl;
 			$mhost = $host;
 			$mport = $port;
 			$mpage = $u->[2];
 			}
 		else {
+			$mssl = $ssl;
 			$mhost = $host;
 			$mport = $port;
 			($mpage = $page) =~ s/[^\/]+$//;
 			$mpage .= $u->[2];
 			}
 		$mtemp = &transname();
-		&http_download($mhost, $mport, $mpage, $mtemp, \$error);
+		&http_download($mhost, $mport, $mpage, $mtemp,
+			       \$error, undef, $mssl);
 		if ($error) {
 			$rv .= "$error\n\n";
 			last;
@@ -110,7 +119,10 @@ foreach $u (@updates) {
 
 # Check if a new version of usermin itself is available
 $file = &transname();
-&http_download('webmin.com', 80, '/index6.html', $file);
+my ($index_host, $index_port, $index_page, $index_ssl) =
+	&parse_http_url($latest_page_url);
+&http_download($index_host, $index_port, $index_page, $file,
+	       undef, undef, $index_ssl);
 open(FILE, "<".$file);
 while(<FILE>) {
 	if (/usermin-([0-9\.]+)\.tar\.gz/) {
@@ -133,7 +145,9 @@ if ($config{'upemail'} && $rv && &foreign_check("mailboxes")) {
 	local $version = $gconfig{'real_os_version'} || $gconfig{'os_version'};
 	local $myhost = &get_system_hostname();
 	$data .= "$myhost ($type $version)\n\n";
-	$data .= &text('update_rv', "http://$host:$port$page")."\n\n";
+	$data .= &text('update_rv',
+		       ($ssl ? "https://" : "http://").
+		       "$host:$port$page")."\n\n";
 	$data .= $rv;
 	&mailboxes::send_text_mail(&mailboxes::get_from_address(),
 				   $config{'upemail'},

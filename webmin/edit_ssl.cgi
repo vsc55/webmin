@@ -29,7 +29,7 @@ get_miniserv_config(\%miniserv);
 $@ = undef;
 eval "use Net::SSLeay";
 if ($@) {
-	print text('ssl_essl', "http://www.webmin.com/ssl.html"),"<p>\n";
+	print text('ssl_essl', "https://webmin.com/ssl.html"),"<p>\n";
 	if (foreign_available("cpan")) {
 		print text('ssl_cpan', "../cpan/download.cgi?source=3&cpan=Net::SSLeay&mode=2&return=/$module_name/&returndesc=".urlize($text{'index_return'})),"<p>\n";
 		}

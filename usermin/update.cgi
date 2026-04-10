@@ -12,14 +12,11 @@ if ($in{'source'} == 0) {
 	$host = $update_host;
 	$port = $update_port;
 	$page = $update_page;
+	$ssl = $update_ssl;
 	}
 else {
-	$in{'other'} =~ /^(http|https):\/\/([^:\/]+)(:(\d+))?(\/\S+)$/ ||
-		&error($text{'update_eurl'});
-	$ssl = $1 eq 'https';
-	$host = $2;
-	$port = $3 ? $4 : $ssl ? 443 : 80;
-	$page = $5;
+	($host, $port, $page, $ssl) = &parse_http_url($in{'other'});
+	$host && $ssl != 2 || &error($text{'update_eurl'});
 	}
 
 # Retrieve the updates list (format is  module version url support description )
@@ -114,7 +111,10 @@ print &text('update_none'),"<br>\n" if (!$count);
 
 # Check if a new version of webmin itself is available
 $file = &transname();
-&http_download('webmin.com', 80, '/index6.html', $file);
+my ($index_host, $index_port, $index_page, $index_ssl) =
+	&parse_http_url($latest_page_url);
+&http_download($index_host, $index_port, $index_page, $file,
+	       undef, undef, $index_ssl);
 open(FILE, "<$file");
 while(<FILE>) {
 	if (/usermin-([0-9\.]+)\.tar\.gz/) {
