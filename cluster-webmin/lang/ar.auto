@@ -34,7 +34,7 @@ index_installon=التثبيت على
 index_upgradeon=خوادم للترقية
 index_update=وحدات التحديث
 index_updateon=خوادم لتحديث
-index_updatedesc=يسمح لك هذا النموذج بترقية وحدات Webmin التي تم اكتشاف أنها تحتوي على أخطاء أو ثغرات أمنية من صفحة <a href=http://www.webmin.com/updates.html>تحديثات Webmin</a> أو من مصدر آخر.
+index_updatedesc=يسمح لك هذا النموذج بترقية وحدات Webmin التي تم اكتشاف أنها تحتوي على أخطاء أو ثغرات أمنية من صفحة <a href=https://webmin.com/updates.html>تحديثات Webmin</a> أو من مصدر آخر.
 index_thost=اسم المضيف
 index_tdesc=وصف
 index_tver=الإصدار

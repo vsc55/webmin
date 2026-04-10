@@ -259,18 +259,18 @@ ui_show_time=系统时间
 
 upgrade_title=升级Usermin
 upgrade_title2=安装Usermin
-upgrade_desc=此表单使您可以将整个Usermin安装升级到新版本。您可以从本地文件，上传的文件或最新版本的<a href=http://www.usermin.com/>www.usermin.com</a>安装。与手动升级一样，所有配置设置和第三方模块都将保留。
-upgrade_descrpm=该表格允许您使用RPM的升级选项将整个Usermin安装升级到新版本。您可以从本地RPM文件，上载的文件或从<a href=http://www.usermin.com/>www.usermin.com</a>的最新版本进行安装。与手动升级一样，所有配置设置和第三方模块都将保留。
-upgrade_descdeb=通过此表，您可以通过升级其Debian软件包将整个Usermin安装升级到新版本。您可以从本地.deb文件，上载的文件或最新版本的<a href=http://www.usermin.com/>www.usermin.com</a>安装。与手动升级一样，所有配置设置和第三方模块都将保留。
+upgrade_desc=此表单使您可以将整个Usermin安装升级到新版本。您可以从本地文件，上传的文件或最新版本的<a href=https://usermin.com>usermin.com</a>安装。与手动升级一样，所有配置设置和第三方模块都将保留。
+upgrade_descrpm=该表格允许您使用RPM的升级选项将整个Usermin安装升级到新版本。您可以从本地RPM文件，上载的文件或从<a href=https://usermin.com>usermin.com</a>的最新版本进行安装。与手动升级一样，所有配置设置和第三方模块都将保留。
+upgrade_descdeb=通过此表，您可以通过升级其Debian软件包将整个Usermin安装升级到新版本。您可以从本地.deb文件，上载的文件或最新版本的<a href=https://usermin.com>usermin.com</a>安装。与手动升级一样，所有配置设置和第三方模块都将保留。
 upgrade_local=从本地文件
 upgrade_uploaded=来自上传的文件
 upgrade_url=从ftp或http URL
-upgrade_ftp=来自www.usermin.com的最新版本
+upgrade_ftp=来自usermin.com的最新版本
 upgrade_delete=升级后删除旧版本的目录？
 upgrade_ok=升级Usermin
 upgrade_err1=无法从 $1升级
 upgrade_err2=无法从上传的文件升级
-upgrade_err3=无法从www.usermin.com升级
+upgrade_err3=无法从usermin.com升级
 upgrade_err5=无法从URL $1升级
 upgrade_eurl=网址缺失或无效
 upgrade_efile=文件不存在
@@ -291,10 +291,10 @@ upgrade_failed=..升级失败！
 upgrade_updates=此新版本的Usermin有 $1更新。 <a href='$2'>单击此处</a>立即自动下载并安装它们。
 upgrade_eupdates=无法下载更新列表： $1
 
-update_desc1=通过此表单，您可以从<a href=http://www.usermin.com/uupdates.html>Usermin Updates</a>页面或其他来源升级已发现包含错误或安全漏洞的Usermin模块。这会将当前安装的模块与可更新的模块进行比较，并有选择地自动下载和安装所有过时的模块。
+update_desc1=通过此表单，您可以从<a href=https://usermin.com/uupdates.html>Usermin Updates</a>页面或其他来源升级已发现包含错误或安全漏洞的Usermin模块。这会将当前安装的模块与可更新的模块进行比较，并有选择地自动下载和安装所有过时的模块。
 update_header1=立即更新模块
 update_header2=按计划更新模块
-update_webmin=从www.usermin.com更新
+update_webmin=从usermin.com更新
 update_other=从其他来源更新
 update_show=只显示要更新的模块
 update_missing=安装当前未安装的模块
@@ -306,7 +306,7 @@ update_apply=保存并申请
 update_sched=每 $2天在 $1：00更新一次模块
 update_none=此版本没有Usermin更新。
 update_failed=无法安装模块： $1
-update_desc2=该表格用于安排<a href=http://www.usermin.com/uupdates.html>Usermin Updates</a>页面或其他来源中包含错误或安全漏洞的Usermin模块的自动更新。尽管此服务很有用，但您应谨慎使用它，因为如果更新服务器遭到破坏，它可能会让攻击者接管您的系统。
+update_desc2=该表格用于安排<a href=https://usermin.com/uupdates.html>Usermin Updates</a>页面或其他来源中包含错误或安全漏洞的Usermin模块的自动更新。尽管此服务很有用，但您应谨慎使用它，因为如果更新服务器遭到破坏，它可能会让攻击者接管您的系统。
 
 assignment_title=重新分配模块
 assignment_header=模块类别分配

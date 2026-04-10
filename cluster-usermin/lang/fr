@@ -34,7 +34,7 @@ index_installon=Installer sur
 index_upgradeon=Serveurs à mettre à niveau
 index_update=Modules de mise à jour
 index_updateon=Serveurs à mettre à jour
-index_updatedesc=Ce formulaire vous permet de mettre à niveau les modules Usermin qui se sont révélés contenir des bogues ou des failles de sécurité à partir de la page <a href=http://www.webmin.com/updates.html>Mises à jour Usermin</a> ou à partir d'une autre source.
+index_updatedesc=Ce formulaire vous permet de mettre à niveau les modules Usermin qui se sont révélés contenir des bogues ou des failles de sécurité à partir de la page <a href=https://webmin.com/updates.html>Mises à jour Usermin</a> ou à partir d'une autre source.
 index_thost=Nom d'hôte
 index_tdesc=La description
 index_tver=Version

@@ -34,7 +34,7 @@ index_installon=にインストール
 index_upgradeon=アップグレードするサーバー
 index_update=更新モジュール
 index_updateon=更新するサーバー
-index_updatedesc=このフォームを使用すると、<a href=http://www.webmin.com/updates.html>Usermin Updates</a>ページまたは別のソースからバグまたはセキュリティホールが見つかったUserminモジュールをアップグレードできます。
+index_updatedesc=このフォームを使用すると、<a href=https://webmin.com/updates.html>Usermin Updates</a>ページまたは別のソースからバグまたはセキュリティホールが見つかったUserminモジュールをアップグレードできます。
 index_thost=ホスト名
 index_tdesc=説明
 index_tver=バージョン

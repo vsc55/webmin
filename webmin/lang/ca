@@ -435,23 +435,23 @@ startpage_webminup=Mostra les actualitzacions de Webmin a la pàgina d'Informaci
 startpage_moduleup=Mostra les actualitzacions de mòduls a la pàgina d'Informació del Sistema
 
 upgrade_title=Actualització de Webmin
-upgrade_desc=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió. Pots instal·lar-la des d'un fitxer local, un fitxer pujat, o des de la versió més recent de <a href=http://www.webmin.com/>www.webmin.com</a>. Igual que amb una actualització manual, es conservaran tots els valors de configuració i tots els mòduls de terceres parts.
-upgrade_descrpm=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió utilitzant l'opció d'actualització RPM. Pots instal·lar-la des d'un fitxer RPM local, un fitxer pujat, o des de la versió més recent de <a href=http://www.webmin.com/>www.webmin.com</a>. Igual que amb una actualització manual, es conservaran tots els valors de configuració i tots els mòduls de terceres parts.
-upgrade_descdeb=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió actualitzant el paquet Debian. Pots instal·lar-lo des d'un fitxer RPM local, un fitxer pujat, o des de la versió més recent de <a href=http://www.webmin.com/>www.webmin.com</a>. Igual que amb una actualització manual, es conservaran tots els valors de configuració i tots els mòduls de terceres parts.
-upgrade_descsolaris-pkg=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió eliminant el paquet Solaris actual i instal·lant-ne un de nou. Pots fer la instal·lació a partir d'un fitxer Solaris local, un fitxer pujat o la darrera versió de <a href=http://www.webmin.com/>www.webmin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
+upgrade_desc=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió. Pots instal·lar-la des d'un fitxer local, un fitxer pujat, o des de la versió més recent de <a href=https://webmin.com>webmin.com</a>. Igual que amb una actualització manual, es conservaran tots els valors de configuració i tots els mòduls de terceres parts.
+upgrade_descrpm=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió utilitzant l'opció d'actualització RPM. Pots instal·lar-la des d'un fitxer RPM local, un fitxer pujat, o des de la versió més recent de <a href=https://webmin.com>webmin.com</a>. Igual que amb una actualització manual, es conservaran tots els valors de configuració i tots els mòduls de terceres parts.
+upgrade_descdeb=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió actualitzant el paquet Debian. Pots instal·lar-lo des d'un fitxer RPM local, un fitxer pujat, o des de la versió més recent de <a href=https://webmin.com>webmin.com</a>. Igual que amb una actualització manual, es conservaran tots els valors de configuració i tots els mòduls de terceres parts.
+upgrade_descsolaris-pkg=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió eliminant el paquet Solaris actual i instal·lant-ne un de nou. Pots fer la instal·lació a partir d'un fitxer Solaris local, un fitxer pujat o la darrera versió de <a href=https://webmin.com>webmin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
 upgrade_descsun-pkg=Aquest formulari permet actualitzar tota la instal·lació Webmin a una nova versió a partir del paquet Solaris proporcionat per Sun. Pots fer la instal·lació a partir d'un fitxer de paquet Solaris local o un fitxer pujat. Pots trobar els darrers paquets a <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
 upgrade_descgentoo=Aquest formulari et permet actualitzar tota la instal·lació de Webmin a una versió nova traient el paquet actual Gentoo Emerge i instal·lant-ne un de nou. Pots instal·lar-lo a partir d'un fitxer local, un fitxer pujat o a partir de la versió més recent del repositori de Gentoo. Igual que per a l'actualització manual, es conservaran tots els valors de configuració i tots els mòduls de terceres parts.
 upgrade_local=Des d'un fitxer local
 upgrade_uploaded=Des d'un fitxer pujat
 upgrade_url=des d'un URL FTP o HTTP
-upgrade_ftp=Versió més recent de www.webmin.com
+upgrade_ftp=Versió més recent de webmin.com
 upgrade_cup=Versió més recent amb l'eina <tt>cupdate</tt> de Caldera
 upgrade_emerge=Versió més recent del repositori Emerge
 upgrade_delete=Suprimeix el directori de la versió anterior després de l'actualització
 upgrade_ok=Actualitza Webmin
 upgrade_err1=No s'ha pogut actualitzar a partir de $1
 upgrade_err2=No s'ha pogut actualitzar des del fitxer pujat
-upgrade_err3=No s'ha pogut actualitzar des de www.webmin.com
+upgrade_err3=No s'ha pogut actualitzar des de webmin.com
 upgrade_err4=No s'ha pogut fer l'actualització des del repositori Emerge
 upgrade_err5=No s'ha pogut fer l'actualització des de l'URL $1
 upgrade_eurl=Hi falta l'URL o bé és invàlid
@@ -476,7 +476,7 @@ upgrade_ewpackage=No és un paquet Solaris vàlid per Webmin
 upgrade_egentoo=No és un paquet Gentoo de Webmin vàlid
 upgrade_eupdates=No s'ha pogut descarregar la llista d'actualitzacions: $1
 upgrade_echecksig=La verificació de la signatura del RPM ha fallat: $1
-upgrade_nosig=No s'ha fet cap verificació de la signatura del paquet - la comprovació dels paquets tar.gz només és possible en actualitzar des de www.webmin.com
+upgrade_nosig=No s'ha fet cap verificació de la signatura del paquet - la comprovació dels paquets tar.gz només és possible en actualitzar des de webmin.com
 upgrade_sig=Comprova la signatura GnuPG del paquet
 upgrade_force=Actualitza encara que la nova versió sigui la mateixa que la vella
 upgrade_disc=Desconnecta tots els altres usuaris
@@ -500,7 +500,7 @@ newmod_header=Accessos del Nou Mòdul
 newmod_def=Comportament per defecte - dóna els nous mòduls a <tt>root</tt> o <tt>admin</tt>
 newmod_users=Dóna els nous mòduls a:
 
-update_desc1=Aquest formulari et permet actualitzar els mòduls de Webmin quer contenen errors o forats de seguretat des de la pàgina d'<a href=http://www.webmin.com/updates.html>Actualitzacions de Webmin</a> des d'una altra font. Això compararà els mòduls actualment instal·lats amb aquells disponibles per a actualització, i opcionalment descarregarà i instal·larà tots els mòduls desfasats.
+update_desc1=Aquest formulari et permet actualitzar els mòduls de Webmin quer contenen errors o forats de seguretat des de la pàgina d'<a href=https://webmin.com/updates.html>Actualitzacions de Webmin</a> des d'una altra font. Això compararà els mòduls actualment instal·lats amb aquells disponibles per a actualització, i opcionalment descarregarà i instal·larà tots els mòduls desfasats.
 update_header1=Actualitza ara els mòduls
 update_header2=Actualitza els mòduls de forma planificada
 update_other=Actualitza des d'altres fonts...
@@ -518,7 +518,7 @@ update_apply=Desa i Aplica
 update_sched2=Actualitza els mòduls a les $1:$2 cada $3 dies
 update_none=No hi ha actualitzacions Webmin per a aquesta versió.
 update_failed=No s'ha pogut instal·lar el mòdul: $1
-update_desc2=Aquest formulari és per planificar l'actualització automàtica dels mòduls Webmin que tenen errors o problemes de seguretat des de la pàgina <a href=http://www.webmin.com/updates.html>Webmin Updates</a> o des d'una altra font. Tot i que aquest servei és útil, has d'anar amb compte en utilitzar-lo, ja que pot permetre que algun atacant prengui control del teu sistema si el servidor d'actualitzacions ha quedat compromès.
+update_desc2=Aquest formulari és per planificar l'actualització automàtica dels mòduls Webmin que tenen errors o problemes de seguretat des de la pàgina <a href=https://webmin.com/updates.html>Webmin Updates</a> o des d'una altra font. Tot i que aquest servei és útil, has d'anar amb compte en utilitzar-lo, ja que pot permetre que algun atacant prengui control del teu sistema si el servidor d'actualitzacions ha quedat compromès.
 update_enosig=No s'ha pogut descarregar el fitxer de signatura per a les actualitzacions: $1
 update_ebadsig=La comprovació de la signatura ha fallat: $1
 update_enomodsig=No s'ha pogut descarregar el fitxer de signatura per al mòdul: $1

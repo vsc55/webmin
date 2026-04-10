@@ -338,14 +338,14 @@ upgrade_descgentoo=Tento formulár slúži na aktualizáciu celej inštalácie W
 upgrade_local=Z miestneho súboru
 upgrade_uploaded=Zo stiahnutého súboru
 upgrade_url=Z ftp alebo http URL
-upgrade_ftp=Najnovšiu verziu z www.webmin.com
+upgrade_ftp=Najnovšiu verziu z webmin.com
 upgrade_cup=Najnovšiu verziu z <tt>cupdate</tt>
 upgrade_emerge=Najnovšiu verziu z Emerge repository
 upgrade_delete=Vymazať adresár starej verzie po aktualizácii?
 upgrade_ok=Aktualizuj Webmin
 upgrade_err1=Zlyhala aktualizácia z $1
 upgrade_err2=Zlyhala aktualizácia z nahraného súboru
-upgrade_err3=Zlyhala aktualizácia z www.webmin.com
+upgrade_err3=Zlyhala aktualizácia z webmin.com
 upgrade_err4=Zlyhala aktualizácia z Emerge repository
 upgrade_err5=Zlyhala aktualizácia z URL $1
 upgrade_eurl=Chýbajúca alebo chybná URL
@@ -368,7 +368,7 @@ upgrade_ewpackage=Nie je správny Solaris balík pre Webmin
 upgrade_egentoo=Neplatný Gentoo balíček Webminu
 upgrade_eupdates=Zlyhalo stiahnutie zoznamu aktualizácií­ : $1
 upgrade_echecksig=Kontrola RPM podpisu zlyhala : $1
-upgrade_nosig=Nebola vykonaná kontrola podpisu balíčku - kontrola tar.gz balíčkov je možná len pri aktualizácii z www.webmin.com.
+upgrade_nosig=Nebola vykonaná kontrola podpisu balíčku - kontrola tar.gz balíčkov je možná len pri aktualizácii z webmin.com.
 upgrade_sig=Kontrolovať GnuPG podpis na balíčku?
 upgrade_force=Aktualizovať aj keď je novšia verzia tá istá alebo staršia?
 upgrade_disc=Odpojiť všetkých ostatných užívateľov?
@@ -389,10 +389,10 @@ newmod_header=Oprávnenia pre nové moduly
 newmod_def=Štandardné nastavenie - pridať oprávnenia pre nové moduly pre užívateľov <tt>root</tt> alebo <tt>admin</tt>
 newmod_users=Oprávnenia pre nové moduly pre :
 
-update_desc1=Tento formulár umožňuje upgrade Webmin modulov z <a href=http://www.webmin.com/updates.html>Webmin Updates</a> alebo z iného zdroja. Automaticky budú nainštalované novšie verzie modulov.
+update_desc1=Tento formulár umožňuje upgrade Webmin modulov z <a href=https://webmin.com/updates.html>Webmin Updates</a> alebo z iného zdroja. Automaticky budú nainštalované novšie verzie modulov.
 update_header1=Aktualizuj moduly teraz
 update_header2=Aktualizuj moduly podľa plánu
-update_webmin=Aktualizuj z www.webmin.com
+update_webmin=Aktualizuj z webmin.com
 update_other=Aktualizuj z iného zdroja
 update_show=Ukázať moduly, ktoré budú aktualizované
 update_missing=Nainštaluj moduly, ktoré nie sú ešte nainštalované
@@ -407,7 +407,7 @@ update_apply=Uložiť a použiť
 update_sched2=Aktualizuje moduly $1:$2 každý $3 deň
 update_none=Nie sú aktualizácie pre túto verziu Webminu.
 update_failed=Zlyhala inštalácia modulu : $1
-update_desc2=Tento formulár umožňuje plánovanie upgradu Webmin modulov z <a href=http://www.webmin.com/updates.html>Webmin Updates</a> alebo z iného zdroja.
+update_desc2=Tento formulár umožňuje plánovanie upgradu Webmin modulov z <a href=https://webmin.com/updates.html>Webmin Updates</a> alebo z iného zdroja.
 
 ca_title=Certifikačná autorita
 ca_old=Existujúci certifikát

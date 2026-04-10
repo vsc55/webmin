@@ -249,18 +249,18 @@ ui_tabs=Categorie modules?
 
 upgrade_title=Upgrade Usermin
 upgrade_title2=Installeer Usermin
-upgrade_desc=Met dit formulier kunt u de gehele Usermin installatie upgraden naar de nieuwste versie. U kunt installeren van een locale file, een geuploaden file van de laatste versie van <a href=http://www.usermin.com/>www.usermin.com</a>. Net als bij een handmatige upgrade, Al uw configuratie instellingen en derde partij modules zullen behouden blijven.
-upgrade_descrpm=Met dit formulier kunt u de gehele Usermin installatie upgraden naar een nieuwere versie met gebruik van de upgrade optie. U kunt installeren van een locale RPM file, een geuploaden file van de laatste versie van <a href=http://www.usermin.com/>www.usermin.com</a>. Net als bij een handmatige upgrade, Al uw configuratie instellingen en derde partij modules zullen behouden blijven.
-upgrade_descdeb=Met dit formulier kunt u de gehele Usermin installatie upgraden naar een nieuwere versie met gebruik van een Debian pakket. U kunt installeren van een locale .deb file, een geuploaden file van de laatste versie van <a href=http://www.usermin.com/>www.usermin.com</a>. Net als bij een handmatige upgrade, Al uw configuratie instellingen en derde partij modules zullen behouden blijven.
+upgrade_desc=Met dit formulier kunt u de gehele Usermin installatie upgraden naar de nieuwste versie. U kunt installeren van een locale file, een geuploaden file van de laatste versie van <a href=https://usermin.com>usermin.com</a>. Net als bij een handmatige upgrade, Al uw configuratie instellingen en derde partij modules zullen behouden blijven.
+upgrade_descrpm=Met dit formulier kunt u de gehele Usermin installatie upgraden naar een nieuwere versie met gebruik van de upgrade optie. U kunt installeren van een locale RPM file, een geuploaden file van de laatste versie van <a href=https://usermin.com>usermin.com</a>. Net als bij een handmatige upgrade, Al uw configuratie instellingen en derde partij modules zullen behouden blijven.
+upgrade_descdeb=Met dit formulier kunt u de gehele Usermin installatie upgraden naar een nieuwere versie met gebruik van een Debian pakket. U kunt installeren van een locale .deb file, een geuploaden file van de laatste versie van <a href=https://usermin.com>usermin.com</a>. Net als bij een handmatige upgrade, Al uw configuratie instellingen en derde partij modules zullen behouden blijven.
 upgrade_local=Van locale file
 upgrade_uploaded=Van geuploaden file
 upgrade_url=Van ftp or http URL
-upgrade_ftp=Laatste versie van www.usermin.com
+upgrade_ftp=Laatste versie van usermin.com
 upgrade_delete=Verwijder de oude versie directory na de upgrade?
 upgrade_ok=Upgrade Usermin
 upgrade_err1=Mislukt om te upgraden van $1
 upgrade_err2=Mislukt om te upgraden van geuploaden file
-upgrade_err3=Mislukt om te upgraden van www.usermin.com
+upgrade_err3=Mislukt om te upgraden van usermin.com
 upgrade_err5=Mislukt om te upgraden van URL $1
 upgrade_eurl=Ontbrekende of ongeldige URL
 upgrade_efile=File bestaat niet
@@ -281,10 +281,10 @@ upgrade_failed=.. upgrade mislukt!
 upgrade_updates=Er zijn $1 updates voor deze nieuwe versie van Usermin. <a href='$2'>Klik hier</a> om ze automatisch te downloaden en nu te installeren.
 upgrade_eupdates=Mislukt om de lijst te downloaden met de updates : $1
 
-update_desc1=Met dit formulier kunt u automatische updates plannen voor Usermin modules waar een bug of veiligheids fouten in kunnen zitten, de updates komen van <a href=http://www.usermin.com/uupdates.html>Usermin Updates</a> pagina of van een andere bron. Dit zal de huidig geinstalleerde modules vergelijken met de beschikbare updates en eventueel automatisch downloaden en ieder module installeren die veroudert zijn.
+update_desc1=Met dit formulier kunt u automatische updates plannen voor Usermin modules waar een bug of veiligheids fouten in kunnen zitten, de updates komen van <a href=https://usermin.com/uupdates.html>Usermin Updates</a> pagina of van een andere bron. Dit zal de huidig geinstalleerde modules vergelijken met de beschikbare updates en eventueel automatisch downloaden en ieder module installeren die veroudert zijn.
 update_header1=Update modules nu
 update_header2=Update modules volgens planning
-update_webmin=Update van www.usermin.com
+update_webmin=Update van usermin.com
 update_other=Update van een andere bron
 update_show=Alleen laten zien welke modules worden geupdate
 update_missing=Installeer modules die op dit moment nog niet geinstalleerd zijn
@@ -296,7 +296,7 @@ update_apply=Opslaan en Toevoegen
 update_sched=Update modules op $1:00 iedere $2 dagen
 update_none=Geen Usermin updates voor deze versie.
 update_failed=Installeren mislukte van module : $1
-update_desc2=Met dit formulier kunt u automatische updates plannen voor Usermin modules waar een bug of veiligheids fouten in kunnen zitten, de updates komen van <a href=http://www.usermin.com/uupdates.html>Usermin Updates</a> pagina of van een andere bron. Welliswaar is deze service handig, echter u zult toch altijd voorzichtig moeten zijn omdat aanvallers uw systeem kunnen overnemen indien zij ooit de update server gehackt hebben.
+update_desc2=Met dit formulier kunt u automatische updates plannen voor Usermin modules waar een bug of veiligheids fouten in kunnen zitten, de updates komen van <a href=https://usermin.com/uupdates.html>Usermin Updates</a> pagina of van een andere bron. Welliswaar is deze service handig, echter u zult toch altijd voorzichtig moeten zijn omdat aanvallers uw systeem kunnen overnemen indien zij ooit de update server gehackt hebben.
 
 assignment_title=Opnieuw Toewijzen Modules
 assignment_header=Module categorie taken

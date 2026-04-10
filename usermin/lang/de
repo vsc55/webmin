@@ -259,18 +259,18 @@ ui_show_time=Systemzeit
 
 upgrade_title=Usermin aktualisieren
 upgrade_title2=Usermin installieren
-upgrade_desc=Dieses Formular ermöglicht es Ihnen, Ihre gesamte Usermin-Installation auf eine neue Version zu aktualisieren. Sie können von einer lokalen Datei, einer hochgeladenen Datei oder von der neuesten Version auf <a href=http://www.webmin.com/>www.webmin.com</a> installieren. Wie bei einem manuellen Upgrade werden alle Ihre Konfigurationseinstellungen und Drittanbieter-Module beibehalten.
-upgrade_descrpm=Dieses Formular ermöglicht es Ihnen, Ihre gesamte Usermin-Installation auf eine neue Version zu aktualisieren, indem Sie die Upgrade-Option von RPM verwenden. Sie können von einer lokalen RPM-Datei, einer hochgeladenen Datei oder von der neuesten Version auf <a href=http://www.webmin.com/>www.webmin.com</a> installieren. Wie bei einem manuellen Upgrade werden alle Ihre Konfigurationseinstellungen und Drittanbieter-Module beibehalten.
-upgrade_descdeb=Dieses Formular ermöglicht es Ihnen, Ihre gesamte Usermin-Installation auf eine neue Version zu aktualisieren, indem Sie das Debian-Paket aktualisieren. Sie können von einer lokalen .deb-Datei, einer hochgeladenen Datei oder von der neuesten Version auf <a href=http://www.webmin.com/>www.webmin.com</a> installieren. Wie bei einem manuellen Upgrade werden alle Ihre Konfigurationseinstellungen und Drittanbieter-Module beibehalten.
+upgrade_desc=Dieses Formular ermöglicht es Ihnen, Ihre gesamte Usermin-Installation auf eine neue Version zu aktualisieren. Sie können von einer lokalen Datei, einer hochgeladenen Datei oder von der neuesten Version auf <a href=https://webmin.com>webmin.com</a> installieren. Wie bei einem manuellen Upgrade werden alle Ihre Konfigurationseinstellungen und Drittanbieter-Module beibehalten.
+upgrade_descrpm=Dieses Formular ermöglicht es Ihnen, Ihre gesamte Usermin-Installation auf eine neue Version zu aktualisieren, indem Sie die Upgrade-Option von RPM verwenden. Sie können von einer lokalen RPM-Datei, einer hochgeladenen Datei oder von der neuesten Version auf <a href=https://webmin.com>webmin.com</a> installieren. Wie bei einem manuellen Upgrade werden alle Ihre Konfigurationseinstellungen und Drittanbieter-Module beibehalten.
+upgrade_descdeb=Dieses Formular ermöglicht es Ihnen, Ihre gesamte Usermin-Installation auf eine neue Version zu aktualisieren, indem Sie das Debian-Paket aktualisieren. Sie können von einer lokalen .deb-Datei, einer hochgeladenen Datei oder von der neuesten Version auf <a href=https://webmin.com>webmin.com</a> installieren. Wie bei einem manuellen Upgrade werden alle Ihre Konfigurationseinstellungen und Drittanbieter-Module beibehalten.
 upgrade_local=Von lokaler Datei
 upgrade_uploaded=Von hochgeladener Datei
 upgrade_url=Von FTP- oder HTTP-URL
-upgrade_ftp=Neueste Version von www.webmin.com
+upgrade_ftp=Neueste Version von webmin.com
 upgrade_delete=Verzeichnis der alten Version nach dem Upgrade löschen?
 upgrade_ok=Usermin aktualisieren
 upgrade_err1=Upgrade von $1 fehlgeschlagen
 upgrade_err2=Upgrade von hochgeladener Datei fehlgeschlagen
-upgrade_err3=Upgrade von www.webmin.com fehlgeschlagen
+upgrade_err3=Upgrade von webmin.com fehlgeschlagen
 upgrade_err5=Upgrade von URL $1 fehlgeschlagen
 upgrade_eurl=Fehlende oder ungültige URL
 upgrade_efile=Datei existiert nicht
@@ -291,10 +291,10 @@ upgrade_failed=.. Upgrade fehlgeschlagen!
 upgrade_updates=Es gibt $1 Updates für diese neue Version von Usermin. <a href='$2'>Hier klicken</a>, um sie jetzt automatisch herunterzuladen und zu installieren.
 upgrade_eupdates=Liste der Updates konnte nicht heruntergeladen werden: $1
 
-update_desc1=Dieses Formular ermöglicht es Ihnen, Usermin-Module zu aktualisieren, die Fehler oder Sicherheitslücken enthalten, von der <a href=http://www.webmin.com/uupdates.html>Usermin Updates</a>-Seite oder von einer anderen Quelle. Es vergleicht die aktuell installierten Module mit den verfügbaren Updates und lädt optional automatisch alle veralteten Module herunter und installiert sie.
+update_desc1=Dieses Formular ermöglicht es Ihnen, Usermin-Module zu aktualisieren, die Fehler oder Sicherheitslücken enthalten, von der <a href=https://webmin.com/uupdates.html>Usermin Updates</a>-Seite oder von einer anderen Quelle. Es vergleicht die aktuell installierten Module mit den verfügbaren Updates und lädt optional automatisch alle veralteten Module herunter und installiert sie.
 update_header1=Module jetzt aktualisieren
 update_header2=Module nach Zeitplan aktualisieren
-update_webmin=Von www.webmin.com aktualisieren
+update_webmin=Von webmin.com aktualisieren
 update_other=Von anderer Quelle aktualisieren
 update_show=Nur anzeigen, welche Module aktualisiert würden
 update_missing=Module installieren, die derzeit nicht installiert sind
@@ -306,7 +306,7 @@ update_apply=Speichern und anwenden
 update_sched=Module um $1:00 Uhr alle $2 Tage aktualisieren
 update_none=Keine Usermin-Updates für diese Version.
 update_failed=Modul konnte nicht installiert werden: $1
-update_desc2=Dieses Formular dient zur Planung der automatischen Aktualisierung von Usermin-Modulen, die Fehler oder Sicherheitslücken enthalten, von der <a href=http://www.webmin.com/uupdates.html>Usermin Updates</a>-Seite oder von einer anderen Quelle. Obwohl dieser Dienst nützlich ist, sollten Sie vorsichtig sein, da er es Angreifern ermöglichen könnte, Ihr System zu übernehmen, wenn der Update-Server kompromittiert wird.
+update_desc2=Dieses Formular dient zur Planung der automatischen Aktualisierung von Usermin-Modulen, die Fehler oder Sicherheitslücken enthalten, von der <a href=https://webmin.com/uupdates.html>Usermin Updates</a>-Seite oder von einer anderen Quelle. Obwohl dieser Dienst nützlich ist, sollten Sie vorsichtig sein, da er es Angreifern ermöglichen könnte, Ihr System zu übernehmen, wenn der Update-Server kompromittiert wird.
 
 assignment_title=Module neu zuweisen
 assignment_header=Modulkategorie-Zuweisungen

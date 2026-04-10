@@ -438,23 +438,23 @@ startpage_webminup=Vis Webmin oppdateringer på siden for Systeminformasjon?
 startpage_moduleup=Vis modul-oppdateringer på siden for Systeminformasjon?
 
 upgrade_title=Oppgrader Webmin
-upgrade_desc=Her kan du oppgradere hele webmin installasjonen til en nyere versjon med RPM pakker. Du kan installere fra en lokal RPM fil, en uploaded fil eller fra siste versjon på <a href=http://www.webmin.com/>www.webmin.com</a>. Alle dine settinger og "third-party" moduler vil forbli som de er.
-upgrade_descrpm=Her kan du oppgradere hele webmin installasjonen til en nyere versjon med RPM pakker. Du kan installere fra en lokal RPM fil, en uploaded fil eller fra siste versjon på <a href=http://www.webmin.com/>www.webmin.com</a>. Alle dine settinger og "third-party" moduler vil forbli som de er.
-upgrade_descdeb=Her kan du oppgradere hele webmin installasjonen til en nyere versjon ved å oppgradere dens Debian pakke. Du kan installere fra en lokal .deb fil, en opplastet fil eller fra siste versjon på <a href=http://www.webmin.com/>www.webmin.com</a>. Alle dine innstillinger og "tredje-parts" moduler vil forbli som de er.
-upgrade_descsolaris-pkg=Her kan du oppgradere hele webmin installasjonen til en nyere versjon ved å fjerne den eksisterende solaris pakken og installere en ny. Du kan installere fra en lokal solaris pakke fil, en uploaded fil eller fra siste versjon på <a href=http://www.webmin.com/>www.webmin.com</a>. Alle dine settinger og "third-party" moduler vil forbli som de er.
+upgrade_desc=Her kan du oppgradere hele webmin installasjonen til en nyere versjon med RPM pakker. Du kan installere fra en lokal RPM fil, en uploaded fil eller fra siste versjon på <a href=https://webmin.com>webmin.com</a>. Alle dine settinger og "third-party" moduler vil forbli som de er.
+upgrade_descrpm=Her kan du oppgradere hele webmin installasjonen til en nyere versjon med RPM pakker. Du kan installere fra en lokal RPM fil, en uploaded fil eller fra siste versjon på <a href=https://webmin.com>webmin.com</a>. Alle dine settinger og "third-party" moduler vil forbli som de er.
+upgrade_descdeb=Her kan du oppgradere hele webmin installasjonen til en nyere versjon ved å oppgradere dens Debian pakke. Du kan installere fra en lokal .deb fil, en opplastet fil eller fra siste versjon på <a href=https://webmin.com>webmin.com</a>. Alle dine innstillinger og "tredje-parts" moduler vil forbli som de er.
+upgrade_descsolaris-pkg=Her kan du oppgradere hele webmin installasjonen til en nyere versjon ved å fjerne den eksisterende solaris pakken og installere en ny. Du kan installere fra en lokal solaris pakke fil, en uploaded fil eller fra siste versjon på <a href=https://webmin.com>webmin.com</a>. Alle dine settinger og "third-party" moduler vil forbli som de er.
 upgrade_descsun-pkg=Her kan du oppgradere hele webmin installasjonen til en nyere versjon fra Solaris pakken levert av Sun. Du kan installere fra en lokal Solaris pakke fil, eller en opplastet fil. Den nyeste pakken finner du på <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Akkurat som ved en manuell oppgradering, vil alle dine konfigurasjonsinnstillinger og tredje-parts moduler bli tatt vare på.
 upgrade_descgentoo=Dette formularet lar deg oppgradere hele din Webmin installasjon til en nyere versjon ved å fjerne den aktuelle Gentoo Emerge pakken å installere en ny. Du kan installere fra en lokal Gentoo pakke fil, en opplastet fil eller fra den siste versjonen i Emerge repository. Akkurat som ved en manual oppgradering, alle dine settinger og third-party moduler vil bli beholdt.
 upgrade_local=Fra lokal fil
 upgrade_uploaded=Fra opplastet fil
 upgrade_url=Fra ftp eller http URL
-upgrade_ftp=Siste versjon fra www.webmin.com
+upgrade_ftp=Siste versjon fra webmin.com
 upgrade_cup=Siste versjon fra Caldera's <tt>cupdate</tt> tool
 upgrade_emerge=Siste versin fra Emerge repository
 upgrade_delete=Slette gamle versjons mapper etter oppgradering??
 upgrade_ok=Oppgrader Webmin
 upgrade_err1=Feilet ved oppgradering fra $1
 upgrade_err2=Feilet ved oppgradering fra uploaded fil
-upgrade_err3=Feilet ved oppgradering fra www.webmin.com
+upgrade_err3=Feilet ved oppgradering fra webmin.com
 upgrade_err4=Kunne ikke oppgradering fra Emerge repository
 upgrade_err5=Kunne ikke oppgradere fra URL $1
 upgrade_eurl=Manglende eller ugyldig URL
@@ -479,7 +479,7 @@ upgrade_ewpackage=Ikke en gyldig Solaris pakke for Webmin
 upgrade_egentoo=Ikke en gyldig Gentoo pakke for Webmin
 upgrade_eupdates=Feilet ved nedlasting av oppgraderings liste : $1
 upgrade_echecksig=RPM signaturverifisering feilet : $1
-upgrade_nosig=Ingen pakkesignatur verifisering utført - sjekk av tar.gz pakker er kun mulig når det oppgraderes fra www.webmin.com.
+upgrade_nosig=Ingen pakkesignatur verifisering utført - sjekk av tar.gz pakker er kun mulig når det oppgraderes fra webmin.com.
 upgrade_sig=Sjekk GnuPG signatur på pakken?
 upgrade_force=Oppgrader selv om ny versjon er samme eller eldre?
 upgrade_disc=Koble fra alle andre brukere?
@@ -503,10 +503,10 @@ newmod_header=Tilgang til nye moduler
 newmod_def=Standard oppførsel - gi tilgang til nye moduler til <tt>root</tt> eller <tt>admin</tt>
 newmod_users=Gi tilgang til nye moduler til :
 
-update_desc1=Her kan du oppgradere Webmin moduler som det er funnet feil i, eller sikkerhets hull. Disse kan lastes ned fra <a href=http://www.webmin.com/webmin/updates.html>Webmin Updates</a> eller fra en annen kilde. Dette vil sammenligne de installerte modulene med de som er tilgjengelig for oppgradering. Og hvis ønskelig, automatisk laste ned og installere de moduler som er "out of date".
+update_desc1=Her kan du oppgradere Webmin moduler som det er funnet feil i, eller sikkerhets hull. Disse kan lastes ned fra <a href=https://webmin.com/webmin/updates.html>Webmin Updates</a> eller fra en annen kilde. Dette vil sammenligne de installerte modulene med de som er tilgjengelig for oppgradering. Og hvis ønskelig, automatisk laste ned og installere de moduler som er "out of date".
 update_header1=Oppdater moduler nå?
 update_header2=Oppdater moduler regelmessig
-update_webmin=Oppdater fra www.webmin.com
+update_webmin=Oppdater fra webmin.com
 update_other=Oppdater fra en annen kilde
 update_show=Vis bare de moduler som skal oppdateres
 update_missing=Installer moduler som ikke er installert
@@ -522,7 +522,7 @@ update_apply=Legg til og lagre
 update_sched2=Oppdater moduler kl $1:$2 hver $3 dag
 update_none=Ingen Webmin oppdatering for denne versjonen.
 update_failed=Kunne ikke installere modul : $1
-update_desc2=Her kan du planlegge den automatiske oppdateringen av moduler som inneholder feil eller sikkerhetshull fra <a href=http://www.webmin.com/webmin/updates.html>Webmin Updates</a> siden eller fra andre kilder. Selv om denne servicen er behagelig, skal du være forsiktig med å bruke den, fordi den kan gi hackere mulighet til å ta over systemet hvis oppdateringstjeneren blir angrepet.
+update_desc2=Her kan du planlegge den automatiske oppdateringen av moduler som inneholder feil eller sikkerhetshull fra <a href=https://webmin.com/webmin/updates.html>Webmin Updates</a> siden eller fra andre kilder. Selv om denne servicen er behagelig, skal du være forsiktig med å bruke den, fordi den kan gi hackere mulighet til å ta over systemet hvis oppdateringstjeneren blir angrepet.
 update_enosig=Kunne ikke laste ned signaturfil for oppdateringer : $1
 update_ebadsig=Sjekk av oppdaterings-signatur feilet : $1
 update_enomodsig=Kunne ikke laste ned signaturfil for modulen : $1

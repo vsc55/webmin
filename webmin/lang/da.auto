@@ -478,16 +478,16 @@ startpage_webminup=Vis Webmin-opdateringer på siden Systeminformation?
 startpage_moduleup=Vis modulopdateringer på siden Systeminformation?
 
 upgrade_title=Opgrader Webmin
-upgrade_desc=Denne formular giver dig mulighed for at opgradere hele Webmin-installationen til en ny version. Du kan installere fra en lokal fil, en uploadet fil eller fra den nyeste version på <a href=http://www.webmin.com/>www.webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
-upgrade_descrpm=Denne formular giver dig mulighed for at opgradere hele din webmin-installation til en ny version ved hjælp af RPM's opgraderingsmulighed. Du kan installere fra en lokal RPM-fil, en uploadet fil eller fra den seneste version på <a href=http://www.webmin.com/>www.webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
-upgrade_descdeb=Denne formular giver dig mulighed for at opgradere hele Webmin-installationen til en ny version ved at opgradere sin Debian-pakke. Du kan installere fra en lokal.deb-fil, en uploadet fil eller fra den seneste version på <a href=http://www.webmin.com/>www.webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
-upgrade_descsolaris-pkg=Denne formular giver dig mulighed for at opgradere hele din Webmin-installation til en ny version ved at fjerne den aktuelle Solaris-pakke og installere en ny. Du kan installere fra en lokal Solaris-pakkefil, en uploadet fil eller fra den seneste version på <a href=http://www.webmin.com/>www.webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
+upgrade_desc=Denne formular giver dig mulighed for at opgradere hele Webmin-installationen til en ny version. Du kan installere fra en lokal fil, en uploadet fil eller fra den nyeste version på <a href=https://webmin.com>webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
+upgrade_descrpm=Denne formular giver dig mulighed for at opgradere hele din webmin-installation til en ny version ved hjælp af RPM's opgraderingsmulighed. Du kan installere fra en lokal RPM-fil, en uploadet fil eller fra den seneste version på <a href=https://webmin.com>webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
+upgrade_descdeb=Denne formular giver dig mulighed for at opgradere hele Webmin-installationen til en ny version ved at opgradere sin Debian-pakke. Du kan installere fra en lokal.deb-fil, en uploadet fil eller fra den seneste version på <a href=https://webmin.com>webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
+upgrade_descsolaris-pkg=Denne formular giver dig mulighed for at opgradere hele din Webmin-installation til en ny version ved at fjerne den aktuelle Solaris-pakke og installere en ny. Du kan installere fra en lokal Solaris-pakkefil, en uploadet fil eller fra den seneste version på <a href=https://webmin.com>webmin.com</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
 upgrade_descsun-pkg=Denne formular giver dig mulighed for at opgradere hele din Webmin-installation til en ny version fra Solaris-pakken leveret af Sun. Du kan installere fra en lokal Solaris-pakkefil eller en uploadet fil. De seneste pakker findes på <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
 upgrade_descgentoo=Denne formular giver dig mulighed for at opgradere hele Webmin-installationen til en ny version ved at fjerne den aktuelle Gentoo Emerge-pakke og installere en ny. Du kan installere fra en lokal Gentoo-pakkefil, en uploadet fil eller fra den nyeste version i Emerge-arkivet. Ligesom med en manuel opgradering vil alle dine konfigurationsindstillinger og tredjepartsmoduler blive bevaret.
 upgrade_local=Fra lokal fil
 upgrade_uploaded=Fra uploadet fil
 upgrade_url=Fra FTP eller HTTP URL
-upgrade_ftp=Seneste version fra www.webmin.com
+upgrade_ftp=Seneste version fra webmin.com
 upgrade_cup=Seneste version fra Calderas <tt>cupdate</tt> værktøj
 upgrade_emerge=Seneste version fra Emerge-arkivet
 upgrade_delete=Slet den gamle versions bibliotek efter opgradering?
@@ -495,7 +495,7 @@ upgrade_repo=Seneste version fra $1 repository
 upgrade_ok=Opgrader Webmin
 upgrade_err1=Kunne ikke opgradere fra $1
 upgrade_err2=Kunne ikke opgradere fra uploadet fil
-upgrade_err3=Kunne ikke opgradere fra www.webmin.com
+upgrade_err3=Kunne ikke opgradere fra webmin.com
 upgrade_err4=Kunne ikke opgradere fra Emerge-arkivet
 upgrade_err5=Kunne ikke opgradere fra URL $1
 upgrade_eurl=Manglende eller ugyldig URL
@@ -524,7 +524,7 @@ upgrade_ewpackage=Ikke en gyldig Solaris-pakke til Webmin
 upgrade_egentoo=Ikke en gyldig Gentoo-pakke med Webmin
 upgrade_eupdates=Kunne ikke downloade listen over opdateringer : $1
 upgrade_echecksig=RPM-signaturverifikation mislykkedes : $1
-upgrade_nosig=Ingen verifikation af pakkesignatur udført - kontrol af tar.gz-pakker er kun mulig, når du opgraderer fra www.webmin.com.
+upgrade_nosig=Ingen verifikation af pakkesignatur udført - kontrol af tar.gz-pakker er kun mulig, når du opgraderer fra webmin.com.
 upgrade_sig=Tjek GnuPG-signatur på pakken?
 upgrade_force=Opgrader, selvom ny version er den samme eller ældre?
 upgrade_disc=Frakobl alle andre brugere?
@@ -548,10 +548,10 @@ newmod_header=Nye modulstilskud
 newmod_def=Standard opførsel - tildel nye moduler til <tt>root</tt> eller <tt>admin</tt>
 newmod_users=Giv nye moduler til :
 
-update_desc1=Denne formular giver dig mulighed for at opgradere Webmin-moduler, der har vist sig at indeholde fejl eller sikkerhedshuller fra siden <a href=http://www.webmin.com/updates.html>Webmin Updates</a> eller fra en anden kilde. Dette vil sammenligne de aktuelt installerede moduler med dem, der er tilgængelige til opdatering, og eventuelt automatisk downloade og installere alle moduler, der er forældede.
+update_desc1=Denne formular giver dig mulighed for at opgradere Webmin-moduler, der har vist sig at indeholde fejl eller sikkerhedshuller fra siden <a href=https://webmin.com/updates.html>Webmin Updates</a> eller fra en anden kilde. Dette vil sammenligne de aktuelt installerede moduler med dem, der er tilgængelige til opdatering, og eventuelt automatisk downloade og installere alle moduler, der er forældede.
 update_header1=Opdater moduler nu
 update_header2=Opdater moduler efter planen
-update_webmin=Opdatering fra www.webmin.com
+update_webmin=Opdatering fra webmin.com
 update_other=Opdatering fra andre kilder ..
 update_show=Vis kun, hvilke moduler der vil blive opdateret
 update_missing=Installer moduler, der ikke er installeret i øjeblikket
@@ -567,7 +567,7 @@ update_apply=Gem og anvend
 update_sched2=Opdater moduler på $1:$2 hver $3 dage
 update_none=Ingen Webmin-opdateringer til denne version.
 update_failed=Kunne ikke installere modulet : $1
-update_desc2=Denne formular er beregnet til planlægning af den automatiske opdatering af Webmin-moduler, der indeholder fejl eller sikkerhedshuller fra siden <a href=http://www.webmin.com/updates.html>Webmin Updates</a> eller fra en anden kilde. Selvom denne service er nyttig, skal du være forsigtig med at bruge den, da den kan give angribere mulighed for at overtage dit system, hvis opdateringsserveren nogensinde blev kompromitteret.
+update_desc2=Denne formular er beregnet til planlægning af den automatiske opdatering af Webmin-moduler, der indeholder fejl eller sikkerhedshuller fra siden <a href=https://webmin.com/updates.html>Webmin Updates</a> eller fra en anden kilde. Selvom denne service er nyttig, skal du være forsigtig med at bruge den, da den kan give angribere mulighed for at overtage dit system, hvis opdateringsserveren nogensinde blev kompromitteret.
 update_enosig=Kunne ikke downloade signaturfil til opdateringer : $1
 update_ebadsig=Opdatering af signaturcheck mislykkedes : $1
 update_enomodsig=Kunne ikke downloade signaturfil til modul : $1

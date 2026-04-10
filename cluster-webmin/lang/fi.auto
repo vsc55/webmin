@@ -34,7 +34,7 @@ index_installon=Asenna päälle
 index_upgradeon=Päivitettävät palvelimet
 index_update=Päivitä moduulit
 index_updateon=Päivitettävät palvelimet
-index_updatedesc=Tämä lomake antaa sinun päivittää Webmin-moduuleja, joiden on havaittu sisältävän virheitä tai <a href=http://www.webmin.com/updates.html>Webmin-päivitykset</a> -sivulta tai muusta lähteestä.
+index_updatedesc=Tämä lomake antaa sinun päivittää Webmin-moduuleja, joiden on havaittu sisältävän virheitä tai <a href=https://webmin.com/updates.html>Webmin-päivitykset</a> -sivulta tai muusta lähteestä.
 index_thost=hostname
 index_tdesc=Kuvaus
 index_tver=Versio

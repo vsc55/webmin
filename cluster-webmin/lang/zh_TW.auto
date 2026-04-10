@@ -34,7 +34,7 @@ index_installon=安裝在
 index_upgradeon=服務器升級
 index_update=更新模塊
 index_updateon=服務器要更新
-index_updatedesc=此表單使您可以從<a href=http://www.webmin.com/updates.html>Webmin更新</a>頁面或其他來源升級發現包含錯誤或安全漏洞的Webmin模塊。
+index_updatedesc=此表單使您可以從<a href=https://webmin.com/updates.html>Webmin更新</a>頁面或其他來源升級發現包含錯誤或安全漏洞的Webmin模塊。
 index_thost=主機名
 index_tdesc=描述
 index_tver=版

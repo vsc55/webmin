@@ -354,7 +354,7 @@ startpage_gotomodule=Gå alltid till modulen efter inloggning
 startpage_webminup=Visa uppdateringar av Webmin på sidan Systeminformation?
 startpage_moduleup=Visa moduluppdateringar på sidan Systeminformation?
 
-upgrade_descdeb=Detta formulär låter dig uppgradera hela Webmin-installationen till en ny version genom att uppgradera Debian-paketet. Du kan installera från en lokal.deb-fil, en uppladdad fil eller från den senaste versionen på <a href=http://www.webmin.com/>www.webmin.com</a>. Precis som med en manuell uppgradering kommer alla dina konfigurationsinställningar och tredjepartsmoduler att behållas.
+upgrade_descdeb=Detta formulär låter dig uppgradera hela Webmin-installationen till en ny version genom att uppgradera Debian-paketet. Du kan installera från en lokal.deb-fil, en uppladdad fil eller från den senaste versionen på <a href=https://webmin.com>webmin.com</a>. Precis som med en manuell uppgradering kommer alla dina konfigurationsinställningar och tredjepartsmoduler att behållas.
 upgrade_descsun-pkg=Detta formulär låter dig uppgradera hela Webmin-installationen till en ny version från Solaris-paketet som levereras av Sun. Du kan installera från en lokal Solaris-paketfil eller en uppladdad fil. De senaste paketen finns på <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Precis som med en manuell uppgradering kommer alla dina konfigurationsinställningar och tredjepartsmoduler att behållas.
 upgrade_descgentoo=Detta formulär låter dig uppgradera hela Webmin-installationen till en ny version genom att ta bort det nuvarande Gentoo Emerge-paketet och installera en ny. Du kan installera från en lokal Gentoo-paketfil, en uppladdad fil eller från den senaste versionen i Emerge-arkivet. Precis som med en manuell uppgradering kommer alla dina konfigurationsinställningar och tredjepartsmoduler att behållas.
 upgrade_url=Från FTP eller HTTP URL
@@ -381,7 +381,7 @@ upgrade_ewpackage=Inte ett giltigt Solaris-paket för Webmin
 upgrade_egentoo=Inte ett giltigt Gentoo-paket med Webmin
 upgrade_eupdates=Det gick inte att ladda ner lista med uppdateringar : $1
 upgrade_echecksig=RPM-signaturverifiering misslyckades : $1
-upgrade_nosig=Ingen paketsignaturverifiering gjord - kontroll av tar.gz-paket är endast möjlig vid uppgradering från www.webmin.com.
+upgrade_nosig=Ingen paketsignaturverifiering gjord - kontroll av tar.gz-paket är endast möjlig vid uppgradering från webmin.com.
 upgrade_sig=Kontrollera GnuPG-signatur på paketet?
 upgrade_force=Uppgradera även om den nya versionen är densamma eller äldre?
 upgrade_disc=Koppla bort alla andra användare?
@@ -405,10 +405,10 @@ newmod_header=Nya modulbidrag
 newmod_def=Standardbeteende - ge nya moduler till <tt>root</tt> eller <tt>admin</tt>
 newmod_users=Ge nya moduler till :
 
-update_desc1=Det här formuläret låter dig uppgradera Webmin-moduler som har visat sig innehålla buggar eller säkerhetshål från sidan <a href=http://www.webmin.com/updates.html>Webmin-uppdateringar</a> eller från en annan källa. Detta kommer att jämföra de för närvarande installerade modulerna med de som är tillgängliga för uppdatering och automatiskt ladda ner och installera alla moduler som är föråldrade.
+update_desc1=Det här formuläret låter dig uppgradera Webmin-moduler som har visat sig innehålla buggar eller säkerhetshål från sidan <a href=https://webmin.com/updates.html>Webmin-uppdateringar</a> eller från en annan källa. Detta kommer att jämföra de för närvarande installerade modulerna med de som är tillgängliga för uppdatering och automatiskt ladda ner och installera alla moduler som är föråldrade.
 update_header1=Uppdatera moduler nu
 update_header2=Uppdatera moduler enligt schema
-update_webmin=Uppdatering från www.webmin.com
+update_webmin=Uppdatering från webmin.com
 update_other=Uppdatering från andra källor ..
 update_show=Visa bara vilka moduler som skulle uppdateras
 update_missing=Installera moduler som för närvarande inte är installerade
@@ -424,7 +424,7 @@ update_apply=Spara och applicera
 update_sched2=Uppdatera moduler på $1:$2 varje $3 dagar
 update_none=Inga Webmin-uppdateringar för den här versionen.
 update_failed=Det gick inte att installera modulen : $1
-update_desc2=Detta formulär är för att schemalägga den automatiska uppdateringen av Webmin-moduler som innehåller buggar eller säkerhetshål från sidan <a href=http://www.webmin.com/updates.html>Webmin-uppdateringar</a> eller från en annan källa. Även om den här tjänsten är användbar bör du vara försiktig med att använda den eftersom den kan göra det möjligt för angripare att ta över ditt system om uppdateringsservern någonsin kompromitterades.
+update_desc2=Detta formulär är för att schemalägga den automatiska uppdateringen av Webmin-moduler som innehåller buggar eller säkerhetshål från sidan <a href=https://webmin.com/updates.html>Webmin-uppdateringar</a> eller från en annan källa. Även om den här tjänsten är användbar bör du vara försiktig med att använda den eftersom den kan göra det möjligt för angripare att ta över ditt system om uppdateringsservern någonsin kompromitterades.
 update_enosig=Det gick inte att ladda ner signaturfilen för uppdateringar : $1
 update_ebadsig=Uppdateringens signaturkontroll misslyckades : $1
 update_enomodsig=Det gick inte att ladda ner signaturfilen för modulen : $1

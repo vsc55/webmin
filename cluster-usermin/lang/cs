@@ -34,7 +34,7 @@ index_installon=Instalovat na
 index_upgradeon=Servery k povýšení
 index_update=Povýšení modulů
 index_updateon=Servery k povýšení
-index_updatedesc=Tento formulář umožní aktualizovat moduly Userminu, které obsahují chyby nebo bezpečnostní trhliny ze stránky <a href=http://www.webmin.com/updates.html>Aktualizace Userminu</a> nebo z jiného zdroje.
+index_updatedesc=Tento formulář umožní aktualizovat moduly Userminu, které obsahují chyby nebo bezpečnostní trhliny ze stránky <a href=https://webmin.com/updates.html>Aktualizace Userminu</a> nebo z jiného zdroje.
 index_thost=Jméno počítače
 index_tdesc=Poznámka
 index_tver=Verze

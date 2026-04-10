@@ -385,16 +385,16 @@ startpage_webminup=Megjeleníti a Webmin frissítéseit a Rendszerinformációk 
 startpage_moduleup=Megjeleníti a modul frissítéseit a Rendszerinformációk oldalon?
 
 upgrade_title=Frissítse a Webmin szoftvert
-upgrade_desc=Ez az űrlap lehetővé teszi a teljes Webmin-telepítés frissítését új verzióra. Telepíthet helyi fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=http://www.webmin.com/>www.webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
-upgrade_descrpm=Ez az űrlap lehetővé teszi, hogy a webmin teljes telepítését új verzióra frissítse az RPM frissítési opciójával. Telepíthet helyi RPM-fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=http://www.webmin.com/>www.webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
-upgrade_descdeb=Ez az űrlap lehetővé teszi, hogy a teljes Webmin telepítését új verzióra frissítse a Debian csomag frissítésével. Telepíthet egy helyi.deb fájlból, egy feltöltött fájlból vagy a legfrissebb verzióról a <a href=http://www.webmin.com/>www.webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
-upgrade_descsolaris-pkg=Ez az űrlap lehetővé teszi a teljes Webmin telepítésének frissítését új verzióra az aktuális Solaris csomag eltávolításával és egy új telepítésével. Telepíthet egy helyi Solaris csomagfájlból, egy feltöltött fájlból vagy a legújabb verzióról a <a href=http://www.webmin.com/>www.webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
+upgrade_desc=Ez az űrlap lehetővé teszi a teljes Webmin-telepítés frissítését új verzióra. Telepíthet helyi fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=https://webmin.com>webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
+upgrade_descrpm=Ez az űrlap lehetővé teszi, hogy a webmin teljes telepítését új verzióra frissítse az RPM frissítési opciójával. Telepíthet helyi RPM-fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=https://webmin.com>webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
+upgrade_descdeb=Ez az űrlap lehetővé teszi, hogy a teljes Webmin telepítését új verzióra frissítse a Debian csomag frissítésével. Telepíthet egy helyi.deb fájlból, egy feltöltött fájlból vagy a legfrissebb verzióról a <a href=https://webmin.com>webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
+upgrade_descsolaris-pkg=Ez az űrlap lehetővé teszi a teljes Webmin telepítésének frissítését új verzióra az aktuális Solaris csomag eltávolításával és egy új telepítésével. Telepíthet egy helyi Solaris csomagfájlból, egy feltöltött fájlból vagy a legújabb verzióról a <a href=https://webmin.com>webmin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
 upgrade_descsun-pkg=Ez az űrlap lehetővé teszi a teljes Webmin telepítésének frissítését a Sun által szállított Solaris csomag új verziójára. Telepíthet egy helyi Solaris csomagfájlból vagy egy feltöltött fájlból. A legújabb csomagok megtalálhatók a <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a> oldalon. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
 upgrade_descgentoo=Ez az űrlap lehetővé teszi, hogy a teljes Webmin telepítését új verzióra frissítse azáltal, hogy eltávolítja a jelenlegi Gentoo Emerge csomagot, és telepít egy újat. Telepíthet egy helyi Gentoo csomagfájlból, feltöltött fájlból vagy az Emerge tároló legújabb verziójából. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
 upgrade_local=Helyi fájlból
 upgrade_uploaded=Feltöltött fájlból
 upgrade_url=FTP vagy HTTP URL-ről
-upgrade_ftp=A legújabb verzió a www.webmin.com webhelyről
+upgrade_ftp=A legújabb verzió a webmin.com webhelyről
 upgrade_cup=A Caldera <tt>cupdate</tt> eszközének legújabb verziója
 upgrade_emerge=A legújabb verzió az Emerge tárolóból
 upgrade_delete=Törli a régi verzió könyvtárát a frissítés után?
@@ -402,7 +402,7 @@ upgrade_repo=A(z) $1 adattár legújabb verziója
 upgrade_ok=Frissítse a Webmin szoftvert
 upgrade_err1=Nem sikerült frissíteni a $1 verzióról
 upgrade_err2=Nem sikerült frissíteni a feltöltött fájlból
-upgrade_err3=Nem sikerült frissíteni a www.webmin.com webhelyről
+upgrade_err3=Nem sikerült frissíteni a webmin.com webhelyről
 upgrade_err4=Nem sikerült frissíteni az Emerge tárolóból
 upgrade_err5=Nem sikerült frissíteni a $1 URL-ről
 upgrade_eurl=Hiányzó vagy érvénytelen URL
@@ -431,7 +431,7 @@ upgrade_ewpackage=A Webmin számára nem érvényes Solaris csomag
 upgrade_egentoo=A Webmin nem érvényes Gentoo csomagja
 upgrade_eupdates=A frissítések listájának letöltése nem sikerült : $1
 upgrade_echecksig=Az RPM aláírás ellenőrzése sikertelen : $1
-upgrade_nosig=Nincs csomag aláírás-ellenőrzés - a tar.gz csomagok ellenőrzése csak a www.webmin.com webhelyről történő frissítés esetén lehetséges.
+upgrade_nosig=Nincs csomag aláírás-ellenőrzés - a tar.gz csomagok ellenőrzése csak a webmin.com webhelyről történő frissítés esetén lehetséges.
 upgrade_sig=Ellenőrizze a GnuPG aláírást a csomagon?
 upgrade_force=Frissítés akkor is, ha az új verzió azonos vagy régebbi?
 upgrade_disc=Lekapcsolja az összes többi felhasználót?
@@ -455,10 +455,10 @@ newmod_header=Új modul támogatások
 newmod_def=Alapértelmezett viselkedés - adjon új modulokat a <tt>gyökér</tt> vagy <tt>admin</tt> számára
 newmod_users=Adjon új modulokat :
 
-update_desc1=Ez az űrlap lehetővé teszi a Webmin modulok frissítését, amelyek hibákat vagy biztonsági lyukakat találtak a <a href=http://www.webmin.com/updates.html>Webmin frissítések</a> oldalon vagy más forrásból. Ez összehasonlítja a jelenleg telepített modulokat a frissítésre elérhető modulokkal, és opcionálisan automatikusan letölti és telepíti az elavult modulokat.
+update_desc1=Ez az űrlap lehetővé teszi a Webmin modulok frissítését, amelyek hibákat vagy biztonsági lyukakat találtak a <a href=https://webmin.com/updates.html>Webmin frissítések</a> oldalon vagy más forrásból. Ez összehasonlítja a jelenleg telepített modulokat a frissítésre elérhető modulokkal, és opcionálisan automatikusan letölti és telepíti az elavult modulokat.
 update_header1=Frissítse a modulokat most
 update_header2=Frissítse a modulokat az ütemezés szerint
-update_webmin=Frissítés a www.webmin.com webhelyről
+update_webmin=Frissítés a webmin.com webhelyről
 update_other=Frissítés más forrásokból ..
 update_show=Csak azt mutatják, mely modulokat frissítik
 update_missing=Telepítse a jelenleg nem telepített modulokat
@@ -474,7 +474,7 @@ update_apply=Mentés és alkalmazás
 update_sched2=Modulok frissítése a $1 oldalon: $2 minden $3 napon
 update_none=Ehhez a verzióhoz nincs Webmin frissítés.
 update_failed=Nem sikerült telepíteni a modult : $1
-update_desc2=Ez az űrlap hibákat vagy biztonsági lyukakat tartalmazó Webmin modulok automatikus frissítésének ütemezésére szolgál a <a href=http://www.webmin.com/updates.html>Webmin frissítések</a> oldalról vagy más forrásból. Míg ez a szolgáltatás hasznos, óvatosan kell használni, mivel ez lehetővé teheti a támadók számára, hogy átvegyék a rendszerét, ha a frissítési szerver valaha veszélybe került.
+update_desc2=Ez az űrlap hibákat vagy biztonsági lyukakat tartalmazó Webmin modulok automatikus frissítésének ütemezésére szolgál a <a href=https://webmin.com/updates.html>Webmin frissítések</a> oldalról vagy más forrásból. Míg ez a szolgáltatás hasznos, óvatosan kell használni, mivel ez lehetővé teheti a támadók számára, hogy átvegyék a rendszerét, ha a frissítési szerver valaha veszélybe került.
 update_enosig=Nem sikerült letölteni az aláírási fájlt a frissítésekhez : $1
 update_ebadsig=Az aláírás frissítése sikertelen : $1
 update_enomodsig=Nem sikerült letölteni a modul aláírási fájlját : $1

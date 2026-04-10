@@ -34,7 +34,7 @@ index_installon=Installera på
 index_upgradeon=Servrar att uppgradera
 index_update=Uppdatera moduler
 index_updateon=Servrar att uppdatera
-index_updatedesc=Detta formulär låter dig uppgradera Usermin-moduler som har visat sig innehålla buggar eller säkerhetshål från sidan <a href=http://www.webmin.com/updates.html>Usermin Updates</a> eller från en annan källa.
+index_updatedesc=Detta formulär låter dig uppgradera Usermin-moduler som har visat sig innehålla buggar eller säkerhetshål från sidan <a href=https://webmin.com/updates.html>Usermin Updates</a> eller från en annan källa.
 index_thost=Värdnamn
 index_tdesc=Beskrivning
 index_tver=Version

@@ -261,7 +261,7 @@ newcsr_ok2=此CSR必鬚髮送給簽名機構，簽名機構將返回簽名證書
 startpage_webminup=在“系統信息”頁面上顯示Webmin更新？
 startpage_moduleup=在“系統信息”頁面上顯示模塊更新？
 
-upgrade_descdeb=通過此表，您可以通過升級Debian軟件包將整個Webmin安裝升級到新版本。您可以從本地.deb文件，上載的文件或最新版本的<a href=http://www.webmin.com/>www.webmin.com</a>安裝。與手動升級一樣，所有配置設置和第三方模塊都將保留。
+upgrade_descdeb=通過此表，您可以通過升級Debian軟件包將整個Webmin安裝升級到新版本。您可以從本地.deb文件，上載的文件或最新版本的<a href=https://webmin.com>webmin.com</a>安裝。與手動升級一樣，所有配置設置和第三方模塊都將保留。
 upgrade_descsun-pkg=該表格使您可以將整個Webmin安裝從Sun提供的Solaris軟件包升級到新版本。您可以從本地Solaris軟件包文件或上載的文件進行安裝。可以在<a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>中找到最新的軟件包。與手動升級一樣，所有配置設置和第三方模塊都將保留。
 upgrade_descgentoo=通過刪除當前的Gentoo Emerge軟件包並安裝新的軟件包，此表單使您可以將整個Webmin安裝升級到新版本。您可以從本地Gentoo軟件包文件，上載的文件或從Emerge存儲庫中的最新版本進行安裝。與手動升級一樣，所有配置設置和第三方模塊都將保留。
 upgrade_emerge=Emerge存儲庫中的最新版本
@@ -279,7 +279,7 @@ upgrade_eusermin=文件是Usermin版本$1，而不是Webmin更新。
 upgrade_ewpackage=這不是Webmin的有效Solaris軟件包
 upgrade_egentoo=不是Webmin的有效Gentoo軟件包
 upgrade_eupdates=無法下載更新列表：$1
-upgrade_nosig=沒有完成軟件包簽名驗證-僅當從www.webmin.com升級時才可以檢查tar.gz軟件包。
+upgrade_nosig=沒有完成軟件包簽名驗證-僅當從webmin.com升級時才可以檢查tar.gz軟件包。
 upgrade_force=即使新版本相同或更舊，也要升級嗎？
 upgrade_disc=斷開所有其他用戶的連接？
 upgrade_everify2=程序包具有來自$1的簽名，但無效

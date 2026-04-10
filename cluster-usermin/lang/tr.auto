@@ -34,7 +34,7 @@ index_installon=Yükleme yeri
 index_upgradeon=Yükseltilecek sunucular
 index_update=Modülleri Güncelle
 index_updateon=Güncellenecek sunucular
-index_updatedesc=Bu form, <a href=http://www.webmin.com/updates.html>Usermin Güncellemeleri</a> sayfasından veya başka bir kaynaktan hata veya güvenlik deliği içerdiği tespit edilen Usermin modüllerini yükseltmenizi sağlar.
+index_updatedesc=Bu form, <a href=https://webmin.com/updates.html>Usermin Güncellemeleri</a> sayfasından veya başka bir kaynaktan hata veya güvenlik deliği içerdiği tespit edilen Usermin modüllerini yükseltmenizi sağlar.
 index_thost=Hostadı
 index_tdesc=Açıklama
 index_tver=versiyon

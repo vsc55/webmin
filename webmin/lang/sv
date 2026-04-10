@@ -135,17 +135,17 @@ startpage_gotoone=Gå direkt till modul<br>om användaren endast har en?
 startpage_deftab=Standardkategori
 
 upgrade_title=Uppgradera Webmin
-upgrade_desc=I detta formulär kan du uppgradera hela Webmin-installationen till en ny version. Du kan uppgradera från en lokal fil, nedladdad fil eller den senaste versionen på <a href=http://www.webmin.com/>www.webmin.com</a>. Precis som vid manuell uppgradering kommer alla inställningar och tredjepartsmoduler att vara oförändrade.
-upgrade_descrpm=I detta formulär kan du uppgradera hela Webmin-installationen till en ny version genom att använda RPMs uppgraderingsfunktion. Installera från en lokal RPM-fil, en nedladdad fil eller från den senaste versionen på <a href=http://www.webmin.com/>www.webmin.com</a>. Precis som vid manuell uppgradering kommer alla inställningar och tredjepartsmoduler att finnas kvar.
-upgrade_descsolaris-pkg=I detta formulär kan du uppgradera hela Webmin-installationen till en ny version genom att ta bort det gamla Solaris-paketet och installera ett nytt. Installera från en lokal Solaris-paketfil, en nedladdad fil eller från den senaste versionen på <a href=http://www.webmin.com/>www.webmin.com</a>. Precis som vid manuell uppgradering kommer alla inställningar och trejdepartsmoduler att finnas kvar.
+upgrade_desc=I detta formulär kan du uppgradera hela Webmin-installationen till en ny version. Du kan uppgradera från en lokal fil, nedladdad fil eller den senaste versionen på <a href=https://webmin.com>webmin.com</a>. Precis som vid manuell uppgradering kommer alla inställningar och tredjepartsmoduler att vara oförändrade.
+upgrade_descrpm=I detta formulär kan du uppgradera hela Webmin-installationen till en ny version genom att använda RPMs uppgraderingsfunktion. Installera från en lokal RPM-fil, en nedladdad fil eller från den senaste versionen på <a href=https://webmin.com>webmin.com</a>. Precis som vid manuell uppgradering kommer alla inställningar och tredjepartsmoduler att finnas kvar.
+upgrade_descsolaris-pkg=I detta formulär kan du uppgradera hela Webmin-installationen till en ny version genom att ta bort det gamla Solaris-paketet och installera ett nytt. Installera från en lokal Solaris-paketfil, en nedladdad fil eller från den senaste versionen på <a href=https://webmin.com>webmin.com</a>. Precis som vid manuell uppgradering kommer alla inställningar och trejdepartsmoduler att finnas kvar.
 upgrade_local=Från lokal fil
 upgrade_uploaded=Från uppladdad fil
-upgrade_ftp=Senaste versionen från www.webmin.com
+upgrade_ftp=Senaste versionen från webmin.com
 upgrade_cup=Senaste versionen från Calderas <tt>cupdate</tt>-verktyg
 upgrade_ok=Upgpradera Webmin
 upgrade_err1=Det gick inte att uppgradera från $1
 upgrade_err2=Det gick inte att uppgradera från uppladdad fil
-upgrade_err3=Det gick inte att uppgradera från www.webmin.com
+upgrade_err3=Det gick inte att uppgradera från webmin.com
 upgrade_efile=Filen finns inte
 upgrade_ebrowser=Din browser stödjer inte nedladdning av filer
 upgrade_eversion=Det går inte att nedgradera till version $1

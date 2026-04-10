@@ -254,18 +254,18 @@ ui_show_time=Masa pada sistem
 
 upgrade_title=Tingkatkan Usermin
 upgrade_title2=Pasang Usermin
-upgrade_desc=Borang ini membolehkan anda menaik taraf keseluruhan pemasangan Usermin ke versi baru. Anda boleh memasang dari fail setempat, fail yang dimuat naik atau dari versi terkini di <a href=http://www.usermin.com/>www.usermin.com</a>. Sama seperti peningkatan manual, semua tetapan konfigurasi dan modul pihak ketiga akan disimpan.
-upgrade_descrpm=Borang ini membolehkan anda menaik taraf keseluruhan pemasangan Usermin ke versi baru menggunakan pilihan naik taraf RPM. Anda boleh memasang dari fail RPM setempat, fail yang dimuat naik atau dari versi terkini di <a href=http://www.usermin.com/>www.usermin.com</a>. Sama seperti peningkatan manual, semua tetapan konfigurasi dan modul pihak ketiga akan disimpan.
-upgrade_descdeb=Borang ini membolehkan anda menaik taraf keseluruhan pemasangan Usermin ke versi baru dengan meningkatkan pakej Debiannya. Anda boleh memasang dari fail.deb setempat, fail yang dimuat naik atau dari versi terkini di <a href=http://www.usermin.com/>www.usermin.com</a>. Sama seperti peningkatan manual, semua tetapan konfigurasi dan modul pihak ketiga akan disimpan.
+upgrade_desc=Borang ini membolehkan anda menaik taraf keseluruhan pemasangan Usermin ke versi baru. Anda boleh memasang dari fail setempat, fail yang dimuat naik atau dari versi terkini di <a href=https://usermin.com>usermin.com</a>. Sama seperti peningkatan manual, semua tetapan konfigurasi dan modul pihak ketiga akan disimpan.
+upgrade_descrpm=Borang ini membolehkan anda menaik taraf keseluruhan pemasangan Usermin ke versi baru menggunakan pilihan naik taraf RPM. Anda boleh memasang dari fail RPM setempat, fail yang dimuat naik atau dari versi terkini di <a href=https://usermin.com>usermin.com</a>. Sama seperti peningkatan manual, semua tetapan konfigurasi dan modul pihak ketiga akan disimpan.
+upgrade_descdeb=Borang ini membolehkan anda menaik taraf keseluruhan pemasangan Usermin ke versi baru dengan meningkatkan pakej Debiannya. Anda boleh memasang dari fail.deb setempat, fail yang dimuat naik atau dari versi terkini di <a href=https://usermin.com>usermin.com</a>. Sama seperti peningkatan manual, semua tetapan konfigurasi dan modul pihak ketiga akan disimpan.
 upgrade_local=Dari fail tempatan
 upgrade_uploaded=Dari fail yang dimuat naik
 upgrade_url=Dari ftp atau URL URL
-upgrade_ftp=Versi terkini dari www.usermin.com
+upgrade_ftp=Versi terkini dari usermin.com
 upgrade_delete=Padamkan direktori versi lama selepas naik taraf?
 upgrade_ok=Tingkatkan Usermin
 upgrade_err1=Gagal naik taraf dari $1
 upgrade_err2=Gagal naik taraf daripada fail yang dimuat naik
-upgrade_err3=Gagal menaik taraf dari www.usermin.com
+upgrade_err3=Gagal menaik taraf dari usermin.com
 upgrade_err5=Gagal menaik taraf dari URL $1
 upgrade_eurl=URL hilang atau tidak sah
 upgrade_efile=Fail tidak wujud
@@ -286,10 +286,10 @@ upgrade_failed=.. naik taraf gagal!
 upgrade_updates=Terdapat $1 kemas kini untuk versi baru Usermin ini. <a href='$2'>Klik di sini</a> untuk memuat turun dan memasangnya secara automatik sekarang.
 upgrade_eupdates=Gagal memuat turun senarai kemas kini : $1
 
-update_desc1=Borang ini membolehkan anda menaik taraf modul Usermin yang didapati mengandungi pepijat atau lubang keselamatan dari halaman <a href=http://www.usermin.com/uupdates.html>Kemas Kini Usermin</a> atau dari sumber lain. Ini akan membandingkan modul yang dipasang sekarang dengan yang tersedia untuk kemas kini, dan secara automatik memuat turun dan memasang sebarang modul yang sudah lapuk.
+update_desc1=Borang ini membolehkan anda menaik taraf modul Usermin yang didapati mengandungi pepijat atau lubang keselamatan dari halaman <a href=https://usermin.com/uupdates.html>Kemas Kini Usermin</a> atau dari sumber lain. Ini akan membandingkan modul yang dipasang sekarang dengan yang tersedia untuk kemas kini, dan secara automatik memuat turun dan memasang sebarang modul yang sudah lapuk.
 update_header1=Kemas kini modul sekarang
 update_header2=Kemas kini modul mengikut jadual
-update_webmin=Kemas kini dari www.usermin.com
+update_webmin=Kemas kini dari usermin.com
 update_other=Kemas kini dari sumber lain
 update_show=Hanya tunjukkan modul mana yang akan dikemas kini
 update_missing=Pasang modul yang tidak dipasang pada masa ini
@@ -301,7 +301,7 @@ update_apply=Simpan dan Terapkan
 update_sched=Kemas kini modul pada $1 :00 setiap $2 hari
 update_none=Tiada kemas kini Usermin untuk versi ini.
 update_failed=Gagal memasang modul : $1
-update_desc2=Borang ini adalah untuk penjadualan kemas kini automatik modul Usermin yang mengandungi pepijat atau lubang keselamatan dari laman <a href=http://www.usermin.com/uupdates.html>Kemas Kini Usermin</a> atau dari sumber lain. Walaupun perkhidmatan ini berguna, anda harus berhati-hati menggunakannya kerana ia mungkin membenarkan penyerang untuk mengambil alih sistem anda jika pelayan kemas kini pernah dikompromi.
+update_desc2=Borang ini adalah untuk penjadualan kemas kini automatik modul Usermin yang mengandungi pepijat atau lubang keselamatan dari laman <a href=https://usermin.com/uupdates.html>Kemas Kini Usermin</a> atau dari sumber lain. Walaupun perkhidmatan ini berguna, anda harus berhati-hati menggunakannya kerana ia mungkin membenarkan penyerang untuk mengambil alih sistem anda jika pelayan kemas kini pernah dikompromi.
 
 assignment_title=Menetapkan semula Modul
 assignment_header=Tugasan kategori modul

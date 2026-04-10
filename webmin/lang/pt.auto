@@ -233,7 +233,7 @@ newcsr_ok2=Esse CSR deve ser enviado a uma autoridade de assinatura, que retorna
 startpage_webminup=Mostrar atualizações do Webmin na página Informações do sistema?
 startpage_moduleup=Mostrar atualizações de módulo na página Informações do sistema?
 
-upgrade_descdeb=Este formulário permite que você atualize toda a instalação do Webmin para uma nova versão, atualizando o pacote Debian. Você pode instalar a partir de um arquivo.deb local, de um arquivo carregado ou da versão mais recente em <a href=http://www.webmin.com/>www.webmin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
+upgrade_descdeb=Este formulário permite que você atualize toda a instalação do Webmin para uma nova versão, atualizando o pacote Debian. Você pode instalar a partir de um arquivo.deb local, de um arquivo carregado ou da versão mais recente em <a href=https://webmin.com>webmin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
 upgrade_descsun-pkg=Este formulário permite atualizar toda a instalação do Webmin para uma nova versão do pacote Solaris fornecido pela Sun. Você pode instalar a partir de um arquivo de pacote Solaris local ou de um arquivo carregado. Os pacotes mais recentes podem ser encontrados em <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
 upgrade_repo=Versão mais recente do repositório $1
 upgrade_edeb=Não é um arquivo de pacote Webmin Debian válido

@@ -259,18 +259,18 @@ ui_show_time=Sisteman denbora
 
 upgrade_title=Erabiltzailearen bertsioa berritu
 upgrade_title2=Instalatu Usermin
-upgrade_desc=Inprimaki honek zure Usermin instalazio osoa bertsio berrira berritzeko aukera ematen du. Tokiko fitxategietatik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=http://www.usermin.com/>www.usermin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
-upgrade_descrpm=Inprimaki honek zure Usermin instalazio osoa bertsio berrira berritzeko aukera ematen dizu RPM bertsio berritzeko aukera erabiliz. Tokiko RPM fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=http://www.usermin.com/>www.usermin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
-upgrade_descdeb=Inprimaki honek zure Usermin instalazio osoa bertsio berrira berritzeko aukera ematen du Debian paketea berrituz. Tokiko.deb fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=http://www.usermin.com/>www.usermin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
+upgrade_desc=Inprimaki honek zure Usermin instalazio osoa bertsio berrira berritzeko aukera ematen du. Tokiko fitxategietatik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=https://usermin.com>usermin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
+upgrade_descrpm=Inprimaki honek zure Usermin instalazio osoa bertsio berrira berritzeko aukera ematen dizu RPM bertsio berritzeko aukera erabiliz. Tokiko RPM fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=https://usermin.com>usermin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
+upgrade_descdeb=Inprimaki honek zure Usermin instalazio osoa bertsio berrira berritzeko aukera ematen du Debian paketea berrituz. Tokiko.deb fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=https://usermin.com>usermin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
 upgrade_local=Tokiko fitxategitik
 upgrade_uploaded=Kargatutako fitxategitik
 upgrade_url=Ftp edo http URLtik
-upgrade_ftp=Azken bertsioa www.usermin.com webgunetik
+upgrade_ftp=Azken bertsioa usermin.com webgunetik
 upgrade_delete=Bertsioaren direktorio zaharra ezabatu nahi duzu?
 upgrade_ok=Erabiltzailearen bertsioa berritu
 upgrade_err1=Huts egin du $1 etik eguneratzeak
 upgrade_err2=Ezin izan da kargatutako fitxategitik eguneratu
-upgrade_err3=Huts egin du www.usermin.com webgunetik eguneratzeak
+upgrade_err3=Huts egin du usermin.com webgunetik eguneratzeak
 upgrade_err5=Huts egin du $1 URLtik eguneratzean
 upgrade_eurl=URL falta edo baliogabea
 upgrade_efile=Fitxategia ez da existitzen
@@ -291,10 +291,10 @@ upgrade_failed=.. bertsio berritzea huts egin du!
 upgrade_updates=Erabiltzailearen bertsio berri honetarako $1 eguneratze daude. <a href='$2'>Egin klik hemen</a> orain deskargatu eta instalatzeko automatikoki.
 upgrade_eupdates=Ezin izan da eguneratzeen zerrenda deskargatu : $1
 
-update_desc1=Inprimaki honek <a href=http://www.usermin.com/uupdates.html>Usermin eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak aurkitu dituzten Usermin moduluak berritzea ahalbidetzen du. Honek gaur egun instalatutako moduluak eguneratzeko erabilgarri daudenekin alderatuko ditu eta, aukeran, zaharkituta dauden modulu guztiak deskargatu eta instalatuko ditu.
+update_desc1=Inprimaki honek <a href=https://usermin.com/uupdates.html>Usermin eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak aurkitu dituzten Usermin moduluak berritzea ahalbidetzen du. Honek gaur egun instalatutako moduluak eguneratzeko erabilgarri daudenekin alderatuko ditu eta, aukeran, zaharkituta dauden modulu guztiak deskargatu eta instalatuko ditu.
 update_header1=Eguneratu moduluak orain
 update_header2=Eguneratu moduluak ordutegian
-update_webmin=Eguneratu www.usermin.com webgunetik
+update_webmin=Eguneratu usermin.com webgunetik
 update_other=Eguneratu beste iturri batetik
 update_show=Erakutsi zein modulu eguneratuko liratekeen soilik
 update_missing=Instalatu ez dauden moduluak instalatu
@@ -306,7 +306,7 @@ update_apply=Gorde eta aplikatu
 update_sched=Eguneratu moduluak $1 : 00 bakoitzean $2 egun bakoitzean
 update_none=Ez dago Usermin eguneratzeik bertsio honetarako.
 update_failed=Ezin izan da modulua instalatu : $1
-update_desc2=Inprimaki hau <a href=http://www.usermin.com/uupdates.html>Usermin Eguneratzeak</a> orritik edo beste iturri batetik akatsak edo segurtasun zuloak dituzten Usermin moduluen eguneratze automatikoa programatzeko da. Zerbitzua erabilgarria den bitartean, kontuz ibili beharko zenuke erasoei erasotzaileei zure sistema har dezaten eguneratze zerbitzaria arriskuan jarriko balitz.
+update_desc2=Inprimaki hau <a href=https://usermin.com/uupdates.html>Usermin Eguneratzeak</a> orritik edo beste iturri batetik akatsak edo segurtasun zuloak dituzten Usermin moduluen eguneratze automatikoa programatzeko da. Zerbitzua erabilgarria den bitartean, kontuz ibili beharko zenuke erasoei erasotzaileei zure sistema har dezaten eguneratze zerbitzaria arriskuan jarriko balitz.
 
 assignment_title=Moduluak berriro esleitu
 assignment_header=Moduluen kategoriako esleipenak

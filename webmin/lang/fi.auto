@@ -478,16 +478,16 @@ startpage_webminup=Näytä Webmin-päivitykset Järjestelmätiedot-sivulla?
 startpage_moduleup=Näytä moduulipäivitykset Järjestelmätiedot-sivulla?
 
 upgrade_title=Päivitä Webmin
-upgrade_desc=Tämän lomakkeen avulla voit päivittää koko Webmin-asennuksen uuteen versioon. Voit asentaa paikallisesta tiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=http://www.webmin.com/>www.webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
-upgrade_descrpm=Tämän lomakkeen avulla voit päivittää koko webmin-asennuksen uuteen versioon RPM: n päivitysvaihtoehdon avulla. Voit asentaa paikallisesta RPM-tiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=http://www.webmin.com/>www.webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
-upgrade_descdeb=Tämä lomake antaa sinun päivittää koko Webmin-asennuksen uuteen versioon päivittämällä sen Debian-paketin. Voit asentaa paikallisesta.deb-tiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=http://www.webmin.com/>www.webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
-upgrade_descsolaris-pkg=Tämä lomake antaa sinun päivittää koko Webmin-asennuksen uuteen versioon poistamalla nykyisen Solaris-paketin ja asentamalla uuden. Voit asentaa paikallisesta Solaris-paketitiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=http://www.webmin.com/>www.webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
+upgrade_desc=Tämän lomakkeen avulla voit päivittää koko Webmin-asennuksen uuteen versioon. Voit asentaa paikallisesta tiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=https://webmin.com>webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
+upgrade_descrpm=Tämän lomakkeen avulla voit päivittää koko webmin-asennuksen uuteen versioon RPM: n päivitysvaihtoehdon avulla. Voit asentaa paikallisesta RPM-tiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=https://webmin.com>webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
+upgrade_descdeb=Tämä lomake antaa sinun päivittää koko Webmin-asennuksen uuteen versioon päivittämällä sen Debian-paketin. Voit asentaa paikallisesta.deb-tiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=https://webmin.com>webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
+upgrade_descsolaris-pkg=Tämä lomake antaa sinun päivittää koko Webmin-asennuksen uuteen versioon poistamalla nykyisen Solaris-paketin ja asentamalla uuden. Voit asentaa paikallisesta Solaris-paketitiedostosta, ladatusta tiedostosta tai uusimmasta versiosta osoitteessa <a href=https://webmin.com>webmin.com</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
 upgrade_descsun-pkg=Tämän lomakkeen avulla voit päivittää koko Webmin-asennuksen uuteen versioon Sunin toimittamasta Solaris-paketista. Voit asentaa paikallisesta Solaris-paketitiedostosta tai ladatusta tiedostosta. Uusimmat paketit löytyvät osoitteesta <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
 upgrade_descgentoo=Tämän lomakkeen avulla voit päivittää koko Webmin-asennuksen uuteen versioon poistamalla nykyisen Gentoo Emerge -paketin ja asentamalla uuden. Voit asentaa paikallisesta Gentoo-paketitiedostosta, ladatusta tiedostosta tai viimeisimmästä Emerge-arkiston versiosta. Aivan kuten manuaalisen päivityksen kanssa, kaikki konfigurointiasetuksesi ja kolmannen osapuolen moduulit säilytetään.
 upgrade_local=Paikallisesta tiedostosta
 upgrade_uploaded=Lähetetystä tiedostosta
 upgrade_url=FTP- tai HTTP-URL-osoitteesta
-upgrade_ftp=Uusin versio osoitteesta www.webmin.com
+upgrade_ftp=Uusin versio osoitteesta webmin.com
 upgrade_cup=Uusin versio Calderan <tt>cupdate</tt> -työkalusta
 upgrade_emerge=Uusin versio Emergen arkistosta
 upgrade_delete=Poistetaanko vanhan version hakemisto päivityksen jälkeen?
@@ -495,7 +495,7 @@ upgrade_repo=Viimeisin versio arkistosta $1
 upgrade_ok=Päivitä Webmin
 upgrade_err1=Päivitys $1 -kohtaan epäonnistui
 upgrade_err2=Päivitys epäonnistui ladatusta tiedostosta
-upgrade_err3=Päivitys epäonnistui sivustolta www.webmin.com
+upgrade_err3=Päivitys epäonnistui sivustolta webmin.com
 upgrade_err4=Päivitys Emergen arkistosta epäonnistui
 upgrade_err5=Päivitys URL-osoitteesta $1 epäonnistui
 upgrade_eurl=Puuttuva tai virheellinen URL-osoite
@@ -524,7 +524,7 @@ upgrade_ewpackage=Ei kelvollinen Solaris-paketti Webminille
 upgrade_egentoo=Ei kelvollinen Gentoo-paketti Webministä
 upgrade_eupdates=Päivitysluettelon lataus epäonnistui : $1
 upgrade_echecksig=RPM-allekirjoituksen todentaminen epäonnistui : $1
-upgrade_nosig=Paketin allekirjoituksen varmennusta ei suoritettu - tar.gz-pakettien tarkistaminen on mahdollista vain päivitettäessä osoitteesta www.webmin.com.
+upgrade_nosig=Paketin allekirjoituksen varmennusta ei suoritettu - tar.gz-pakettien tarkistaminen on mahdollista vain päivitettäessä osoitteesta webmin.com.
 upgrade_sig=Tarkistetaanko GnuPG-allekirjoitus paketissa?
 upgrade_force=Päivitä, vaikka uusi versio olisi sama tai vanhempi?
 upgrade_disc=Poistetaanko kaikki muut käyttäjät?
@@ -548,10 +548,10 @@ newmod_header=Uudet moduulituki
 newmod_def=Oletuskäyttäytyminen - anna uusia moduuleja <tt>root</tt> tai <tt>admin</tt>
 newmod_users=Myönnä uusia moduuleja :
 
-update_desc1=Tämä lomake antaa sinun päivittää Webmin-moduuleja, joiden on havaittu sisältävän virheitä tai <a href=http://www.webmin.com/updates.html>Webmin-päivitykset</a> -sivulta tai muusta lähteestä. Tämä vertaa nykyisin asennettuja moduuleja päivitettävissä oleviin moduuleihin ja lataa ja asentaa valinnaisesti kaikki vanhentuneet moduulit.
+update_desc1=Tämä lomake antaa sinun päivittää Webmin-moduuleja, joiden on havaittu sisältävän virheitä tai <a href=https://webmin.com/updates.html>Webmin-päivitykset</a> -sivulta tai muusta lähteestä. Tämä vertaa nykyisin asennettuja moduuleja päivitettävissä oleviin moduuleihin ja lataa ja asentaa valinnaisesti kaikki vanhentuneet moduulit.
 update_header1=Päivitä moduulit nyt
 update_header2=Päivitä moduulit aikataulussa
-update_webmin=Päivitys osoitteesta www.webmin.com
+update_webmin=Päivitys osoitteesta webmin.com
 update_other=Päivitys muista lähteistä ..
 update_show=Näytä vain mitkä moduulit päivitetään
 update_missing=Asenna moduulit, joita ei ole tällä hetkellä asennettu
@@ -567,7 +567,7 @@ update_apply=Tallenna ja käytä
 update_sched2=Päivitä moduulit $1:$2 jokainen $3 päivä
 update_none=Tätä versiota ei Webmin-päivityksiä.
 update_failed=Moduulin asentaminen epäonnistui : $1
-update_desc2=Tämä lomake on tarkoitettu vikoja tai tietoturvareikiä sisältävien Webmin-moduulien automaattisen päivityksen ajoittamiseen <a href=http://www.webmin.com/updates.html>Webmin-päivitykset</a> -sivulta tai muusta lähteestä. Vaikka tämä palvelu on hyödyllinen, sinun tulee olla varovainen sen käyttämisessä, koska se saattaa antaa hyökkääjien ottaa järjestelmän haltuunsa, jos päivityspalvelin on koskaan vaarantunut.
+update_desc2=Tämä lomake on tarkoitettu vikoja tai tietoturvareikiä sisältävien Webmin-moduulien automaattisen päivityksen ajoittamiseen <a href=https://webmin.com/updates.html>Webmin-päivitykset</a> -sivulta tai muusta lähteestä. Vaikka tämä palvelu on hyödyllinen, sinun tulee olla varovainen sen käyttämisessä, koska se saattaa antaa hyökkääjien ottaa järjestelmän haltuunsa, jos päivityspalvelin on koskaan vaarantunut.
 update_enosig=Allekirjoitustiedostoa ei voitu ladata päivityksiä varten : $1
 update_ebadsig=Päivitys allekirjoitusten tarkistuksessa epäonnistui : $1
 update_enomodsig=Moduulin allekirjoitustiedostoa ei voitu ladata : $1

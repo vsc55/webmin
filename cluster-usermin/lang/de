@@ -34,7 +34,7 @@ index_installon=Installieren auf
 index_upgradeon=Zu aktualisierende Server
 index_update=Module aktualisieren
 index_updateon=Zu aktualisierende Server
-index_updatedesc=Dieses Formular ermöglicht es Ihnen, Usermin-Module zu aktualisieren, die Fehler oder Sicherheitslücken enthalten. Weitere Informationen finden Sie auf der <a href=http://www.webmin.com/updates.html>Usermin Updates</a>-Seite oder von einer anderen Quelle.
+index_updatedesc=Dieses Formular ermöglicht es Ihnen, Usermin-Module zu aktualisieren, die Fehler oder Sicherheitslücken enthalten. Weitere Informationen finden Sie auf der <a href=https://webmin.com/updates.html>Usermin Updates</a>-Seite oder von einer anderen Quelle.
 index_thost=Hostname
 index_tdesc=Beschreibung
 index_tver=Version

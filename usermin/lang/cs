@@ -241,18 +241,18 @@ ui_tabs=Kategorizovat moduly v úvodním seznamu?
 
 upgrade_title=Povýšení Userminu
 upgrade_title2=Instalovat Usermin
-upgrade_desc=Tento formulář umožňuje povýšení výchozí instalace Userminu na novou verzi. Můžete instalovat z lokálního souboru, nebo stáhnout soubor s nejnovější verzí z <a href=http://www.webmin.com/>www.usermin.com</a> Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
-upgrade_descrpm=Tento formulář umožňuje povýšení výchozí instalace Userminu na novou verzi při použití povýšení pomocí RPM. Můžete instalovat z lokálního souboru RPM, nebo stáhnout soubor s nejnovější verzí z <a href=http://www.usermin.com/>www.usermin.com</a>. Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
-upgrade_descdeb=Tento formulář umožňuje aktualizovat váš Usermin na novou verzi za pomoci balíčků pro Debian. Můžete taktéž instalovat pomocí lokálních .deb souborů, anebo provést aktualizací na poslední verzi z <a href=http://www.usermin.com/>www.usermin.com</a>. I v případě ruční aktualizace by měli být zachovány konfigurace a využívání modulů třetích stran.
+upgrade_desc=Tento formulář umožňuje povýšení výchozí instalace Userminu na novou verzi. Můžete instalovat z lokálního souboru, nebo stáhnout soubor s nejnovější verzí z <a href=https://webmin.com>webmin.com</a> Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
+upgrade_descrpm=Tento formulář umožňuje povýšení výchozí instalace Userminu na novou verzi při použití povýšení pomocí RPM. Můžete instalovat z lokálního souboru RPM, nebo stáhnout soubor s nejnovější verzí z <a href=https://usermin.com>usermin.com</a>. Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
+upgrade_descdeb=Tento formulář umožňuje aktualizovat váš Usermin na novou verzi za pomoci balíčků pro Debian. Můžete taktéž instalovat pomocí lokálních .deb souborů, anebo provést aktualizací na poslední verzi z <a href=https://usermin.com>usermin.com</a>. I v případě ruční aktualizace by měli být zachovány konfigurace a využívání modulů třetích stran.
 upgrade_local=Z lokálního souboru
 upgrade_uploaded=Ze stahovaného souboru
 upgrade_url=Z ftp nebo http URL
-upgrade_ftp=Poslední verze z www.usermin.com
+upgrade_ftp=Poslední verze z usermin.com
 upgrade_delete=Smazat adresář se starou verzí po povýšení?
 upgrade_ok=Povýšení Userminu
 upgrade_err1=Chyba při povýšení z $1
 upgrade_err2=Chyba při povýšení ze stahovaného souboru
-upgrade_err3=Chyba povýšení z www.usermin.com
+upgrade_err3=Chyba povýšení z usermin.com
 upgrade_err5=Chyba při povýšení z URL $1
 upgrade_eurl=Chybějící nabo nesprávné URL
 upgrade_efile=Soubor neexistuje
@@ -273,10 +273,10 @@ upgrade_failed=.. povýšení byla neúspěšná!
 upgrade_updates=Pro novou verzi Userminu existuje(í) $1 aktualizací(e). a href='$2'>Klepnutím zde</a> dojde k jejich okamžitému stažení a instalaci.
 upgrade_eupdates=Chyba při stahování seznamu aktualizací: $1
 
-update_desc1=Tento formulář umožňuje aktualizovat moduly Userminu, které obsahují bugy nebo bezpečnostní díry ze stránky <a href=http://www.usermin.com/uupdates.html>Usermin Updates</a> či z jiného zdroje. Tento postup porovná stávající moduly s těmi, které jsou přístupné k aktualizaci, a popřípadě automaticky stáhnou a nainstalují ty moduly, které jsou zastaralé.
+update_desc1=Tento formulář umožňuje aktualizovat moduly Userminu, které obsahují bugy nebo bezpečnostní díry ze stránky <a href=https://usermin.com/uupdates.html>Usermin Updates</a> či z jiného zdroje. Tento postup porovná stávající moduly s těmi, které jsou přístupné k aktualizaci, a popřípadě automaticky stáhnou a nainstalují ty moduly, které jsou zastaralé.
 update_header1=Aktualizovat moduly ihned
 update_header2=Aktulaizovat moduly s využitím plánovače
-update_webmin=Aktualizovat data z www.usermin.com
+update_webmin=Aktualizovat data z usermin.com
 update_other=Aktualizovat z jiného zdroje
 update_show=Zobrazit pouze ty moduly, které lze aktualizovat
 update_missing=Instalovat ty moduly, které nejsou správně nainstalovány
@@ -288,7 +288,7 @@ update_apply=Uložit a použít
 update_sched=Aktualizovat moduly v $1:00 každých $2 dnů
 update_none=Nejsou pro tuto verzi Userminu žádné aktualizace.
 update_failed=Chyba při instalaci modulu : $1
-update_desc2=Tento formulář umožňuje naplánovat automatické aktualizace modulů Userminu, jež obsahují bugy a bezpečnostní díry ze stránek <a href=http://www.usermin.com/uupdates.html>Usermin Updates</a> nebo jiného zdroje. Pokud chcete tuto službu používat, buďte opatrní, protože ji mohou využít útočníci, jestliže je update server napaden.
+update_desc2=Tento formulář umožňuje naplánovat automatické aktualizace modulů Userminu, jež obsahují bugy a bezpečnostní díry ze stránek <a href=https://usermin.com/uupdates.html>Usermin Updates</a> nebo jiného zdroje. Pokud chcete tuto službu používat, buďte opatrní, protože ji mohou využít útočníci, jestliže je update server napaden.
 
 assignment_title=Přerozdělování modulů
 assignment_header=Ůkoly pro kategorie v modulu

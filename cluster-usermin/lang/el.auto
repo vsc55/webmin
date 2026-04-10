@@ -34,7 +34,7 @@ index_installon=Εγκαταστήστε το
 index_upgradeon=Διακομιστές για αναβάθμιση
 index_update=Ενημερώστε τις ενότητες
 index_updateon=Οι διακομιστές για ενημέρωση
-index_updatedesc=Αυτή η φόρμα σάς επιτρέπει να αναβαθμίσετε τις ενότητες Usermin που έχουν βρεθεί ότι περιέχουν σφάλματα ή τρύπες ασφαλείας από τη σελίδα <a href=http://www.webmin.com/updates.html>Usermin Updates</a> ή από άλλη πηγή.
+index_updatedesc=Αυτή η φόρμα σάς επιτρέπει να αναβαθμίσετε τις ενότητες Usermin που έχουν βρεθεί ότι περιέχουν σφάλματα ή τρύπες ασφαλείας από τη σελίδα <a href=https://webmin.com/updates.html>Usermin Updates</a> ή από άλλη πηγή.
 index_thost=Όνομα κεντρικού υπολογιστή
 index_tdesc=Περιγραφή
 index_tver=Εκδοχή

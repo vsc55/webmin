@@ -259,18 +259,18 @@ ui_show_time=A rendszeren töltött idő
 
 upgrade_title=Frissítse a Usermin alkalmazást
 upgrade_title2=Telepítse a Usermin alkalmazást
-upgrade_desc=Ez az űrlap lehetővé teszi a teljes Usermin telepítésének frissítését új verzióra. Telepíthet helyi fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=http://www.usermin.com/>www.usermin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
-upgrade_descrpm=Ez az űrlap lehetővé teszi, hogy a teljes Usermin telepítését az RPM frissítési opciójával új verzióra frissítse. Telepíthet egy helyi RPM-fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=http://www.usermin.com/>www.usermin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
-upgrade_descdeb=Ez az űrlap lehetővé teszi a teljes Usermin telepítésének új verzióra történő frissítését a Debian csomag frissítésével. Telepíthet egy helyi.deb fájlból, egy feltöltött fájlból vagy a legfrissebb verzióról a <a href=http://www.usermin.com/>www.usermin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
+upgrade_desc=Ez az űrlap lehetővé teszi a teljes Usermin telepítésének frissítését új verzióra. Telepíthet helyi fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=https://usermin.com>usermin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
+upgrade_descrpm=Ez az űrlap lehetővé teszi, hogy a teljes Usermin telepítését az RPM frissítési opciójával új verzióra frissítse. Telepíthet egy helyi RPM-fájlból, feltöltött fájlból vagy a legfrissebb verzióról a <a href=https://usermin.com>usermin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
+upgrade_descdeb=Ez az űrlap lehetővé teszi a teljes Usermin telepítésének új verzióra történő frissítését a Debian csomag frissítésével. Telepíthet egy helyi.deb fájlból, egy feltöltött fájlból vagy a legfrissebb verzióról a <a href=https://usermin.com>usermin.com</a> webhelyen. A kézi frissítéshez hasonlóan a konfigurációs beállításokat és a harmadik fél moduljait is megőrzik.
 upgrade_local=Helyi fájlból
 upgrade_uploaded=Feltöltött fájlból
 upgrade_url=Ftp vagy http URL-ről
-upgrade_ftp=A legújabb verzió a www.usermin.com webhelyről
+upgrade_ftp=A legújabb verzió a usermin.com webhelyről
 upgrade_delete=Törli a régi verzió könyvtárát a frissítés után?
 upgrade_ok=Frissítse a Usermin alkalmazást
 upgrade_err1=Nem sikerült frissíteni a következőről: $1
 upgrade_err2=Nem sikerült frissíteni a feltöltött fájlból
-upgrade_err3=Nem sikerült frissíteni a www.usermin.com webhelyről
+upgrade_err3=Nem sikerült frissíteni a usermin.com webhelyről
 upgrade_err5=Nem sikerült frissíteni a (z) $1 URL-ről
 upgrade_eurl=Hiányzó vagy érvénytelen URL
 upgrade_efile=A fájl nem létezik
@@ -291,10 +291,10 @@ upgrade_failed=.. a frissítés sikertelen!
 upgrade_updates=$1 frissítés van a Usermin ezen új verziójához. <a href='$2'>Kattintson ide</a>, hogy automatikusan letöltse és telepítse őket.
 upgrade_eupdates=A frissítések listájának letöltése nem sikerült : $1
 
-update_desc1=Ez az űrlap lehetővé teszi azoknak a Usermin moduloknak a frissítését, amelyek hibákat vagy biztonsági lyukakat találtak a <a href=http://www.usermin.com/uupdates.html>Usermin frissítések</a> oldalon vagy más forrásból. Ez összehasonlítja a jelenleg telepített modulokat a frissítésre elérhető modulokkal, és opcionálisan automatikusan letölti és telepíti az elavult modulokat.
+update_desc1=Ez az űrlap lehetővé teszi azoknak a Usermin moduloknak a frissítését, amelyek hibákat vagy biztonsági lyukakat találtak a <a href=https://usermin.com/uupdates.html>Usermin frissítések</a> oldalon vagy más forrásból. Ez összehasonlítja a jelenleg telepített modulokat a frissítésre elérhető modulokkal, és opcionálisan automatikusan letölti és telepíti az elavult modulokat.
 update_header1=Frissítse a modulokat most
 update_header2=Frissítse a modulokat az ütemezés szerint
-update_webmin=Frissítés a www.usermin.com webhelyről
+update_webmin=Frissítés a usermin.com webhelyről
 update_other=Frissítés más forrásból
 update_show=Csak azt mutatják, mely modulokat frissítik
 update_missing=Telepítse a jelenleg nem telepített modulokat
@@ -306,7 +306,7 @@ update_apply=Mentés és alkalmazás
 update_sched=Frissítse a modulokat $1 : 00-on $2 naponta
 update_none=Ehhez a verzióhoz nincs Usermin frissítés.
 update_failed=Nem sikerült a modul telepítése : $1
-update_desc2=Ez az űrlap hibákat vagy biztonsági lyukakat tartalmazó Usermin modulok automatikus frissítésének ütemezésére szolgál a <a href=http://www.usermin.com/uupdates.html>Felhasználói frissítések</a> oldalról vagy más forrásból. Míg ez a szolgáltatás hasznos, óvatosan kell használni, mivel ez lehetővé teheti a támadók számára, hogy átvegyék a rendszerét, ha a frissítési szerver valaha veszélybe került.
+update_desc2=Ez az űrlap hibákat vagy biztonsági lyukakat tartalmazó Usermin modulok automatikus frissítésének ütemezésére szolgál a <a href=https://usermin.com/uupdates.html>Felhasználói frissítések</a> oldalról vagy más forrásból. Míg ez a szolgáltatás hasznos, óvatosan kell használni, mivel ez lehetővé teheti a támadók számára, hogy átvegyék a rendszerét, ha a frissítési szerver valaha veszélybe került.
 
 assignment_title=A modulok újbóli hozzárendelése
 assignment_header=Modulkategória-hozzárendelések

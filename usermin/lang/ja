@@ -186,16 +186,16 @@ ui_feedback=Send feedback to
 
 upgrade_title=Userminのアップグレード
 upgrade_title2=Usermin の導入
-upgrade_desc=この画面では、ご使用の Webmin インストール全体を新規のバージョンにアップグレードできます。ローカル ファイル、アップロードされたファイルから、または最新バージョンを <a href=http://www.usermin.com/>www.usermin.com</a>からダウンロードしてインストールできます。手動アップグレードでは、すべての config 設定と第三者モジュールが保存されます。
-upgrade_descrpm=これは、ご使用の Usermin インストール全体を RPM アップグレード オプションを使用した新規のバージョンにアップグレードできるようにします。ローカル ファイル、アップロードされたファイルから、または最新バージョンを <a href=http://www.usermin.com/>www.usermin.com</a>. 手動アップグレードでは、すべての config 設定と第三者モジュールが保存されます。.
+upgrade_desc=この画面では、ご使用の Webmin インストール全体を新規のバージョンにアップグレードできます。ローカル ファイル、アップロードされたファイルから、または最新バージョンを <a href=https://usermin.com>usermin.com</a>からダウンロードしてインストールできます。手動アップグレードでは、すべての config 設定と第三者モジュールが保存されます。
+upgrade_descrpm=これは、ご使用の Usermin インストール全体を RPM アップグレード オプションを使用した新規のバージョンにアップグレードできるようにします。ローカル ファイル、アップロードされたファイルから、または最新バージョンを <a href=https://usermin.com>usermin.com</a>. 手動アップグレードでは、すべての config 設定と第三者モジュールが保存されます。.
 upgrade_local=ローカル ファイルから
 upgrade_uploaded=アップロードしたファイルから
-upgrade_ftp=www.usermin.com からの最新バージョン
+upgrade_ftp=usermin.com からの最新バージョン
 upgrade_delete=Delete old version's directory after upgrade?
 upgrade_ok=Usermin のアップグレード
 upgrade_err1=$1 からアップグレードできませんでした
 upgrade_err2=アップロードされたファイルからアップグレードできませんでした
-upgrade_err3=www.usermin.com からアップグレードできませんでした
+upgrade_err3=usermin.com からアップグレードできませんでした
 upgrade_efile=ファイルがありません
 upgrade_ebrowser=ご使用のブラウザはファイルのアップロードをサポートしていません
 upgrade_eversion=バージョン $1 にダウングレードできません

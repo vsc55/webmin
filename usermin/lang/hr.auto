@@ -259,18 +259,18 @@ ui_show_time=Vrijeme na sustavu
 
 upgrade_title=Nadogradite Usermin
 upgrade_title2=Instalirajte Usermin
-upgrade_desc=Ovaj obrazac omogućuje nadogradnju cjelokupne Usermin instalacije na novu verziju. Možete instalirati iz lokalne datoteke, prenesene datoteke ili iz najnovije verzije na <a href=http://www.usermin.com/>www.usermin.com</a>. Kao i kod ručne nadogradnje, zadržat će se sve vaše postavke konfiguracije i treći moduli.
-upgrade_descrpm=Ovaj obrazac omogućuje nadogradnju cjelokupne Usermin instalacije na novu verziju pomoću RPM opcije nadogradnje. Možete instalirati iz lokalne RPM datoteke, prenesene datoteke ili iz najnovije verzije na <a href=http://www.usermin.com/>www.usermin.com</a>. Kao i kod ručne nadogradnje, zadržat će se sve vaše postavke konfiguracije i treći moduli.
-upgrade_descdeb=Ovaj obrazac omogućava nadogradnju cjelokupne Usermin instalacije na novu verziju nadogradnjom Debian paketa. Možete se instalirati iz lokalne.deb datoteke, prenesene datoteke ili iz najnovije verzije na <a href=http://www.usermin.com/>www.usermin.com</a>. Kao i kod ručne nadogradnje, zadržat će se sve vaše postavke konfiguracije i treći moduli.
+upgrade_desc=Ovaj obrazac omogućuje nadogradnju cjelokupne Usermin instalacije na novu verziju. Možete instalirati iz lokalne datoteke, prenesene datoteke ili iz najnovije verzije na <a href=https://usermin.com>usermin.com</a>. Kao i kod ručne nadogradnje, zadržat će se sve vaše postavke konfiguracije i treći moduli.
+upgrade_descrpm=Ovaj obrazac omogućuje nadogradnju cjelokupne Usermin instalacije na novu verziju pomoću RPM opcije nadogradnje. Možete instalirati iz lokalne RPM datoteke, prenesene datoteke ili iz najnovije verzije na <a href=https://usermin.com>usermin.com</a>. Kao i kod ručne nadogradnje, zadržat će se sve vaše postavke konfiguracije i treći moduli.
+upgrade_descdeb=Ovaj obrazac omogućava nadogradnju cjelokupne Usermin instalacije na novu verziju nadogradnjom Debian paketa. Možete se instalirati iz lokalne.deb datoteke, prenesene datoteke ili iz najnovije verzije na <a href=https://usermin.com>usermin.com</a>. Kao i kod ručne nadogradnje, zadržat će se sve vaše postavke konfiguracije i treći moduli.
 upgrade_local=Iz lokalne datoteke
 upgrade_uploaded=Iz prenesene datoteke
 upgrade_url=S ftp ili http URL
-upgrade_ftp=Najnovija verzija s www.usermin.com
+upgrade_ftp=Najnovija verzija s usermin.com
 upgrade_delete=Izbrisati imenik stare verzije nakon nadogradnje?
 upgrade_ok=Nadogradite Usermin
 upgrade_err1=Nadogradnja sa $1 nije uspjela
 upgrade_err2=Nadogradnja s prenesene datoteke nije uspjela
-upgrade_err3=Nadogradnja s web stranice www.usermin.com nije uspjela
+upgrade_err3=Nadogradnja s web stranice usermin.com nije uspjela
 upgrade_err5=Nadogradnja s URL-a $1 nije uspjela
 upgrade_eurl=Nedostaje ili nevažeći URL
 upgrade_efile=Mapa ne postoji
@@ -291,10 +291,10 @@ upgrade_failed=.. nadogradnja nije uspjela!
 upgrade_updates=Postoje $1 ažuriranja za ovu novu verziju Usermin-a. <a href='$2'>Kliknite ovdje</a> da biste ih odmah preuzeli i instalirali.
 upgrade_eupdates=Preuzimanje datoteka ažuriranja nije uspjelo : $1
 
-update_desc1=Ovaj obrazac omogućuje nadogradnju Usermin modula za koje je otkriveno da sadrže greške ili sigurnosne rupe sa stranice <a href=http://www.usermin.com/uupdates.html>Korisnička ažuriranja</a> ili iz drugog izvora. Ovo će usporediti trenutno instalirane module s onima dostupnim za ažuriranje i po potrebi automatski preuzeti i instalirati sve zastarjele module.
+update_desc1=Ovaj obrazac omogućuje nadogradnju Usermin modula za koje je otkriveno da sadrže greške ili sigurnosne rupe sa stranice <a href=https://usermin.com/uupdates.html>Korisnička ažuriranja</a> ili iz drugog izvora. Ovo će usporediti trenutno instalirane module s onima dostupnim za ažuriranje i po potrebi automatski preuzeti i instalirati sve zastarjele module.
 update_header1=Ažurirajte module odmah
 update_header2=Ažurirajte module po rasporedu
-update_webmin=Ažuriranje s www.usermin.com
+update_webmin=Ažuriranje s usermin.com
 update_other=Ažuriranje iz drugog izvora
 update_show=Pokaži samo koji će se moduli ažurirati
 update_missing=Instalirajte module koji trenutno nisu instalirani
@@ -306,7 +306,7 @@ update_apply=Spremite i primijenite
 update_sched=Ažurirajte module na $1 : 00 svakih $2 dana
 update_none=Nema ažuriranja korisnika za ovu verziju.
 update_failed=Instalacija modula nije uspjela : $1
-update_desc2=Ovaj je obrazac namijenjen zakazivanju automatskog ažuriranja Usermin modula koji sadrže greške ili sigurnosne rupe sa stranice <a href=http://www.usermin.com/uupdates.html>Korisnička ažuriranja</a> ili iz drugog izvora. Iako je ova usluga korisna, trebali biste biti oprezni s njenim korištenjem jer može omogućiti napadačima da preuzmu vaš sustav ako poslužitelj ažuriranja ikad bude ugrožen.
+update_desc2=Ovaj je obrazac namijenjen zakazivanju automatskog ažuriranja Usermin modula koji sadrže greške ili sigurnosne rupe sa stranice <a href=https://usermin.com/uupdates.html>Korisnička ažuriranja</a> ili iz drugog izvora. Iako je ova usluga korisna, trebali biste biti oprezni s njenim korištenjem jer može omogućiti napadačima da preuzmu vaš sustav ako poslužitelj ažuriranja ikad bude ugrožen.
 
 assignment_title=Ponovno dodijelite module
 assignment_header=Zadaci kategorije modula

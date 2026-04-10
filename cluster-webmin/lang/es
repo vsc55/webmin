@@ -34,7 +34,7 @@ index_installon=Instalar en
 index_upgradeon=Servidores en los que subir versión
 index_update=Actualizar Módulos
 index_updateon=Servidores a actualizar
-index_updatedesc=Este formulario le permite actualizar los módulos de Webmin que tienen errores o agujeros de seguridad desde la página <a href=http://www.webmin.com/updates.html>Webmin Updates</a> o desde otra fuente.
+index_updatedesc=Este formulario le permite actualizar los módulos de Webmin que tienen errores o agujeros de seguridad desde la página <a href=https://webmin.com/updates.html>Webmin Updates</a> o desde otra fuente.
 
 this_server=este servidor
 

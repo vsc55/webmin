@@ -402,23 +402,23 @@ startpage_webminup=Toon de Webmin updates op de Systeem Informatie pagina?
 startpage_moduleup=Toon de module updates op de Systeem Informatie pagina?
 
 upgrade_title=Webmin bijwerken
-upgrade_desc=Met deze functie kunt u uw gehele Webmin installatie opwaarderen naar een nieuwere versie. U kun installeren vanuit een lokaal bestand, of vanaf de laatste versie op <a href=http://www.webmin.com/>www.webmin.com</a>. Evenals bij een handmatige upgrade, zullen alle configuratie instellingen en 3e-partij modules worden behouden.
-upgrade_descrpm=Met deze functie kunt u uw gehele Webmin installatie opwaarderen naar een nieuwere versie. U kun installeren vanuit een lokaal bestand, of vanaf de laatste versie op <a href=http://www.webmin.com/>www.webmin.com</a>. Evenals bij een handmatige upgrade, zullen alle configuratie instellingen en 3e-partij modules worden behouden.
-upgrade_descdeb=Met dit formulier kunt u de gehele Webmin installatie upgraden naar een nieuwere versie van het Debian pakket. U kunt van een locale .deb file installeren of van een geuploaden file van de laatste versie van <a href=http://www.webmin.com/>www.webmin.com</a>. Net zoals bij een handmatige upgrade, al uw config settings en derde partij modules zullen onaangeroerd blijven.
-upgrade_descsolaris-pkg=Met deze functie kunt u uw gehele Webmin installatie opwaarderen naar een nieuwere versie. U kun installeren vanuit een lokaal bestand, of vanaf de laatste versie op <a href=http://www.webmin.com/>www.webmin.com</a>. Evenals bij een handmatige upgrade, zullen alle configuratie instellingen en 3e-partij modules worden behouden.
+upgrade_desc=Met deze functie kunt u uw gehele Webmin installatie opwaarderen naar een nieuwere versie. U kun installeren vanuit een lokaal bestand, of vanaf de laatste versie op <a href=https://webmin.com>webmin.com</a>. Evenals bij een handmatige upgrade, zullen alle configuratie instellingen en 3e-partij modules worden behouden.
+upgrade_descrpm=Met deze functie kunt u uw gehele Webmin installatie opwaarderen naar een nieuwere versie. U kun installeren vanuit een lokaal bestand, of vanaf de laatste versie op <a href=https://webmin.com>webmin.com</a>. Evenals bij een handmatige upgrade, zullen alle configuratie instellingen en 3e-partij modules worden behouden.
+upgrade_descdeb=Met dit formulier kunt u de gehele Webmin installatie upgraden naar een nieuwere versie van het Debian pakket. U kunt van een locale .deb file installeren of van een geuploaden file van de laatste versie van <a href=https://webmin.com>webmin.com</a>. Net zoals bij een handmatige upgrade, al uw config settings en derde partij modules zullen onaangeroerd blijven.
+upgrade_descsolaris-pkg=Met deze functie kunt u uw gehele Webmin installatie opwaarderen naar een nieuwere versie. U kun installeren vanuit een lokaal bestand, of vanaf de laatste versie op <a href=https://webmin.com>webmin.com</a>. Evenals bij een handmatige upgrade, zullen alle configuratie instellingen en 3e-partij modules worden behouden.
 upgrade_descsun-pkg=Dit formulier stelt u instaat uw volledige Webmin installatie bij te werken naar een nieuwe versie door gebruik te maken van de het Solaris pakket beschikbaar gesteld door Sun. U kunt installeren vanuit een lokaal Solaris pakket of een geuploaden file. De meest recente pakketten kunnen worden gevonden op <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Net als bij een handmatige upgrade zullen alle configuratie instellingen en 3e-partij modules worden behouden.
 upgrade_descgentoo=Dit formulier stelt u instaat uw volledige Webmin installatie bij te werken naar een nieuwe versie door het huidige Emerge pakket te un-installeren en een nieuwe te installeren. U kunt installeren vanuit een lokaal Gentoo pakket, een geuploaden file of vanuit de laatste in de Emerge repository. Net als bij een handmatige upgrade zullen alle configuratie instellingen en 3e-partij modules worden behouden.
 upgrade_local=Vanaf een locale file
 upgrade_uploaded=Vanaf een geuploaden file
 upgrade_url=Van FTP of HTTP URL
-upgrade_ftp=Laatste versie op www.webmin.com
+upgrade_ftp=Laatste versie op webmin.com
 upgrade_cup=Laatste versie van Caldera's <tt>cupdate</tt> tool
 upgrade_emerge=Meest recente versie uit Emerge repository
 upgrade_delete=Verwijder directory van de oude versie na het bijwerken?
 upgrade_ok=Webmin bijwerken
 upgrade_err1=Fout bij het bijwerken vanaf $1
 upgrade_err2=Fout bij het bijwerken vanaf een geuploaden file
-upgrade_err3=Fout bij het bijwerken vanaf www.webmin.com
+upgrade_err3=Fout bij het bijwerken vanaf webmin.com
 upgrade_err4=Fout bij het bijwerken vanuit Emerge repository
 upgrade_err5=Fout bij het bijwerken van URL $1
 upgrade_eurl=Ontbrekende of ongeldige URL
@@ -442,7 +442,7 @@ upgrade_ewpackage=Geen geldig Solaris pakket voor Webmin
 upgrade_egentoo=Geen geldig Gentoo pakket voor Webmin
 upgrade_eupdates=Fout bij het downloaden van een lijst met updates : $1
 upgrade_echecksig=Verificatie van RPM handtekening mislukt: $1
-upgrade_nosig=Geen pakket verificatie uitgevoerd - controle van Tar.gz pakketten is alleen mogelijk wanneer u bijwerkt vanaf www.webmin.com.
+upgrade_nosig=Geen pakket verificatie uitgevoerd - controle van Tar.gz pakketten is alleen mogelijk wanneer u bijwerkt vanaf webmin.com.
 upgrade_sig=GnuPG handtekening van pakket controleren?
 upgrade_force=Ook bijwerken indien de versie gelijk of lager is
 upgrade_disc=Verbreek verbinding van alle andere gebruikers?
@@ -464,10 +464,10 @@ newmod_header=Nieuwe module toewijzingen
 newmod_def=Standaard gedrag - nieuwe module toewijzen aan <tt>root</tt> of <tt>admin</tt>
 newmod_users=Nieuwe modules toewijzen aan :
 
-update_desc1=Met deze functie kunt u Webmin modules bijwerken, waarin fouten of beveiligingslekken zijn gevonden vanaf de <a href=http://www.webmin.com/updates.html>Webmin Updates</a> pagina of een andere plek. De nu geinstalleerde modules worden vergeleken met de voorhanden zijnde nieuwe versies en desgewenst worden ze opgehaald en geinstalleerd.
+update_desc1=Met deze functie kunt u Webmin modules bijwerken, waarin fouten of beveiligingslekken zijn gevonden vanaf de <a href=https://webmin.com/updates.html>Webmin Updates</a> pagina of een andere plek. De nu geinstalleerde modules worden vergeleken met de voorhanden zijnde nieuwe versies en desgewenst worden ze opgehaald en geinstalleerd.
 update_header1=Installeer nu de nieuwe modules
 update_header2=Installeer de nieuwe modules op tijdschema
-update_webmin=Opwaarderen vanaf www.webmin.com
+update_webmin=Opwaarderen vanaf webmin.com
 update_other=Opwaarderen vanaf een andere bron:
 update_show=Laat alleen de modules zien die zouden worden opgewaardeerd
 update_missing=Installeer modules die nu niet zijn geinstalleerd
@@ -483,7 +483,7 @@ update_apply=Bewaren en Toepassen
 update_sched2=Modules bijwerken iedere $3 dagen om $1:$2
 update_none=Geen Webmin updates voor deze versie.
 update_failed=Fout bij het installeren van module : $1
-update_desc2=Met deze functie kunt u automatisch volgens een tijdschema Webmin modules opwaarderen, waarin fouten of beveiligingslekken zijn gevonden vanaf de <a href=http://www.webmin.com/updates.html>Webmin Updates</a> pagina of een andere plek. Alhoewel dit een handige service is, dient het voorzichtig te worden gebruikt want als de Webmin site wordt gekraakt door hackers, bestaat zo de mogelijkheid dat uw server volledig door die hackers wordt overgenomen.
+update_desc2=Met deze functie kunt u automatisch volgens een tijdschema Webmin modules opwaarderen, waarin fouten of beveiligingslekken zijn gevonden vanaf de <a href=https://webmin.com/updates.html>Webmin Updates</a> pagina of een andere plek. Alhoewel dit een handige service is, dient het voorzichtig te worden gebruikt want als de Webmin site wordt gekraakt door hackers, bestaat zo de mogelijkheid dat uw server volledig door die hackers wordt overgenomen.
 update_enosig=Kon de ondertekenings file niet downloaden voor de updates : $1
 update_ebadsig=Update ondertekening controle mislukte : $1
 update_enomodsig=Kon de ondertekenings file niet downloaden voor de module : $1

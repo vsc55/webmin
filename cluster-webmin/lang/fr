@@ -34,7 +34,7 @@ index_installon=Installer sur
 index_upgradeon=Serveurs à mettre à niveau
 index_update=Mettre à jour les modules
 index_updateon=Serveurs à mettre à jour
-index_updatedesc=Ce formulaire vous permet de mettre à jour les modules Webmin qui sont censés contenir des bogues ou des trous de sécurité depuis la page <a href=http://www.webmin.com/updates.html>Webmin Updates</a> ou depuis une autre source.
+index_updatedesc=Ce formulaire vous permet de mettre à jour les modules Webmin qui sont censés contenir des bogues ou des trous de sécurité depuis la page <a href=https://webmin.com/updates.html>Webmin Updates</a> ou depuis une autre source.
 index_thost=Nom d'hôte
 index_tdesc=Description
 index_tver=Version

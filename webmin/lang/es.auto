@@ -203,7 +203,7 @@ newcsr_ok2=Este CSR debe enviarse a una autoridad de firma, que devolverá un ce
 startpage_webminup=¿Mostrar actualizaciones de Webmin en la página de información del sistema?
 startpage_moduleup=¿Mostrar actualizaciones de módulos en la página de información del sistema?
 
-upgrade_descdeb=Este formulario le permite actualizar toda su instalación de Webmin a una nueva versión actualizando su paquete Debian. Puede instalar desde un archivo.deb local, un archivo cargado o desde la última versión en <a href=http://www.webmin.com/>www.webmin.com</a>. Al igual que con una actualización manual, se mantendrán todos sus ajustes de configuración y módulos de terceros.
+upgrade_descdeb=Este formulario le permite actualizar toda su instalación de Webmin a una nueva versión actualizando su paquete Debian. Puede instalar desde un archivo.deb local, un archivo cargado o desde la última versión en <a href=https://webmin.com>webmin.com</a>. Al igual que con una actualización manual, se mantendrán todos sus ajustes de configuración y módulos de terceros.
 upgrade_repo=Última versión del repositorio $1
 upgrade_edeb=No es un archivo de paquete Webmin Debian válido
 upgrade_setup=Ejecutando el script <tt>setup.sh</tt> para actualizar Webmin ..

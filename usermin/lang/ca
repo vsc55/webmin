@@ -250,18 +250,18 @@ ui_tabs=Categoritza els mòduls
 
 upgrade_title=Actualització d'Usermin
 upgrade_title2=Instal·lació d'Usermin
-upgrade_desc=Aquest formulari permet actualitzar tota la instal·lació Usermin a una versió nova. Pots instal·lar-la des d'un fitxer local, un fitxer pujat o des de la versió més actual a <a href=http://www.usermin.com/>www.usermin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
-upgrade_descrpm=Aquest formulari permet actualitzar tota la instal·lació Usermin a una versió nova utilitzant l'opció d'actualització RPM. Pots instal·lar-la des d'un fitxer local, un fitxer pujat o des de la versió més actual a <a href=http://www.usermin.com/>www.usermin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
-upgrade_descdeb=Aquest formulari permet actualitzar tota la instal·lació Usermin a una versió nova actualitzant el paquet Debian. Pots instal·lar-lo des d'un fitxer local, un fitxer pujat o des de la versió més actual a <a href=http://www.usermin.com/>www.usermin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
+upgrade_desc=Aquest formulari permet actualitzar tota la instal·lació Usermin a una versió nova. Pots instal·lar-la des d'un fitxer local, un fitxer pujat o des de la versió més actual a <a href=https://usermin.com>usermin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
+upgrade_descrpm=Aquest formulari permet actualitzar tota la instal·lació Usermin a una versió nova utilitzant l'opció d'actualització RPM. Pots instal·lar-la des d'un fitxer local, un fitxer pujat o des de la versió més actual a <a href=https://usermin.com>usermin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
+upgrade_descdeb=Aquest formulari permet actualitzar tota la instal·lació Usermin a una versió nova actualitzant el paquet Debian. Pots instal·lar-lo des d'un fitxer local, un fitxer pujat o des de la versió més actual a <a href=https://usermin.com>usermin.com</a>. Igual que amb una actualització manual, es conservaran totes les configuracions i mòduls de tercers.
 upgrade_local=Des d'un fitxer local
 upgrade_uploaded=Des d'un fitxer pujat
 upgrade_url=Des d'un URL ftp o http
-upgrade_ftp=Versió més actual de www.usermin.com
+upgrade_ftp=Versió més actual de usermin.com
 upgrade_delete=Esborra el directori de la versió antiga abans d'actualitzar
 upgrade_ok=Actualitza Usermin
 upgrade_err1=No s'ha pogut actualitzar des de $1
 upgrade_err2=No s'ha pogut actualitzar des del fitxer pujat
-upgrade_err3=No s'ha pogut actualitzar des de www.usermin.com
+upgrade_err3=No s'ha pogut actualitzar des de usermin.com
 upgrade_err5=No s'ha pogut fer l'actualització des de l'URL $1
 upgrade_eurl=Hi falta l'URL o bé és invàlid
 upgrade_efile=El fitxer no existeix
@@ -282,10 +282,10 @@ upgrade_failed=...l'actualització ha fallat!
 upgrade_updates=Hi ha $1 actualitzacions per a aquesta nova versió d'Usermin. Fes clic <a href='$2'>aquí</a> per descarregar-les i instal·lar-les automàticament ara.
 upgrade_eupdates=No s'ha pogut descarregar la llista d'actualitzacions: $1
 
-update_desc1=Aquest formulari et permet d'actualitzar mòduls Usermin que tenen errors o forats de seguretat des de la pàgina d'<a href=http://www.usermin.com/uupdates.html>Actualitzacions d'Usermin</a> o des d'una altra font. Això compararà els mòduls instal·lats actualment amb aquells disponibles per actualitzar, i opcionalment descarregarà i instal·larà qualsevol mòdul desfasat.
+update_desc1=Aquest formulari et permet d'actualitzar mòduls Usermin que tenen errors o forats de seguretat des de la pàgina d'<a href=https://usermin.com/uupdates.html>Actualitzacions d'Usermin</a> o des d'una altra font. Això compararà els mòduls instal·lats actualment amb aquells disponibles per actualitzar, i opcionalment descarregarà i instal·larà qualsevol mòdul desfasat.
 update_header1=Actualitza els mòduls ara
 update_header2=Actualitza els mòduls de forma planificada
-update_webmin=Actualitza des de www.usermin.com
+update_webmin=Actualitza des de usermin.com
 update_other=Actualitza'ls des d'una altra font
 update_show=Mostra només quins mòduls s'actualitzaran
 update_missing=Instal·la els mòduls que no estiguin actualment instal·lats
@@ -297,7 +297,7 @@ update_apply=Desa i Aplica
 update_sched=Actualitza els mòduls a les $1:00 cada $2 dies
 update_none=No hi ha cap actualització d'Usermin per aquesta versió.
 update_failed=No s'ha pogut instal·lar el mòdul: $1
-update_desc2=Aquest formulari és per planificar l'actualització automàtica dels mòduls d'Usermin que continguin errors o forats de seguretat des de la pàgina d'<a href=http://www.usermin.com/updates.html>Actualitzacions d'Usermin</a> des d'una altra font. Tot i que aquest servei és útil, cal anar amb compte, ja que això pot permetre els atacants de prendre el teu sistema si el servidor queda compromès.
+update_desc2=Aquest formulari és per planificar l'actualització automàtica dels mòduls d'Usermin que continguin errors o forats de seguretat des de la pàgina d'<a href=https://usermin.com/updates.html>Actualitzacions d'Usermin</a> des d'una altra font. Tot i que aquest servei és útil, cal anar amb compte, ja que això pot permetre els atacants de prendre el teu sistema si el servidor queda compromès.
 
 assignment_title=Reassignació de Mòduls
 assignment_header=Assignacions de categories de mòduls

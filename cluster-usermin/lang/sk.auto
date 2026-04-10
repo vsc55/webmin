@@ -34,7 +34,7 @@ index_installon=Inštalovať na
 index_upgradeon=Servery na aktualizáciu
 index_update=Aktualizujte moduly
 index_updateon=Servery sa aktualizujú
-index_updatedesc=Tento formulár vám umožňuje inovovať moduly Usermin, o ktorých sa zistilo, že obsahujú chyby alebo bezpečnostné medzery, na stránke <a href=http://www.webmin.com/updates.html>Aktualizácie Usermin</a> alebo z iného zdroja.
+index_updatedesc=Tento formulár vám umožňuje inovovať moduly Usermin, o ktorých sa zistilo, že obsahujú chyby alebo bezpečnostné medzery, na stránke <a href=https://webmin.com/updates.html>Aktualizácie Usermin</a> alebo z iného zdroja.
 index_thost=Meno hosťa
 index_tdesc=popis
 index_tver=verzia

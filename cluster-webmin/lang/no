@@ -34,7 +34,7 @@ index_installon=Installer på
 index_upgradeon=Tjenere å oppgradere
 index_update=Oppdater moduler
 index_updateon=Tjenere å oppdatere
-index_updatedesc=Dette skjemaet lar deg oppgradere Webmin moduler som inneholder kjente feil eller sikkerhetshull fra siden <a href=http://www.webmin.com/updates.html>Webmin Oppdateringer</a> eller fra en annen kilde.
+index_updatedesc=Dette skjemaet lar deg oppgradere Webmin moduler som inneholder kjente feil eller sikkerhetshull fra siden <a href=https://webmin.com/updates.html>Webmin Oppdateringer</a> eller fra en annen kilde.
 index_thost=Vertsnavn
 index_tdesc=Beskrivelse
 index_tver=Versjon

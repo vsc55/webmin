@@ -34,7 +34,7 @@ index_installon=Установить на
 index_upgradeon=Серверы для обновления
 index_update=Обновить модули
 index_updateon=Серверы для обновления
-index_updatedesc=Эта форма позволяет вам обновить модули Webmin, в которых обнаружены ошибки или дыры в безопасности со страницы <a href=http://www.webmin.com/updates.html>Webmin Updates</a> или из другого источника.
+index_updatedesc=Эта форма позволяет вам обновить модули Webmin, в которых обнаружены ошибки или дыры в безопасности со страницы <a href=https://webmin.com/updates.html>Webmin Updates</a> или из другого источника.
 index_thost=Hostname
 index_tdesc=Описание
 index_tver=Версия

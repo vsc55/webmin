@@ -34,7 +34,7 @@ index_installon=Instaliraj na
 index_upgradeon=Poslužitelji za nadogradnju
 index_update=Nadopunjeni Moduli
 index_updateon=Poslužitelji za nadopunu
-index_updatedesc=Ova forma Vam dopušta da nadogradite Usermin module za koje je utvđeno da sadrže greške ili propuste u sigurnosti iz <a href=http://www.webmin.com/updates.html>Usermin Nadopune</a> stranice ili iz nekog drugog izvora.
+index_updatedesc=Ova forma Vam dopušta da nadogradite Usermin module za koje je utvđeno da sadrže greške ili propuste u sigurnosti iz <a href=https://webmin.com/updates.html>Usermin Nadopune</a> stranice ili iz nekog drugog izvora.
 
 this_server=ovaj poslužitelj
 

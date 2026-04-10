@@ -155,16 +155,16 @@ ui_eblue='$1' 的藍色值錯誤
 ui_feedback=傳送回饋到
 
 upgrade_title=升級 Usermin
-upgrade_desc=這個表單可以讓您將整個安裝的 Usermin 升級到新的版本。您可以從本機檔案、上傳檔案或從 <a href=http://www.webmin.com/>www.webmin.com</a> 所提供的最新版本安裝。就如同手動升級一樣，所有的設定與協力廠商模組都會被保留。
-upgrade_descrpm=這個表單可以讓您安裝升級所輸入的新webmin RPM升級檔案，您可以從本地端安裝RPM檔案,上傳一個檔案或是從 <a href=http://www.webmin.com/>www.webmin.com</a>下載最新版本，只要按照說明升級，所有您的設定和額外(third-party)的模組都會保留。
+upgrade_desc=這個表單可以讓您將整個安裝的 Usermin 升級到新的版本。您可以從本機檔案、上傳檔案或從 <a href=https://webmin.com>webmin.com</a> 所提供的最新版本安裝。就如同手動升級一樣，所有的設定與協力廠商模組都會被保留。
+upgrade_descrpm=這個表單可以讓您安裝升級所輸入的新webmin RPM升級檔案，您可以從本地端安裝RPM檔案,上傳一個檔案或是從 <a href=https://webmin.com>webmin.com</a>下載最新版本，只要按照說明升級，所有您的設定和額外(third-party)的模組都會保留。
 upgrade_local=從本機檔案
 upgrade_uploaded=從上傳的檔案
-upgrade_ftp=從 www.usermin.com 的最新版本
+upgrade_ftp=從 usermin.com 的最新版本
 upgrade_delete=升級後刪除舊版本目錄?
 upgrade_ok=升級 Usermin
 upgrade_err1=無法從 $1 升級
 upgrade_err2=無法從上傳的檔案升級
-upgrade_err3=無法從 www.usermin.com 升級
+upgrade_err3=無法從 usermin.com 升級
 upgrade_efile=檔案不存在
 upgrade_ebrowser=您的瀏覽器不支援上傳檔案
 upgrade_eversion=無法降級為版本 $1

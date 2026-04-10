@@ -55,7 +55,7 @@ upgrade_setuprpm=S'està executant <tt>RPM</tt> per actualitzar Webmin ..
 upgrade_setupdeb=S'està executant <tt>DPKG</tt> per actualitzar Webmin ..
 upgrade_setuppackage=S'està executant <tt>pkgadd</tt> per actualitzar Webmin ..
 
-update_webmin=Actualització de www.webmin.com
+update_webmin=Actualització de webmin.com
 
 session_blockhost=Bloqueja les IP del client amb més de $1 inicis de sessió fallits durant $2 segons.
 session_utmp=Enregistrar els inicis de sessió i tancaments de sessió a <tt>utmp</tt>?

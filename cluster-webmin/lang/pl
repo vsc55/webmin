@@ -34,7 +34,7 @@ index_installon=Zainstaluj na
 index_upgradeon=Serwer do aktualizacji
 index_update=Aktualizuj moduły
 index_updateon=Serwer aktualizacji
-index_updatedesc=Ten formularz pozwala na aktualizację modułów Webmina, w których zostały znalezione błędy lub luki w zabezpieczeniach ze strony <a href=http://www.webmin.com/updates.html>Aktualizacje Webmina</a> lub z innych źródeł.
+index_updatedesc=Ten formularz pozwala na aktualizację modułów Webmina, w których zostały znalezione błędy lub luki w zabezpieczeniach ze strony <a href=https://webmin.com/updates.html>Aktualizacje Webmina</a> lub z innych źródeł.
 index_thost=Nazwa hosta
 index_tdesc=Opis
 index_tver=Wersja

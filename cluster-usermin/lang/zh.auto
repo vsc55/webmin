@@ -34,7 +34,7 @@ index_installon=安装在
 index_upgradeon=服务器升级
 index_update=更新模块
 index_updateon=服务器要更新
-index_updatedesc=通过此表单，您可以从<a href=http://www.webmin.com/updates.html>Usermin Updates</a>页面或其他来源升级已发现包含错误或安全漏洞的Usermin模块。
+index_updatedesc=通过此表单，您可以从<a href=https://webmin.com/updates.html>Usermin Updates</a>页面或其他来源升级已发现包含错误或安全漏洞的Usermin模块。
 index_thost=主机名
 index_tdesc=描述
 index_tver=版

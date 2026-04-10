@@ -250,18 +250,18 @@ ui_tabs=Classifier les modules sur la page d'index ?
 
 upgrade_title=Mise à niveau de Usermin
 upgrade_title2=Installer Usermin
-upgrade_desc=Ce formulaire vous permet de mettre à niveau l'ensemble de votre installation Usermin vers une nouvelle version. Vous pouvez installer à partir d'un fichier local, d'un fichier déposé sur le serveur ou à partir de la toute dernière version sur <a href=http://www.usermin.com/>www.usermin.com</a>. Tout comme pour une mise à niveau manuelle, tous vos paramètres de configuration et les modules tiers seront conservés.
-upgrade_descrpm=Ce formulaire vous permet de mettre à niveau la totalité de votre installation Usermin vers une nouvelle version à l'aide de l'option de mise à niveau de RPM. Vous pouvez effectuer l'installation à partir d'un fichier RPM local, d'un fichier téléchargé ou de la toute dernière version sur <a href=http://www.usermin.com/>www.usermin.com</a>. Tout comme pour une une mise à niveau manuelle, tous vos paramètres de configuration et les modules tiers seront conservés.
-upgrade_descdeb=Ce formulaire vous permet de mettre à niveau l'ensemble de votre installation Usermin en mettant à jour son paquet Debian. Vous pouvez installer à partir d'un fichier local .deb, téléchargé ou à partir de la dernière version sur <a href=http://www.usermin.com/>www.usermin.com</a>. Tous vos paramètres de configuration ainsi que vos modules seront conservés, de la même manière qu'avec une mise à jour manuelle.
+upgrade_desc=Ce formulaire vous permet de mettre à niveau l'ensemble de votre installation Usermin vers une nouvelle version. Vous pouvez installer à partir d'un fichier local, d'un fichier déposé sur le serveur ou à partir de la toute dernière version sur <a href=https://usermin.com>usermin.com</a>. Tout comme pour une mise à niveau manuelle, tous vos paramètres de configuration et les modules tiers seront conservés.
+upgrade_descrpm=Ce formulaire vous permet de mettre à niveau la totalité de votre installation Usermin vers une nouvelle version à l'aide de l'option de mise à niveau de RPM. Vous pouvez effectuer l'installation à partir d'un fichier RPM local, d'un fichier téléchargé ou de la toute dernière version sur <a href=https://usermin.com>usermin.com</a>. Tout comme pour une une mise à niveau manuelle, tous vos paramètres de configuration et les modules tiers seront conservés.
+upgrade_descdeb=Ce formulaire vous permet de mettre à niveau l'ensemble de votre installation Usermin en mettant à jour son paquet Debian. Vous pouvez installer à partir d'un fichier local .deb, téléchargé ou à partir de la dernière version sur <a href=https://usermin.com>usermin.com</a>. Tous vos paramètres de configuration ainsi que vos modules seront conservés, de la même manière qu'avec une mise à jour manuelle.
 upgrade_local=À partir d'un fichier local
 upgrade_uploaded=À partir d'un fichier déposé sur le serveur
 upgrade_url=À partir de l'URL ftp ou http
-upgrade_ftp=La toute dernière version sur www.usermin.com
+upgrade_ftp=La toute dernière version sur usermin.com
 upgrade_delete=Supprimer le répertoire de l'ancienne version après la mise à niveau ?
 upgrade_ok=Mettre à niveau Usermin
 upgrade_err1=Impossible d'effectuer la mise à niveau à partir de $1
 upgrade_err2=Impossible d'effectuer la mise à niveau à partir du fichier téléchargé
-upgrade_err3=Impossible de mettre à niveau à partir de www.usermin.com
+upgrade_err3=Impossible de mettre à niveau à partir de usermin.com
 upgrade_err5=Impossible de mettre à niveau à partir de l'URL $1
 upgrade_eurl=URL manquante ou invalide
 upgrade_efile=Le fichier n'existe pas
@@ -282,10 +282,10 @@ upgrade_failed=... mise à niveau impossible !
 upgrade_updates=Il y a $1 mises à jour pour cette nouvelle version de Usermin. <a href='$2'>Cliquez ici</a> pour les télécharger et les installer automatiquement maintenant.
 upgrade_eupdates=Impossible de télécharger la liste des mises à jour : $1
 
-update_desc1=Ce formulaire vous permet de mettre à niveau les modules Usermin qui sont réputés contenir des bogues ou des trous de sécurité sur la page <a href=http://www.usermin.com/uupdates.html>Mises à jour de Usermin</a> ou à partir d'une autre source. Celle-ci comparera les modules installés actuellement avec ceux disponibles pour la mise à jour. Optionnellement, elle téléchargera et installera automatiquement tout module périmé.
+update_desc1=Ce formulaire vous permet de mettre à niveau les modules Usermin qui sont réputés contenir des bogues ou des trous de sécurité sur la page <a href=https://usermin.com/uupdates.html>Mises à jour de Usermin</a> ou à partir d'une autre source. Celle-ci comparera les modules installés actuellement avec ceux disponibles pour la mise à jour. Optionnellement, elle téléchargera et installera automatiquement tout module périmé.
 update_header1=Mise à jour des modules maintenant
 update_header2=Mise à jour des modules selon les prévisions
-update_webmin=Mettre à jour à partir de www.usermin.com
+update_webmin=Mettre à jour à partir de usermin.com
 update_other=Mettre à jour à partir d'une autre source
 update_show=Afficher seulement quels sont les modules qui seront mis à jour
 update_missing=Installer les modules qui ne sont pas installés actuellement
@@ -297,7 +297,7 @@ update_apply=Enregistrer et appliquer
 update_sched=Mettre à jour les modules à $1:00 tous les $2 jour(s)
 update_none=Pas de mises à jour de Usermin pour cette version.
 update_failed=Impossible d'installer le module : $1
-update_desc2=Ce formulaire est destiné à programmer la mise à jour automatique des modules Usermin contenant des bogues ou des trous de sécurité sur la page <a href=http://www.usermin.com/uupdates.html>Mises à jour de Usermin</a> ou d'une autre source. Bien que ce service soit utile, soyez prudent quand vous l'utilisez car elle peut permettre à des attaquants de prendre le contrôle de votre système s'il arrive que le serveur de mise à jour ait été compromis.
+update_desc2=Ce formulaire est destiné à programmer la mise à jour automatique des modules Usermin contenant des bogues ou des trous de sécurité sur la page <a href=https://usermin.com/uupdates.html>Mises à jour de Usermin</a> ou d'une autre source. Bien que ce service soit utile, soyez prudent quand vous l'utilisez car elle peut permettre à des attaquants de prendre le contrôle de votre système s'il arrive que le serveur de mise à jour ait été compromis.
 
 assignment_title=Réaffectation des modules
 assignment_header=Affectation de catégories de modules

@@ -84,7 +84,7 @@ ui_show_ver=Usermin バージョン
 ui_show_tver=テーマバージョン
 ui_show_time=システム使用時間
 
-upgrade_descdeb=このフォームを使用すると、Debianパッケージをアップグレードすることにより、Userminインストール全体を新しいバージョンにアップグレードできます。ローカルの.debファイル、アップロードされたファイル、または<a href=http://www.usermin.com/>www.usermin.com</a>の最新バージョンからインストールできます。手動アップグレードの場合と同様に、すべての構成設定とサードパーティモジュールが保持されます。
+upgrade_descdeb=このフォームを使用すると、Debianパッケージをアップグレードすることにより、Userminインストール全体を新しいバージョンにアップグレードできます。ローカルの.debファイル、アップロードされたファイル、または<a href=https://usermin.com>usermin.com</a>の最新バージョンからインストールできます。手動アップグレードの場合と同様に、すべての構成設定とサードパーティモジュールが保持されます。
 upgrade_url=ftpまたはhttp URLから
 upgrade_err5=URL $1からのアップグレードに失敗しました
 upgrade_eurl=欠落または無効なURL
@@ -92,10 +92,10 @@ upgrade_setup2=コマンド $1でUserminをインストールしています。
 upgrade_updates=Userminのこの新しいバージョンには $1の更新があります。 <a href='$2'>ここをクリック</a>して、今すぐ自動的にダウンロードしてインストールします。
 upgrade_eupdates=更新リストのダウンロードに失敗しました： $1
 
-update_desc1=このフォームを使用すると、<a href=http://www.usermin.com/uupdates.html>Usermin Updates</a>ページまたは別のソースからバグまたはセキュリティホールが見つかったUserminモジュールをアップグレードできます。これにより、現在インストールされているモジュールと更新可能なモジュールが比較され、オプションで古いモジュールが自動的にダウンロードおよびインストールされます。
+update_desc1=このフォームを使用すると、<a href=https://usermin.com/uupdates.html>Usermin Updates</a>ページまたは別のソースからバグまたはセキュリティホールが見つかったUserminモジュールをアップグレードできます。これにより、現在インストールされているモジュールと更新可能なモジュールが比較され、オプションで古いモジュールが自動的にダウンロードおよびインストールされます。
 update_header1=今すぐモジュールを更新
 update_header2=スケジュールに従ってモジュールを更新する
-update_webmin=www.usermin.comからの更新
+update_webmin=usermin.comからの更新
 update_other=別のソースからの更新
 update_show=更新されるモジュールのみを表示する
 update_missing=現在インストールされていないモジュールをインストールする
@@ -107,7 +107,7 @@ update_apply=保存して適用
 update_sched=$2日ごとに $1：00にモジュールを更新する
 update_none=このバージョンのUsermin更新はありません。
 update_failed=モジュールのインストールに失敗しました： $1
-update_desc2=このフォームは、<a href=http://www.usermin.com/uupdates.html>Usermin Updates</a>ページまたは別のソースからのバグまたはセキュリティホールを含むUserminモジュールの自動更新をスケジュールするためのものです。このサービスは便利ですが、更新サーバーが侵害された場合に攻撃者がシステムを乗っ取る可能性があるため、慎重に使用する必要があります。
+update_desc2=このフォームは、<a href=https://usermin.com/uupdates.html>Usermin Updates</a>ページまたは別のソースからのバグまたはセキュリティホールを含むUserminモジュールの自動更新をスケジュールするためのものです。このサービスは便利ですが、更新サーバーが侵害された場合に攻撃者がシステムを乗っ取る可能性があるため、慎重に使用する必要があります。
 
 update_err=モジュールの更新に失敗しました
 update_eurl=更新URLが見つからないか無効です

@@ -256,21 +256,21 @@ startpage_gotonone=&lt;Nenhum&gt;
 startpage_gotomodule=Após entrar, ir sempre para o módulo
 
 upgrade_title=Actualizar o Webmin
-upgrade_desc=Este formulário permite-lhe actualizar completamente a sua instalação do Webmin para uma nova versão. Pode instalar a partir de um ficheiro local, um ficheiro remoto ou a partir da última versão em <a href=http://www.webmin.com/>www.webmin.com</a>. Tal como na actualização manual, todas as suas configurações e módulos de terceiras partes serão mantidas.
-upgrade_descrpm=Este formulário permite-lhe actualizar completamente a sua instalação do Webmin para uma nova versão usando a opção de actualização dos RPM's. Pode instalar a partir de um ficheiro RPM local, um ficheiro RPM remoto ou a partir da última versão em <a href=http://www.webmin.com/>www.webmin.com</a>. Tal como na actualização manual, todas as suas configurações e módulos de terceiras partes serão mantidas.
-upgrade_descsolaris-pkg=Este formulário permite-lhe actualizar completamente a sua instalação do Webmin para uma nova versão removendo o pacote solaris actual e instalando um novo. Pode instalar a partir de um ficheiro de pacote solaris local, um ficheiro remoto ou a partir da última versão em <a href=http://www.webmin.com/>www.webmin.com</a>. Tal como na actualização manual, todas as suas configurações e módulos de terceiras partes serão mantidas.
+upgrade_desc=Este formulário permite-lhe actualizar completamente a sua instalação do Webmin para uma nova versão. Pode instalar a partir de um ficheiro local, um ficheiro remoto ou a partir da última versão em <a href=https://webmin.com>webmin.com</a>. Tal como na actualização manual, todas as suas configurações e módulos de terceiras partes serão mantidas.
+upgrade_descrpm=Este formulário permite-lhe actualizar completamente a sua instalação do Webmin para uma nova versão usando a opção de actualização dos RPM's. Pode instalar a partir de um ficheiro RPM local, um ficheiro RPM remoto ou a partir da última versão em <a href=https://webmin.com>webmin.com</a>. Tal como na actualização manual, todas as suas configurações e módulos de terceiras partes serão mantidas.
+upgrade_descsolaris-pkg=Este formulário permite-lhe actualizar completamente a sua instalação do Webmin para uma nova versão removendo o pacote solaris actual e instalando um novo. Pode instalar a partir de um ficheiro de pacote solaris local, um ficheiro remoto ou a partir da última versão em <a href=https://webmin.com>webmin.com</a>. Tal como na actualização manual, todas as suas configurações e módulos de terceiras partes serão mantidas.
 upgrade_descgentoo=Este formulário permite-lhe actualizar completamente a sua instalação do Webmin para uma nova versão removendo o pacote Gentoo Emerge actual e instalando um novo. Pode instalar a partir de um ficheiro de pacote Gentoo local, um ficheiro remoto ou a partir da última versão no repositório Emerge. Tal como na actualização manual, todas as suas configurações e módulos de terceiras partes serão mantidas.
 upgrade_local=A partir de um ficheiro local
 upgrade_uploaded=A partir de um ficheiro remoto
 upgrade_url=A partir de um URL de ftp ou http
-upgrade_ftp=Última versão a partir de www.webmin.com
+upgrade_ftp=Última versão a partir de webmin.com
 upgrade_cup=Última versão a partir da ferramenta <tt>cupdate</tt> da Caldera
 upgrade_emerge=Última versão a partir do repositório Emerge
 upgrade_delete=Apagar o directório da versão antiga após a actualização?
 upgrade_ok=Actualizar o Webmin
 upgrade_err1=Erro ao actualizar a partir de $1
 upgrade_err2=Erro ao actualizar a partir do ficheiro remoto
-upgrade_err3=Erro ao actualizar a partir de www.webmin.com
+upgrade_err3=Erro ao actualizar a partir de webmin.com
 upgrade_err4=Erro ao actualizar a partir do repositório Emerge
 upgrade_err5=Erro ao actualizar a partir do URL $1
 upgrade_eurl=O URL não existe ou é inválido
@@ -291,7 +291,7 @@ upgrade_epackage=Não é um pacote solaris válido
 upgrade_egentoo=Não é um pacote Gentoo válido do Webmin
 upgrade_eupdates=Erro ao descarregar a lista de actualizações : $1
 upgrade_echecksig=A verificação da assinatura RPM falhou : $1
-upgrade_nosig=Não foi feita a verificação da assinatura do pacote - a verificação de pacotes tar.gz só é possível quando se actualiza a partir de www.webmin.com.
+upgrade_nosig=Não foi feita a verificação da assinatura do pacote - a verificação de pacotes tar.gz só é possível quando se actualiza a partir de webmin.com.
 upgrade_sig=Verificar a assinatura GnuPG no pacote?
 upgrade_force=Actualizar mesmo se a nova versão for a mesma ou mais antiga?
 upgrade_edownsig=Erro ao descarregar a assinatura : $1
@@ -307,10 +307,10 @@ newmod_header=Permissões dos novos Módulos
 newmod_def=Comportamento prédefinido - permitir novos módulos a <tt>root</tt> ou <tt>admin</tt>
 newmod_users=Permitir novos módulos a :
 
-update_desc1=Este formulário permite-lhe actualizar os módulos do Webmin que se descobriu conterem erros ou falhas de segurança a partir da página <a href=http://www.webmin.com/updates.html>Webmin Updates</a> ou a partir de outra fonte. Irá comparar os módulos actualmente instalados com aqueles disponíveis para actualização, e opcionalmente automáticamente descarregar e instalar aqueles módulos que estiverem desactualizados.
+update_desc1=Este formulário permite-lhe actualizar os módulos do Webmin que se descobriu conterem erros ou falhas de segurança a partir da página <a href=https://webmin.com/updates.html>Webmin Updates</a> ou a partir de outra fonte. Irá comparar os módulos actualmente instalados com aqueles disponíveis para actualização, e opcionalmente automáticamente descarregar e instalar aqueles módulos que estiverem desactualizados.
 update_header1=Actualizar os módulos agora
 update_header2=Actualizar os módulos através de calendarização
-update_webmin=Actualizar a partir de www.webmin.com
+update_webmin=Actualizar a partir de webmin.com
 update_other=Actualizar a partir de outra fonte
 update_show=Mostrar só que módulos seriam actualizados
 update_missing=Instalar módulos que não estejam actualmente instalados
@@ -323,7 +323,7 @@ update_apply=Gravar e Aplicar
 update_sched2=Actualizar módulos às $1:$2 a cada $3 dias
 update_none=Nenhuma actualização do Webmin para esta versão.
 update_failed=Erro ao instalar o módulo : $1
-update_desc2=Este formulário é para calendarizar a actualização automática de módulo do Webmin que contenham erros ou falhas de segurança a partir da página <a href=http://www.webmin.com/updates.html>Webmin Updates</a> ou a partir de outra fonte. Apesar da utilidade deste serviço, deve ter cuidada ao utilizá-lo porque pode permitir a um atacante tomar conta do seu sistema caso o servidor de actualizaçoes alguma vez fique comprometido.
+update_desc2=Este formulário é para calendarizar a actualização automática de módulo do Webmin que contenham erros ou falhas de segurança a partir da página <a href=https://webmin.com/updates.html>Webmin Updates</a> ou a partir de outra fonte. Apesar da utilidade deste serviço, deve ter cuidada ao utilizá-lo porque pode permitir a um atacante tomar conta do seu sistema caso o servidor de actualizaçoes alguma vez fique comprometido.
 
 ca_title=Autoridade de Certificação
 ca_old=Certificado existente

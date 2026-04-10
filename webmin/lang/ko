@@ -364,23 +364,23 @@ startpage_gotonone=&lt;없음&gt;
 startpage_gotomodule=로그인 후, 항상 모듈로 이동
 
 upgrade_title=Webmin 업그레이드
-upgrade_desc=이 양식에서는 전체 Webmin 설치를 새 버전으로 업그레이드할 수 있습니다. 로컬 파일, 업로드한 파일 또는 최신 버전의 파일(<a href=http://www.webmin.com/>www.webmin.com</a>)로부터 설치할 수 있습니다. 수동 업그레이드의 경우와 마찬가지로, 모든 구성 설정과 타사 모듈이 그대로 유지됩니다.
-upgrade_descrpm=이 양식에서는 RPM의 업그레이드 옵션을 사용하여 전체 Webmin 설치를 새 버전으로 업데이트할 수 있습니다. 로컬 RPM 파일, 업로드한 파일 또는 최신 버전의 파일(<a href=http://www.webmin.com/>www.webmin.com</a>)로부터 설치할 수 있습니다. 수동 업그레이드의 경우와 마찬가지로, 모든 구성 설정과 타사 모듈이 그대로 유지됩니다.
-upgrade_descdeb=이 폼은 데비안 패키지 업그레이드를 이용하여 새로운 버전으로 설치된 Webmin 전체를 업데이트 하도록 합니다. 로컬 .deb 파일, 업로드 파일 또는 <a href=http://www.webmin.com/>www.webmin.com</a>의 최신 버전으로 부터 설치할 수 있습니다. 수동으로 업그레이드 처럼 모든 설정과 thrid party 모듈들은 유지가 됩니다.
-upgrade_descsolaris-pkg=이 양식에서는 현재 솔라리스 패키지를 제거하고 새 패키지를 설치함으로써 전체 Webmin 설치를 새 버전으로 업데이트할 수 있습니다. 로컬 솔라리스 파일, 업로드한 파일 또는 최신 버전의 파일(<a href=http://www.webmin.com/>www.webmin.com</a>)로부터 설치할 수 있습니다. 수동 업그레이드의 경우와 마찬가지로, 모든 구성 설정과 타사 모듈이 그대로 유지됩니다.
+upgrade_desc=이 양식에서는 전체 Webmin 설치를 새 버전으로 업그레이드할 수 있습니다. 로컬 파일, 업로드한 파일 또는 최신 버전의 파일(<a href=https://webmin.com>webmin.com</a>)로부터 설치할 수 있습니다. 수동 업그레이드의 경우와 마찬가지로, 모든 구성 설정과 타사 모듈이 그대로 유지됩니다.
+upgrade_descrpm=이 양식에서는 RPM의 업그레이드 옵션을 사용하여 전체 Webmin 설치를 새 버전으로 업데이트할 수 있습니다. 로컬 RPM 파일, 업로드한 파일 또는 최신 버전의 파일(<a href=https://webmin.com>webmin.com</a>)로부터 설치할 수 있습니다. 수동 업그레이드의 경우와 마찬가지로, 모든 구성 설정과 타사 모듈이 그대로 유지됩니다.
+upgrade_descdeb=이 폼은 데비안 패키지 업그레이드를 이용하여 새로운 버전으로 설치된 Webmin 전체를 업데이트 하도록 합니다. 로컬 .deb 파일, 업로드 파일 또는 <a href=https://webmin.com>webmin.com</a>의 최신 버전으로 부터 설치할 수 있습니다. 수동으로 업그레이드 처럼 모든 설정과 thrid party 모듈들은 유지가 됩니다.
+upgrade_descsolaris-pkg=이 양식에서는 현재 솔라리스 패키지를 제거하고 새 패키지를 설치함으로써 전체 Webmin 설치를 새 버전으로 업데이트할 수 있습니다. 로컬 솔라리스 파일, 업로드한 파일 또는 최신 버전의 파일(<a href=https://webmin.com>webmin.com</a>)로부터 설치할 수 있습니다. 수동 업그레이드의 경우와 마찬가지로, 모든 구성 설정과 타사 모듈이 그대로 유지됩니다.
 upgrade_descsun-pkg=이 폼에서 선에서 제공하는 솔라리스 패키지를 이용하여 설치되어 있는 Webmin 전체를 새로운 버전으로 업그레이드 할 수 있습니다. 로컬의 솔라리스 패키지, 업로드 파일로 설치할 수 있습니다. 최신 패키지는 <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a> 에서 찾을 수 있습니다. 수동 업그레이드와 같이 모든 설정과 thrid-party 모듈을 유지할 수 있습니다.
 upgrade_descgentoo=이 폼으로 현 젠투 Emerge 를 이용하여 현재 설치되어 있는 Webmin 전체를 새로운 버전으로 업그레이드 할 수 있습니다. 로컬 젠투 패키지 파일, 업로드 파일 또는 Emerge 저장소의 최신 파일로 부터 설치를 할 수 있습니다. 수동 업그레이드 처럼 모든 설정과 third-party 모듈을 유지할 수 있습니다.
 upgrade_local=로컬 파일
 upgrade_uploaded=업로드한 파일에서
 upgrade_url=ftp 또는 http URL
-upgrade_ftp=www.webmin.com의 최신 버전
+upgrade_ftp=webmin.com의 최신 버전
 upgrade_cup=Caldera<tt>cupdate</tt> 도구의 최신 버전
 upgrade_emerge=Emerge 저장소의 마지막 버전
 upgrade_delete=업데이트 후에 이전 버전 디렉토리 제거
 upgrade_ok=Webmin 업그레이드
 upgrade_err1=$1(으)로부터 업데이트하지 못했습니다
 upgrade_err2=업로드한 파일로부터 업데이트하지 못했습니다
-upgrade_err3=www.webmin.com으로부터 업데이트하지 못했습니다
+upgrade_err3=webmin.com으로부터 업데이트하지 못했습니다
 upgrade_err4=Emerge 저장소로부터 업그레이드 실패
 upgrade_err5=URL $1에서 업그레이드 실패
 upgrade_eurl=URL 이 없거나 유효하지 않습니다.
@@ -404,7 +404,7 @@ upgrade_ewpackage=Webmin 용 솔라리스 패키지가 아닙니다.
 upgrade_egentoo=유효하지 않은 Gentoo Webmin 패키지 입니다.
 upgrade_eupdates=업데이트 리스트 받기 실패 : $1
 upgrade_echecksig=RPM 사인 검증 실패: $1
-upgrade_nosig=사인 검증이 된 패키지가 없습니다. - tar.gz 패키지 확인은 www.webmin.com 에서 업그레이드를 할 경우에만 가능 합니다.
+upgrade_nosig=사인 검증이 된 패키지가 없습니다. - tar.gz 패키지 확인은 webmin.com 에서 업그레이드를 할 경우에만 가능 합니다.
 upgrade_sig=패키지의 GnuPG 사인을 검증하겠습니까?
 upgrade_force=새 버전이 현재와 같거나 오래되었더라도 업그레이드 하겠습니까?
 upgrade_disc=다른 모든 유저의 접속을 끊겠습니까?
@@ -426,10 +426,10 @@ newmod_header=새로운 모듈 권한
 newmod_def=기본 행동 - 새로운 모듈에 대하여 <tt>root</tt> 또는 <tt>admin</tt> 에게 권한을 줌
 newmod_users=새로운 모듈 권한 :
 
-update_desc1=<a href=http://www.webmin.com/updates.html>Webmin 업데이트</a> 페이지 또는 다른 곳에서 버그나 보안구멍을 포함한 Webmin 모듈을 업그레이드 할 수 있습니다. 현재 설치되어 있는 모듈과 업데이트가 가능한 것을 비교하여, 새버전이 있는 모듈을 자동으로 받아서 설치하도록 할 수 있습니다.
+update_desc1=<a href=https://webmin.com/updates.html>Webmin 업데이트</a> 페이지 또는 다른 곳에서 버그나 보안구멍을 포함한 Webmin 모듈을 업그레이드 할 수 있습니다. 현재 설치되어 있는 모듈과 업데이트가 가능한 것을 비교하여, 새버전이 있는 모듈을 자동으로 받아서 설치하도록 할 수 있습니다.
 update_header1=지금 모듈 업데이트
 update_header2=모듈 업데이트 일정
-update_webmin=www.webmin.com 에서 업데이트
+update_webmin=webmin.com 에서 업데이트
 update_other=다른 소스로부터 업데이트 ..
 update_show=업데이드할 모듈만 보기
 update_missing=현재 설치되지 않은 모듈 설치
@@ -444,7 +444,7 @@ update_apply=저장하고 적용
 update_sched2=모듈을 $3일마다 $1:$2에 업데이트
 update_none=이 버전에 대한 Webmin 업데이트가 없습니다.
 update_failed=모듈 설치 실패 : $1
-update_desc2=<a href=http://www.webmin.com/updates.html>Webmin 업데이트</a> 페이지 또는 다른 곳에서 버그나 보안구멍을 포함한 Webmin 모듈의 자동 업데이트에 대한 스케줄을 설정할 수 있습니다. 이 서비스를 사용하는 동안에, 업데이트 서버가 안전성을 보장하지 못할 경우 공격자에게 시스템을 공격당할 수 있으므로 주의해야 합니다.
+update_desc2=<a href=https://webmin.com/updates.html>Webmin 업데이트</a> 페이지 또는 다른 곳에서 버그나 보안구멍을 포함한 Webmin 모듈의 자동 업데이트에 대한 스케줄을 설정할 수 있습니다. 이 서비스를 사용하는 동안에, 업데이트 서버가 안전성을 보장하지 못할 경우 공격자에게 시스템을 공격당할 수 있으므로 주의해야 합니다.
 
 ca_title=인증 기관
 ca_old=기존 인증서

@@ -34,7 +34,7 @@ index_installon=Instalatu martxan
 index_upgradeon=Zerbitzariak bertsio berritzeko
 index_update=Eguneratzeko moduluak
 index_updateon=Zerbitzariak eguneratzeko
-index_updatedesc=Inprimaki honek <a href=http://www.webmin.com/updates.html>Usermin Eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak aurkitu dituzten Usermin moduluak berritzea ahalbidetzen du.
+index_updatedesc=Inprimaki honek <a href=https://webmin.com/updates.html>Usermin Eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak aurkitu dituzten Usermin moduluak berritzea ahalbidetzen du.
 index_thost=hostname
 index_tdesc=deskribapena
 index_tver=Bertsio

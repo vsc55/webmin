@@ -34,7 +34,7 @@ index_installon=Installeer op
 index_upgradeon=Servers om te upgraden
 index_update=Update Modules
 index_updateon=Servers om te updaten
-index_updatedesc=Met dit formulier kunt u Usermin modules upgraden via <a href=http://www.webmin.com/updates.html>Usermin Updates</a> of via een andere bron om bugs en veiligheid's problemen mee te herstellen.
+index_updatedesc=Met dit formulier kunt u Usermin modules upgraden via <a href=https://webmin.com/updates.html>Usermin Updates</a> of via een andere bron om bugs en veiligheid's problemen mee te herstellen.
 index_thost=Hostnaam
 index_tdesc=Omschrijving
 index_tver=Versie

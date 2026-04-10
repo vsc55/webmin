@@ -364,23 +364,23 @@ startpage_gotonone=&lt;Nessuna&gt;
 startpage_gotomodule=Dopo il login vai sempre al modulo:
 
 upgrade_title=Aggiorna Webmin
-upgrade_desc=Questa pagina ti permette di aggiornare la tua installazione di Webmin con una nuova versione. Puoi installare da un file locale, tramite un file-upload o dall'ultima versione disponibile su <a href="http://www.webmin.com/">www.webmin.com</a>. In modo analogo ad un aggiornamento manuale, tutti i file di configurazione verranno mantenuti intatti.
-upgrade_descrpm=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione utilizzando l'opzione di aggiornamento di RPM. Puoi installare l'aggiornamento da un file RPM locale, oppure caricandolo sul server tramite browser o utilizzando l'ultima versione presente su <a href=http://www.webmin.com/>www.webmin.com</a>. Come avviene anche con gli aggiornamenti manuali tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
-upgrade_descdeb=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione aggiornando i pacchetti Debian. Puoi installare l'aggiornamento da un file .deb locale, oppure caricandolo sul server tramite browser o utilizzando l'ultima versione presente su <a href=http://www.webmin.com/>www.webmin.com</a>. Come avviene anche con gli aggiornamenti manuali tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
-upgrade_descsolaris-pkg=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione rimuovendo il pacchetto Solaris attuale ed installando quello nuovo. Puoi installare l'aggiornamento da un pacchetto Solaris locale, oppure caricandolo sul server tramite browser o utilizzando l'ultima versione presente su <a href=http://www.webmin.com/>www.webmin.com</a>. Come avviene anche con gli aggiornamenti manuali, tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
+upgrade_desc=Questa pagina ti permette di aggiornare la tua installazione di Webmin con una nuova versione. Puoi installare da un file locale, tramite un file-upload o dall'ultima versione disponibile su <a href="https://webmin.com/">webmin.com</a>. In modo analogo ad un aggiornamento manuale, tutti i file di configurazione verranno mantenuti intatti.
+upgrade_descrpm=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione utilizzando l'opzione di aggiornamento di RPM. Puoi installare l'aggiornamento da un file RPM locale, oppure caricandolo sul server tramite browser o utilizzando l'ultima versione presente su <a href=https://webmin.com>webmin.com</a>. Come avviene anche con gli aggiornamenti manuali tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
+upgrade_descdeb=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione aggiornando i pacchetti Debian. Puoi installare l'aggiornamento da un file .deb locale, oppure caricandolo sul server tramite browser o utilizzando l'ultima versione presente su <a href=https://webmin.com>webmin.com</a>. Come avviene anche con gli aggiornamenti manuali tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
+upgrade_descsolaris-pkg=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione rimuovendo il pacchetto Solaris attuale ed installando quello nuovo. Puoi installare l'aggiornamento da un pacchetto Solaris locale, oppure caricandolo sul server tramite browser o utilizzando l'ultima versione presente su <a href=https://webmin.com>webmin.com</a>. Come avviene anche con gli aggiornamenti manuali, tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
 upgrade_descsun-pkg=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione rimuovendo il pacchetto Solaris fornito da Sun. Puoi installare l'aggiornamento da un pacchetto Solaris locale, oppure caricandolo sul server tramite browser. Puoi trovare il pacchetto Solaris fornito da Sun contenente l'ultima versione su <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Come avviene anche con gli aggiornamenti manuali, tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
 upgrade_descgentoo=Questo form ti permette di aggiornare l'intera installazione di Webmin ad una nuova versione rimuovendo il pacchetto Emerge di Gentoo attuale ed installando quello nuovo. Puoi installare l'aggiornamento da un pacchetto Gentoo locale, oppure caricandolo sul server tramite browser o utilizzando l'ultima versione presente sul repository Emerge. Come avviene anche con gli aggiornamenti manuali, tutte le impostazioni di configurazione e i moduli di terze parti saranno mantenuti.
 upgrade_local=Da un file locale
 upgrade_uploaded=Tramite upload del file:
 upgrade_url=Da indirizzo FTP o HTTP:
-upgrade_ftp=Ultima versione da www.webmin.com
+upgrade_ftp=Ultima versione da webmin.com
 upgrade_cup=L'ultima versione dal tool di aggiornamento di Caldera <tt>cupdate</tt>
 upgrade_emerge=L'ultima versione dal repository Emerge
 upgrade_delete=Cancellare le directory delle vecchie versioni dopo l'aggiornamento?
 upgrade_ok=Aggiorna Webmin
 upgrade_err1=Aggiornamento da $1 non riuscito
 upgrade_err2=Aggiornamento dal file inviato non riuscito
-upgrade_err3=Aggiornamento da www.webmin.com non riuscito
+upgrade_err3=Aggiornamento da webmin.com non riuscito
 upgrade_err4=Aggiornamento dal repository Emerge non riuscito
 upgrade_err5=Aggiornamento dall'URL $1 non riuscito
 upgrade_eurl=URL mancante o non valido
@@ -404,7 +404,7 @@ upgrade_ewpackage=Non è un pacchetto Solaris di Webmin valido
 upgrade_egentoo=Non è un pacchetto Gentoo di Webmin valido
 upgrade_eupdates=Download della lista degli aggiornamenti non riuscito: $1
 upgrade_echecksig=Verifica della firma del pacchetto RPM non riuscita: $1
-upgrade_nosig=Non è stata svolta alcuna verifica della firma del pacchetto - Il controllo dei pacchetti tar.gz è possibile solo quando l'aggiornamento è effettuato da www.webmin.com.
+upgrade_nosig=Non è stata svolta alcuna verifica della firma del pacchetto - Il controllo dei pacchetti tar.gz è possibile solo quando l'aggiornamento è effettuato da webmin.com.
 upgrade_sig=Verificare la firma GnuPG del pacchetto?
 upgrade_force=Aggiornare anche se la nuova versione è la stessa o precedente a quella installata?
 upgrade_disc=Disconnettere tutti gli altri utenti?
@@ -426,10 +426,10 @@ newmod_header=Concessioni sui nuovi moduli
 newmod_def=Comportamento predefinito - concedi l'accesso ai nuovi moduli a <tt>root</tt> o a <tt>admin</tt>
 newmod_users=Permetti l'accesso ai nuovi moduli a:
 
-update_desc1=Questo modulo ti permette di aggiornare i moduli di Webmin nei quali sono stati trovati bug o falle di sicurezza dalla pagina degli <a href=http://www.webmin.com/updates.html>aggiornamenti di Webmin</a> o da un'altra sorgente. Questa operazione comparerà i moduli installati con quelli disponibili per l'aggiornamento e, opzionalmente, scaricherà ed aggiornerà i moduli che richiedono un aggiornamento.
+update_desc1=Questo modulo ti permette di aggiornare i moduli di Webmin nei quali sono stati trovati bug o falle di sicurezza dalla pagina degli <a href=https://webmin.com/updates.html>aggiornamenti di Webmin</a> o da un'altra sorgente. Questa operazione comparerà i moduli installati con quelli disponibili per l'aggiornamento e, opzionalmente, scaricherà ed aggiornerà i moduli che richiedono un aggiornamento.
 update_header1=Aggiorna i moduli adesso
 update_header2=Aggiorna i moduli sulla base di una pianificazione
-update_webmin=Aggiorna da www.webmin.com
+update_webmin=Aggiorna da webmin.com
 update_other=Aggiorna da altre fonti:
 update_show=Mostra solamente i moduli che saranno aggiornati
 update_missing=Installa moduli che non sono attualmente installati
@@ -444,7 +444,7 @@ update_apply=Salva ed applica
 update_sched2=Aggiorna i moduli alle ore $1:$2 ogni $3 giorni
 update_none=Nessun aggiornamento Webmin per questa versione.
 update_failed=Installazione del modulo non riuscita: $1
-update_desc2=Questo modulo ti permette di programmare l'aggiornamento automatico dei moduli di Webmin contenente bug o falle di sicurezza dalla pagina degli <a href=http://www.webmin.com/updates.html>aggiornamenti di Webmin</a> o da un'altra sorgente. Questo sistema è molto utile per mantenere Webmin aggiornato. Tuttavia deve essere usato con cura in quanto potrebbe permettere degli attacchi al sistema nel caso in cui il server su cui risiedono gli aggiornamenti sia compromesso.
+update_desc2=Questo modulo ti permette di programmare l'aggiornamento automatico dei moduli di Webmin contenente bug o falle di sicurezza dalla pagina degli <a href=https://webmin.com/updates.html>aggiornamenti di Webmin</a> o da un'altra sorgente. Questo sistema è molto utile per mantenere Webmin aggiornato. Tuttavia deve essere usato con cura in quanto potrebbe permettere degli attacchi al sistema nel caso in cui il server su cui risiedono gli aggiornamenti sia compromesso.
 
 ca_title=Autorità di certificazione
 ca_old=Certificato esistente

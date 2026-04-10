@@ -469,16 +469,16 @@ startpage_webminup=在 “系统信息” 页面上显示 Webmin 更新？
 startpage_moduleup=在 “系统信息” 页面上显示模块更新？
 
 upgrade_title=升级 Webmin
-upgrade_desc=在此表上，您可以将整个 webmin 安装升级。可从本地文件、上载文件或从 <a href=http://www.webmin.com/>www.webmin.com</a> 的最新的版本来安装。与手工升级一样，您的所有配置和第三方模块均被保留。
-upgrade_descrpm=在此表上，您可以用 RPM 的升级选项将整个 webmin 安装升级到一个新版本。可从本地文件、上载文件或从 <a href=http://www.webmin.com/>www.webmin.com</a> 的最新的版本来安装。与手工升级一样，您的所有配置和第三方模块均被保留。
-upgrade_descdeb=通过此选项，您可以通过升级 Debian 软件包将整个 Webmin 安装升级到新版本。您可以上传本地 .deb 文件，或从 <a href=http://www.webmin.com/>www.webmin.com</a> 下载最新版本安装。与手动升级一样，所有配置设置和第三方模块都将保留。
-upgrade_descsolaris-pkg=在此表上，您可通过删除原有的 solaris 软件包并重新安装来将整个 webmin 安装升级到一个新版本。可从本地solaris 软件包文件、上载文件或从 <a href=http://www.webmin.com/>www.webmin.com</a> 的最新的版本来安装。与手工升级一样，您的所有配置和第三方模块均会被保留。
+upgrade_desc=在此表上，您可以将整个 webmin 安装升级。可从本地文件、上载文件或从 <a href=https://webmin.com>webmin.com</a> 的最新的版本来安装。与手工升级一样，您的所有配置和第三方模块均被保留。
+upgrade_descrpm=在此表上，您可以用 RPM 的升级选项将整个 webmin 安装升级到一个新版本。可从本地文件、上载文件或从 <a href=https://webmin.com>webmin.com</a> 的最新的版本来安装。与手工升级一样，您的所有配置和第三方模块均被保留。
+upgrade_descdeb=通过此选项，您可以通过升级 Debian 软件包将整个 Webmin 安装升级到新版本。您可以上传本地 .deb 文件，或从 <a href=https://webmin.com>webmin.com</a> 下载最新版本安装。与手动升级一样，所有配置设置和第三方模块都将保留。
+upgrade_descsolaris-pkg=在此表上，您可通过删除原有的 solaris 软件包并重新安装来将整个 webmin 安装升级到一个新版本。可从本地solaris 软件包文件、上载文件或从 <a href=https://webmin.com>webmin.com</a> 的最新的版本来安装。与手工升级一样，您的所有配置和第三方模块均会被保留。
 upgrade_descsun-pkg=该选项可以从 Sun 提供的 Solaris 软件包将 Webmin 升级到新版本。您可以从本地 Solaris 软件包或上传的文件进行安装。可以在 <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a> 上找到最新的软件包。与手动升级一样，所有配置设置和第三方模块都将保留。
 upgrade_descgentoo=通过删除当前的 Gentoo Emerge 软件包并安装新的软件包，此选项可以将整个 Webmin 安装升级到新版本。您可以选择本地的 Gentoo 软件包文件上传，或选择 Emerge 存储库中的最新版本进行安装。与手动升级一样，所有配置设置和第三方模块都将保留。
 upgrade_local=从本地文件
 upgrade_uploaded=从上载文件
 upgrade_url=从 FTP 或 HTTP URL
-upgrade_ftp=从 www.webmin.com 网站的最新版本
+upgrade_ftp=从 webmin.com 网站的最新版本
 upgrade_cup=从 Caldera 的 <tt>cupdate</tt> 工具的最新版本
 upgrade_emerge=Emerge 存储库中的最新版本
 upgrade_delete=升级之后删除旧版本的路径？
@@ -486,7 +486,7 @@ upgrade_repo=存储库中的最新版本 $1
 upgrade_ok=升级 Webmin
 upgrade_err1=无法从 $1 升级
 upgrade_err2=无法从上载文件升级
-upgrade_err3=无法从 www.webmin.com 升级
+upgrade_err3=无法从 webmin.com 升级
 upgrade_err4=无法从 Emerge 存储库升级
 upgrade_err5=无法从 URL $1 升级
 upgrade_eurl=网址未设定或无效
@@ -515,7 +515,7 @@ upgrade_ewpackage=这不是 Webmin 的 Solaris 软件包
 upgrade_egentoo=不是 Webmin 的 Gentoo 软件包
 upgrade_eupdates=下载更新列表失败 : $1
 upgrade_echecksig=RPM 签名验证失败：$1
-upgrade_nosig=未完成软件包签名验证，仅当从 www.webmin.com 升级时才可以校验 tar.gz 软件包。
+upgrade_nosig=未完成软件包签名验证，仅当从 webmin.com 升级时才可以校验 tar.gz 软件包。
 upgrade_sig=检查软件包的 GnuPG 签名？
 upgrade_force=即使新版本相同或更旧，也要升级？
 upgrade_disc=断开所有其他用户的连接？
@@ -539,10 +539,10 @@ newmod_header=新模块授权
 newmod_def=默认行为：将新模块授权给 <tt>root</tt> 或 <tt>admin</tt>
 newmod_users=授予新模块 :
 
-update_desc1=在此表上，您可以从 <a href=http://www.webmin.com/webmin/updates.html>Webmin 更新</a> 页面或者以其他方式将出错或安全漏洞的 Webmin 升级。与此相反，现在安装的带有可更新功能的模块，当有的模块版本过时的情况时，会有选择性自动下载并安装到您的系统中。
+update_desc1=在此表上，您可以从 <a href=https://webmin.com/webmin/updates.html>Webmin 更新</a> 页面或者以其他方式将出错或安全漏洞的 Webmin 升级。与此相反，现在安装的带有可更新功能的模块，当有的模块版本过时的情况时，会有选择性自动下载并安装到您的系统中。
 update_header1=现在更新模块
 update_header2=按时更新模块
-update_webmin=从 www.webmin.com 更新
+update_webmin=从 webmin.com 更新
 update_other=以其他方式
 update_show=仅显示将要更新的模块
 update_missing=安装现在尚未安装的模块
@@ -558,7 +558,7 @@ update_apply=保存并应用
 update_sched2=每 $3 天更新一次 $1 的模块：$2
 update_none=这版没有 Webmin 更新模块。
 update_failed=安装模块失败 : $1
-update_desc2=此表示用来从 <a href=http://www.webmin.com/webmin/updates.html>Webmin 更新</a>或其他地方安排出错或有安全漏洞的 Webmin 模块的自动更新时间的。虽然这项服务很有帮助，但是您在使用时应该小心，防止出现更新服务器被入侵，攻击者入侵您的系统的情况。
+update_desc2=此表示用来从 <a href=https://webmin.com/webmin/updates.html>Webmin 更新</a>或其他地方安排出错或有安全漏洞的 Webmin 模块的自动更新时间的。虽然这项服务很有帮助，但是您在使用时应该小心，防止出现更新服务器被入侵，攻击者入侵您的系统的情况。
 update_enosig=无法下载用于更新的签名文件 : $1
 update_ebadsig=更新签名检查失败 : $1
 update_enomodsig=无法下载模块的签名文件 : $1

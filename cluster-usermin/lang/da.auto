@@ -34,7 +34,7 @@ index_installon=Installer på
 index_upgradeon=Servere, der skal opgraderes
 index_update=Opdater moduler
 index_updateon=Servere, der skal opdateres
-index_updatedesc=Denne formular giver dig mulighed for at opgradere Usermin-moduler, der har vist sig at indeholde fejl eller sikkerhedshuller fra siden <a href=http://www.webmin.com/updates.html>Usermin Updates</a> eller fra en anden kilde.
+index_updatedesc=Denne formular giver dig mulighed for at opgradere Usermin-moduler, der har vist sig at indeholde fejl eller sikkerhedshuller fra siden <a href=https://webmin.com/updates.html>Usermin Updates</a> eller fra en anden kilde.
 index_thost=Værtsnavn
 index_tdesc=Beskrivelse
 index_tver=Version

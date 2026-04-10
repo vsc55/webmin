@@ -34,7 +34,7 @@ index_installon=Встановити
 index_upgradeon=Сервери для оновлення
 index_update=Оновлення модулів
 index_updateon=Сервери для оновлення
-index_updatedesc=Ця форма дозволяє оновити модулі Usermin, які знайшли помилки або отвори в безпеці зі сторінки <a href=http://www.webmin.com/updates.html>Оновлення користувачів</a> або з іншого джерела.
+index_updatedesc=Ця форма дозволяє оновити модулі Usermin, які знайшли помилки або отвори в безпеці зі сторінки <a href=https://webmin.com/updates.html>Оновлення користувачів</a> або з іншого джерела.
 index_thost=Ім'я хоста
 index_tdesc=Опис
 index_tver=Версія

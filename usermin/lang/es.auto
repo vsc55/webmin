@@ -35,7 +35,7 @@ ui_show_ver=Versión de Usermin
 ui_show_tver=Versión temática
 ui_show_time=Tiempo en el sistema
 
-upgrade_descdeb=Este formulario le permite actualizar su instalación completa de Usermin a una nueva versión actualizando su paquete Debian. Puede instalar desde un archivo.deb local, un archivo cargado o desde la última versión en <a href=http://www.usermin.com/>www.usermin.com</a>. Al igual que con una actualización manual, se mantendrán todos sus ajustes de configuración y módulos de terceros.
+upgrade_descdeb=Este formulario le permite actualizar su instalación completa de Usermin a una nueva versión actualizando su paquete Debian. Puede instalar desde un archivo.deb local, un archivo cargado o desde la última versión en <a href=https://usermin.com>usermin.com</a>. Al igual que con una actualización manual, se mantendrán todos sus ajustes de configuración y módulos de terceros.
 
 log_copycert=Configuración SSL copiada de Webmin
 log_dav=Cambió la configuración del servidor DAV

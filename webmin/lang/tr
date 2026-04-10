@@ -252,21 +252,21 @@ startpage_gotonone=&lt;Hiçbiri&gt;
 startpage_gotomodule=Girişten sonra her zaman bu modüle git
 
 upgrade_title=Webmin Güncelleştir
-upgrade_desc=Bu sayfa varolan Webmin'i daha yeni bir sürümüne güncellemek için kullanılır. Yerel dosyadan, yüklenebilecek bir dosyadan veya <a href="www.webmin.com">www.webmin.com</a> adresinden en son sürümünü kurabilirsiniz. Eğer elle yapacaksanız bütün yapılandırma ayarları ve üçüncü parti modüller saklanacaktır.
-upgrade_descrpm=Bu form ile webmin'in tamamını RPM'nin güncelleme seçeneği ile yeni sürümüne güncelleyebilirsiniz. Sunucudaki bir dosyadan, yüklenen bir dosyadan ya da <a href=http://www.webmin.com/>www.webmin.com</a> adresindeki son sürümü ile güncelleme yapabilirsiniz. Elle yapılan bir güncelleme gibi bütün yapılandırmanız ve üçüncü parti modülleriniz saklanacaktır.
-upgrade_descsolaris-pkg=Bu form ile mevcut solaris paketini silip yenisini kurarak webmin'in tamamını güncelleyebilirsiniz. Sunucudaki bir solaris paket dosyasından, yüklenen bir dosyadan ya da <a href=http://www.webmin.com/>www.webmin.com</a> adresindeki son sürümü ile güncelleme yapabilirsiniz. Elle yapılan bir güncelleme gibi bütün yapılandırmanız ve üçüncü parti modülleriniz saklanacaktır.
+upgrade_desc=Bu sayfa varolan Webmin'i daha yeni bir sürümüne güncellemek için kullanılır. Yerel dosyadan, yüklenebilecek bir dosyadan veya <a href="webmin.com">webmin.com</a> adresinden en son sürümünü kurabilirsiniz. Eğer elle yapacaksanız bütün yapılandırma ayarları ve üçüncü parti modüller saklanacaktır.
+upgrade_descrpm=Bu form ile webmin'in tamamını RPM'nin güncelleme seçeneği ile yeni sürümüne güncelleyebilirsiniz. Sunucudaki bir dosyadan, yüklenen bir dosyadan ya da <a href=https://webmin.com>webmin.com</a> adresindeki son sürümü ile güncelleme yapabilirsiniz. Elle yapılan bir güncelleme gibi bütün yapılandırmanız ve üçüncü parti modülleriniz saklanacaktır.
+upgrade_descsolaris-pkg=Bu form ile mevcut solaris paketini silip yenisini kurarak webmin'in tamamını güncelleyebilirsiniz. Sunucudaki bir solaris paket dosyasından, yüklenen bir dosyadan ya da <a href=https://webmin.com>webmin.com</a> adresindeki son sürümü ile güncelleme yapabilirsiniz. Elle yapılan bir güncelleme gibi bütün yapılandırmanız ve üçüncü parti modülleriniz saklanacaktır.
 upgrade_descgentoo=Bu form ile mevcut Gentoo Emerge paketini silip yenisini kurarak webmin'in tamamını güncelleyebilirsiniz. Sunucudaki bir Gentoo paketinden, yüklenilen bir dosyadan ya da Emerge deposundaki son sürümünden güncelleme yapabilirsiniz. Elle yapılan bir güncelleme gibi bütün yapılandırmanız ve üçüncü parti modülleriniz saklanacaktır.
 upgrade_local=Yerel dosyadan
 upgrade_uploaded=Yüklenilen dosyadan
 upgrade_url=Ftp ya da httpd URL'sinden
-upgrade_ftp=En son sürümünü www.webmin.com'dan
+upgrade_ftp=En son sürümünü webmin.com'dan
 upgrade_cup=Caldera'nın <tt>cupdate</tt> aracı ile son sürümü
 upgrade_emerge=Emerge deposundan en son sürüm
 upgrade_delete=Güncellemeden sonra eski sürümün dizini silinsin ?
 upgrade_ok=Webmin'i güncelleştir
 upgrade_err1=$1'den güncellemede hata oluştu.
 upgrade_err2=Yüklenilen dosyadan güncellemede hata oluştu.
-upgrade_err3=www.webmin.com'dan güncellemede hata oluştu.
+upgrade_err3=webmin.com'dan güncellemede hata oluştu.
 upgrade_err4=Emerge deposundan güncelleme yapılırken hata oluştu
 upgrade_err5=$1 URL'sinden güncellemede hata oluştu
 upgrade_eurl=Eksik ya da geçersiz URL>
@@ -299,10 +299,10 @@ newmod_header=Yeni modül izinleri
 newmod_def=Öntanımlı davranış - <tt>root</tt> ya da <tt>admin</tt> kullanıcısı erişebilsin
 newmod_users=Yeni modüllere erişebilenler :
 
-update_desc1=Bu form ile modüllerin hatalarını ya da güvenlik açıklarını <a href=http://www.webmin.com/updates.html>Webmin Güncellemeleri</a> sayfasından ya da başka bir kaynaktan güncelleyebilirsiniz. Mevcut modüllerin güncellemelerinin olup olmadığı araştırılacak ve seçiminize göre güncel modülleri otomatik olarak indirip kurulacaktır.
+update_desc1=Bu form ile modüllerin hatalarını ya da güvenlik açıklarını <a href=https://webmin.com/updates.html>Webmin Güncellemeleri</a> sayfasından ya da başka bir kaynaktan güncelleyebilirsiniz. Mevcut modüllerin güncellemelerinin olup olmadığı araştırılacak ve seçiminize göre güncel modülleri otomatik olarak indirip kurulacaktır.
 update_header1=Modülleri şimdi güncelle
 update_header2=Modülleri belirli zamanlanlarda güncelle
-update_webmin=www.webmin.com adresinden güncelle
+update_webmin=webmin.com adresinden güncelle
 update_other=Başka bir kaynaktan güncelle
 update_show=Sadece güncellenecek modülleri göster
 update_missing=Şu an kurulu olmayan modülleri de kur
@@ -315,7 +315,7 @@ update_apply=Kaydet ve Uygula
 update_sched2=Modülleri her $3 günde bir $1:$2 'de güncelle
 update_none=Bu sürüm için bir güncelleme yok
 update_failed=Modülün kurulmasında hata oluştu : $1
-update_desc2=Bu form ile modüllerin hatalarının ya da güvenlik açıklarının <a href=http://www.webmin.com/updates.html>Webmin Güncellemeleri</a> sayfasından ya da başka bir kaynaktan bir zaman çizelgesine göre otomatik olarak güncellenmesi sağlanabilir. Bu servis oldukça kullanışlıdır, fakat güncelleme sunucusu saldırganlar tarafından ele geçirilirse sisteminizin de kontrolü ele geçirilebileceğinden oldukça dikkatli olmalıdır.
+update_desc2=Bu form ile modüllerin hatalarının ya da güvenlik açıklarının <a href=https://webmin.com/updates.html>Webmin Güncellemeleri</a> sayfasından ya da başka bir kaynaktan bir zaman çizelgesine göre otomatik olarak güncellenmesi sağlanabilir. Bu servis oldukça kullanışlıdır, fakat güncelleme sunucusu saldırganlar tarafından ele geçirilirse sisteminizin de kontrolü ele geçirilebileceğinden oldukça dikkatli olmalıdır.
 
 ca_title=Sertifika Onaylama
 ca_old=Mevcut Sertifika

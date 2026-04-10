@@ -158,7 +158,7 @@ newcsr_ok2=Tento CSR sa musí poslať podpisujúcej autorite, ktorá vráti podp
 startpage_webminup=Zobraziť aktualizácie webminov na stránke Systémové informácie?
 startpage_moduleup=Zobraziť aktualizácie modulov na stránke Systémové informácie?
 
-upgrade_descdeb=Tento formulár vám umožňuje inovovať celú inštaláciu Webminu na novú verziu inovovaním jeho balíka Debian. Môžete nainštalovať z miestneho súboru.deb, nahraného súboru alebo z najnovšej verzie na stránke <a href=http://www.webmin.com/>www.webmin.com</a>. Rovnako ako pri manuálnej inovácii sa zachovajú všetky vaše konfiguračné nastavenia a moduly tretích strán.
+upgrade_descdeb=Tento formulár vám umožňuje inovovať celú inštaláciu Webminu na novú verziu inovovaním jeho balíka Debian. Môžete nainštalovať z miestneho súboru.deb, nahraného súboru alebo z najnovšej verzie na stránke <a href=https://webmin.com>webmin.com</a>. Rovnako ako pri manuálnej inovácii sa zachovajú všetky vaše konfiguračné nastavenia a moduly tretích strán.
 upgrade_descsun-pkg=Tento formulár vám umožňuje inovovať celú inštaláciu Webminu na novú verziu z balíka Solaris dodávaného spoločnosťou Sun. Môžete nainštalovať z lokálneho súboru balíka Solaris alebo z nahraného súboru. Najnovšie balíky nájdete na adrese <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. Rovnako ako pri manuálnej inovácii sa zachovajú všetky vaše konfiguračné nastavenia a moduly tretích strán.
 upgrade_repo=Najnovšia verzia z úložiska $1
 upgrade_setup=Spustenie skriptu <tt>setup.sh</tt> na aktualizáciu Webminu ..

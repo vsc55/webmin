@@ -259,18 +259,18 @@ ui_show_time=Tempo no sistema
 
 upgrade_title=Atualizar Usermin
 upgrade_title2=Instale Usermin
-upgrade_desc=Este formulário permite que você atualize toda a instalação do Usermin para uma nova versão. Você pode instalar a partir de um arquivo local, de um arquivo carregado ou da versão mais recente em <a href=http://www.usermin.com/>www.usermin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
-upgrade_descrpm=Este formulário permite atualizar toda a instalação do Usermin para uma nova versão usando a opção de atualização do RPM. Você pode instalar a partir de um arquivo RPM local, de um arquivo carregado ou da versão mais recente em <a href=http://www.usermin.com/>www.usermin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
-upgrade_descdeb=Este formulário permite que você atualize toda a instalação do Usermin para uma nova versão, atualizando o pacote Debian. Você pode instalar a partir de um arquivo.deb local, de um arquivo carregado ou da versão mais recente em <a href=http://www.usermin.com/>www.usermin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
+upgrade_desc=Este formulário permite que você atualize toda a instalação do Usermin para uma nova versão. Você pode instalar a partir de um arquivo local, de um arquivo carregado ou da versão mais recente em <a href=https://usermin.com>usermin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
+upgrade_descrpm=Este formulário permite atualizar toda a instalação do Usermin para uma nova versão usando a opção de atualização do RPM. Você pode instalar a partir de um arquivo RPM local, de um arquivo carregado ou da versão mais recente em <a href=https://usermin.com>usermin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
+upgrade_descdeb=Este formulário permite que você atualize toda a instalação do Usermin para uma nova versão, atualizando o pacote Debian. Você pode instalar a partir de um arquivo.deb local, de um arquivo carregado ou da versão mais recente em <a href=https://usermin.com>usermin.com</a>. Assim como com uma atualização manual, todas as suas configurações e módulos de terceiros serão mantidos.
 upgrade_local=Do arquivo local
 upgrade_uploaded=Do arquivo enviado
 upgrade_url=De FTP ou URL URL
-upgrade_ftp=Versão mais recente em www.usermin.com
+upgrade_ftp=Versão mais recente em usermin.com
 upgrade_delete=Excluir o diretório da versão antiga após a atualização?
 upgrade_ok=Atualizar Usermin
 upgrade_err1=Falha ao atualizar de $1
 upgrade_err2=Falha ao atualizar do arquivo enviado
-upgrade_err3=Falha ao atualizar de www.usermin.com
+upgrade_err3=Falha ao atualizar de usermin.com
 upgrade_err5=Falha ao atualizar do URL $1
 upgrade_eurl=URL ausente ou inválido
 upgrade_efile=Arquivo não existe
@@ -291,10 +291,10 @@ upgrade_failed=.. atualização falhou!
 upgrade_updates=Existem $1 atualizações para esta nova versão do Usermin. <a href='$2'>Clique aqui</a> para fazer o download e instalá-los automaticamente agora.
 upgrade_eupdates=Falha ao baixar a lista de atualizações : $1
 
-update_desc1=Este formulário permite que você atualize os módulos Usermin que contêm bugs ou falhas de segurança na página <a href=http://www.usermin.com/uupdates.html>Atualizações do usuáriomin</a> ou de outra fonte. Isso comparará os módulos atualmente instalados com os disponíveis para atualização e, opcionalmente, baixará e instalará automaticamente todos os módulos desatualizados.
+update_desc1=Este formulário permite que você atualize os módulos Usermin que contêm bugs ou falhas de segurança na página <a href=https://usermin.com/uupdates.html>Atualizações do usuáriomin</a> ou de outra fonte. Isso comparará os módulos atualmente instalados com os disponíveis para atualização e, opcionalmente, baixará e instalará automaticamente todos os módulos desatualizados.
 update_header1=Atualize os módulos agora
 update_header2=Atualizar módulos dentro do cronograma
-update_webmin=Atualização de www.usermin.com
+update_webmin=Atualização de usermin.com
 update_other=Atualização de outra fonte
 update_show=Mostrar apenas quais módulos seriam atualizados
 update_missing=Instale os módulos que não estão atualmente instalados
@@ -306,7 +306,7 @@ update_apply=Salvar e aplicar
 update_sched=Atualizar módulos às $1 : 00 a cada $2 dias
 update_none=Não há atualizações de Usermin para esta versão.
 update_failed=Falha ao instalar o módulo : $1
-update_desc2=Este formulário é para agendar a atualização automática dos módulos Usermin que contêm bugs ou falhas de segurança na página <a href=http://www.usermin.com/uupdates.html>Atualizações do Usermin</a> ou de outra fonte. Embora esse serviço seja útil, você deve ter cuidado ao usá-lo, pois pode permitir que invasores assumam o controle do seu sistema se o servidor de atualização estiver comprometido.
+update_desc2=Este formulário é para agendar a atualização automática dos módulos Usermin que contêm bugs ou falhas de segurança na página <a href=https://usermin.com/uupdates.html>Atualizações do Usermin</a> ou de outra fonte. Embora esse serviço seja útil, você deve ter cuidado ao usá-lo, pois pode permitir que invasores assumam o controle do seu sistema se o servidor de atualização estiver comprometido.
 
 assignment_title=Reatribuir módulos
 assignment_header=Atribuições de categoria de módulo

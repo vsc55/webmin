@@ -34,7 +34,7 @@ index_installon=نصب کنید
 index_upgradeon=سرورهای به روزرسانی
 index_update=ماژول ها را به روز کنید
 index_updateon=سرورها برای بروزرسانی
-index_updatedesc=این فرم به شما امکان می دهد ماژول های Usermin را که پیدا شده است شامل اشکالات یا حفره های امنیتی از <a href=http://www.webmin.com/updates.html>Usermin Updates</a> یا از منبع دیگری باشد ، به روز کنید.
+index_updatedesc=این فرم به شما امکان می دهد ماژول های Usermin را که پیدا شده است شامل اشکالات یا حفره های امنیتی از <a href=https://webmin.com/updates.html>Usermin Updates</a> یا از منبع دیگری باشد ، به روز کنید.
 index_thost=نام میزبان
 index_tdesc=شرح
 index_tver=نسخه

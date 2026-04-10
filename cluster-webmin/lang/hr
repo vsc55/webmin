@@ -34,7 +34,7 @@ index_installon=Instaliraj na
 index_upgradeon=Poslužitelji za nadogradnju
 index_update=Obnovi Module
 index_updateon=Poslužitelji za nadopunu
-index_updatedesc=Ova forma dopušta Vam da Webmin module na kojima su pronađene greške ili propuste u sigurnosti nadograđujete iz stranice <a href=http://www.webmin.com/updates.html>Webmin Nadopune</a> ili iz nekog drugog izvora.
+index_updatedesc=Ova forma dopušta Vam da Webmin module na kojima su pronađene greške ili propuste u sigurnosti nadograđujete iz stranice <a href=https://webmin.com/updates.html>Webmin Nadopune</a> ili iz nekog drugog izvora.
 
 this_server=ovaj poslužitelj
 

@@ -229,19 +229,19 @@ startpage_gotonone=&lt;無&gt;
 startpage_gotomodule=登入後，直接到模組
 
 upgrade_title=升級 Webmin
-upgrade_desc=這個表單可以讓您將整個安裝的 Webmin 升級到新的版本。您可以從本機檔案、上傳檔案或從 <a href=http://www.webmin.com/>www.webmin.com</a> 所提供的最新版本安裝。就如同手動升級一樣，所有的設定與協力廠商模組都會被保留。
-upgrade_descrpm=這個表單可以讓您安裝升級所輸入的新webmin RPM升級檔案，您可以從本地端安裝RPM檔案,上傳一個檔案或是從 <a href=http://www.webmin.com/>www.webmin.com</a>下載最新版本，只要按照說明升級，所有您的設定和額外(third-party)的模組都會保留。
-upgrade_descsolaris-pkg=T這個表單可以讓您移除目前solaris套件檔案和安裝升級所輸入的新webmin 升級檔案，您可以從本地端安裝RPM檔案,上傳一個檔案或是從 <a href=http://www.webmin.com/>www.webmin.com</a>下載最新版本，只要按照說明升級，所有您的設定和額外(third-party)的模組都會保留。
+upgrade_desc=這個表單可以讓您將整個安裝的 Webmin 升級到新的版本。您可以從本機檔案、上傳檔案或從 <a href=https://webmin.com>webmin.com</a> 所提供的最新版本安裝。就如同手動升級一樣，所有的設定與協力廠商模組都會被保留。
+upgrade_descrpm=這個表單可以讓您安裝升級所輸入的新webmin RPM升級檔案，您可以從本地端安裝RPM檔案,上傳一個檔案或是從 <a href=https://webmin.com>webmin.com</a>下載最新版本，只要按照說明升級，所有您的設定和額外(third-party)的模組都會保留。
+upgrade_descsolaris-pkg=T這個表單可以讓您移除目前solaris套件檔案和安裝升級所輸入的新webmin 升級檔案，您可以從本地端安裝RPM檔案,上傳一個檔案或是從 <a href=https://webmin.com>webmin.com</a>下載最新版本，只要按照說明升級，所有您的設定和額外(third-party)的模組都會保留。
 upgrade_local=從本機檔案
 upgrade_uploaded=從上傳的檔案
 upgrade_url=從ftp或http 網址
-upgrade_ftp=從 www.webmin.com 的最新版本
+upgrade_ftp=從 webmin.com 的最新版本
 upgrade_cup=從Caldera的最新版本 <tt>cupdate</tt> 工具
 upgrade_delete=升級後刪除舊版本目錄?
 upgrade_ok=升級 Webmin
 upgrade_err1=無法從 $1 升級
 upgrade_err2=無法從上傳的檔案升級
-upgrade_err3=無法從 www.webmin.com 升級
+upgrade_err3=無法從 webmin.com 升級
 upgrade_eurl=錯誤或無效的網址
 upgrade_efile=檔案不存在
 upgrade_ebrowser=您的瀏覽器不支援上傳檔案
@@ -267,10 +267,10 @@ newmod_header=新模組使用權
 newmod_def=預設行為 - 同意新模組給 <tt>root</tt> 或 <tt>admin</tt>
 newmod_users=同意新模組給 :
 
-update_desc1=這個表單可以讓您升級Webmin 模組包含修補錯誤和安全漏洞從<a href=http://www.webmin.com/updates.html>Webmin升級</a>，這個會比對目前安裝的模組和需要升級的，可以選擇自動下載和安裝所有模組在排時間之外
+update_desc1=這個表單可以讓您升級Webmin 模組包含修補錯誤和安全漏洞從<a href=https://webmin.com/updates.html>Webmin升級</a>，這個會比對目前安裝的模組和需要升級的，可以選擇自動下載和安裝所有模組在排時間之外
 update_header1=現在升級模組
 update_header2=排時間來升級模組
-update_webmin=從www.webmin.com升級
+update_webmin=從webmin.com升級
 update_other=從其他地方升級
 update_show=只顯示會被升級的模組
 update_missing=安裝目前沒有安裝的模組
@@ -283,7 +283,7 @@ update_apply=儲存和套用
 update_sched2=每 $3 天在 $1:$2 升級模組
 update_none=沒有這版本的Webmin升級
 update_failed=安裝模組失敗 : $1
-update_desc2=這個表單可以讓您排時間來自動升級 Webmin 模組包含修補錯誤和安全漏洞從<a href=http://www.webmin.com/updates.html>Webmin升級</a>頁面或其他地方，這像服務是很有用的，您應該注意使用，這也有可能當升級伺服器被入侵後使攻擊者有機會取得您的系統權限
+update_desc2=這個表單可以讓您排時間來自動升級 Webmin 模組包含修補錯誤和安全漏洞從<a href=https://webmin.com/updates.html>Webmin升級</a>頁面或其他地方，這像服務是很有用的，您應該注意使用，這也有可能當升級伺服器被入侵後使攻擊者有機會取得您的系統權限
 
 ca_title=憑證授權
 ca_old=現有的憑證

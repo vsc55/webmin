@@ -34,7 +34,7 @@ index_installon=Инсталиране на
 index_upgradeon=Сървъри за надграждане
 index_update=Актуализиране на модули
 index_updateon=Сървъри за актуализация
-index_updatedesc=Този формуляр ви позволява да надстроите Usermin модули, за които е установено, че съдържат грешки или дупки за сигурност от страницата <a href=http://www.webmin.com/updates.html>Usermin Updates</a> или от друг източник.
+index_updatedesc=Този формуляр ви позволява да надстроите Usermin модули, за които е установено, че съдържат грешки или дупки за сигурност от страницата <a href=https://webmin.com/updates.html>Usermin Updates</a> или от друг източник.
 index_thost=Име на хост
 index_tdesc=описание
 index_tver=версия

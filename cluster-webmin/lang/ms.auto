@@ -34,7 +34,7 @@ index_installon=Pasang pada
 index_upgradeon=Pelayan untuk menaik taraf
 index_update=Kemas kini Modul
 index_updateon=Pelayan untuk mengemaskini
-index_updatedesc=Borang ini membolehkan anda menaik taraf modul Webmin yang didapati mengandungi pepijat atau lubang keselamatan dari halaman <a href=http://www.webmin.com/updates.html>Webmin Updates</a> atau dari sumber lain.
+index_updatedesc=Borang ini membolehkan anda menaik taraf modul Webmin yang didapati mengandungi pepijat atau lubang keselamatan dari halaman <a href=https://webmin.com/updates.html>Webmin Updates</a> atau dari sumber lain.
 index_thost=Nama hos
 index_tdesc=Penerangan
 index_tver=Versi

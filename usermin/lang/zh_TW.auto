@@ -117,7 +117,7 @@ ui_show_tver=主題版本
 ui_show_time=系統運作時間
 
 upgrade_title2=安裝Usermin
-upgrade_descdeb=通過此表，您可以通過升級其Debian軟件包將整個Usermin安裝升級到新版本。您可以從本地.deb文件，上載的文件或最新版本的<a href=http://www.usermin.com/>www.usermin.com</a>安裝。與手動升級一樣，所有配置設置和第三方模塊都將保留。
+upgrade_descdeb=通過此表，您可以通過升級其Debian軟件包將整個Usermin安裝升級到新版本。您可以從本地.deb文件，上載的文件或最新版本的<a href=https://usermin.com>usermin.com</a>安裝。與手動升級一樣，所有配置設置和第三方模塊都將保留。
 upgrade_url=從ftp或http URL
 upgrade_err5=無法從URL $1升級
 upgrade_eurl=網址缺失或無效
@@ -125,10 +125,10 @@ upgrade_setup2=使用命令 $1..安裝Usermin
 upgrade_updates=此新版本的Usermin有 $1更新。 <a href='$2'>單擊此處</a>立即自動下載並安裝它們。
 upgrade_eupdates=無法下載更新列表： $1
 
-update_desc1=通過此表單，您可以從<a href=http://www.usermin.com/uupdates.html>Usermin Updates</a>頁面或其他來源升級已發現包含錯誤或安全漏洞的Usermin模塊。這會將當前安裝的模塊與可更新的模塊進行比較，並有選擇地自動下載和安裝所有過時的模塊。
+update_desc1=通過此表單，您可以從<a href=https://usermin.com/uupdates.html>Usermin Updates</a>頁面或其他來源升級已發現包含錯誤或安全漏洞的Usermin模塊。這會將當前安裝的模塊與可更新的模塊進行比較，並有選擇地自動下載和安裝所有過時的模塊。
 update_header1=立即更新模塊
 update_header2=按計劃更新模塊
-update_webmin=從www.usermin.com更新
+update_webmin=從usermin.com更新
 update_other=從其他來源更新
 update_show=只顯示要更新的模塊
 update_missing=安裝當前未安裝的模塊
@@ -140,7 +140,7 @@ update_apply=保存併申請
 update_sched=每 $2天在 $1：00更新一次模塊
 update_none=此版本沒有Usermin更新。
 update_failed=無法安裝模塊： $1
-update_desc2=該表格用於安排<a href=http://www.usermin.com/uupdates.html>Usermin Updates</a>頁面或其他來源中包含錯誤或安全漏洞的Usermin模塊的自動更新。儘管此服務很有用，但您應謹慎使用它，因為如果更新服務器遭到破壞，它可能會讓攻擊者接管您的系統。
+update_desc2=該表格用於安排<a href=https://usermin.com/uupdates.html>Usermin Updates</a>頁面或其他來源中包含錯誤或安全漏洞的Usermin模塊的自動更新。儘管此服務很有用，但您應謹慎使用它，因為如果更新服務器遭到破壞，它可能會讓攻擊者接管您的系統。
 
 categories_code=ID
 categories_name=顯示的描述

@@ -231,17 +231,17 @@ ui_tabs=¿Categorizar los módulos en la página principal?
 
 upgrade_title=Mejorar Usermin
 upgrade_title2=Instalar Usermin
-upgrade_desc=Este formulario te permite mejorar tu completa instalación de Usermin a una nueva versión. Puedes instalar desde un archivo local, un archivo cargado o desde la última versión en <a href=http://www.usermin.com/>www.usermin.com</a>. Al igual que con una mejora manual, todos los valores de configuración y los módulos de terceros serán mantenidos.
-upgrade_descrpm=Este formulario te permite mejorar tu completa instalación de Usermin a una nueva versión mediante la opción de mejora de RPM. Puedes instalar desde un archivo local RPM, un archivo cargado o desde la última versión en <a href=http://www.usermin.com/>www.usermin.com</a>. Al igual que con una mejora manual, todos los valores de configuración y los módulos de terceros serán mantenidos.
+upgrade_desc=Este formulario te permite mejorar tu completa instalación de Usermin a una nueva versión. Puedes instalar desde un archivo local, un archivo cargado o desde la última versión en <a href=https://usermin.com>usermin.com</a>. Al igual que con una mejora manual, todos los valores de configuración y los módulos de terceros serán mantenidos.
+upgrade_descrpm=Este formulario te permite mejorar tu completa instalación de Usermin a una nueva versión mediante la opción de mejora de RPM. Puedes instalar desde un archivo local RPM, un archivo cargado o desde la última versión en <a href=https://usermin.com>usermin.com</a>. Al igual que con una mejora manual, todos los valores de configuración y los módulos de terceros serán mantenidos.
 upgrade_local=Desde archivo local
 upgrade_uploaded=Desde archivo cargado
 upgrade_url=Desde URL de ftp o http
-upgrade_ftp=Última versión desde www.usermin.com
+upgrade_ftp=Última versión desde usermin.com
 upgrade_delete=¿Borro directorio de versión vieja tras mejora?
 upgrade_ok=Mejorar Usermin
 upgrade_err1=No pude mejorar desde $1
 upgrade_err2=No pude mejorar desde archivo cargado
-upgrade_err3=No pude mejorar desde www.usermin.com
+upgrade_err3=No pude mejorar desde usermin.com
 upgrade_err5=Fallo al actualizar desde URL $1
 upgrade_eurl=URL no válida o no introducida
 upgrade_efile=El archivo no existe
@@ -262,10 +262,10 @@ upgrade_failed=... ¡falló la mejora!
 upgrade_updates=Hay $1 actualizaciones para esta nueva versión de Usermin. <a href='$2'>Pulse aquí</a> para descargarlas e instalarlas automáticamente.
 upgrade_eupdates=Fallo al descargar lista de actualizaciones : $1
 
-update_desc1=Este formulario le permite actualizar los módulos de Usermin que contienen errores o agujeros de seguridad desde la página de <a href=http://www.usermin.com/uupdates.html>Actualizaciones de Usermin</a> o desde otra fuente. Se compararán los módulos instalados con los disponibles para actualización, y opcionalmente se descargarán e instalarán automáticamente aquellos que no estén actualizados.
+update_desc1=Este formulario le permite actualizar los módulos de Usermin que contienen errores o agujeros de seguridad desde la página de <a href=https://usermin.com/uupdates.html>Actualizaciones de Usermin</a> o desde otra fuente. Se compararán los módulos instalados con los disponibles para actualización, y opcionalmente se descargarán e instalarán automáticamente aquellos que no estén actualizados.
 update_header1=Actualizar módulos ahora
 update_header2=Actualizar módulos de forma planificada
-update_webmin=Actualizar desde www.usermin.com
+update_webmin=Actualizar desde usermin.com
 update_other=Actualizar desde otra fuente
 update_show=Sólo mostrar qué módulos sería actualizados
 update_missing=Instalar módulos que aún no están instalados
@@ -277,7 +277,7 @@ update_apply=Salvar y aplicar
 update_sched=Actualizar módulos a las $1:00 cada $2 días
 update_none=No hay actualizaciones de Usermin para esta versión.
 update_failed=Fallo al instalar módulo : $1
-update_desc2=Este formulario es para planificar la actualización automática de los módulos de Usermin que contienen errores o agujeros de seguridad desde la página de <a href=http://www.usermin.com/uupdates.html>Actualizaciones de Usermin</a> o desde otra fuente. Aunque este servicio es útil, debería tener cuidado al utilizarlo, dado que podría permitir a algún atacante tomar el control de su sistema si el servidor de actualización ha sido comprometido.
+update_desc2=Este formulario es para planificar la actualización automática de los módulos de Usermin que contienen errores o agujeros de seguridad desde la página de <a href=https://usermin.com/uupdates.html>Actualizaciones de Usermin</a> o desde otra fuente. Aunque este servicio es útil, debería tener cuidado al utilizarlo, dado que podría permitir a algún atacante tomar el control de su sistema si el servidor de actualización ha sido comprometido.
 
 assignment_title=Reasignar Módulos
 assignment_header=Asignaciones de categoría de módulo

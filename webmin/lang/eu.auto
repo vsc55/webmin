@@ -478,16 +478,16 @@ startpage_webminup=Erakutsi Webmin eguneratzeak sistemaren informazioa orrian?
 startpage_moduleup=Erakutsi moduluaren eguneratzeak sistemaren informazioa orrian?
 
 upgrade_title=Berritu Webmin
-upgrade_desc=Inprimaki honek zure Webmin instalazio osoa bertsio berrira eguneratzeko aukera ematen du. Tokiko fitxategietatik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=http://www.webmin.com/>www.webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
-upgrade_descrpm=Inprimaki honek zure webmin instalazio osoa bertsio berrira eguneratzeko aukera ematen dizu RPM bertsio berritzeko aukera erabiliz. Tokiko RPM fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=http://www.webmin.com/>www.webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
-upgrade_descdeb=Inprimaki honek zure Webmin instalazio osoa bertsio berrira berritzeko aukera ematen du Debian paketea berrituz. Tokiko.deb fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=http://www.webmin.com/>www.webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
-upgrade_descsolaris-pkg=Inprimaki honek zure Webminen instalazio osoa bertsio berrira eguneratzeko aukera ematen du egungo Solaris paketea kenduz eta berri bat instalatuz. Solaris pakete lokalen fitxategia, kargatutako fitxategia edo azken bertsio hauetatik instala dezakezu <a href=http://www.webmin.com/>www.webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
+upgrade_desc=Inprimaki honek zure Webmin instalazio osoa bertsio berrira eguneratzeko aukera ematen du. Tokiko fitxategietatik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=https://webmin.com>webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
+upgrade_descrpm=Inprimaki honek zure webmin instalazio osoa bertsio berrira eguneratzeko aukera ematen dizu RPM bertsio berritzeko aukera erabiliz. Tokiko RPM fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=https://webmin.com>webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
+upgrade_descdeb=Inprimaki honek zure Webmin instalazio osoa bertsio berrira berritzeko aukera ematen du Debian paketea berrituz. Tokiko.deb fitxategitik, kargatutako fitxategitik edo azken bertsiotik instala dezakezu <a href=https://webmin.com>webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
+upgrade_descsolaris-pkg=Inprimaki honek zure Webminen instalazio osoa bertsio berrira eguneratzeko aukera ematen du egungo Solaris paketea kenduz eta berri bat instalatuz. Solaris pakete lokalen fitxategia, kargatutako fitxategia edo azken bertsio hauetatik instala dezakezu <a href=https://webmin.com>webmin.com</a>. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
 upgrade_descsun-pkg=Inprimaki honek Sunmin-ek emandako Solaris paketearen bertsio berrira bertsio berrira eguneratzeko aukera ematen du. Solaris pakete lokaletik edo kargatutako fitxategietatik instala dezakezu. Azken paketeak <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a> aurki daitezke. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
 upgrade_descgentoo=Inprimaki honek zure Webmin instalazio osoa bertsio berrira berritzea ahalbidetzen du Gentoo Emerge paketea kenduz eta berri bat instalatuz. Gentoo pakete lokaletik, kargatutako fitxategitik edo azken bertsioan instalatu dezakezu Emerge biltegian. Eskuzko berritzearekin gertatzen den bezala, zure konfigurazioko ezarpen guztiak eta hirugarrenen moduluak mantenduko dira.
 upgrade_local=Tokiko fitxategitik
 upgrade_uploaded=Kargatutako fitxategitik
 upgrade_url=FTP edo HTTP URL batetik
-upgrade_ftp=Azken bertsioa www.webmin.com-en
+upgrade_ftp=Azken bertsioa webmin.com-en
 upgrade_cup=Caldera-ren <tt>cupdate</tt> tresnaren azken bertsioa
 upgrade_emerge=Emerge biltegitik azken bertsioa
 upgrade_delete=Bertsioaren direktorio zaharra ezabatu nahi duzu?
@@ -495,7 +495,7 @@ upgrade_repo=$1 biltegiko azken bertsioa
 upgrade_ok=Berritu Webmin
 upgrade_err1=Huts egin du $1 tik eguneratzeak
 upgrade_err2=Ezin izan da kargatutako fitxategitik eguneratu
-upgrade_err3=Ezin izan da eguneratu www.webmin.com webgunetik
+upgrade_err3=Ezin izan da eguneratu webmin.com webgunetik
 upgrade_err4=Ezin izan da eguneratu Emerge biltegitik
 upgrade_err5=Huts egin du URL $1 tik eguneratzeak
 upgrade_eurl=URL falta edo baliogabea
@@ -524,7 +524,7 @@ upgrade_ewpackage=Ez da baliozko Solaris pakete bat Webmin-erako
 upgrade_egentoo=Ez da baliozko Gentmin-en Webmin pakete bat
 upgrade_eupdates=Ezin izan da eguneratzeen zerrenda deskargatu : $1
 upgrade_echecksig=RPM sinadura egiaztapena huts egin da : $1
-upgrade_nosig=Ez da paketearen sinadura egiaztapenik egin. Tar.gz paketeak egiaztatzea www.webmin.com-tik bertsio berritzean soilik posible da.
+upgrade_nosig=Ez da paketearen sinadura egiaztapenik egin. Tar.gz paketeak egiaztatzea webmin.com-tik bertsio berritzean soilik posible da.
 upgrade_sig=Egiaztatu GnuPG sinadura paketean?
 upgrade_force=Eguneratu bertsio berria berdina edo zaharragoa bada ere?
 upgrade_disc=Deskonektatu beste erabiltzaile guztiak?
@@ -548,10 +548,10 @@ newmod_header=Modulu berrien diru-laguntzak
 newmod_def=Portaera lehenetsia - eman modulu berriak <tt>root</tt> edo <tt>admin</tt>
 newmod_users=Eman modulu berriak :
 
-update_desc1=Inprimaki honi esker, <a href=http://www.webmin.com/updates.html>Webmin Eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak aurkitu dituzten Webmin moduluak eguneratu daitezke. Honek gaur egun instalatutako moduluak eguneratzeko erabilgarri daudenekin alderatuko ditu eta, aukeran, automatikoki deskargatu eta zaharkituta dauden moduluak instalatuko ditu.
+update_desc1=Inprimaki honi esker, <a href=https://webmin.com/updates.html>Webmin Eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak aurkitu dituzten Webmin moduluak eguneratu daitezke. Honek gaur egun instalatutako moduluak eguneratzeko erabilgarri daudenekin alderatuko ditu eta, aukeran, automatikoki deskargatu eta zaharkituta dauden moduluak instalatuko ditu.
 update_header1=Eguneratu moduluak orain
 update_header2=Eguneratu moduluak ordutegian
-update_webmin=Eguneratu www.webmin.com webgunetik
+update_webmin=Eguneratu webmin.com webgunetik
 update_other=Eguneratu beste iturri batzuetatik ..
 update_show=Erakutsi zein modulu eguneratuko liratekeen soilik
 update_missing=Instalatu ez dauden moduluak instalatu
@@ -567,7 +567,7 @@ update_apply=Gorde eta aplikatu
 update_sched2=Eguneratu moduluak $1:$2 behin $3 egunetan
 update_none=Ez dago Webmin bertsiorik bertsio honetarako.
 update_failed=Ezin izan da modulua instalatu : $1
-update_desc2=Inprimaki hau <a href=http://www.webmin.com/updates.html>Webmin Eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak dituzten Webmin moduluen eguneratze automatikoa programatzeko da. Zerbitzua erabilgarria den bitartean, kontuz ibili beharko zenuke erasotzaileei zure sistema har dezaten eguneratze zerbitzaria arriskuan jarriko balitz.
+update_desc2=Inprimaki hau <a href=https://webmin.com/updates.html>Webmin Eguneratzeak</a> orrialdetik akatsak edo segurtasun zuloak dituzten Webmin moduluen eguneratze automatikoa programatzeko da. Zerbitzua erabilgarria den bitartean, kontuz ibili beharko zenuke erasotzaileei zure sistema har dezaten eguneratze zerbitzaria arriskuan jarriko balitz.
 update_enosig=Ezin izan da eguneratzeetarako sinadura fitxategia deskargatu : $1
 update_ebadsig=Eguneratzeen sinadura egiaztapena huts egin da : $1
 update_enomodsig=Ezin izan da moduluko sinadura fitxategia deskargatu : $1

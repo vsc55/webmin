@@ -34,7 +34,7 @@ index_installon=Installa su
 index_upgradeon=Server da aggiornare
 index_update=Moduli di aggiornamento
 index_updateon=Server da aggiornare
-index_updatedesc=Questo modulo consente di aggiornare i moduli Webmin che sono stati trovati contenere bug o falle di sicurezza dalla pagina <a href=http://www.webmin.com/updates.html>Aggiornamenti Webmin</a> o da un'altra fonte.
+index_updatedesc=Questo modulo consente di aggiornare i moduli Webmin che sono stati trovati contenere bug o falle di sicurezza dalla pagina <a href=https://webmin.com/updates.html>Aggiornamenti Webmin</a> o da un'altra fonte.
 index_thost=Nome host
 index_tdesc=Descrizione
 index_tver=Versione

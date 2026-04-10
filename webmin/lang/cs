@@ -364,23 +364,23 @@ startpage_gotonone=&lt;Žádný&gt;
 startpage_gotomodule=Po přihlášení vždy přejít na modul
 
 upgrade_title=Povýšení Webminu
-upgrade_desc=Tento formulář umožňuje povýšení výchozí instalace Webminu na novou verzi. Můžete instalovat z lokálního souboru, nebo stáhnout soubor s nejnovější verzí z <a href=http://www.webmin.com/>www.webmin.com</a> Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
-upgrade_descrpm=Tento formulář umožňuje povýšení výchozí instalace Webminu na novou verzi při použití povýšení pomocí RPM. Můžete instalovat z lokálního souboru RPM, nebo stáhnout soubor s nejnovější verzí z <a href=http://www.webmin.com/>www.webmin.com</a>. Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
-upgrade_descdeb=Tento formulář umožňuje aktualizovat váš Webmin na novou verzi za pomoci balíčků pro Debian. Můžete taktéž instalovat pomocí lokálních .deb souborů, anebo provést aktualizací na poslední verzi z <a href=http://www.usermin.com/>www.webmin.com</a>. I v případě ruční aktualizace by měli být zachovány konfigurace a využívání modulů třetích stran.
-upgrade_descsolaris-pkg=Tento formulář umožňuje povýšení výchozí instalace Webminu na novou verzi odstraněním stávajícího solaris balíčku a instalací nového. Můžete instalovat z lokálního balíčku solaris, nebo stáhnout soubor s nejnovější verzí z <a href=http://www.webmin.com/>www.webmin.com</a>. Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
+upgrade_desc=Tento formulář umožňuje povýšení výchozí instalace Webminu na novou verzi. Můžete instalovat z lokálního souboru, nebo stáhnout soubor s nejnovější verzí z <a href=https://webmin.com>webmin.com</a> Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
+upgrade_descrpm=Tento formulář umožňuje povýšení výchozí instalace Webminu na novou verzi při použití povýšení pomocí RPM. Můžete instalovat z lokálního souboru RPM, nebo stáhnout soubor s nejnovější verzí z <a href=https://webmin.com>webmin.com</a>. Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
+upgrade_descdeb=Tento formulář umožňuje aktualizovat váš Webmin na novou verzi za pomoci balíčků pro Debian. Můžete taktéž instalovat pomocí lokálních .deb souborů, anebo provést aktualizací na poslední verzi z <a href=https://usermin.com/>webmin.com</a>. I v případě ruční aktualizace by měli být zachovány konfigurace a využívání modulů třetích stran.
+upgrade_descsolaris-pkg=Tento formulář umožňuje povýšení výchozí instalace Webminu na novou verzi odstraněním stávajícího solaris balíčku a instalací nového. Můžete instalovat z lokálního balíčku solaris, nebo stáhnout soubor s nejnovější verzí z <a href=https://webmin.com>webmin.com</a>. Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
 upgrade_descsun-pkg=Tento formulář umožňuje aktualizovat váš Webmin na novou verzi za pomoci balíčků pro Solaris. Můžete taktéž instalovat pomocí lokálních solaris souborů, anebo provést aktualizací na poslední verzi z <a href=http://www.sun.com/bigadmin/content/webmin/>http://www.sun.com/bigadmin/content/webmin/</a>. I v případě ruční aktualizace by měli být zachovány konfigurace a využívání modulů třetích stran.
 upgrade_descgentoo=Tento formulář umožňuje povýšení výchozí instalace Webminu na novou verzi odstraněním stávajícího Gentoo Emerge balíčku a instalací nového. Můžete instalovat z lokálního balíčku Gentoo package, nebo stáhnout soubor s nejnovější verzí ma the Emerge repository. Při ručním povýšení budou všechna konfigurační nastavení a third-party moduly zachována.
 upgrade_local=Z lokálního souboru
 upgrade_uploaded=Ze stahovaného souboru
 upgrade_url=Z ftp nebo http URL
-upgrade_ftp=Poslední verze z www.webmin.com
+upgrade_ftp=Poslední verze z webmin.com
 upgrade_cup=Poslední verze ze služby Caldera's <tt>cupdate</tt>
 upgrade_emerge=Poslední verze od Emerge repository
 upgrade_delete=Smazat adresář se starou verzí po povýšení?
 upgrade_ok=Aktualizace Webminu
 upgrade_err1=Chyba při povýšení z $1
 upgrade_err2=Chyba při povýšení ze stahovaného souboru
-upgrade_err3=Chyba povýšení z www.webmin.com
+upgrade_err3=Chyba povýšení z webmin.com
 upgrade_err4=Chyba při povýšení z Emerge repository
 upgrade_err5=Chyba při povýšení z URL $1
 upgrade_eurl=Chybějící nabo nesprávné URL
@@ -404,7 +404,7 @@ upgrade_ewpackage=Nejedná se o správný Solaris balíček Webminu
 upgrade_egentoo=Nejedná se o platný Gentoo balíček Webminu
 upgrade_eupdates=Chyba při stahování seznamu aktualizací : $1
 upgrade_echecksig=Chyba v ověřovací signatuře RPM : $1
-upgrade_nosig=Nebyla vytvořena žádná ověřovací signatura balíčku - kontrola balíčku tar.gz je možná pouze při povýšení z www.webmin.com.
+upgrade_nosig=Nebyla vytvořena žádná ověřovací signatura balíčku - kontrola balíčku tar.gz je možná pouze při povýšení z webmin.com.
 upgrade_sig=Kontrolovat v balíčku GnuPG signaturu?
 upgrade_force=Aktualizovat i tehdy, pokud je nová verze stejná neb starší?
 upgrade_disc=Odpojit všechny ostatní uživatele?
@@ -426,10 +426,10 @@ newmod_header=Práva pro nové moduly
 newmod_def=Výchozí režim - povolit nové moduly pod uživatelem <tt>root</tt> nebo <tt>admin</tt>
 newmod_users=Nastavit práva pro nové moduly na :
 
-update_desc1=Tento formulář umožňuje aktualizovat moduly Webminu, které obsahují bugy nebo bezpečnostní díry ze stránky <a href=http://www.webmin.com/updates.html>Webmin Updates</a> či z jiného zdroje. Tento postup porovná stávající moduly s těmi, které jsou přístupné k aktualizaci, a popřípadě automaticky stáhnou a nainstalují ty moduly, které jsou zastaralé.
+update_desc1=Tento formulář umožňuje aktualizovat moduly Webminu, které obsahují bugy nebo bezpečnostní díry ze stránky <a href=https://webmin.com/updates.html>Webmin Updates</a> či z jiného zdroje. Tento postup porovná stávající moduly s těmi, které jsou přístupné k aktualizaci, a popřípadě automaticky stáhnou a nainstalují ty moduly, které jsou zastaralé.
 update_header1=Aktualizovat moduly ihned
 update_header2=Aktualizovat moduly s využitím plánovače
-update_webmin=Aktualizovat data z www.webmin.com
+update_webmin=Aktualizovat data z webmin.com
 update_other=Aktualizovat z jiného zdroje
 update_show=Zobrazit pouze ty moduly, které lze aktualizovat
 update_missing=Instalovat ty moduly, které nejsou správně nainstalovány
@@ -444,7 +444,7 @@ update_apply=Uložit a použít
 update_sched2=Aktualizovat moduly v $1:$2 každé(ých) $3 dny(ů)
 update_none=Nejsou pro tuto verzi Webminu žádné aktualizace.
 update_failed=Chyba při instalaci modulu : $1
-update_desc2=Tento formulář umožňuje naplánovat automatické aktualizace modulů Webminu, jež obsahují bugy a bezpečnostní díry ze stránek <a href=http://www.webmin.com/updates.html>Webmin Updates</a> nebo jiného zdroje. Pokud chcete tuto službu používat, buďte opatrní, protože ji mohou využít útočníci, jestliže je update server napaden.
+update_desc2=Tento formulář umožňuje naplánovat automatické aktualizace modulů Webminu, jež obsahují bugy a bezpečnostní díry ze stránek <a href=https://webmin.com/updates.html>Webmin Updates</a> nebo jiného zdroje. Pokud chcete tuto službu používat, buďte opatrní, protože ji mohou využít útočníci, jestliže je update server napaden.
 
 ca_title=Certifikační autorita
 ca_old=Existující certifikace
