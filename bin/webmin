@@ -5,16 +5,46 @@
 use strict;
 use warnings;
 BEGIN { $Pod::Usage::Formatter = 'Pod::Text::Color'; }
-use 5.010;
 use Getopt::Long qw(:config no_ignore_case permute pass_through);
-use Term::ANSIColor qw(:constants);
+use Term::ANSIColor qw(color);
 use Pod::Usage;
+
+my %ansi_specs = (
+	reset         => [ 'reset' ],
+	red           => [ 'red' ],
+	green         => [ 'green' ],
+	yellow        => [ 'yellow' ],
+	cyan          => [ 'cyan' ],
+	dark          => [ 'dark', 'faint' ],
+	bright_red    => [ 'bright_red', 'bold red', 'red' ],
+	bright_green  => [ 'bright_green', 'bold green', 'green' ],
+	bright_yellow => [ 'bright_yellow', 'bold yellow', 'yellow' ],
+);
+my %ansi_cache;
+
+sub ansi
+{
+my ($name) = @_;
+return $ansi_cache{$name} if (exists $ansi_cache{$name});
+foreach my $spec (@{ $ansi_specs{$name} || [] }) {
+	my $value = eval { color($spec) };
+	return $ansi_cache{$name} = $value if (defined($value));
+	}
+return $ansi_cache{$name} = "";
+}
+
+sub print_line
+{
+print @_;
+print "\n";
+}
 
 # Check if root
 if ($> != 0) {
-	die BRIGHT_RED,
-		"Error: ", RESET, BRIGHT_YELLOW,"webmin", RESET, 
-		" command must be run as root\n";
+	die join("",
+		ansi('bright_red'), "Error: ", ansi('reset'),
+		ansi('bright_yellow'), "webmin", ansi('reset'),
+		" command must be run as root\n");
 	exit 1;
 	}
 
@@ -35,7 +65,7 @@ GetOptions(
 		# Handle unrecognized options, inc. subcommands.
 		my($arg) = @_;
 		if ($arg =~ m{^-}) {
-			say "Usage error: Unknown option $arg.";
+			print_line("Usage error: Unknown option $arg.");
 			pod2usage(0);
 			}
 		else {
@@ -93,10 +123,13 @@ elsif ($opt{'version'} || $opt{'versions'}) {
 						"get_module_edition"));
 				$mod_ver .= " $ed" if ($ed);
 				}
-			say CYAN, "  $module_type: ", RESET if (!$head++);
-			say "    $m->{'desc'}: ", GREEN, $mod_ver, RESET,
-						  DARK " [$m->{'dir'}]", RESET;
-		}
+			print_line(ansi('cyan'), "  $module_type: ",
+				   ansi('reset')) if (!$head++);
+			print_line("    $m->{'desc'}: ", ansi('green'),
+				   $mod_ver, ansi('reset'),
+				   ansi('dark'), " [$m->{'dir'}]",
+				   ansi('reset'));
+			}
 	};
 
 	my $root = root($opt{'config'});
@@ -124,18 +157,22 @@ elsif ($opt{'version'} || $opt{'versions'}) {
 		$ver = trim($ver);
 		if ($ver) {
 			if ($opt{'version'}) {
-				say "$ver$verrel";
+				print_line("$ver$verrel");
 				exit 0;
 				}
 			else {
-				say CYAN, "Webmin: ", RESET, GREEN,
-					"$ver$verrel", RESET,
-					DARK " [$root]", RESET;
+				print_line(ansi('cyan'), "Webmin: ",
+					   ansi('reset'),
+					   ansi('green'),
+					   "$ver$verrel", ansi('reset'),
+					   ansi('dark'), " [$root]",
+					   ansi('reset'));
 				}
 			}
 		else {
-			say RED, "Error: ", RESET,
-					"Cannot determine Webmin version";
+			print_line(ansi('red'), "Error: ",
+				   ansi('reset'),
+				   "Cannot determine Webmin version");
 			exit 1;
 			}
 		
@@ -182,7 +219,14 @@ elsif ($opt{'version'} || $opt{'versions'}) {
 					$uverrel = ":@{[trim($uverrel)]}" if ($uverrel);
 					$uver = trim($uver) . $uverrel;
 					if ($uver) {
-						say CYAN, "Usermin: ", RESET, GREEN, $uver, RESET, DARK " [$uroot]", RESET;
+						print_line(ansi('cyan'),
+							   "Usermin: ",
+							   ansi('reset'),
+							   ansi('green'),
+							   $uver, ansi('reset'),
+							   ansi('dark'),
+							   " [$uroot]",
+							   ansi('reset'));
 						my ($udir, @uthemes, @umods);
 						if (opendir($udir, "$uroot")) {
 							while (my $file = readdir($udir)) {
@@ -234,7 +278,9 @@ my $root = root($optref->{'config'});
 
 my (@commands) = list_commands($optref);
 if (! grep( /^$subcmd$/, @commands ) ) {
-	say RED, "Error: ", RESET, "Command \`$subcmd\` doesn't exist", RESET;
+	print_line(ansi('red'), "Error: ", ansi('reset'),
+		   "Command \`$subcmd\` doesn't exist",
+		   ansi('reset'));
 	exit 1;
 	}
 
@@ -246,7 +292,8 @@ my @allopts = ("--config", "$optref->{'config'}", @$remainref);
 system($command_path, @allopts);
 # Try to exit with the passed through exit code (rarely used, but why not?)
 if ($? == -1) {
-	say RED, "Error: ", RESET, "Failed to execute \`$command_path\`: $!";
+	print_line(ansi('red'), "Error: ", ansi('reset'),
+		   "Failed to execute \`$command_path\`: $!");
 	exit 1;
 	}
 else {
@@ -306,7 +353,9 @@ elsif ($command) {
 	return $command;
 	}
 else {
-	die RED, "Unrecognized subcommand: $subcmd", RESET , "\n";
+	die join("", ansi('red'),
+		 "Unrecognized subcommand: $subcmd",
+		 ansi('reset'), "\n");
 	}
 }
 
@@ -325,7 +374,7 @@ for my $command (glob ("$root/bin/*")) {
 		}
 	if ($optref->{'describe'}) {
 		# Display name and description
-		say YELLOW, "$bin", RESET;
+		print_line(ansi('yellow'), "$bin", ansi('reset'));
 		pod2usage( -verbose => 99,
 				-sections => [ qw(DESCRIPTION) ],
 				-input => $command,
@@ -337,7 +386,7 @@ for my $command (glob ("$root/bin/*")) {
 			}
 		else {
 			# Just list the names
-			say "$bin";
+			print_line("$bin");
 			}
 		}
 	}
@@ -349,11 +398,12 @@ for my $command (glob ("$root/*/bin/*")) {
 	my $module = (split /\//, $path)[-2];
 	if ($optref->{'describe'}) {
 		# Display name and description
-		say YELLOW, "$module-$bin", RESET;
+		print_line(ansi('yellow'), "$module-$bin",
+			   ansi('reset'));
 		pod2usage( -verbose => 99,
-					-sections => [ qw(DESCRIPTION) ],
-					-input => $command,
-					-exitval => "NOEXIT");
+				-sections => [ qw(DESCRIPTION) ],
+				-input => $command,
+				-exitval => "NOEXIT");
 		}
 	else {
 		if (wantarray) {
@@ -361,7 +411,7 @@ for my $command (glob ("$root/*/bin/*")) {
 			}
 		else {
 			# Just list the names
-			say "$module-$bin";
+			print_line("$module-$bin");
 			}
 		}
 	}
@@ -396,7 +446,9 @@ sub root
 {
 my ($config) = @_;
 open(my $CONF, "<", "$config/miniserv.conf") ||
-	die RED, "Failed to open $config/miniserv.conf", RESET , "\n";
+	die join("", ansi('red'),
+		 "Failed to open $config/miniserv.conf",
+		 ansi('reset'), "\n");
 my $root;
 while (<$CONF>) {
 	if (/^root=(.*)/) {
