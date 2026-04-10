@@ -1,7 +1,7 @@
 ## 内容
 * [更新日志](https://github.com/webmin/webmin/blob/master/CHANGELOG.md)
 * [关于](#关于)
-* [安装](#安装)[<img src="https://github.com/webmin-devel/webmin/blob/master/media/download-23x14-stable.png?raw=true" title="稳定版">](http://webmin.com/download.html)[<img src="https://github.com/webmin-devel/webmin/blob/master/media/download-23x14-devel.png?raw=true" title="Development Versions">](http://webmin.com/devel.html)
+* [安装](#安装)[<img src="https://github.com/webmin-devel/webmin/blob/master/media/download-23x14-stable.png?raw=true" title="稳定版">](https://webmin.com/download.html)[<img src="https://github.com/webmin-devel/webmin/blob/master/media/download-23x14-devel.png?raw=true" title="Development Versions">](https://webmin.com/devel.html)
 * [文档](#文档)
 * [致谢](#致谢)
 * [许可](#许可)
@@ -26,7 +26,7 @@ Perl 5.10 或更高。
 ## 安装
 Webmin 可以两种方法安装：
 
- 1. 下载一个预编译包，可用于不同的发行版（CentOS, Fedora, SuSE, Mandriva, Debian, Ubuntu, Solaris 和 [其他发行版](https://webmin.com/support.html)）。[下载页面直达车](http://webmin.com/download.html);
+ 1. 下载一个预编译包，可用于不同的发行版（CentOS, Fedora, SuSE, Mandriva, Debian, Ubuntu, Solaris 和 [其他发行版](https://webmin.com/support.html)）。[下载页面直达车](https://webmin.com/download.html);
   <kbd>注：非常建议[在你的系统添加源](https://doxfer.webmin.com/Webmin/Installation)，这样可以自动更新</kbd>
 
  2. 下载并解压[源码](https://prdownloads.sourceforge.net/webadmin/webmin-1.996.tar.gz)然后运行[_setup.sh_](https://webmin.com/tgz.html) 脚本，无需任何选项，也就是说会直接安装到当前目录。或者使用命令行参数，例如目标目录。
