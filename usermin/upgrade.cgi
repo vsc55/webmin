@@ -45,10 +45,10 @@ elsif ($in{'source'} == 1) {
 	&close_tempfile(MOD);
 	}
 elsif ($in{'source'} == 2) {
-	# find latest version at www.webmin.com by looking at index page
+	# find latest version at webmin.com by looking at index page
 	&error_setup($text{'upgrade_err3'});
 	$file = &transname();
-	&http_download('www.webmin.com', 80, '/index6.html', $file, \$error);
+	&http_download('webmin.com', 80, '/index6.html', $file, \$error);
 	$error && &inst_error($error);
 	open(FILE, "<$file");
 	while(<FILE>) {

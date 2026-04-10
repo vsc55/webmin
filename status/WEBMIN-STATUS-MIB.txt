@@ -13,7 +13,7 @@ IMPORTS
 
 Webmin MODULE-IDENTITY
     LAST-UPDATED "200412220000Z"
-    ORGANIZATION "www.webmin.com"
+    ORGANIZATION "webmin.com"
     CONTACT-INFO    
 	 "postal:   Wes Hardaker
                     P.O. Box 382

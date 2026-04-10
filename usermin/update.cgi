@@ -114,7 +114,7 @@ print &text('update_none'),"<br>\n" if (!$count);
 
 # Check if a new version of webmin itself is available
 $file = &transname();
-&http_download('www.webmin.com', 80, '/index6.html', $file);
+&http_download('webmin.com', 80, '/index6.html', $file);
 open(FILE, "<$file");
 while(<FILE>) {
 	if (/usermin-([0-9\.]+)\.tar\.gz/) {

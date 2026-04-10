@@ -32,7 +32,7 @@ elsif ($in{'source'} == 1) {
 	close(MOD);
 	}
 elsif ($in{'source'} == 2) {
-	# find latest version at www.webmin.com by looking at index page
+	# find latest version at webmin.com by looking at index page
 	&error_setup($webmin::text{'upgrade_err3'});
 	($ok, $site_version) = &webmin::get_latest_webmin_version();
 	$ok || &inst_error($site_version);

@@ -1,6 +1,6 @@
 line1=Options configurables,11
-standard_url=URL de la liste des modules standard,3,www.webmin.com
-third_url=URL de la liste des modules non-standard,3,www.webmin.com
+standard_url=URL de la liste des modules standard,3,webmin.com
+third_url=URL de la liste des modules non-standard,3,webmin.com
 cron_mode=Afficher les heures de mise à jour comme,1,0-Interface simple,1-Sélecteur de temps Cron
 warn_days=Jours avant l'expiration du mot de passe pour avertir les utilisateurs,0,5
 line2=Let's Encrypt configuration,11

@@ -26,11 +26,11 @@ Perl 5.10 或更高。
 ## 安装
 Webmin 可以两种方法安装：
 
- 1. 下载一个预编译包，可用于不同的发行版（CentOS, Fedora, SuSE, Mandriva, Debian, Ubuntu, Solaris 和 [其他发行版](http://www.webmin.com/support.html)）。[下载页面直达车](http://webmin.com/download.html);
+ 1. 下载一个预编译包，可用于不同的发行版（CentOS, Fedora, SuSE, Mandriva, Debian, Ubuntu, Solaris 和 [其他发行版](https://webmin.com/support.html)）。[下载页面直达车](http://webmin.com/download.html);
   <kbd>注：非常建议[在你的系统添加源](https://doxfer.webmin.com/Webmin/Installation)，这样可以自动更新</kbd>
 
- 2. 下载并解压[源码](https://prdownloads.sourceforge.net/webadmin/webmin-1.996.tar.gz)然后运行[_setup.sh_](http://www.webmin.com/tgz.html) 脚本，无需任何选项，也就是说会直接安装到当前目录。或者使用命令行参数，例如目标目录。
-  <kbd>注：如果你正在安装 Webmin [到Windows](http://www.webmin.com/windows.html) 系统上，你必须运行 `perl setup.pl` 命令。Windows 版能否正常运行取决于许多程序，和可能不属于标准发行版的模块。你需要 _process.exe_ 命令， _sc.exe_ 命令，以及 _Win32::Daemon_ Perl 模块。</kbd>
+ 2. 下载并解压[源码](https://prdownloads.sourceforge.net/webadmin/webmin-1.996.tar.gz)然后运行[_setup.sh_](https://webmin.com/tgz.html) 脚本，无需任何选项，也就是说会直接安装到当前目录。或者使用命令行参数，例如目标目录。
+  <kbd>注：如果你正在安装 Webmin [到Windows](https://webmin.com/windows.html) 系统上，你必须运行 `perl setup.pl` 命令。Windows 版能否正常运行取决于许多程序，和可能不属于标准发行版的模块。你需要 _process.exe_ 命令， _sc.exe_ 命令，以及 _Win32::Daemon_ Perl 模块。</kbd>
 
 ## 文档
 完整的 Webmin 还有它所有模块的详细配置都在[维基页面](https://doxfer.webmin.com/Webmin/Main_Page).
@@ -39,7 +39,7 @@ Webmin 可以两种方法安装：
 
 ### 首席开发者
 
-* [Jamie Cameron](http://www.webmin.com/about.html) [![](https://github.com/webmin-devel/webmin/blob/master/media/linkedin-15x15.png?raw=true)](https://www.linkedin.com/in/jamiecameron2)
+* [Jamie Cameron](https://webmin.com/about.html) [![](https://github.com/webmin-devel/webmin/blob/master/media/linkedin-15x15.png?raw=true)](https://www.linkedin.com/in/jamiecameron2)
 
 ### 贡献者
 

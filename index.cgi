@@ -52,7 +52,7 @@ else {
 	"<a href=$tconfig{'brand_url'}>$tconfig{'brand'}</a>" :
 	$gconfig{'brand'} ? 
 	"<a href=$gconfig{'brand_url'}>$gconfig{'brand'}</a>" :
-	"<a href=http://www.webmin.com/>$text{'main_homepage'}</a>"
+	"<a href=https://webmin.com>$text{'main_homepage'}</a>"
 	);
 print "<center><font size=+1>",
     &text('main_version', $ver, $hostname, $ostr),"</font></center>\n"

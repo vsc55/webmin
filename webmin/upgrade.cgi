@@ -78,7 +78,7 @@ elsif ($in{'source'} == 1) {
 		}
 	}
 elsif ($in{'source'} == 2) {
-	# find latest version at www.webmin.com by looking at index page
+	# find latest version at webmin.com by looking at index page
 	&error_setup($text{'upgrade_err3'});
 	($ok, $version, $release) = &get_latest_webmin_version();
 	$ok || &inst_error($version);

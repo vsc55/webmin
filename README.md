@@ -45,7 +45,7 @@ For detailed installation instructions check our guide on [webmin.com/download](
 
 ### Lead developer
 
-* [Jamie Cameron](https://www.webmin.com/about.html) [![](https://github.com/webmin-devel/webmin/blob/master/media/linkedin-15x15.png?raw=true)](https://www.linkedin.com/in/jamiecameron2)
+* [Jamie Cameron](https://webmin.com/about.html) [![](https://github.com/webmin-devel/webmin/blob/master/media/linkedin-15x15.png?raw=true)](https://www.linkedin.com/in/jamiecameron2)
 
 ### Developers
 * [Ilia Rostovtsev](https://github.com/iliaross)

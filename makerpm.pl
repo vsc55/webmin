@@ -92,7 +92,7 @@ Recommends: perl(DateTime) perl(DateTime::TimeZone) perl(DateTime::Locale) perl(
 AutoReq: 0
 License: BSD-3-Clause
 Group: System/Tools
-Source: http://www.webmin.com/download/$tarfile
+Source: https://webmin.com/download/$tarfile
 Vendor: $rpm_maintainer
 BuildRoot: /tmp/%{name}-%{version}
 BuildArchitectures: noarch
