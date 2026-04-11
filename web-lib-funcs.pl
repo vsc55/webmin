@@ -13482,25 +13482,68 @@ return $url;
 =head2 get_webmin_browser_url([module], [cgi])
 
 Returns the URL for accessing this Webmin system, based on the current browser
-connection.
+connection. Honors X-Forwarded-Proto, X-Forwarded-Host and X-Forwarded-Port
+when Webmin is behind a reverse proxy, so the returned URL is the one the
+user's browser actually used.
 
 =cut
 sub get_webmin_browser_url
 {
 my ($mod, $cgi) = @_;
 
-# Work out the base URL`
-my $host = $ENV{'HTTP_HOST'};
+# Pick the first comma-separated value from a (possibly proxy-chained) header
+my $first = sub {
+	my ($v) = @_;
+	return undef if (!defined($v) || $v eq '');
+	$v =~ s/\r|\n//g;
+	$v = (split(/\s*,\s*/, $v))[0];
+	$v =~ s/^\s+//; $v =~ s/\s+$//;
+	return $v ne '' ? $v : undef;
+	};
+
+# Pull proto/host/port from X-Forwarded-* (set by reverse proxies), with
+# RFC 7239 Forwarded as a secondary fallback, then plain request env
+my $fwd = $ENV{'HTTP_FORWARDED'};
+my ($fwd_proto, $fwd_host);
+if ($fwd) {
+	# RFC 7239 lists outermost proxy first; only inspect the first element
+	my $first_el = (split(/\s*,\s*/, $fwd))[0];
+	if ($first_el) {
+		$fwd_proto = $1 if ($first_el =~ /(?:^|;)\s*proto="?([^";]+)"?/i);
+		$fwd_host  = $1 if ($first_el =~ /(?:^|;)\s*host="?([^";]+)"?/i);
+		}
+	}
+
+my $proto = $first->($ENV{'HTTP_X_FORWARDED_PROTO'}) || $fwd_proto ||
+	    (lc($ENV{'HTTPS'}) eq 'on' ? 'https' : 'http');
+$proto = lc($proto);
+$proto = 'https' if ($proto eq 'wss');
+$proto = 'http'  if ($proto eq 'ws');
+
+my $host = $first->($ENV{'HTTP_X_FORWARDED_HOST'}) || $fwd_host ||
+	   $ENV{'HTTP_HOST'};
 if (!$host) {
-	# Fall back to non-browser mode
+	# No request context at all - fall back to non-browser mode
 	return &get_webmin_email_url(@_);
 	}
-my $port = $ENV{'SERVER_PORT'} || 80;
+
+my $defport = $proto eq 'https' ? 443 : 80;
+my $port;
 if ($host =~ s/:(\d+)$//) {
+	# Host carried its own port
 	$port = $1;
 	}
-my $proto = lc($ENV{'HTTPS'}) eq 'on' ? "https" : "http";
-my $defport = $proto eq 'https' ? 443 : 80;
+else {
+	# Trust X-Forwarded-Port if the host didn't carry one; otherwise the
+	# request env port (which is the internal port behind a proxy and so
+	# only meaningful when there's no proxy in front)
+	$port = $first->($ENV{'HTTP_X_FORWARDED_PORT'});
+	if (!$port && !$ENV{'HTTP_X_FORWARDED_HOST'} && !$fwd_host) {
+		$port = $ENV{'SERVER_PORT'};
+		}
+	$port ||= $defport;
+	}
+
 my $url = $proto."://".$host.($port == $defport ? "" : ":".$port);
 $url .= $gconfig{'webprefix'} if ($gconfig{'webprefix'});
 
