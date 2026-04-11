@@ -7,7 +7,7 @@ require 'mod_access.pl';
 sub mod_authz_host_directives
 {
 local($rv);
-$rv = [ [ 'allow deny order', 1, 4, 'directory htaccess' ] ];
+$rv = [ [ 'allow deny order', 1, 4, 'directory htaccess', '2.0-2.4' ] ];
 return &make_directives($rv, $_[0], "mod_authz_host");
 }
 

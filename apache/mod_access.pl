@@ -4,7 +4,7 @@
 sub mod_access_directives
 {
 local($rv);
-$rv = [ [ 'allow deny order', 1, 4, 'directory htaccess' ] ];
+$rv = [ [ 'allow deny order', 1, 4, 'directory htaccess', '-2.0' ] ];
 return &make_directives($rv, $_[0], "mod_access");
 }
 

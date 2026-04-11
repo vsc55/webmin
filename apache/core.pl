@@ -73,11 +73,12 @@ $rv = [	[ 'AccessFileName', 0, 5, 'virtual', undef, 5 ],
 	[ 'Options', 0, 5, 'virtual directory htaccess', undef, 3 ],
 	[ 'PidFile', 0, 9, 'global', -2.0 ],
 	[ 'Protocols', 0, 1, 'virtual', 2.4 ],
-	[ 'require', 0, 4, 'directory htaccess', undef, 6 ],
+	[ 'require', 0, 4, 'directory htaccess', '-2.4', 6 ],
+	[ 'Require allow deny order Satisfy', 1, 4, 'directory htaccess', 2.4, 6 ],
 	[ 'RLimitCPU', 0, 0, 'virtual', 1.2 ],
 	[ 'RLimitMEM', 0, 0, 'virtual', 1.2 ],
 	[ 'RLimitNPROC', 0, 0, 'virtual', 1.2 ],
-	[ 'Satisfy', 0, 4, 'directory htaccess', 1.2, 4 ],
+	[ 'Satisfy', 0, 4, 'directory htaccess', '1.2-2.4', 4 ],
 	[ 'ScoreBoardFile', 0, 9, 'global', '1.2-2.0' ],
 	[ 'SendBufferSize', 0, 1, 'global', -2.0 ],
 	[ 'ServerAdmin', 0, 1, 'virtual' ],
@@ -956,6 +957,234 @@ sub save_AuthType
 {
 if ($in{'AuthType'}) { return ( [ $in{'AuthType'} ] ); }
 else { return ( [ ] ); }
+}
+
+# parse_access_require_rule(value)
+# Maps a Require line to a UI mode and value.
+sub parse_access_require_rule
+{
+my ($value) = @_;
+my $lv = lc($value);
+return ('granted', '') if ($lv eq 'all granted');
+return ('denied', '') if ($lv eq 'all denied');
+return ('local', '') if ($lv eq 'local');
+return ('valid-user', '') if ($lv eq 'valid-user');
+return ('file-owner', '') if ($lv eq 'file-owner');
+return ('file-group', '') if ($lv eq 'file-group');
+if ($value =~ /^(ip|host|env|user|group|method|expr)\s+(.+)$/i) {
+	return (lc($1), $2);
+	}
+return ('other', $value);
+}
+
+# legacy_access_rule_to_require(&directive)
+# Converts a single Allow rule from legacy syntax to a Require mode/value pair.
+sub legacy_access_rule_to_require
+{
+my ($dir) = @_;
+my $what = join(" ", @{$dir->{'words'}});
+$what =~ s/^from\s+//i;
+return ('granted', '') if (lc($what) eq 'all');
+return ('env', $1) if ($what =~ /^env=(\S+)$/i);
+return ($what =~ /^[0-9a-f\.\:\/]+$/i ? 'ip' : 'host', $what);
+}
+
+# legacy_access_to_require_rules(&allow, &deny, &order)
+# For the common Apache 2.4 cases, convert old Allow/Deny/Order rules to Require.
+sub legacy_access_to_require_rules
+{
+my ($allow, $deny, $order) = @_;
+my $orderv = @$order ? lc($order->[0]->{'value'}) : '';
+
+# allow from all
+if (@$allow == 1 && !@$deny && $allow->[0]->{'value'} =~ /^from\s+all$/i) {
+	return [ [ 'granted', '' ] ];
+	}
+
+# deny from all
+if (@$deny == 1 && !@$allow && $deny->[0]->{'value'} =~ /^from\s+all$/i) {
+	return [ [ 'denied', '' ] ];
+	}
+
+# deny from all, then allow some specific requests
+if ($orderv eq 'deny,allow' &&
+    @$deny == 1 &&
+    $deny->[0]->{'value'} =~ /^from\s+all$/i &&
+    @$allow) {
+	my @rv;
+	foreach my $dir (@$allow) {
+		push(@rv, [ &legacy_access_rule_to_require($dir) ]);
+		}
+	return \@rv;
+	}
+
+return [ ];
+}
+
+# access_require_conf_root()
+# Returns the outer-most config list that contains the current section.
+sub access_require_conf_root
+{
+return $vconf if (defined($vconf));
+return $hconf if (defined($hconf));
+return $conf;
+}
+
+# access_require_container_info(&requires, &satisfy)
+# Determines the current top-level Require container mode and rules.
+sub access_require_container_info
+{
+my ($requires, $satisfy) = @_;
+my @all = grep { $_->{'type'} } &find_directive_struct("RequireAll", $conf);
+my @any = grep { $_->{'type'} } &find_directive_struct("RequireAny", $conf);
+my @rules = @$requires;
+my $mode = @$satisfy ? lc($satisfy->[0]->{'value'}) : 'default';
+my $advanced = 0;
+
+if (@all || @any) {
+	$advanced = 1 if (@all + @any > 1 || @$requires || @$satisfy);
+	my $container = @all ? $all[0] : $any[0];
+	$mode = @all ? 'all' : 'any';
+	@rules = ( );
+	foreach my $m (@{$container->{'members'}}) {
+		next if ($m->{'name'} eq 'dummy');
+		if ($m->{'type'} || lc($m->{'name'}) ne 'require') {
+			$advanced = 1;
+			next;
+			}
+		push(@rules, $m);
+		}
+	}
+
+return ($mode, \@rules, $advanced);
+}
+
+sub edit_Require_allow_deny_order_Satisfy
+{
+my ($reqs, $allow, $deny, $order, $satisfy, $e) = @_;
+my (@mode, @value);
+my ($logic, $active_reqs, $advanced) =
+	&access_require_container_info($reqs, $satisfy);
+foreach my $req (@$active_reqs) {
+	my ($m, $v) = &parse_access_require_rule($req->{'value'});
+	push(@mode, $m);
+	push(@value, $v);
+	}
+
+my $has_legacy = @$allow || @$deny || @$order || @$satisfy;
+if (!@mode && $has_legacy) {
+	foreach my $r (@{&legacy_access_to_require_rules($allow, $deny, $order)}) {
+		push(@mode, $r->[0]);
+		push(@value, $r->[1]);
+		}
+	}
+
+push(@mode, "");
+push(@value, "");
+
+my $rv = "";
+if ($has_legacy) {
+	$rv .= &ui_alert($text{'core_require_legacy'}, 'warning',
+		["fa-info-circle", "", 1],
+		{ style => "margin-bottom: 5px;" });
+	}
+if ($advanced) {
+	$rv .= "<i>$text{'core_require_advanced'}</i><br>\n";
+	}
+$rv .= "$text{'core_require_logic'} ".
+	&select_input($logic, "Require_logic", "default",
+		"$text{'core_require_logic_default'},default",
+		"$text{'core_require_logic_any'},any",
+		"$text{'core_require_logic_all'},all")."<br>\n";
+$rv .= &ui_tag("div", "", { style => "height: 5px;" });
+$rv .= "<table border>\n".
+	"<tr $tb> <td><b>$text{'core_require_type'}</b></td> ".
+	"<td><b>$text{'core_require_value'}</b></td> </tr>\n";
+for(my $i=0; $i<@mode; $i++) {
+	$rv .= "<tr $cb>\n";
+	$rv .= "<td>".&select_input($mode[$i], "Require_mode_$i", "",
+		"$text{'default'},",
+		"$text{'core_require_granted'},granted",
+		"$text{'core_require_denied'},denied",
+		"$text{'core_require_local'},local",
+		"$text{'core_require_ip'},ip",
+		"$text{'core_require_host'},host",
+		"$text{'core_require_env'},env",
+		"$text{'core_require_user'},user",
+		"$text{'core_require_group'},group",
+		"$text{'core_require_validuser'},valid-user",
+		"$text{'core_require_fileowner'},file-owner",
+		"$text{'core_require_filegroup'},file-group",
+		"$text{'core_require_method'},method",
+		"$text{'core_require_expr'},expr",
+		"$text{'core_require_other'},other")."</td>\n";
+	$rv .= sprintf "<td><input name=Require_value_%d size=40 value=\"%s\"></td>\n",
+		$i, &html_escape($value[$i]);
+	$rv .= "</tr>\n";
+	}
+$rv .= "</table>\n";
+return (2, $text{'mod_access_restr'}, $rv);
+}
+
+sub save_Require_allow_deny_order_Satisfy
+{
+my (@req);
+for(my $i=0; defined($in{"Require_mode_$i"}); $i++) {
+	my $mode = $in{"Require_mode_$i"};
+	my $value = $in{"Require_value_$i"};
+	$value =~ /\r|\n|\0/ && &error($text{'enewline'});
+	$value =~ s/^\s+//;
+	$value =~ s/\s+$//;
+	next if (!$mode && $value eq '');
+	$mode || &error($text{'core_require_etype'});
+	if ($mode eq 'granted') {
+		push(@req, "all granted");
+		}
+	elsif ($mode eq 'denied') {
+		push(@req, "all denied");
+		}
+	elsif ($mode eq 'local' ||
+	       $mode eq 'valid-user' ||
+	       $mode eq 'file-owner' ||
+	       $mode eq 'file-group') {
+		push(@req, $mode);
+		}
+	elsif ($mode eq 'other') {
+		$value =~ /\S/ || &error($text{'core_require_evalue'});
+		push(@req, $value);
+		}
+	else {
+		$value =~ /\S/ || &error($text{'core_require_evalue'});
+		push(@req, "$mode $value");
+		}
+	}
+
+my $logic = $in{'Require_logic'} || 'default';
+my $root = &access_require_conf_root();
+my @all = grep { $_->{'type'} } &find_directive_struct("RequireAll", $conf);
+my @any = grep { $_->{'type'} } &find_directive_struct("RequireAny", $conf);
+my @containers = (@all, @any);
+
+if (@req && $logic ne 'default') {
+	my $new = {
+		'name' => $logic eq 'all' ? 'RequireAll' : 'RequireAny',
+		'value' => '',
+		'type' => 1,
+		'members' => [ map { {
+			'name' => 'Require',
+			'value' => $_,
+			'type' => 0,
+		} } @req ],
+	};
+	my $old = shift(@containers);
+	&save_directive_struct($old, $new, $conf, $root);
+	}
+
+foreach my $c (@containers) {
+	&save_directive_struct($c, undef, $conf, $root);
+	}
+
+return ( $logic eq 'default' ? \@req : [ ], [ ], [ ], [ ], [ ] );
 }
 
 sub edit_require

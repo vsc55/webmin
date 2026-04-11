@@ -4,7 +4,7 @@
 sub mod_auth_digest_directives
 {
 local($rv);
-$rv = [ [ 'AuthDigestAuthoritative', 0, 4, 'directory htaccess' ],
+$rv = [ [ 'AuthDigestAuthoritative', 0, 4, 'directory htaccess', '-2.4' ],
 	[ 'AuthDigestProvider', 0, 4, 'directory htaccess' ],
 	[ 'AuthDigestAlgorithm', 0, 4, 'directory htaccess' ],
       ];
@@ -38,9 +38,11 @@ return ( $p ? [ join(" ", split(/\0/, $p)) ] : [ ] );
 
 sub edit_AuthDigestAlgorithm
 {
+# MD5-sess is not correctly implemented yet!
+# https://httpd.apache.org/docs/2.4/mod/mod_auth_digest.html#authdigestalgorithm
 return (1, $text{'mod_auth_digest_al'},
        &choice_input($_[0]->{'value'}, "AuthDigestAlgorithm", "",
-       "MD5", "MD5-sess", "$text{'default'},") );
+       "MD5,MD5", "MD5-sess,MD5-sess", "$text{'default'},") );
 }
 sub save_AuthDigestAlgorithm
 {
