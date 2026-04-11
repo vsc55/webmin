@@ -62,56 +62,43 @@ if ($ENV{'PATH_INFO'}) {
 		# Work out the type
 		&open_readfile(FILE, $file) ||
 			&error(&text('fetch_eopen', $!));
+		my $type = "application/octet-stream";
+		my $show_inline = 0;
 		if ($fetch_show) {
-			$type = &guess_mime_type($file, undef);
-			if (!$type) {
-				# See if it is really text
-				$out = &backquote_command("file ".
+			# Only allow file types that are safe to render inside a
+			# Webmin session. Everything else must be downloaded.
+			my $guessed_type =
+				&guess_mime_type($file, "application/octet-stream");
+			if ($guessed_type =~ /^image\/(?:gif|png|jpe?g)$/i) {
+				$type = $guessed_type;
+				$show_inline = 1;
+				}
+			elsif ($guessed_type =~ /^text\//i &&
+			       $guessed_type !~ /^text\/(?:html|xml)$/i) {
+				$type = "text/plain";
+				$show_inline = 1;
+				}
+			else {
+				my $file_desc = &backquote_command("file ".
 					quotemeta(&resolve_links($file)));
-				$type = "text/plain" if ($out =~ /text|script/);
+				if ($file_desc =~ /\btext\b/i &&
+				    $file_desc !~ /\b(?:html|xml|svg|pdf)\b/i) {
+					$type = "text/plain";
+					$show_inline = 1;
+					}
 				}
 			}
-		else {
+		if (!$show_inline) {
 			print "Content-Disposition: Attachment\n";
 			}
 
 		# Send it
-		$type ||= "application/octet-stream";
-		if (!$fetch_show) {
-			print "Content-Disposition: Attachment\n";
-			}
-		# Stat file
 		my @st = stat($file);
-		my $fsize = $st[7];
-
-		# Get and analyze the file contents first
-		my $fdata = "";
-		my $dangertypes = $type =~ /html|xml|pdf/i;
-		my $htmltype    = $type =~ /html/i ? 1 : 0;
-		my $pdftype     = $type =~ /pdf/i ? 'pdf' : 0;
-		if ($dangertypes) {
-			$fdata = do { local $/; <FILE> };
-			my $fdata_filtered = &filter_javascript($fdata, $pdftype);
-			# If content was changed upon
-			# filtering force download it
-			if ($fdata_filtered ne $fdata) {
-				$type = "application/octet-stream";
-				print "Content-Disposition: Attachment\n";
-				}
-			}
-
-		print "Content-length: $fsize\n";
+		print "Content-length: $st[7]\n";
 		print "X-Content-Type-Options: nosniff\n";
 		print "Content-type: $type\n\n";
-		# File is already read, so print it
-		if ($dangertypes) {
-			print "$fdata";
-			}
-		else {
-			# Send the file
-			while(read(FILE, $buffer, &get_buffer_size_binary())) {
-					print("$buffer");
-					}
+		while(read(FILE, $buffer, &get_buffer_size_binary())) {
+			print("$buffer");
 			}
 		close(FILE);
 		}
