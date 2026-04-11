@@ -396,6 +396,26 @@ form [name="mode"] + .leftlink {
 .ui_alert_box > tbody > tr[bgcolor="#F2DEDE"] > td {
   border: 1px solid #da10bb57;
 }
+.alert {
+  padding: 2px 8px;
+}
+.alert.alert-success {
+  background-color: #DFF0D8;
+  border: 1px solid #7cda1099;
+}
+.alert.alert-info {
+  background-color: #D9EDF7;
+  border: 1px solid #108eda5c;
+}
+.alert.alert-warning {
+  background-color: #FCF8E3;
+  border: 1px solid #dac51099;
+}
+.alert.alert-danger,
+.alert.alert-danger-fatal {
+  background-color: #F2DEDE;
+  border: 1px solid #da10bb57;
+}
 
 .right-top-links {
   margin-bottom: 4px;
