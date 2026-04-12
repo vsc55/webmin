@@ -5823,8 +5823,8 @@ if ($config{'dav_debug'}) {
 return 0;
 }
 
-# handle_websocket_request(&wsconfig, original-path)
-# Handle a websockets connection, which may be a proxy to another host and port
+# normalise_websocket_origin(scheme, host, port)
+# Canonicalises an origin for websocket security checks
 sub normalise_websocket_origin
 {
 my ($scheme, $host, $port) = @_;
@@ -5841,6 +5841,8 @@ my $hostport = &check_ip6address($host) ? "[".$host."]".$portstr
 return $scheme."://".$hostport;
 }
 
+# parse_websocket_origin(origin)
+# Parses an Origin header value into canonical scheme://host[:port] form
 sub parse_websocket_origin
 {
 my ($origin) = @_;
@@ -5856,6 +5858,8 @@ elsif ($origin =~ /^(https?):\/\/([^:\/]+)(?::(\d+))?\/?$/i) {
 return undef;
 }
 
+# parse_configured_websocket_origin(origin)
+# Parses a configured origin, accepting ws:// and wss:// aliases
 sub parse_configured_websocket_origin
 {
 my ($origin) = @_;
@@ -5866,6 +5870,8 @@ $origin =~ s/^wss:\/\//https:\/\//i;
 return &parse_websocket_origin($origin);
 }
 
+# forwarded_websocket_origin(proto, host, port)
+# Builds a canonical origin from reverse-proxy forwarding headers
 sub forwarded_websocket_origin
 {
 my ($proto, $host, $port) = @_;
@@ -5883,6 +5889,8 @@ elsif ($host =~ /^([^:]+):(\d+)$/) {
 return &normalise_websocket_origin($proto, $host, $port);
 }
 
+# get_websocket_allowed_origins()
+# Returns all canonical origins allowed to connect to miniserv websockets
 sub get_websocket_allowed_origins
 {
 my @rv;
@@ -5941,6 +5949,8 @@ if ($config{'websocket_extra_origins'}) {
 return @rv;
 }
 
+# handle_websocket_request(&wsconfig, original-path)
+# Handles a websocket connection, which may proxy to another host and port
 sub handle_websocket_request
 {
 my ($ws, $simple) = @_;
