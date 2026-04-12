@@ -5791,6 +5791,12 @@ if (@users || @busers) {
 		return 0;
 		}
 	}
+if ($ws->{'token'} && (!defined($in{'token'}) ||
+    $in{'token'} ne $ws->{'token'})) {
+	print DEBUG "websockets token mismatch for $simple\n";
+	&http_error(403, "Invalid Websockets token");
+	return 0;
+	}
 my @protos = split(/\s*,\s*/, $header{'sec-websocket-protocol'});
 print DEBUG "websockets protos ",join(" ", @protos),"\n";
 

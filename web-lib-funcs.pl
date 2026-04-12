@@ -14163,6 +14163,25 @@ my $dir = $var_directory."/locks/".$$;
 return $dir;
 }
 
+# generate_miniserv_websocket_token()
+# Returns an unguessable token for websocket URLs proxied by miniserv
+sub generate_miniserv_websocket_token
+{
+my $token;
+if (open(RANDOM, "</dev/urandom")) {
+	my $buf;
+	if (read(RANDOM, $buf, 16) == 16) {
+		$token = lc(unpack('h*', $buf));
+		}
+	close(RANDOM);
+	}
+if (!$token) {
+	&seed_random();
+	$token = &substitute_pattern('[a-f0-9]{32}');
+	}
+return $token;
+}
+
 # allocate_miniserv_websocket([module], [base-remote-user])
 # Allocate a new websocket and stores it miniserv.conf file
 sub allocate_miniserv_websocket
@@ -14192,10 +14211,11 @@ while(1) {
     }
 my $wspath = "/$module/ws-".$port;
 my $now = time();
+my $token = &generate_miniserv_websocket_token();
 my $opt_buser = "";
 $opt_buser = " buser=$buser" if (defined($buser) && $buser eq $base_remote_user);
 $miniserv{"websockets_$wspath"} = "host=127.0.0.1 port=$port wspath=/ ".
-	  "user=$remote_user$opt_buser time=$now";
+	  "user=$remote_user$opt_buser token=$token time=$now";
 &put_miniserv_config(\%miniserv);
 &unlock_file(&get_miniserv_config_file());
 &reload_miniserv();
@@ -14212,6 +14232,12 @@ my $ws_proto = lc($ENV{'HTTPS'}) eq 'on' ? 'wss' : 'ws';
 my %miniserv;
 my $webprefix = &get_webprefix();
 &get_miniserv_config(\%miniserv);
+my $wspath = "/$module/ws-".$port;
+my $wstoken;
+if ($miniserv{'websockets_'.$wspath} &&
+    $miniserv{'websockets_'.$wspath} =~ /\btoken=(\S+)/) {
+	$wstoken = $1;
+	}
 my $http_host_conf = &trim($miniserv{'websocket_host'} || $host);
 # Pass as defined
 if ($http_host_conf) {
@@ -14230,7 +14256,9 @@ if (!defined($http_host_conf)) {
 	}
 my $http_host = $http_host_conf || "$ws_proto://$ENV{'HTTP_HOST'}";
 $http_host .= $webprefix if ($webprefix);
-return "$http_host/$module/ws-$port";
+my $url = "$http_host$wspath";
+$url .= "?token=".&urlize($wstoken) if ($wstoken);
+return $url;
 }
 
 # remove_miniserv_websocket(port, [module])
