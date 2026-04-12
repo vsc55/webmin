@@ -5818,6 +5818,16 @@ elsif ($origin =~ /^(https?):\/\/([^:\/]+)(?::(\d+))?\/?$/i) {
 return undef;
 }
 
+sub parse_configured_websocket_origin
+{
+my ($origin) = @_;
+return undef if (!defined($origin));
+$origin =~ s/^\s+|\s+$//g;
+$origin =~ s/^ws:\/\//http:\/\//i;  # if admin configures websocket URLs
+$origin =~ s/^wss:\/\//https:\/\//i;
+return &parse_websocket_origin($origin);
+}
+
 sub forwarded_websocket_origin
 {
 my ($proto, $host, $port) = @_;
@@ -5871,6 +5881,22 @@ if ($config{'websocket_host'}) {
 	else {
 		&$add_origin(&forwarded_websocket_origin($ssl ? 'https' : 'http',
 							 $wshost, undef));
+		}
+	}
+
+# Extra public origins can be whitelisted explicitly for unusual edge proxy
+# configs where auto-detection cannot work
+if ($config{'websocket_extra_origins'}) {
+	foreach my $origin (split(/\s+|,\s*/, $config{'websocket_extra_origins'})) {
+		next if (!$origin);
+		my $parsed = &parse_configured_websocket_origin($origin);
+		if ($parsed) {
+			&$add_origin($parsed);
+			}
+		else {
+			print DEBUG "ignoring invalid websocket_extra_origins ".
+				    "entry $origin\n";
+			}
 		}
 	}
 
