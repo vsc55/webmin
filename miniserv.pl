@@ -2227,12 +2227,22 @@ if (lc($header{'connection'}) =~ /upgrade/ &&
     lc($header{'upgrade'}) eq 'websocket' &&
     $baseauthuser) {
 	print DEBUG "websockets request to $simple\n";
-	my ($ws) = grep { $_->{'path'} eq $simple } @websocket_paths;
+	my $ws_simple = $simple;
+	my ($ws) = grep { $_->{'path'} eq $ws_simple } @websocket_paths;
+	if (!$ws && $config{'redirect_prefix'}) {
+		my $prefix = $config{'redirect_prefix'};
+		$prefix =~ s/[\/]+$//g;
+		if ($prefix && $ws_simple =~ s/^\Q$prefix\E(?=\/|$)//) {
+			$ws_simple ||= "/";
+			print DEBUG "websockets retry without prefix $prefix as $ws_simple\n";
+			($ws) = grep { $_->{'path'} eq $ws_simple } @websocket_paths;
+			}
+		}
 	if (!$ws) {
 		&http_error(400, "Unknown websocket path");
 		return 0;
 		}
-	return &handle_websocket_request($ws, $simple);
+	return &handle_websocket_request($ws, $ws_simple);
 	}
 
 # Work out the active theme(s)
