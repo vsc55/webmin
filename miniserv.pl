@@ -5774,6 +5774,96 @@ return 0;
 
 # handle_websocket_request(&wsconfig, original-path)
 # Handle a websockets connection, which may be a proxy to another host and port
+sub normalise_websocket_origin
+{
+my ($scheme, $host, $port) = @_;
+return undef if (!$scheme || !defined($host) || $host eq '');
+$scheme = lc($scheme);
+$host =~ s/^\s+|\s+$//g;
+$host =~ s/^\[(.+)\]$/$1/;
+$host = lc($host);
+$port ||= $scheme eq 'https' ? 443 : 80;
+my $portstr = $port == 80 && $scheme eq 'http' ? "" :
+	      $port == 443 && $scheme eq 'https' ? "" : ":".$port;
+my $hostport = &check_ip6address($host) ? "[".$host."]".$portstr
+					: $host.$portstr;
+return $scheme."://".$hostport;
+}
+
+sub parse_websocket_origin
+{
+my ($origin) = @_;
+return undef if (!defined($origin));
+$origin =~ s/^\s+|\s+$//g;
+return undef if (!$origin || lc($origin) eq 'null');
+if ($origin =~ /^(https?):\/\/\[([^\]]+)\](?::(\d+))?\/?$/i) {
+	return &normalise_websocket_origin($1, $2, $3);
+	}
+elsif ($origin =~ /^(https?):\/\/([^:\/]+)(?::(\d+))?\/?$/i) {
+	return &normalise_websocket_origin($1, $2, $3);
+	}
+return undef;
+}
+
+sub forwarded_websocket_origin
+{
+my ($proto, $host, $port) = @_;
+return undef if (!$proto || !$host);
+$proto =~ s/\s+//g;
+$proto = (split(/,/, $proto))[0];
+$host =~ s/^\s+|\s+$//g;
+$host = (split(/\s*,\s*/, $host))[0];
+if ($host =~ /^\[(.+)\]:(\d+)$/) {
+	($host, $port) = ($1, $2);
+	}
+elsif ($host =~ /^([^:]+):(\d+)$/) {
+	($host, $port) = ($1, $2);
+	}
+return &normalise_websocket_origin($proto, $host, $port);
+}
+
+sub get_websocket_allowed_origins
+{
+my @rv;
+my %seen;
+my $add_origin = sub {
+	my ($origin) = @_;
+	return if (!$origin || $seen{$origin}++);
+	push(@rv, $origin);
+	};
+
+# Direct access to miniserv, based on the current request host and port
+&$add_origin(&normalise_websocket_origin($use_ssl ? 'https' : 'http',
+					 $host, $port));
+
+# Canonical externally-visible URL, if one has been configured
+&$add_origin(&normalise_websocket_origin($prot, $redirhost, $redirport));
+
+# Reverse proxy headers, when present
+&$add_origin(&forwarded_websocket_origin($header{'x-forwarded-proto'},
+					 $header{'x-forwarded-host'},
+					 $header{'x-forwarded-port'}));
+&$add_origin(&forwarded_websocket_origin($header{'x-forwarded-proto'},
+					 $header{'host'},
+					 $header{'x-forwarded-port'}));
+
+# Explicit websocket host setting, converted back to a page origin
+if ($config{'websocket_host'}) {
+	my $wshost = $config{'websocket_host'};
+	$wshost =~ s/[\/]+$//g;
+	if ($wshost =~ /^wss?:\/\//) {
+		$wshost =~ s/^ws/http/i;
+		&$add_origin(&parse_websocket_origin($wshost));
+		}
+	else {
+		&$add_origin(&forwarded_websocket_origin($ssl ? 'https' : 'http',
+							 $wshost, undef));
+		}
+	}
+
+return @rv;
+}
+
 sub handle_websocket_request
 {
 my ($ws, $simple) = @_;
@@ -5795,6 +5885,20 @@ if ($ws->{'token'} && (!defined($in{'token'}) ||
     $in{'token'} ne $ws->{'token'})) {
 	print DEBUG "websockets token mismatch for $simple\n";
 	&http_error(403, "Invalid Websockets token");
+	return 0;
+	}
+my $origin = $header{'origin'} || $header{'sec-websocket-origin'};
+my $parsed_origin = &parse_websocket_origin($origin);
+if (!$origin || !$parsed_origin) {
+	print DEBUG "websockets missing or invalid Origin header\n";
+	&http_error(403, "Invalid Websockets origin");
+	return 0;
+	}
+my @allowed_origins = &get_websocket_allowed_origins();
+if (!grep { $_ eq $parsed_origin } @allowed_origins) {
+	print DEBUG "websockets origin $parsed_origin not in ".
+		    join(" ", @allowed_origins)."\n";
+	&http_error(403, "Invalid Websockets origin");
 	return 0;
 	}
 my @protos = split(/\s*,\s*/, $header{'sec-websocket-protocol'});
