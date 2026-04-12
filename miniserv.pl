@@ -3362,6 +3362,43 @@ sub reset_byte_count { $write_data_count = 0; }
 # byte_count()
 sub byte_count { return $write_data_count; }
 
+# get_logged_sensitive_params()
+# Returns query parameter names whose values should be redacted in access logs
+sub get_logged_sensitive_params
+{
+my @rv = qw(access_token api_key auth key pass passwd password refresh_token secret token);
+my %seen = map { lc($_) => 1 } @rv;
+if ($config{'log_redact_params'}) {
+	foreach my $param (split(/\s+|,\s*/, $config{'log_redact_params'})) {
+		next if (!$param);
+		my $lparam = lc($param);
+		next if ($seen{$lparam}++);
+		push(@rv, $param);
+		}
+	}
+return @rv;
+}
+
+# sanitise_logged_request(request)
+# Redacts sensitive query parameter values from a request line before logging
+sub sanitise_logged_request
+{
+my ($request) = @_;
+return $request if (!defined($request));
+my $sanitised = $request;
+my @sensitive = &get_logged_sensitive_params();
+return $request if (!@sensitive);
+my $sensitive = qr/(?:@{[join("|", map { quotemeta($_) } @sensitive)]})/i;
+
+if ($sanitised =~ /^(\S+\s+)(\S+)(\s+HTTP\/\d+\.\d+)$/) {
+	my ($prefix, $uri, $suffix) = ($1, $2, $3);
+	$uri =~ s/([?&;])((?:$sensitive))=([^&;\s]*)/$1.$2."=***"/ige;
+	$sanitised = $prefix.$uri.$suffix;
+	}
+
+return $sanitised;
+}
+
 # log_request(hostname, user, request, code, bytes)
 # Write an HTTP request to the log file
 sub log_request
@@ -3369,6 +3406,7 @@ sub log_request
 local ($host, $user, $request, $code, $bytes) = @_;
 local $headers;
 my $request_nolog = $request;
+my $request_log = &sanitise_logged_request($request);
 
 # Process full request string like `POST /index.cgi?param=1 HTTP/1.1` as well
 if ($request =~ /^(POST|GET)\s+/) {
@@ -3401,7 +3439,7 @@ if ($config{'log'}) {
 	else {
 		$headers = "";
 		}
-	print MINISERVLOG "$host $ident $user [$dstr] \"$request\" ",
+	print MINISERVLOG "$host $ident $user [$dstr] \"$request_log\" ",
 			  "$code $bytes$headers\n";
 	close(MINISERVLOG);
 	}
