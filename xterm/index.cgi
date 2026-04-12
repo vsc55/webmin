@@ -1,5 +1,7 @@
 #!/usr/local/bin/perl
 # Show a terminal that is connected to a Websockets server via Webmin proxying
+
+$unsafe_index_cgi = 1;
 require './xterm-lib.pl';
 &ReadParse();
 
