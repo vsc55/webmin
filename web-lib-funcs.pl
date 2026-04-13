@@ -13483,8 +13483,8 @@ return $url;
 
 Returns the URL for accessing this Webmin system, based on the current browser
 connection. Honors X-Forwarded-Proto, X-Forwarded-Host and X-Forwarded-Port
-when Webmin is behind a reverse proxy, so the returned URL is the one the
-user's browser actually used.
+when Webmin is behind a reverse proxy and proxy headers are trusted, so the
+returned URL is the one the user's browser actually used.
 
 =cut
 sub get_webmin_browser_url
@@ -13501,9 +13501,13 @@ my $first = sub {
 	return $v ne '' ? $v : undef;
 	};
 
+my %miniserv;
+&get_miniserv_config(\%miniserv);
+my $trust_proxy = $miniserv{'trust_real_ip'};
+
 # Pull proto/host/port from X-Forwarded-* (set by reverse proxies), with
 # RFC 7239 Forwarded as a secondary fallback, then plain request env
-my $fwd = $ENV{'HTTP_FORWARDED'};
+my $fwd = $trust_proxy ? $ENV{'HTTP_FORWARDED'} : undef;
 my ($fwd_proto, $fwd_host);
 if ($fwd) {
 	# RFC 7239 lists outermost proxy first; only inspect the first element
@@ -13514,13 +13518,15 @@ if ($fwd) {
 		}
 	}
 
-my $proto = $first->($ENV{'HTTP_X_FORWARDED_PROTO'}) || $fwd_proto ||
+my $proto = ($trust_proxy ? $first->($ENV{'HTTP_X_FORWARDED_PROTO'}) : undef) ||
+	    $fwd_proto ||
 	    (lc($ENV{'HTTPS'}) eq 'on' ? 'https' : 'http');
 $proto = lc($proto);
 $proto = 'https' if ($proto eq 'wss');
 $proto = 'http'  if ($proto eq 'ws');
 
-my $host = $first->($ENV{'HTTP_X_FORWARDED_HOST'}) || $fwd_host ||
+my $host = ($trust_proxy ? $first->($ENV{'HTTP_X_FORWARDED_HOST'}) : undef) ||
+	   $fwd_host ||
 	   $ENV{'HTTP_HOST'};
 if (!$host) {
 	# No request context at all - fall back to non-browser mode
@@ -13537,8 +13543,9 @@ else {
 	# Trust X-Forwarded-Port if the host didn't carry one; otherwise the
 	# request env port (which is the internal port behind a proxy and so
 	# only meaningful when there's no proxy in front)
-	$port = $first->($ENV{'HTTP_X_FORWARDED_PORT'});
-	if (!$port && !$ENV{'HTTP_X_FORWARDED_HOST'} && !$fwd_host) {
+	$port = $trust_proxy ? $first->($ENV{'HTTP_X_FORWARDED_PORT'}) : undef;
+	if (!$port && !($trust_proxy && $ENV{'HTTP_X_FORWARDED_HOST'}) &&
+	    !$fwd_host) {
 		$port = $ENV{'SERVER_PORT'};
 		}
 	$port ||= $defport;
