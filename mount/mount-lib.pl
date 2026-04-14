@@ -366,9 +366,11 @@ foreach my $m (@mounted) {
 			}
 		# Get the size - for ZFS mounts, this comes from the underlying
 		# total pool size and free
-		my ($t, $f);
+		my ($t, $f, $u, $p);
 		if ($zp) {
 			($t, $f) = @$zp;
+			$u = $t - $f;
+			$p = $u * 100 / $t;
 			}
 		else {
 			($t, $f, $u, $p) = &disk_space($m->[2], $m->[0]);
