@@ -36,13 +36,21 @@ print &ui_form_start("exec.cgi", "form-data");
 print &ui_hidden("db", $in{'db'});
 print &ui_textarea("cmd", undef, 10, 70),"<br>\n";
 if (@old) {
-	print $text{'exec_old'}," ",
-	      &ui_select("old", undef,
-		[ map { [ $_, &html_escape(length($_) > 80 ?
-				substr($_, 0, 80).".." : $_) ] } @old ]),"\n",
-	      &ui_button($text{'exec_edit'}, "movecmd", undef,
-		"onClick='cmd.value = old.options[old.selectedIndex].value'"),
-	      " ",&ui_submit($text{'exec_clear'}, "clear"),"<br>\n";
+	$oldrow = $text{'exec_old_cmd'}."&nbsp;".
+		  &ui_select("old", undef,
+			[ map { [ $_, &html_escape(length($_) > 80
+				? substr($_, 0, 80).".."
+				: $_) ] } @old ],
+			  undef, undef, undef, undef,
+			  "style='max-width: 40%;'")."\n".
+		  &ui_button($text{'exec_edit'}, "movecmd", undef,
+			"onClick='cmd.value = ".
+			  "old.options[old.selectedIndex].value'").
+		  " ".&ui_submit($text{'exec_clear'}, "clear");
+	print &ui_tag('div', $oldrow,
+		      { 'style' => 'display: flex; align-items: center; '.
+		                   'flex-wrap: wrap; gap: 5px; '.
+				   'margin-bottom: 5px;' });
 	}
 print "$text{'exec_cs'}&nbsp;&nbsp;",$csel,"<br>\n";
 print &ui_form_end([ [ undef, $text{'exec_exec'} ] ]);

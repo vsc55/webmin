@@ -14282,6 +14282,7 @@ my $ws_proto = lc($ENV{'HTTPS'}) eq 'on' ? 'wss' : 'ws';
 my %miniserv;
 my $webprefix = &get_webprefix();
 &get_miniserv_config(\%miniserv);
+my $trust_proxy = $miniserv{'trust_real_ip'};
 my $wspath = "/$module/ws-".$port;
 my $wstoken;
 if ($miniserv{'websockets_'.$wspath} &&
@@ -14297,7 +14298,7 @@ if ($http_host_conf) {
 	$http_host_conf =~ s/[\/]+$//g;
 	}
 # Try to rely on the proxy
-if (!defined($http_host_conf)) {
+if ($trust_proxy && !defined($http_host_conf)) {
 	my $forwarded_host = $ENV{'HTTP_X_FORWARDED_HOST'};
 	if ($forwarded_host) {
 		$http_host_conf = "$ws_proto://$forwarded_host";

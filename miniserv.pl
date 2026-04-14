@@ -5909,12 +5909,14 @@ my $add_origin = sub {
 &$add_origin(&normalise_websocket_origin($prot, $redirhost, $redirport));
 
 # Reverse proxy headers, when present
-&$add_origin(&forwarded_websocket_origin($header{'x-forwarded-proto'},
-					 $header{'x-forwarded-host'},
-					 $header{'x-forwarded-port'}));
-&$add_origin(&forwarded_websocket_origin($header{'x-forwarded-proto'},
-					 $header{'host'},
-					 $header{'x-forwarded-port'}));
+if ($config{'trust_real_ip'}) {
+	&$add_origin(&forwarded_websocket_origin($header{'x-forwarded-proto'},
+						 $header{'x-forwarded-host'},
+						 $header{'x-forwarded-port'}));
+	&$add_origin(&forwarded_websocket_origin($header{'x-forwarded-proto'},
+						 $header{'host'},
+						 $header{'x-forwarded-port'}));
+	}
 
 # Explicit websocket host setting, converted back to a page origin
 if ($config{'websocket_host'}) {
