@@ -8773,6 +8773,25 @@ my ($func) = @_;
 $main::remote_error_handler = $func || \&error;
 }
 
+=head2 remote_rpc_login_error(&connection, username)
+
+Reads the headers from a failed remote RPC login attempt and
+returns a more helpful error message when the server provides one.
+
+=cut
+sub remote_rpc_login_error
+{
+my ($con, $user) = @_;
+my ($headers, undef, $bad_header) = &read_http_headers($con);
+&close_http_connection($con);
+my $msg = ".. login to RPC server as ".($user || 'unknown')." rejected";
+my $reason = !$bad_header ? &get_http_auth_reason($headers) : undef;
+if ($reason) {
+	$reason = &html_escape($reason);
+	}
+return $reason ? "$msg : @{[lcfirst $reason]}" : $msg;
+}
+
 =head2 remote_rpc_call(server, &structure)
 
 Calls rpc.cgi on some server and passes it a perl structure (hash,array,etc)
@@ -8852,9 +8871,8 @@ if ($serv->{'fast'} || !$sn) {
 		my $line = &read_http_connection($con);
 		$line =~ tr/\r\n//d;
 		if ($line =~ /^HTTP\/1\..\s+40[13]\s+/) {
-			my $username = $user;
-			$username ||= 'unknown';
-			return &$main::remote_error_handler("Login to RPC server as user \"$username\" rejected");
+			return &$main::remote_error_handler(
+				&remote_rpc_login_error($con, $user));
 			}
 		$line || return &$main::remote_error_handler("HTTP error : No status line");
 		$line =~ /^HTTP\/1\..\s+200\s+/ ||
@@ -9023,8 +9041,9 @@ else {
 	my $line = &read_http_connection($con);
 	$line =~ tr/\r\n//d;
 	if ($line =~ /^HTTP\/1\..\s+401\s+/) {
-		return &$main::remote_error_handler("Login to RPC server as $user rejected");
-		}
+		return &$main::remote_error_handler(
+			&remote_rpc_login_error($con, $user));
+			}
 	$line || return &$main::remote_error_handler("HTTP error : No status line");
 	$line =~ /^HTTP\/1\..\s+200\s+/ || return &$main::remote_error_handler("RPC HTTP error : $line");
 	do {
@@ -9813,6 +9832,51 @@ sub close_http_connection
 {
 my ($h) = @_;
 return close($h->{'fh'});
+}
+
+=head2 read_http_headers(&handle)
+
+Reads HTTP response headers from the connection until the blank line after
+them. In list context returns a hashref of lower-cased header names, the raw
+header text, and an optional offending header line. If an invalid header line
+is encountered, the headers and raw text are undef and the third return value
+contains the offending line.
+
+=cut
+sub read_http_headers
+{
+my ($h) = @_;
+my (%headers, $raw);
+while(defined(my $line = &read_http_connection($h))) {
+	$line =~ tr/\r\n//d;
+	last if ($line eq '');
+	if ($line =~ /^(\S+):\s*(.*)$/) {
+		$headers{lc($1)} = $2;
+		$raw .= $line."\n";
+		}
+	else {
+		return wantarray ? (undef, undef, $line) : undef;
+		}
+	}
+return wantarray ? (\%headers, $raw, undef) : \%headers;
+}
+
+=head2 get_http_auth_reason(&headers)
+
+Returns the Webmin-specific authentication reason from a parsed HTTP headers
+hash, if present.
+
+=cut
+sub get_http_auth_reason
+{
+my ($headers) = @_;
+my $reason = $headers->{'x-webmin-auth-reason'} ||
+	     $headers->{'x-webmin-auth-error'};
+if ($reason) {
+	$reason =~ s/\s+/ /g;
+	$reason =~ s/^\s+|\s+$//g;
+	}
+return $reason;
 }
 
 =head2 clean_environment

@@ -146,20 +146,20 @@ if ($cl) {
 
 # read back the headers
 my $dummy = &read_http_connection($con);
-my (%header, $headers);
-while(1) {
-	my $headline;
-	($headline = &read_http_connection($con)) =~ s/\r|\n//g;
-	last if (!$headline);
-	$headline =~ /^(\S+):\s+(.*)$/ || &error("Bad header");
-	$header{lc($1)} = $2;
-	$headers .= $headline."\n";
+my ($header, $headers, $bad) = &read_http_headers($con);
+if ($bad) {
+	# Normalized and truncated
+	$bad =~ s/[\x00-\x1f\x7f]+/ /g;
+	$bad =~ s/\s+/ /g;
+	$bad =~ s/^\s+|\s+$//g;
+	$bad = substr($bad, 0, 200).(length($bad) > 200 ? "..." : "");
+	&error("Bad header : ".&html_escape($bad));
 	}
 
 my $defport = $s->{'ssl'} ? 443 : 80;
-if ($header{'location'} &&
-    ($header{'location'} =~ /^(http|https):\/\/$s->{'host'}:$s->{'port'}(.*)$/||
-     $header{'location'} =~ /^(http|https):\/\/$s->{'host'}(.*)/ &&
+if ($header->{'location'} &&
+    ($header->{'location'} =~ /^(http|https):\/\/$s->{'host'}:$s->{'port'}(.*)$/||
+     $header->{'location'} =~ /^(http|https):\/\/$s->{'host'}(.*)/ &&
      $s->{'port'} == $defport)) {
 	# fix a redirect
 	local $gconfig{'webprefixnoredir'} = 1;		# We've already added
@@ -168,15 +168,20 @@ if ($header{'location'} &&
 	&redirect("$url$2");
 	exit;
 	}
-elsif ($header{'www-authenticate'}) {
+elsif ($header->{'www-authenticate'}) {
 	# Invalid login
+	my $detail = &get_http_auth_reason($header);
 	if ($s->{'autouser'}) {
 		print "Set-Cookie: $id=; path=/\n";
-		&error(&text('link_eautologin', $s->{'host'},
-		     "@{[&get_webprefix()]}/$module_name/link.cgi/$id/"));
+		my $msg = &text('link_eautologin', $s->{'host'},
+		     "@{[&get_webprefix()]}/$module_name/link.cgi/$id/");
+		$msg .= "<br>".&html_escape($detail) if ($detail);
+		&error($msg);
 		}
 	else {
-		&error(&text('link_elogin', $s->{'host'}, $user));
+		my $msg = &text('link_elogin', $s->{'host'}, $user);
+		$msg .= " : ".&html_escape($detail) if ($detail);
+		&error($msg);
 		}
 	}
 else {
@@ -185,9 +190,9 @@ else {
 	}
 
 # read back the rest of the page
-if ($header{'content-type'} &&
-    $header{'content-type'} =~ /text\/html/ &&
-    !$header{'x-no-links'}) {
+if ($header->{'content-type'} &&
+    $header->{'content-type'} =~ /text\/html/ &&
+    !$header->{'x-no-links'}) {
 	# Fix up HTML
 	while($_ = &read_http_connection($con)) {
 		s/src='(\/[^']*)'/src='$url$1'/gi;
@@ -214,9 +219,9 @@ if ($header{'content-type'} &&
 			}
 		}
 	}
-elsif ($header{'content-type'} &&
-       $header{'content-type'} =~ /text\/css/ &&
-       !$header{'x-no-links'}) {
+elsif ($header->{'content-type'} &&
+       $header->{'content-type'} =~ /text\/css/ &&
+       !$header->{'x-no-links'}) {
 	# Fix up CSS
 	while($_ = &read_http_connection($con)) {
 		s/url\("(\/[^"]*)"\)/url\("$url$1"\)/gi;
