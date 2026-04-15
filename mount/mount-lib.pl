@@ -370,9 +370,9 @@ foreach my $m (@mounted) {
 		if ($zp) {
 			($t, $f) = @$zp;
 			$u = $t - $f;
-			$p = $u * 100 / $t;
+			$p = $u * 100 / $t if ($t);
 			}
-		else {
+		if (!$t) {
 			($t, $f, $u, $p) = &disk_space($m->[2], $m->[0]);
 			}
 		if (($m->[2] eq "simfs" || $m->[2] eq "vzfs" ||
