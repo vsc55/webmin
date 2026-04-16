@@ -1209,6 +1209,7 @@ twofactor_enrolllink=You can now enroll for two-factor authentication in the <a 
 twofactor_url=To learn more about $1, see its website at <a href='$2' target=_blank>$2</a>.
 twofactor_etotpmodule=The Perl module <tt>$1</tt> needed for two-factor authentication is not installed. Use the <a href='$2'>Perl Modules</a> page in Webmin to install it.
 twofactor_qrcode=Enter the secret code $1 in the TOTP app, or scan the QR code below.
+twofactor_qrcode_manual=Enter the secret code $1 in the TOTP app and set it up manually, as QR code generation is not supported on this system.
 twofactor_etotpid=Invalid TOTP base32-encoded secret
 twofactor_etotptoken=TOTP token must be a number
 twofactor_etotpmatch=Incorrect OTP code

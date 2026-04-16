@@ -224,55 +224,25 @@ sub message_twofactor_totp
 my ($user) = @_;
 my $name = &get_display_hostname()." (".$user->{'name'}.")";
 my $str = "otpauth://totp/".$name."?secret=".$user->{'twofactor_id'};
-my $qrcode = &ui_tag('p',
-	&text('twofactor_qrcode', "<tt>$user->{'twofactor_id'}</tt>"));
-if (&can_generate_qr()) {
-	my $url;
-	if (&get_product_name() eq 'usermin') {
-		$url = "qr.cgi?size=6";
-		}
-	else {
-		$url = "$gconfig{'webprefix'}/webmin/qr.cgi?size=6";
-		}
-	my $id = "twofactor_qr_".int(time())."_".int(rand(1000000));
+my ($qrimg, $mime) = &generate_qr_code($str, 6);
+if ($qrimg) {
+	my $qrcode = &ui_tag('p',
+		&text('twofactor_qrcode', "<tt>$user->{'twofactor_id'}</tt>"));
+	my $src = "data:$mime;base64,".&encode_base64($qrimg, 'noeol');
 	my $img = &ui_tag('img', undef,
-		{ 'id' => $id, 'border' => 0,
-		  'style' => 'width:210px; height:210px; '.
+		{ 'src' => $src, 'border' => 0,
+		  'style' => 'width:180px; height:180px; '.
 		  	     'border:1px solid #444;',
 		  'alt' => 'QR code' });
-	my $id_js = &quote_javascript($id);
-	my $url_js = &quote_javascript($url);
-	my $str_js = &quote_javascript($str);
 	return <<EOF;
-	$qrcode$img
-<script>
-(function() {
-const img = document.getElementById("$id_js"),
-      body = "str=" + encodeURIComponent("$str_js");
-fetch("$url_js", {
-	method: "POST",
-	body: body
-	}).then(function(response) {
-		if (!response.ok) { return null; }
-		return response.blob();
-	}).then(function(blob) {
-		if (!blob) { return; }
-		const reader = new FileReader();
-		reader.onloadend = function() { img.src = reader.result; };
-		reader.readAsDataURL(blob);
-	}).catch(function() { });
-})();
-</script>
-<p>
+	$qrcode$img<p>
 EOF
 	}
 else {
-	my $url = "https://api.qrserver.com/v1/create-qr-code/?".
-		  "size=200x200&data=".&urlize($str);
-	my $img = &ui_tag('img', undef,
-		{ 'src' => $url, 'border' => 0, 'alt' => 'QR code' });
 	return <<EOF;
-	$qrcode$img<p>
+	<p>@{[ &text('twofactor_qrcode_manual',
+		     "<tt>$user->{'twofactor_id'}</tt>") ]}</p>
+	<p>
 EOF
 	}
 }
@@ -361,18 +331,13 @@ if (!$found && $prov) {
 &unlock_file($miniserv->{'twofactorfile'});
 }
 
-# can_generate_qr()
-# Returns 1 if QR codes can be generated on this system
-sub can_generate_qr
+# can_generate_qr_encoder()
+# Returns 1 if the local QRCode::Encoder fallback can be used
+sub can_generate_qr_encoder
 {
-if (&has_command("qrencode")) {
-	return 1;
-	}
-eval "use Image::PNG::QRCode";
-if (!$@) {
-	return 1;
-	}
-return 0;
+eval "use lib (\"$root_directory/vendor_perl\")";
+eval "use QRCode::Encoder qw(qr_encode)";
+return $@ ? 0 : 1;
 }
 
 # generate_qr_code(string, [block-size])
@@ -380,6 +345,10 @@ return 0;
 sub generate_qr_code
 {
 my ($str, $size) = @_;
+if (&can_generate_qr_encoder()) {
+	my @rv = eval { &generate_qr_code_encoder($str, $size) };
+	return @rv if (!$@ && defined($rv[0]));
+	}
 if (&has_command("qrencode")) {
 	# Use the qrencode shell command
 	my $cmd = "qrencode -o - -t PNG ".quotemeta($str);
@@ -391,19 +360,43 @@ if (&has_command("qrencode")) {
 		}
 	return ($out, "image/png");
 	}
-eval "use Image::PNG::QRCode";
-if (!$@) {
-	# Use a Perl module
-	my $out;
-	Image::PNG::QRCode::qrpng(
-		text => $str,
-		scale => $size || 6,
-		out => \$out,
-		);
-	return ($out, "image/png");
-	}
 return (undef, "QR code generation requires either the qrencode command or ".
-	       "Image::PNG::QRCode Perl module");
+	       "QRCode::Encoder Perl module");
+}
+
+# generate_qr_code_encoder(string, [block-size])
+# Turn a string into a QR code SVG using the local QRCode::Encoder fallback
+sub generate_qr_code_encoder
+{
+my ($str, $size) = @_;
+eval "use lib (\"$root_directory/vendor_perl\")";
+eval "use QRCode::Encoder qw(qr_encode)";
+if ($@) {
+	return (undef, "QR code generation requires the ".
+		       "QRCode::Encoder Perl module");
+	}
+my $encoded = qr_encode($str, level => 'M');
+my $matrix = $encoded->{'matrix'};
+my $mod_size = $size || 6;
+my $count = scalar(@$matrix);
+my $dim = $count * $mod_size;
+my $svg = qq{<svg xmlns="http://www.w3.org/2000/svg" }.
+	  qq{viewBox="0 0 $dim $dim" }.
+	  qq{width="$dim" height="$dim">};
+$svg .= qq{<rect width="$dim" height="$dim" fill="white"/>};
+for my $y (0 .. $#$matrix) {
+	for my $x (0 .. $#{$matrix->[$y]}) {
+		if ($matrix->[$y][$x] & 1) {
+			my $px = $x * $mod_size;
+			my $py = $y * $mod_size;
+			$svg .= qq{<rect x="$px" y="$py" }.
+				qq{width="$mod_size" }.
+				qq{height="$mod_size"/>};
+			}
+		}
+	}
+$svg .= "</svg>";
+return ($svg, "image/svg+xml");
 }
 
 1;
