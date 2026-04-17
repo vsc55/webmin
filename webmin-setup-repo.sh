@@ -539,8 +539,20 @@ EOF
       post_status $?
       # Set correct permissions on the repo key in case the system uses a restrictive umask
       chmod 644 "/usr/share/keyrings/$repoid_debian_like-$repo_key_suffix.gpg"
-      sources_list=$(grep -v "$repo_host" /etc/apt/sources.list)
-      echo "$sources_list" > /etc/apt/sources.list
+      # Remove any existing entries for this repo from sources.list to avoid
+      # conflicts
+      if [ -f /etc/apt/sources.list ]; then
+        tmp="/tmp/sources.list.$$"
+        grep -vF "$repo_host" /etc/apt/sources.list >"$tmp"
+        status=$?
+        if [ "$status" -le 1 ]; then
+          mv "$tmp" /etc/apt/sources.list
+          post_status $? "Failed to replace \`/etc/apt/sources.list\`"
+        else
+          rm -f "$tmp"
+          post_status "$status" "Failed to update \`/etc/apt/sources.list\`"
+        fi
+      fi
       # Configure packages priority if provided
       debian_repo_prefs="/etc/apt/preferences.d/$repoid_debian_like-$repo_dist-package-priority"
       if [ -n "$repo_pkg_prefs" ]; then
