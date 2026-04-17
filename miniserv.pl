@@ -1703,6 +1703,8 @@ if (!$davpath && ($method eq "SEARCH" || $method eq "PUT")) {
 print DEBUG "handle_request: Need authentication\n";
 $validated = 0;
 $blocked = 0;
+local $http_auth_error;
+local $http_auth_reason;
 
 # Session authentication is never used for connections by
 # another webmin server, or for specified pages, or for DAV, or XMLRPC,
@@ -1761,11 +1763,31 @@ if (!$validated && !$deny_authentication && !$config{'session'} &&
     $header{authorization} =~ /^basic\s+(\S+)$/i) {
 	# authorization given..
 	($authuser, $authpass) = split(/:/, &b64decode($1), 2);
-	print DEBUG "handle_request: doing basic auth check authuser=$authuser authpass=$authpass\n";
+	print DEBUG "handle_request: doing basic auth check ".
+		    "authuser=$authuser authpass=$authpass\n";
 	local ($vu, $expired, $nonexist, $wvu) =
 		&validate_user_caseless($authuser, $authpass, $host,
 				        $acptip, $port);
-	print DEBUG "handle_request: vu=$vu expired=$expired nonexist=$nonexist\n";
+	local $twofactor_blocked = 0;
+	if ($vu && $wvu) {
+		# Don't allow a 2FA-protected account to fall back to
+		# password-only HTTP Basic authentication.
+		my $uinfo = &get_user_details($wvu, $vu);
+		if ($uinfo && $uinfo->{'twofactor_provider'}) {
+			print DEBUG "handle_request: rejecting basic auth for ".
+				    "$wvu because two-factor authentication ".
+				    "is enabled\n";
+			$twofactor_blocked = 1;
+			$http_auth_error = 'twofactor-required';
+			$http_auth_reason = 'With two-factor authentication '.
+					    'enabled for this account, RPC '.
+					    'access requires a separate '.
+					    'Webmin user without 2FA';
+			$vu = undef;
+			}
+		}
+	print DEBUG "handle_request: vu=$vu expired=$expired ".
+		    "nonexist=$nonexist\n";
 	if ($vu && (!$expired || $config{'passwd_mode'} == 1)) {
 		$authuser = $vu;
 		$validated = 1;
@@ -1774,10 +1796,16 @@ if (!$validated && !$deny_authentication && !$config{'session'} &&
 		$validated = 0;
 		}
 	if ($use_syslog && !$validated) {
-		syslog("crit", "%s",
-		       ($nonexist ? "Non-existent" :
-			$expired ? "Expired" : "Invalid").
-		       " login as $authuser from $acpthost");
+		my $msg = $twofactor_blocked
+			? "Login as $authuser from $acpthost rejected because ".
+			  "two-factor authentication is enabled"
+			: ($nonexist
+				? "Non-existent"
+				: $expired
+					? "Expired"
+					: "Invalid").
+			  " login as $authuser from $acpthost";
+		syslog("crit", "%s", $msg);
 		}
 	if ($authuser =~ /\r|\n|\s/) {
 		&http_error(500, "Invalid username",
@@ -2144,15 +2172,29 @@ if (!$validated) {
 			&write_data("Server: @{[&server_info()]}\r\n");
 			&write_data("WWW-authenticate: Basic ".
 				   "realm=\"$config{'realm'}\"\r\n");
+			if ($http_auth_error) {
+				my $err = $http_auth_error;
+				$err =~ s/\r|\n//g;
+				&write_data("X-Webmin-Auth-Error: $err\r\n");
+				if ($http_auth_reason) {
+					my $reason = $http_auth_reason;
+					$reason =~ s/\r|\n//g;
+					&write_data(
+					  "X-Webmin-Auth-Reason: $reason\r\n");
+					}
+				}
 			&write_keep_alive(0);
 			&write_data("Content-type: text/html; Charset=utf-8\r\n");
 			&write_data("\r\n");
 			&reset_byte_count();
+			my $auth_err = $http_auth_reason ||
+				"A password is required to access this ".
+				"web server. Please try again.";
 			&write_data("<html>\n");
 			&write_data("<head>".&embed_error_styles($roots[0])."<title>401 &mdash; Unauthorized</title></head>\n");
 			&write_data("<body><h2 class=\"err-head\">401 &mdash; Unauthorized</h2>\n");
-			&write_data("<p class=\"err-content\">A password is required to access this\n");
-			&write_data("web server. Please try again.</p> <p>\n");
+			&write_data("<p class=\"err-content\">".
+				    &html_escape($auth_err)."</p> <p>\n");
 			&write_data("</body></html>\n");
 			&log_request($loghost, undef, $reqline, 401, &byte_count());
 			return 0;
