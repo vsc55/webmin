@@ -50,8 +50,6 @@ session_md5on=<tt>MD5</tt> ハッシュ形式を使用
 session_sha512=<tt>SHA512</tt> ハッシュ形式を使用
 session_yescrypt=<tt>yescrypt</tt> ハッシュ形式を使用する
 session_emd5mod=Perl $1 モジュールがインストールされていないため、MD5 ハッシュ形式は使用できません
-session_esha512mod=Perl $1 モジュールがインストールされていないため、SHA512 ハッシュ形式は使用できません
-session_eyescrypt=Perl $1 モジュールがインストールされていないため、yescrypt ハッシュ形式は使用できません
 session_forgot=忘れたパスワードの回復を許可しますか?
 session_eforgot=パスワードを忘れた場合の回復機能は、<b>Virtualmin Password Recovery</b> プラグインモジュールを削除しないと有効になりません。これは <a href='$1'>Webmin モジュール</a> ページで実行できます。
 
