@@ -98,11 +98,10 @@ if ($use_md5) {
 	push(@startup_msg, "Using MD5 module $use_md5");
 	}
 
-# Check if the SHA512 perl module is available
-eval "use Crypt::SHA";
-$use_sha512 = $@ ? "Crypt::SHA" : undef;
-if ($use_sha512) {
-	push(@startup_msg, "Using SHA512 module $use_sha512");
+# Check if the crypt function supports SHA512
+if (&unix_crypt_supports_sha512()) {
+	$use_sha512 = 1;
+	push(@startup_msg, "Using SHA512 via crypt() function");
 	}
 
 # Get miniserv's perl path and location
@@ -6593,6 +6592,15 @@ if ($salt) {
 else {
 	return $rv;
 	}
+}
+
+# unix_crypt_supports_sha512()
+# Returns 1 if the built-in crypt() function can already do SHA512
+sub unix_crypt_supports_sha512
+{
+my $hash = '$6$Tk5o/GEE$zjvXhYf/dr5M7/jan3pgunkNrAsKmQO9r5O8sr/Cr1hFOLkWmsH4iE9hhqdmHwXd5Pzm4ubBWTEjtMeC.h5qv1';
+my $newhash = eval { crypt('test', $hash) };
+return $newhash eq $hash;
 }
 
 # encrypt_sha512(password, [salt])
