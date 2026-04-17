@@ -36,6 +36,7 @@ repo_mode="stable"
 download_curl="/usr/bin/curl"
 download="$download_curl -q -f -sS -L -O"
 force_setup=0
+tmp_dir=""
 
 # Colors
 NORMAL="$(tput sgr0 2>/dev/null || echo '')"
@@ -231,11 +232,80 @@ check_permission() {
   fi
 }
 
+create_tmp_dir() {
+  if command -pv mktemp 1>/dev/null 2>&1; then
+    tmp_candidate=$(mktemp -d 2>/dev/null)
+    if [ $? -eq 0 ] && [ -n "$tmp_candidate" ]; then
+      printf '%s\n' "$tmp_candidate"
+      return 0
+    fi
+  fi
+
+  for candidate in "/tmp" "/var/tmp"; do
+    if [ ! -d "$candidate" ] || [ ! -w "$candidate" ]; then
+      continue
+    fi
+    tmp_try=0
+    while [ "$tmp_try" -lt 10 ]; do
+      tmp_candidate="$candidate/webmin-setup-repo.$$"
+      [ "$tmp_try" -gt 0 ] && tmp_candidate="$tmp_candidate.$tmp_try"
+      if ( umask 077 && mkdir "$tmp_candidate" ) 2>/dev/null; then
+        printf '%s\n' "$tmp_candidate"
+        return 0
+      fi
+      tmp_try=$((tmp_try + 1))
+    done
+  done
+  return 1
+}
+
+create_tmp_file() {
+  tmp_parent="$1"
+  tmp_prefix="$2"
+
+  if [ ! -d "$tmp_parent" ] || [ ! -w "$tmp_parent" ]; then
+    return 1
+  fi
+
+  if command -pv mktemp 1>/dev/null 2>&1; then
+    tmp_candidate=$(mktemp "$tmp_parent/$tmp_prefix.XXXXXX" 2>/dev/null)
+    if [ $? -eq 0 ] && [ -n "$tmp_candidate" ]; then
+      printf '%s\n' "$tmp_candidate"
+      return 0
+    fi
+  fi
+
+  tmp_try=0
+  while [ "$tmp_try" -lt 10 ]; do
+    tmp_candidate="$tmp_parent/$tmp_prefix.$$"
+    [ "$tmp_try" -gt 0 ] && tmp_candidate="$tmp_candidate.$tmp_try"
+    if ( umask 077 && set -C && : > "$tmp_candidate" ) 2>/dev/null; then
+      printf '%s\n' "$tmp_candidate"
+      return 0
+    fi
+    tmp_try=$((tmp_try + 1))
+  done
+  return 1
+}
+
 prepare_tmp() {
-  cd "/tmp" 1>/dev/null 2>&1
-  if [ $? -ne 0 ]; then
-    echo "${RED}Error:${NORMAL} Failed to switch to \`/tmp\`!"
+  tmp_dir=$(create_tmp_dir)
+  if [ $? -ne 0 ] || [ -z "$tmp_dir" ]; then
+    echo "${RED}Error:${NORMAL} Failed to create temporary working directory!"
     exit 1
+  fi
+  trap cleanup_tmp EXIT
+  trap 'cleanup_tmp; exit 1' HUP INT TERM
+  cd "$tmp_dir" 1>/dev/null 2>&1
+  if [ $? -ne 0 ]; then
+    echo "${RED}Error:${NORMAL} Failed to switch to temporary working directory!"
+    exit 1
+  fi
+}
+
+cleanup_tmp() {
+  if [ -n "$tmp_dir" ] && [ -d "$tmp_dir" ]; then
+    rm -rf "$tmp_dir"
   fi
 }
 
@@ -408,7 +478,6 @@ enforce_package_priority() {
 download_key() {
   echo "  Downloading $repo_key_name key .."
   for key in $repo_key; do
-    rm -f "/tmp/$key"
     download_out=$($download "$repo_key_server/$key" 2>&1)
     if [ $? -ne 0 ]; then
       post_status 1 "$(printf '%s : %s' "$repo_key_server/$key" "$download_out" | tr '\n' ' ')"
@@ -542,12 +611,23 @@ EOF
       # Remove any existing entries for this repo from sources.list to avoid
       # conflicts
       if [ -f /etc/apt/sources.list ]; then
-        tmp="/tmp/sources.list.$$"
+        tmp=$(create_tmp_file "/etc/apt" "sources.list")
+        if [ $? -ne 0 ] || [ -z "$tmp" ]; then
+          post_status 1 "Failed to create temporary \`sources.list\`"
+        fi
         grep -vF "$repo_host" /etc/apt/sources.list >"$tmp"
         status=$?
         if [ "$status" -le 1 ]; then
+          chmod 644 "$tmp"
+          if [ $? -ne 0 ]; then
+            rm -f "$tmp"
+            post_status 1 "Failed to set permissions on temporary \`sources.list\`"
+          fi
           mv "$tmp" /etc/apt/sources.list
-          post_status $? "Failed to replace \`/etc/apt/sources.list\`"
+          status=$?
+          if [ "$status" -ne 0 ]; then
+            post_status "$status" "Failed to replace \`/etc/apt/sources.list\`"
+          fi
         else
           rm -f "$tmp"
           post_status "$status" "Failed to update \`/etc/apt/sources.list\`"
