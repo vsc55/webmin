@@ -45,6 +45,7 @@ RED="$(tput setaf 1 2>/dev/null || echo '')"
 BOLD="$(tput bold 2>/dev/null || echo '')"
 ITALIC="$(tput sitm 2>/dev/null || echo '')"
 
+# Print the usage message and exit
 usage() {
   if [ -n "${1-}" ]; then
     echo "${RED}Error:${NORMAL} Unknown or invalid argument: $1"
@@ -93,6 +94,7 @@ EOF
   exit 1
 }
 
+# Print a success or failure status line and exit on failure
 post_status() {
     status="$1"
     message="$2"
@@ -108,6 +110,7 @@ post_status() {
     fi
 }
 
+# Parse CLI arguments and select the active repository settings
 process_args() {
   for arg in "$@"; do
     case "$arg" in
@@ -225,6 +228,7 @@ process_args() {
   esac
 }
 
+# Ensure the script is running with root privileges
 check_permission() {
   if [ "$(id -u)" -ne 0 ]; then
     echo "${RED}Error:${NORMAL} \`$(basename "$0")\` must be run as root!" >&2
@@ -232,6 +236,7 @@ check_permission() {
   fi
 }
 
+# Create a temporary working directory, preferring mktemp when available
 create_tmp_dir() {
   if command -pv mktemp 1>/dev/null 2>&1; then
     tmp_candidate=$(mktemp -d 2>/dev/null)
@@ -259,6 +264,7 @@ create_tmp_dir() {
   return 1
 }
 
+# Create a temporary file in a specific directory for safe replacement writes
 create_tmp_file() {
   tmp_parent="$1"
   tmp_prefix="$2"
@@ -288,6 +294,7 @@ create_tmp_file() {
   return 1
 }
 
+# Create and switch into the temporary working directory
 prepare_tmp() {
   tmp_dir=$(create_tmp_dir)
   if [ $? -ne 0 ] || [ -z "$tmp_dir" ]; then
@@ -303,12 +310,14 @@ prepare_tmp() {
   fi
 }
 
+# Remove the temporary working directory on exit
 cleanup_tmp() {
   if [ -n "$tmp_dir" ] && [ -d "$tmp_dir" ]; then
     rm -rf "$tmp_dir"
   fi
 }
 
+# Detect the current OS family and choose the package manager commands
 detect_os() {
   osrelease="/etc/os-release"
   if [ ! -f "$osrelease" ]; then
@@ -367,6 +376,7 @@ detect_os() {
   fi
 }
 
+# Derive package-manager-specific repository file paths
 set_os_variables() {
   # Debian-based
   debian_repo_file="/etc/apt/sources.list.d/$active_repo_name.list"
@@ -379,6 +389,7 @@ set_os_variables() {
   rpm_repo_file="$rpm_repo_dir/$active_repo_name.repo"
 }
 
+# Show the repository mode warning and ask for confirmation when needed
 ask_confirmation() {
   # Format description so only the first word keeps its case and the rest is
   # lowercased
@@ -407,6 +418,7 @@ ask_confirmation() {
   fi
 }
 
+# Ensure a supported download tool is available
 check_downloader() {
   if [ ! -x "$download_curl" ]; then
     if [ -x "/usr/bin/wget" ]; then
@@ -421,6 +433,7 @@ check_downloader() {
   fi
 }
 
+# Install GnuPG on Debian-like systems when it is required
 check_gpg() {
   if [ -n "$osid_debian_like" ]; then
     if [ ! -x /usr/bin/gpg ]; then
@@ -432,6 +445,7 @@ check_gpg() {
   fi
 }
 
+# Parse package preference rules for the requested package manager
 enforce_package_priority() {
   repo_pkg_pref=$1
   disttarget=$2
@@ -475,6 +489,7 @@ enforce_package_priority() {
   IFS=$old_ifs
 }
 
+# Download the configured repository signing key files
 download_key() {
   echo "  Downloading $repo_key_name key .."
   for key in $repo_key; do
@@ -487,6 +502,7 @@ download_key() {
   post_status 0 ""
 }
 
+# Extract RPM-specific repository preference lines
 rpm_repo_prefs() {
   for pref in $repo_prefs; do
     if echo "$pref" | grep "^rpm:" >/dev/null 2>&1; then
@@ -496,6 +512,7 @@ rpm_repo_prefs() {
   done
 }
 
+# Install keys, configure repository files, and refresh metadata
 setup_repos() {
   # Format description so only the first word keeps its case and the rest is
   # lowercased
@@ -718,6 +735,7 @@ $active_repo_download$repo_deb_pathname $repo_dist $repo_component"
   esac
 }
 
+# Print the final installation hint when Webmin is not yet installed
 final_msg() {
   if [ "$install_check_binary" != "0" ] && [ ! -x "$install_check_binary" ]; then
     echo "$install_message"
