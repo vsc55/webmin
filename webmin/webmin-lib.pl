@@ -2721,38 +2721,109 @@ my @doms = split(/\s+/, $config{'letsencrypt_doms'});
 my $webroot = $config{'letsencrypt_webroot'};
 my $mode = $config{'letsencrypt_mode'} || "web";
 my $size = $config{'letsencrypt_size'};
-my $server = $config{'letsencrypt_server'};
-my $email = $config{'letsencrypt_email'};
+my $server_mode = $config{'letsencrypt_server_mode'};
+if ($server_mode !~ /^(public|custom)$/) {
+	$server_mode = ($config{'letsencrypt_server'} ||
+			$config{'letsencrypt_directory_url'}) ?
+		       "custom" : "public";
+	}
+my $server = $server_mode eq "custom" ?
+	     ($config{'letsencrypt_server'} ||
+	      $config{'letsencrypt_directory_url'}) : undef;
+my $server_key = $server_mode eq "custom" ? $config{'letsencrypt_eab_kid'}
+					  : undef;
+my $server_hmac = $server_mode eq "custom" ? $config{'letsencrypt_eab_hmac'}
+					   : undef;
+my $email_mode = $config{'letsencrypt_email_mode'};
+if ($email_mode !~ /^(none|webmin|custom)$/) {
+	$email_mode = $config{'letsencrypt_email'} ? "custom" : "none";
+	}
+my $email_webmin_raw = $email_mode eq "webmin" ?
+		       &get_letsencrypt_webmin_email_raw() : undef;
+my $email = $email_mode eq "custom" ? $config{'letsencrypt_email'}
+	    : $email_mode eq "webmin" &&
+	      &is_usable_letsencrypt_acme_email($email_webmin_raw) ?
+		$email_webmin_raw
+				      : undef;
 my $force = defined($config{'letsencrypt_force'}) ?
 	    $config{'letsencrypt_force'} : 1;
 my $usewebmin = !$config{'letsencrypt_nouse'};
 if (!@doms) {
-	print "No domains saved to renew cert for!\n";
+	my $err = "No domains saved to renew cert for!";
+	print "$err\n";
+	&webmin_log("letsencrypt_renew_failed", undef, join(" ", @doms),
+		    { 'domains' => join(", ", @doms),
+		      'mode' => $mode,
+		      'error' => &clean_letsencrypt_event_value($err),
+		      'server' => $server || "" });
+	&save_letsencrypt_event(0, "renew", \@doms, $mode, $webroot,
+				$server, $err);
 	return;
 	}
 if ($mode eq "web") {
 	if (!$webroot) {
-		print "No webroot saved to renew cert for!\n";
+		my $err = "No webroot saved to renew cert for!";
+		print "$err\n";
+		&webmin_log("letsencrypt_renew_failed", undef, join(" ", @doms),
+			    { 'domains' => join(", ", @doms),
+			      'mode' => $mode,
+			      'error' => &clean_letsencrypt_event_value($err),
+			      'server' => $server || "" });
+		&save_letsencrypt_event(0, "renew", \@doms, $mode, $webroot,
+					$server, $err);
 		return;
 		}
 	elsif (!-d $webroot) {
-		print "Webroot $webroot does not exist!\n";
+		my $err = "Webroot $webroot does not exist!";
+		print "$err\n";
+		&webmin_log("letsencrypt_renew_failed", undef, join(" ", @doms),
+			    { 'domains' => join(", ", @doms),
+			      'mode' => $mode,
+			      'error' => &clean_letsencrypt_event_value($err),
+			      'server' => $server || "" });
+		&save_letsencrypt_event(0, "renew", \@doms, $mode, $webroot,
+					$server, $err);
 		return;
 		}
+	}
+if ($email_mode eq "webmin" && $email_webmin_raw && !$email) {
+	&webmin_log("letsencrypt_email_fallback", undef, join(" ", @doms),
+		    { 'domains' => join(", ", @doms),
+		      'email' => &clean_letsencrypt_event_value($email_webmin_raw),
+		      'context' => 'renew' });
 	}
 my ($ok, $cert, $key, $chain) = &request_letsencrypt_cert(\@doms, $webroot,
 							  $email, $size, $mode,
 							  undef, undef, undef,
 							  undef, $server,
-							  undef, undef, undef,
+							  $server_key,
+							  $server_hmac, undef,
 							  $force);
 if (!$ok) {
-	print "Failed to renew certificate : $cert\n";
+	my $err = "Failed to renew certificate : $cert";
+	print "$err\n";
+	&webmin_log("letsencrypt_renew_failed", undef, join(" ", @doms),
+		    { 'domains' => join(", ", @doms),
+		      'mode' => $mode,
+		      'error' => &clean_letsencrypt_event_value($cert),
+		      'server' => $server || "" });
+	&save_letsencrypt_event(0, "renew", \@doms, $mode, $webroot,
+				$server, $cert);
 	return;
 	}
 
 # If we don't want to update the Webmin SSL certificate, then just return
-return if (!$usewebmin);
+if (!$usewebmin) {
+	&webmin_log("letsencrypt_renew", undef, join(" ", @doms),
+		    { 'domains' => join(", ", @doms),
+		      'mode' => $mode,
+		      'use_webmin' => 0,
+		      'server' => $server || "" });
+	&save_letsencrypt_event(1, "renew", \@doms, $mode, $webroot,
+				$server,
+				"Certificate renewed successfully (not applied to Webmin)");
+	return;
+	}
 
 # Copy into place
 my %miniserv;
@@ -2778,6 +2849,14 @@ else {
 &put_miniserv_config(\%miniserv);
 &unlock_file($ENV{'MINISERV_CONFIG'});
 &restart_miniserv(1);
+&webmin_log("letsencrypt_renew", undef, join(" ", @doms),
+	    { 'domains' => join(", ", @doms),
+	      'mode' => $mode,
+	      'use_webmin' => 1,
+	      'server' => $server || "" });
+&save_letsencrypt_event(1, "renew", \@doms, $mode, $webroot,
+			$server,
+			"Certificate renewed and applied to Webmin");
 }
 
 # find_openssl_config_file()

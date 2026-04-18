@@ -1,3 +1,15 @@
+line1=Opciones configurables,11
 standard_url=URL de lista de módulos estándar,3,En webmin.com
 third_url=URL de lista de módulos de terceros,3,En webmin.com
 cron_mode=Mostrar horas de actualización como,1,0-Interfaz simple,1-Selector horario de Cron
+warn_days=Días antes del vencimiento de contraseña para avisar a los usuarios,0,5
+line2=Configuración del proveedor ACME,11
+letsencrypt_cmd=Ruta completa del comando del cliente ACME,3,Buscar automáticamente
+letsencrypt_directory_url=URL personalizada del directorio ACME,3,Usar predeterminado del proveedor
+letsencrypt_eab_kid=ID de clave de External Account Binding,3,Ninguno
+letsencrypt_eab_hmac=Clave HMAC de External Account Binding,12
+letsencrypt_algo=Algoritmo de cifrado para la clave privada de Let's Encrypt,1,rsa-RSA,ecdsa-ECC
+letsencrypt_dns_wait=Segundos de espera para la propagación DNS de Let's Encrypt,0,5
+letsencrypt_before=Comando a ejecutar antes de la solicitud de Let's Encrypt,0,60
+letsencrypt_after=Comando a ejecutar después de la solicitud de Let's Encrypt,0,60
+letsencrypt_reuse=¿Reutilizar claves existentes de Let's Encrypt?,1,1-Sí,0-No

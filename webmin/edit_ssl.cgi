@@ -390,24 +390,68 @@ else {
 
 	# ACME server and account
 	print &ui_table_start($text{'ssl_letssec_acme'}, undef, 2);
+	# Optional custom ACME server URL
+	my $acme_desc = $text{'ssl_acmeserver_desc'};
+	my $acme_server_value = $config{'letsencrypt_server'} ||
+				$config{'letsencrypt_directory_url'};
+	my $acme_server_mode = $config{'letsencrypt_server_mode'};
+	if ($acme_server_mode !~ /^(public|custom)$/) {
+		$acme_server_mode = $acme_server_value ?
+				    "custom" : "public";
+		}
+	print &ui_table_row($text{'ssl_acmeserver'},
+		&ui_radio_table("acme_server_mode", $acme_server_mode,
+				[ [ "public",
+				    $text{'ssl_acmeserver_mode_public'} ],
+				  [ "custom",
+				    $text{'ssl_acmeserver_mode_custom'},
+				    &ui_textbox("acme_server",
+						$acme_server_value, 60) ] ]).
+		"<br>\n".$acme_desc);
+	my $staging_note = $text{'ssl_staging_desc'};
 	print &ui_table_row($text{'ssl_staging'},
 		&ui_radio("staging", 0,
 			  [ [ 0, $text{'ssl_staging0'} ],
-			    [ 1, $text{'ssl_staging1'} ] ]));
-
-	# Optional custom ACME server URL
-	my $acme_desc = $text{'ssl_acmeserver_desc'};
+			    [ 1, $text{'ssl_staging1'} ] ]).
+		"<br>\n".$staging_note);
+	my $eab_desc = $text{'ssl_acmeeab_desc'};
 	if (!$letsencrypt_cmd) {
-		$acme_desc .= "<br>\n".$text{'ssl_acmeserver_nocertbot'};
+		$eab_desc .= "<br>\n".$text{'ssl_acmeeab_nocertbot'};
 		}
-	print &ui_table_row($text{'ssl_acmeserver'},
-		&ui_textbox("acme_server", $config{'letsencrypt_server'}, 60,
-			    !$letsencrypt_cmd).
-		"<br>\n".$acme_desc);
+	print &ui_table_row($text{'ssl_acmeeab_kid'},
+		&ui_textbox("acme_eab_kid", $config{'letsencrypt_eab_kid'},
+			    40, !$letsencrypt_cmd).
+		"<br>\n".$text{'ssl_acmeeab_kid_desc'});
+	print &ui_table_row($text{'ssl_acmeeab_hmac'},
+		&ui_password("acme_eab_hmac", $config{'letsencrypt_eab_hmac'},
+			     50, !$letsencrypt_cmd).
+		"<br>\n".$text{'ssl_acmeeab_hmac_desc'}.
+		"<br>\n".$text{'ssl_acmeeab_secretwarn'}.
+		"<br>\n".$eab_desc);
 
 	# Optional ACME account email
+	my $acme_email_mode = $config{'letsencrypt_email_mode'};
+	if ($acme_email_mode !~ /^(none|webmin|custom)$/) {
+		$acme_email_mode = $config{'letsencrypt_email'} ? "custom" : "none";
+		}
+	my $webmin_email_raw = &get_letsencrypt_webmin_email_raw();
+	my $webmin_email = &get_letsencrypt_webmin_email();
+	my $webmin_email_desc = $webmin_email ?
+		&text('ssl_acmeemail_mode_webmin_desc',
+		      "<tt>".&html_escape($webmin_email)."</tt>")
+		: $webmin_email_raw ?
+		&text('ssl_acmeemail_mode_webmin_invalid',
+		      "<tt>".&html_escape($webmin_email_raw)."</tt>")
+		: $text{'ssl_acmeemail_mode_webmin_none'};
 	print &ui_table_row($text{'ssl_acmeemail'},
-		&ui_textbox("acme_email", $config{'letsencrypt_email'}, 50).
+		&ui_radio_table("acme_email_mode", $acme_email_mode,
+				[ [ "none", $text{'ssl_acmeemail_mode_none'} ],
+				  [ "webmin", $text{'ssl_acmeemail_mode_webmin'},
+				    $webmin_email_desc ],
+				  [ "custom", $text{'ssl_acmeemail_mode_custom'},
+				    &ui_textbox("acme_email",
+						$config{'letsencrypt_email'},
+						50) ] ]).
 		"<br>\n".$text{'ssl_acmeemail_desc'});
 	print &ui_table_end();
 
@@ -423,7 +467,8 @@ else {
 	my $job = &find_letsencrypt_cron_job();
 	my $renew = $job && $job->{'months'} =~ /^\*\/(\d+)$/ ? $1 : undef;
 	print &ui_table_row($text{'ssl_letsrenew'},
-		&ui_opt_textbox("renew", $renew, 4, $text{'ssl_letsnotrenew'}));
+		&ui_opt_textbox("renew", $renew, 4, $text{'ssl_letsnotrenew'}).
+		"<br>\n".$text{'ssl_letsrenew_hint'});
 	print &ui_table_end();
 
 	# Apply certificate in Webmin
@@ -433,6 +478,77 @@ else {
 	print &ui_table_end();
 	print &ui_form_end([ [ undef, $text{'ssl_letsok'} ],
 			     [ 'save', $text{'ssl_letssave'} ] ]);
+
+	# Show recent request / renewal events
+	my $event_days = $in{'event_days'};
+	$event_days = undef if (!defined($event_days) ||
+				$event_days !~ /^\d+$/ || $event_days < 1);
+	my @events = &list_letsencrypt_events(30, $event_days);
+	print "<p>\n";
+	print &ui_hidden_start($text{'ssl_letsevents'}, "letsevents",
+			       0);
+	print &ui_form_start("edit_ssl.cgi");
+	print &ui_hidden("mode", "lets");
+	print &ui_table_start(undef, undef, 2);
+	print &ui_table_row($text{'ssl_letsevents_days'},
+		&ui_opt_textbox("event_days", $event_days, 4,
+				$text{'ssl_letsevents_days_all'})." ".
+		&ui_submit($text{'ssl_letsevents_filter'}));
+	print &ui_table_end();
+	print &ui_form_end();
+	print "<p>\n";
+	print &ui_table_start(undef, undef, 2);
+	if (!@events) {
+		print &ui_table_row("", $text{'ssl_letsevents_none'});
+		}
+	else {
+		my @tds = ("width=20%", "width=14%",
+			   "width=10%", "width=56%");
+		print &ui_columns_start(
+			[ $text{'ssl_letsevents_time'},
+			  $text{'ssl_letsevents_action'},
+			  $text{'ssl_letsevents_result'},
+			  $text{'ssl_letsevents_details'} ],
+			100, 0, \@tds);
+		foreach my $ev (@events) {
+			my $action = $ev->{'action'} eq "renew" ?
+				$text{'ssl_letsevents_action_renew'} :
+				$text{'ssl_letsevents_action_request'};
+			my $result = $ev->{'status'} eq "ok" ?
+				$text{'ssl_letsevents_status_ok'} :
+				$text{'ssl_letsevents_status_error'};
+			my @details;
+			push(@details, &text('ssl_letsevents_domains',
+					     "<tt>".&html_escape($ev->{'domains'})."</tt>"))
+				if ($ev->{'domains'});
+			push(@details, &text('ssl_letsevents_mode',
+					     "<tt>".&html_escape($ev->{'mode'})."</tt>"))
+				if ($ev->{'mode'});
+			push(@details, &text('ssl_letsevents_webroot',
+					     "<tt>".&html_escape($ev->{'webroot'})."</tt>"))
+				if ($ev->{'webroot'});
+			push(@details, &text('ssl_letsevents_server',
+					     "<tt>".&html_escape($ev->{'server'})."</tt>"))
+				if ($ev->{'server'});
+			push(@details, &text('ssl_letsevents_message',
+					     &html_escape($ev->{'message'})))
+				if ($ev->{'message'});
+			print &ui_columns_row(
+				[ $ev->{'time_text'}, $action, $result,
+				  join("<br>\n", @details) ],
+				\@tds);
+			}
+		print &ui_columns_end();
+		print "<p>\n";
+		print &ui_form_start("letsencrypt.cgi?event_action=clear_all", "post",
+				     undef, "style='display:inline'");
+		print &ui_hidden("clearall", 1),"\n";
+		print &ui_hidden("event_days", $event_days),"\n" if ($event_days);
+		print &ui_submit($text{'ssl_letsevents_clear'}, "clearall");
+		print &ui_form_end();
+		}
+	print &ui_table_end();
+	print &ui_hidden_end("letsevents");
 	}
 
 print ui_tabs_end_tab();

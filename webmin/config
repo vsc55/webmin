@@ -9,3 +9,5 @@ letsencrypt_dns_wait=10
 letsencrypt_algo=rsa
 letsencrypt_reuse=1
 letsencrypt_nouse=0
+letsencrypt_server_mode=public
+letsencrypt_force=1

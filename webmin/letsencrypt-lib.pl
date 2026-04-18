@@ -91,9 +91,8 @@ foreach my $d (@doms) {
 		}
 	}
 
-if ($server && !$letsencrypt_cmd) {
-	return (0, "A non-standard server can only be used when the native ".
-		   "Let's Encrypt client is installed");
+if (($server_key || $server_hmac) && !$letsencrypt_cmd) {
+	return (0, $text{'letsencrypt_eeabnative'});
 	}
 
 if ($mode eq "web") {
@@ -138,6 +137,12 @@ if ($mode eq "web") {
 	# If Webmin itself is handling HTTP requests, temporarily allow the
 	# challenge path without authentication while requesting the cert.
 	$miniserv_unauth = &setup_miniserv_acme_unauth($webroot, $server);
+	my ($precheck_ok, $precheck_err) =
+		&check_http01_challenge_access(\@doms, $challenge);
+	if (!$precheck_ok) {
+		@rv = (0, $precheck_err);
+		goto FAILED;
+		}
 	}
 elsif ($mode eq "dns") {
 	# Make sure all the DNS zones exist
@@ -243,7 +248,7 @@ if ($letsencrypt_cmd) {
 			   " --rsa-key-size ".quotemeta($size).
 			   " --cert-name ".quotemeta($doms[0]).
 			   " --no-autorenew".
-			   ($staging ? " --test-cert" : "");
+			   (!$server && $staging ? " --test-cert" : "");
 	if ($mode eq "web") {
 		# Webserver based validation
 		&clean_environment();
@@ -346,13 +351,14 @@ if ($letsencrypt_cmd) {
 	$chain = undef if (!-r $chain);
 	&set_ownership_permissions(undef, undef, 0600, $cert);
 	&set_ownership_permissions(undef, undef, 0600, $key);
-	&set_ownership_permissions(undef, undef, 0600, $chain);
+	&set_ownership_permissions(undef, undef, 0600, $chain) if ($chain);
 
 	if ($account_email) {
 		# Attempt to update the contact email on file with let's encrypt
 		&system_logged(
 		    "$letsencrypt_cmd register --update-registration".
 		    " --email ".quotemeta($account_email).
+		    $server_flags.
 		    " >/dev/null 2>&1 </dev/null");
 		}
 
@@ -400,6 +406,11 @@ else {
 
 	# Request the cert and key
 	my $cert = &transname();
+	my $directory_flags = $server ?
+		"--directory-url ".quotemeta($server)." --disable-check "
+		: $staging
+		  ? "--ca https://acme-staging-v02.api.letsencrypt.org "
+		  : "--disable-check ";
 	&clean_environment();
 	my $out = &backquote_logged(
 		"$python $module_root_directory/acme_tiny.py ".
@@ -408,8 +419,7 @@ else {
 		($mode eq "web" ? "--acme-dir ".quotemeta($challenge)." "
 				: "--dns-hook $dns_hook ".
 				  "--cleanup-hook $cleanup_hook ").
-		($staging ? "--ca https://acme-staging-v02.api.letsencrypt.org "
-			  : "--disable-check ").
+		$directory_flags.
 		"--quiet ".
 		"2>&1 >".quotemeta($cert));
 	&reset_environment();
@@ -454,25 +464,30 @@ else {
 		&close_tempfile($fh2);
 		}
 	else {
-		# Download the fixed list chained cert files
-		foreach my $url (@$letsencrypt_chain_urls) {
-			my $cout;
-			my ($host, $port, $page, $ssl) = &parse_http_url($url);
-			my $err;
-			&http_download($host, $port, $page, \$cout, \$err,
-				       undef, $ssl);
-			if ($err) {
-				@rv = (0, &text('letsencrypt_echain', $err));
-				goto FAILED;
+		if (!$server) {
+			# Download the fixed list chained cert files
+			foreach my $url (@$letsencrypt_chain_urls) {
+				my $cout;
+				my ($host, $port, $page, $ssl) =
+					&parse_http_url($url);
+				my $err;
+				&http_download($host, $port, $page, \$cout,
+					       \$err, undef, $ssl);
+				if ($err) {
+					@rv = (0, &text('letsencrypt_echain',
+							$err));
+					goto FAILED;
+					}
+				if ($cout !~ /\S/ && !-r $chain) {
+					@rv = (0, &text('letsencrypt_echain2',
+							$url));
+					goto FAILED;
+					}
+				my $fh = "CHAIN";
+				&open_tempfile($fh, ">>$chain");
+				&print_tempfile($fh, $cout);
+				&close_tempfile($fh);
 				}
-			if ($cout !~ /\S/ && !-r $chain) {
-				@rv = (0, &text('letsencrypt_echain2', $url));
-				goto FAILED;
-				}
-			my $fh = "CHAIN";
-			&open_tempfile($fh, ">>$chain");
-			&print_tempfile($fh, $cout);
-			&close_tempfile($fh);
 			}
 		}
 
@@ -482,13 +497,18 @@ else {
 	my $chainfinal = "$module_config_directory/$doms[0].ca";
 	&copy_source_dest($cert, $certfinal, 1);
 	&copy_source_dest($key, $keyfinal, 1);
-	&copy_source_dest($chain, $chainfinal, 1);
 	&set_ownership_permissions(undef, undef, 0600, $certfinal);
 	&set_ownership_permissions(undef, undef, 0600, $keyfinal);
-	&set_ownership_permissions(undef, undef, 0600, $chainfinal);
+	if ($chain) {
+		&copy_source_dest($chain, $chainfinal, 1);
+		&set_ownership_permissions(undef, undef, 0600, $chainfinal);
+		}
+	else {
+		$chainfinal = undef;
+		}
 	&unlink_file($cert);
 	&unlink_file($key);
-	&unlink_file($chain);
+	&unlink_file($chain) if ($chain);
 
 	@rv = (1, $certfinal, $keyfinal, $chainfinal);
 	}
@@ -743,6 +763,53 @@ foreach my $line (split(/\r?\n/, &read_file_contents($marker))) {
 return \%rv;
 }
 
+# check_http01_challenge_access(&domains, challenge-dir)
+# Creates a temporary challenge file and checks if each hostname can fetch it
+# over HTTP. This catches common 403/denied webroot mistakes before certbot
+# starts the ACME order process.
+sub check_http01_challenge_access
+{
+my ($domains, $challenge) = @_;
+return (1) if (!$challenge || !-d $challenge);
+my @doms = ref($domains) ? @$domains : split(/\s+/, $domains || "");
+@doms = grep { $_ && $_ !~ /^\*/ } @doms;
+return (1) if (!@doms);
+my $token = "webmin-precheck-".time()."-$$-".int(rand(1000000));
+my $content = "webmin-acme-precheck-".time()."-$$";
+my $file = "$challenge/$token";
+my $fh = "PRECHECK";
+my $created = eval {
+	&open_tempfile($fh, ">$file");
+	&print_tempfile($fh, $content."\n");
+	&close_tempfile($fh);
+	&set_ownership_permissions(undef, undef, 0644, $file);
+	1;
+	};
+return (1) if (!$created);
+
+my @errors;
+foreach my $dom (@doms) {
+	my $path = "/.well-known/acme-challenge/$token";
+	my $url = "http://$dom$path";
+	my ($out, $err) = ("", undef);
+	&http_download($dom, 80, $path, \$out, \$err, undef, 0);
+	if ($err) {
+		# Local pre-check can be blocked by local ACL / allow rules even
+		# when ACME validation from the provider still works. Treat HTTP
+		# errors as non-fatal and continue with the real ACME request.
+		next;
+		}
+	if ($out !~ /\Q$content\E/) {
+		push(@errors, &text('letsencrypt_eprecheck_badcontent', $url));
+		}
+	}
+&unlink_file($file);
+if (@errors) {
+	return (0, join("\n", @errors)."\n".$text{'letsencrypt_eprecheck_hint'});
+	}
+return (1);
+}
+
 # cleanup_wellknown(wellknown, challenge)
 # Delete directories that were created as part of this process
 sub cleanup_wellknown
@@ -798,6 +865,160 @@ if ($out && $out =~ /\s*(\d+\.\d+)\s*/) {
 	return $1;
 	}
 return undef;
+}
+
+# get_letsencrypt_webmin_email()
+# Returns the Webmin-configured email address for ACME registration, if any.
+sub get_letsencrypt_webmin_email
+{
+my $email = &get_letsencrypt_webmin_email_raw();
+return undef if (!$email || !&is_usable_letsencrypt_acme_email($email));
+return $email;
+}
+
+# get_letsencrypt_webmin_email_raw()
+# Returns the configured Webmin email address without ACME suitability checks.
+sub get_letsencrypt_webmin_email_raw
+{
+my $email;
+if (&foreign_check("mailboxes")) {
+	eval {
+		&foreign_require("mailboxes");
+		};
+	if (!$@ && defined(&mailboxes::get_from_address)) {
+		my $from = &mailboxes::get_from_address();
+		if ($from =~ /<([^<>\s]+\@[^\s<>]+)>/) {
+			$email = $1;
+			}
+		elsif ($from =~ /([A-Za-z0-9\.\_\+\-]+\@[A-Za-z0-9\.\-]+)/) {
+			$email = $1;
+			}
+		}
+	}
+if (!$email && $gconfig{'webmin_email_to'}) {
+	$email = $gconfig{'webmin_email_to'};
+	}
+return $email;
+}
+
+# is_usable_letsencrypt_acme_email(email)
+# Returns 1 if the email looks suitable for ACME account registration.
+sub is_usable_letsencrypt_acme_email
+{
+my ($email) = @_;
+return 0 if (!$email);
+return 0 if ($email !~ /^[^\s\@]+\@([^\s\@]+)$/);
+my $domain = lc($1);
+return 0 if ($domain !~ /\./);                          # like localhost
+return 0 if ($domain =~ /(?:^|\.)localhost$/);
+return 0 if ($domain =~ /(?:^|\.)localdomain$/);
+return 0 if ($domain =~ /\.(?:local|lan|home|internal)$/);
+return 1;
+}
+
+# letsencrypt_events_log_file()
+# Returns the log file used for certificate request / renewal events.
+sub letsencrypt_events_log_file
+{
+return "$module_config_directory/letsencrypt-events.log";
+}
+
+# clean_letsencrypt_event_value(value)
+# Removes tabs/newlines and extra whitespace from log fields.
+sub clean_letsencrypt_event_value
+{
+my ($value) = @_;
+$value = "" if (!defined($value));
+$value =~ s/<[^>]*>//g;
+if (defined(&html_unescape)) {
+	$value = &html_unescape($value);
+	}
+$value =~ s/[\r\n\t]+/ /g;
+$value =~ s/\s+/ /g;
+$value =~ s/^\s+//;
+$value =~ s/\s+$//;
+if (length($value) > 1000) {
+	$value = substr($value, 0, 997)."...";
+	}
+return $value;
+}
+
+# save_letsencrypt_event(ok, action, domains|&domains, mode, webroot, server,
+#			 message)
+# Records a request / renewal event for later display in the UI.
+sub save_letsencrypt_event
+{
+my ($ok, $action, $domains, $mode, $webroot, $server, $message) = @_;
+my @doms = ref($domains) ? @$domains : split(/\s+/, $domains || "");
+my $file = &letsencrypt_events_log_file();
+my $line = join("\t",
+		time(),
+		$ok ? "ok" : "error",
+		&clean_letsencrypt_event_value($action || "request"),
+		&clean_letsencrypt_event_value(join(", ", @doms)),
+		&clean_letsencrypt_event_value($mode),
+		&clean_letsencrypt_event_value($webroot),
+		&clean_letsencrypt_event_value($server),
+		&clean_letsencrypt_event_value($message));
+
+	&lock_file($file);
+	if (open(my $fh, ">>", $file)) {
+		print $fh $line,"\n";
+		close($fh);
+		}
+
+	# Keep only the latest events to avoid unbounded growth.
+	my $max = defined($config{'letsencrypt_events_max'}) &&
+		  $config{'letsencrypt_events_max'} =~ /^\d+$/ &&
+		  $config{'letsencrypt_events_max'} > 0 ?
+		  $config{'letsencrypt_events_max'} : 200;
+	my @lines = split(/\r?\n/, &read_file_contents($file));
+	if (@lines > $max) {
+		@lines = @lines[$#lines-$max+1 .. $#lines];
+		&write_file_contents($file, join("\n", @lines)."\n");
+		}
+	&unlock_file($file);
+}
+
+# list_letsencrypt_events([max], [days])
+# Returns latest request / renewal events, most recent first.
+sub list_letsencrypt_events
+{
+my ($max, $days) = @_;
+my $file = &letsencrypt_events_log_file();
+return () if (!-r $file);
+my @lines = split(/\r?\n/, &read_file_contents($file));
+my $cutoff = $days ? time() - $days*24*60*60 : undef;
+my @rv;
+for (my $i = $#lines; $i >= 0; $i--) {
+	my $line = $lines[$i];
+	next if ($line !~ /\S/);
+	my ($time, $status, $action, $domains, $mode, $webroot, $server,
+	    $message) = split(/\t/, $line, 8);
+	next if ($time !~ /^\d+$/);
+	next if (defined($cutoff) && $time < $cutoff);
+	push(@rv, { 'time' => $time+0,
+		    'time_text' => &make_date($time, 1),
+		    'status' => $status,
+		    'action' => $action,
+		    'domains' => $domains,
+		    'mode' => $mode,
+		    'webroot' => $webroot,
+		    'server' => $server,
+		    'message' => $message });
+	last if ($max && @rv >= $max);
+	}
+return @rv;
+}
+
+# clear_letsencrypt_events()
+# Deletes stored request / renewal events.
+sub clear_letsencrypt_events
+{
+my $file = &letsencrypt_events_log_file();
+&lock_file($file);
+&unlink_file($file);
+&unlock_file($file);
 }
 
 # cleanup_letsencrypt_files(domain)
