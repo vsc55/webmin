@@ -30,6 +30,12 @@ $in{'renew_def'} || $in{'renew'} =~ /^[1-9][0-9]*$/ ||
 $in{'size_def'} || $in{'size'} =~ /^\d+$/ ||
 	&error($text{'newkey_esize'});
 my $size = $in{'size_def'} ? undef : $in{'size'};
+my $acme_server = $in{'acme_server'};
+$acme_server =~ s/^\s+//;
+$acme_server =~ s/\s+$//;
+$acme_server = undef if (!length($acme_server));
+$acme_server =~ /^https?:\/\/\S+$/i ||
+	&error($text{'letsencrypt_eacmeserver'}) if ($acme_server);
 my $webroot;
 my $mode = "web";
 if ($in{'webroot_mode'} == 3) {
@@ -89,7 +95,7 @@ else {
 if ($in{'save'}) {
 	# Just update renewal
 	&save_renewal_only(\@doms, $webroot, $mode, $size,
-			   $in{'subset'}, $in{'use'});
+			   $in{'subset'}, $in{'use'}, $acme_server);
 	&redirect("edit_ssl.cgi");
 	}
 else {
@@ -103,7 +109,7 @@ else {
 		    "<tt>".&html_escape($webroot)."</tt>"),"<p>\n";
 	my ($ok, $cert, $key, $chain) = &request_letsencrypt_cert(
 		\@doms, $webroot, undef, $size, $mode, $in{'staging'},
-		undef, undef, undef, undef, undef, undef, $in{'subset'});
+		undef, undef, undef, $acme_server, undef, undef, $in{'subset'});
 	if (!$ok) {
 		print &text('letsencrypt_failed', $cert),"<p>\n";
 		}
@@ -113,7 +119,8 @@ else {
 
 		# Save the renewal schedule
 		&save_renewal_only(\@doms, $webroot, $mode,
-				   $size, $in{'subset'}, $in{'use'});
+				   $size, $in{'subset'}, $in{'use'},
+				   $acme_server);
 
 		# Copy cert, key and chain to Webmin
 		if ($in{'use'}) {
@@ -162,17 +169,24 @@ else {
 	&ui_print_footer("", $text{'index_return'});
 	}
 
-# save_renewal_only(&doms, webroot, mode, size, subset-mode, used-by-webmin)
+# save_renewal_only(&doms, webroot, mode, size, subset-mode, used-by-webmin,
+#		    [custom-acme-server])
 # Save for future renewals
 sub save_renewal_only
 {
-my ($doms, $webroot, $mode, $size, $subset, $usewebmin) = @_;
+my ($doms, $webroot, $mode, $size, $subset, $usewebmin, $acme_server) = @_;
 $config{'letsencrypt_doms'} = join(" ", @$doms);
 $config{'letsencrypt_webroot'} = $webroot;
 $config{'letsencrypt_mode'} = $mode;
 $config{'letsencrypt_size'} = $size;
 $config{'letsencrypt_subset'} = $subset;
 $config{'letsencrypt_nouse'} = $usewebmin ? 0 : 1;
+if ($acme_server) {
+	$config{'letsencrypt_server'} = $acme_server;
+	}
+else {
+	delete($config{'letsencrypt_server'});
+	}
 &save_module_config();
 if (&foreign_check("webmincron")) {
 	my $job = &find_letsencrypt_cron_job();

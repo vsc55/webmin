@@ -2719,6 +2719,7 @@ my @doms = split(/\s+/, $config{'letsencrypt_doms'});
 my $webroot = $config{'letsencrypt_webroot'};
 my $mode = $config{'letsencrypt_mode'} || "web";
 my $size = $config{'letsencrypt_size'};
+my $server = $config{'letsencrypt_server'};
 my $usewebmin = !$config{'letsencrypt_nouse'};
 if (!@doms) {
 	print "No domains saved to renew cert for!\n";
@@ -2733,7 +2734,9 @@ elsif (!-d $webroot) {
 	return;
 	}
 my ($ok, $cert, $key, $chain) = &request_letsencrypt_cert(\@doms, $webroot,
-							  undef, $size, $mode);
+							  undef, $size, $mode,
+							  undef, undef, undef,
+							  undef, $server);
 if (!$ok) {
 	print "Failed to renew certificate : $cert\n";
 	return;

@@ -343,6 +343,11 @@ else {
 			  [ [ 0, $text{'ssl_staging0'} ],
 			    [ 1, $text{'ssl_staging1'} ] ]));
 
+	# Optional custom ACME server URL
+	print &ui_table_row($text{'ssl_acmeserver'},
+		&ui_textbox("acme_server", $config{'letsencrypt_server'}, 60).
+		"<br>\n".$text{'ssl_acmeserver_desc'});
+
 	# Renewal option
 	my $job = &find_letsencrypt_cron_job();
 	my $renew = $job && $job->{'months'} =~ /^\*\/(\d+)$/ ? $1 : undef;
@@ -359,4 +364,3 @@ print ui_tabs_end_tab();
 print ui_tabs_end(1);
 
 ui_print_footer("", $text{'index_return'});
-

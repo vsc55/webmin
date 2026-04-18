@@ -443,6 +443,8 @@ ssl_letsnotrenew=Only renew manually
 ssl_staging=Let's Encrypt server
 ssl_staging0=Real
 ssl_staging1=Staging (test only)
+ssl_acmeserver=Custom ACME server URL
+ssl_acmeserver_desc=Optional advanced setting. If set, use this ACME server instead of the default Let's Encrypt server.
 
 newkey_err=Failed to create SSL key
 newkey_ecn=Missing or invalid server name
@@ -1253,6 +1255,7 @@ letsencrypt_ekeygen=Failed to generate private key : $1
 letsencrypt_enative=The native Let's Encrypt client (certbot) was used previously on this system, and must be used for all future certificate requests
 letsencrypt_eacmedns=Only the official Let's Encrypt client supports DNS-based validation
 letsencrypt_eacmecertbot=Only the official Let's Encrypt client supports Certbot validation
+letsencrypt_eacmeserver=Custom ACME server URL must be an absolute http:// or https:// URL
 
 announce_hide=Hide This Announcement
 alert_hide=Hide Alert
