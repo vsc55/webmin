@@ -13,6 +13,7 @@ our %in;
 our $config_directory;
 our %config;
 our $module_name;
+our $letsencrypt_cmd;
 &error_setup($text{'letsencrypt_err'});
 
 # Re-check if let's encrypt is available
@@ -36,6 +37,19 @@ $acme_server =~ s/\s+$//;
 $acme_server = undef if (!length($acme_server));
 $acme_server =~ /^https?:\/\/\S+$/i ||
 	&error($text{'letsencrypt_eacmeserver'}) if ($acme_server);
+if ($acme_server && !$letsencrypt_cmd) {
+	&error($text{'letsencrypt_eacmeservercmd'});
+	}
+my $acme_email = $in{'acme_email'};
+$acme_email =~ s/^\s+//;
+$acme_email =~ s/\s+$//;
+$acme_email = undef if (!length($acme_email));
+if ($acme_email && $acme_email !~ /^[^\s\@]+\@[^\s\@]+$/) {
+	&error($text{'letsencrypt_eacmeemail'});
+	}
+my $force = defined($in{'force'}) ? ($in{'force'} ? 1 : 0)
+				  : defined($config{'letsencrypt_force'}) ?
+				      $config{'letsencrypt_force'} : 1;
 my $webroot;
 my $mode = "web";
 if ($in{'webroot_mode'} == 3) {
@@ -43,8 +57,33 @@ if ($in{'webroot_mode'} == 3) {
 	$mode = "dns";
 	}
 elsif ($in{'webroot_mode'} == 4) {
-	# Validation via Certbot webserver
-	$mode = "certbot";
+	# Validation via Certbot webserver, unless Webmin is already handling
+	# HTTP on port 80 (fall back to webroot mode in that case)
+	&get_miniserv_config(\%miniserv);
+	my @fallback_webroots = grep { $_ && $_ =~ /^\/\S+/ && -d $_ } (
+		$in{'webroot'},
+		$config{'letsencrypt_webroot'},
+		$miniserv{'root'}
+		);
+	my %done;
+	@fallback_webroots = grep { !$done{$_}++ } @fallback_webroots;
+	if ($miniserv{'port'} =~ /(^|\s)80($|\s)/ &&
+	    $miniserv{'root'} && -d $miniserv{'root'}) {
+		$mode = "web";
+		$webroot = $miniserv{'root'};
+		}
+	elsif (!&can_bind_local_port(80)) {
+		if (@fallback_webroots) {
+			$mode = "web";
+			$webroot = $fallback_webroots[0];
+			}
+		else {
+			&error(&text('letsencrypt_ecertbotport', 80));
+			}
+		}
+	else {
+		$mode = "certbot";
+		}
 	}
 elsif ($in{'webroot_mode'} == 2) {
 	# Some directory
@@ -92,13 +131,20 @@ else {
 	$webroot || &error(&text('letsencrypt_evhost', $doms[0]));
 	}
 
-if ($in{'save'}) {
+if ($in{'save'} || $in{'savecfg'}) {
 	# Just update renewal
 	&save_renewal_only(\@doms, $webroot, $mode, $size,
-			   $in{'subset'}, $in{'use'}, $acme_server);
-	&redirect("edit_ssl.cgi");
+			   $in{'subset'}, $in{'use'}, $acme_server,
+			   $acme_email, $force);
+	&redirect("edit_ssl.cgi?mode=lets");
 	}
 else {
+	# Save renewal and request options even if certificate issuance fails,
+	# so cron/email/server settings can be updated independently.
+	&save_renewal_only(\@doms, $webroot, $mode, $size,
+			   $in{'subset'}, $in{'use'},
+			   $acme_server, $acme_email, $force);
+
 	# Request the cert
 	&ui_print_unbuffered_header(undef, $text{'letsencrypt_title'}, "");
 
@@ -108,19 +154,15 @@ else {
 		    "<tt>".&html_escape(join(", ", @doms))."</tt>",
 		    "<tt>".&html_escape($webroot)."</tt>"),"<p>\n";
 	my ($ok, $cert, $key, $chain) = &request_letsencrypt_cert(
-		\@doms, $webroot, undef, $size, $mode, $in{'staging'},
-		undef, undef, undef, $acme_server, undef, undef, $in{'subset'});
+		\@doms, $webroot, $acme_email, $size, $mode, $in{'staging'},
+		undef, undef, undef, $acme_server, undef, undef, $in{'subset'},
+		$force);
 	if (!$ok) {
 		print &text('letsencrypt_failed', $cert),"<p>\n";
 		}
 	else {
 		# Worked, now copy to Webmin
 		print $text{'letsencrypt_done'},"<p>\n";
-
-		# Save the renewal schedule
-		&save_renewal_only(\@doms, $webroot, $mode,
-				   $size, $in{'subset'}, $in{'use'},
-				   $acme_server);
 
 		# Copy cert, key and chain to Webmin
 		if ($in{'use'}) {
@@ -170,11 +212,12 @@ else {
 	}
 
 # save_renewal_only(&doms, webroot, mode, size, subset-mode, used-by-webmin,
-#		    [custom-acme-server])
+#		    [custom-acme-server], [acme-account-email], [force-renew])
 # Save for future renewals
 sub save_renewal_only
 {
-my ($doms, $webroot, $mode, $size, $subset, $usewebmin, $acme_server) = @_;
+my ($doms, $webroot, $mode, $size, $subset, $usewebmin, $acme_server,
+    $acme_email, $force) = @_;
 $config{'letsencrypt_doms'} = join(" ", @$doms);
 $config{'letsencrypt_webroot'} = $webroot;
 $config{'letsencrypt_mode'} = $mode;
@@ -187,6 +230,14 @@ if ($acme_server) {
 else {
 	delete($config{'letsencrypt_server'});
 	}
+if ($acme_email) {
+	$config{'letsencrypt_email'} = $acme_email;
+	}
+else {
+	delete($config{'letsencrypt_email'});
+	}
+$force = 1 if (!defined($force));
+$config{'letsencrypt_force'} = $force ? 1 : 0;
 &save_module_config();
 if (&foreign_check("webmincron")) {
 	my $job = &find_letsencrypt_cron_job();
@@ -205,4 +256,25 @@ if (&foreign_check("webmincron")) {
 		&webmincron::create_webmin_cron($job);
 		}
 	}
+}
+
+# can_bind_local_port(port)
+# Returns 1 if this process can bind to a local TCP port.
+sub can_bind_local_port
+{
+my ($port) = @_;
+my $sock;
+eval {
+	require IO::Socket::INET;
+	$sock = IO::Socket::INET->new(
+		'Proto' => 'tcp',
+		'LocalAddr' => '0.0.0.0',
+		'LocalPort' => $port,
+		'Listen' => 5,
+		'ReUseAddr' => 0,
+		);
+	};
+return 0 if ($@ || !$sock);
+close($sock);
+return 1;
 }

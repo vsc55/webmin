@@ -60,20 +60,29 @@ return &software::missing_install_link(
 # 			   [request-mode], [use-staging], [account-email],
 # 			   [key-type], [reuse-key],
 # 			   [server-url, server-key, server-hmac],
-# 			   [allow-subset])
+# 			   [allow-subset], [force-renew])
 # Attempt to request a cert using a generated key with the Let's Encrypt client
 # command, and write it to the given path. Returns a status flag, and either
 # an error message or the paths to cert, key and chain files.
 sub request_letsencrypt_cert
 {
 my ($dom, $webroot, $email, $size, $mode, $staging, $account_email,
-    $key_type, $reuse_key, $server, $server_key, $server_hmac, $subset) = @_;
+    $key_type, $reuse_key, $server, $server_key, $server_hmac, $subset,
+    $force_renew) = @_;
 my @doms = ref($dom) ? @$dom : ($dom);
+$email = undef if (defined($email) && $email !~ /\S/);
+my $auto_email = !defined($email);
 $email ||= "root\@$doms[0]";
 $mode ||= "web";
 @doms = &unique(@doms);
 $reuse_key = $config{'letsencrypt_reuse'} if (!defined($reuse_key));
 my ($challenge, $wellknown, $challenge_new, $wellknown_new, $wildcard);
+my $miniserv_unauth;
+my @rv;
+
+# Defensive cleanup in case a previous run was interrupted before restoring
+# temporary miniserv unauthenticated ACME access.
+&cleanup_stale_miniserv_acme_unauth();
 
 # Wildcard mode?
 foreach my $d (@doms) {
@@ -125,6 +134,10 @@ if ($mode eq "web") {
 				$user, undef, 0755, $htaccess);
 			}
 		}
+
+	# If Webmin itself is handling HTTP requests, temporarily allow the
+	# challenge path without authentication while requesting the cert.
+	$miniserv_unauth = &setup_miniserv_acme_unauth($webroot, $server);
 	}
 elsif ($mode eq "dns") {
 	# Make sure all the DNS zones exist
@@ -164,16 +177,19 @@ if ($mode eq "dns") {
 if ($config{'letsencrypt_before'}) {
 	my $out = &backquote_logged("$config{'letsencrypt_before'} 2>&1 </dev/null");
 	if ($?) {
-		return (0, "Pre-request command failed : $out");
+		@rv = (0, "Pre-request command failed : $out");
+		goto FAILED;
 		}
 	}
 
-my @rv;
 if ($letsencrypt_cmd) {
 	# Call the native Let's Encrypt client
 	my $temp = &transname();
+	my $set_email = !$auto_email;
+	my $email_flags = $auto_email ? " --register-unsafely-without-email"
+				      : "";
 	&open_tempfile(TEMP, ">$temp");
-	&print_tempfile(TEMP, "email = $email\n");
+	&print_tempfile(TEMP, "email = $email\n") if ($set_email);
 	&print_tempfile(TEMP, "text = True\n");
 	&close_tempfile(TEMP);
 	my $dir = $letsencrypt_cmd;
@@ -216,11 +232,14 @@ if ($letsencrypt_cmd) {
 	$dir =~ s/\/[^\/]+$//;
 	$size ||= 2048;
 	my $out;
-	my $common_flags = " --duplicate".
-			   " --force-renewal".
+	$force_renew = 1 if (!defined($force_renew));
+	my $renew_flags = $force_renew ? " --force-renewal"
+				       : " --keep-until-expiring";
+	my $common_flags = $renew_flags.
 			   " --non-interactive".
 			   " --agree-tos".
 			   " --config ".quotemeta($temp)."".
+			   $email_flags.
 			   " --rsa-key-size ".quotemeta($size).
 			   " --cert-name ".quotemeta($doms[0]).
 			   " --no-autorenew".
@@ -293,7 +312,9 @@ if ($letsencrypt_cmd) {
 		}
 	else {
 		# Try searching common paths
-		my @fulls = (glob("/etc/letsencrypt/live/$doms[0]-*/cert.pem"),
+		my @fulls = (glob("/etc/letsencrypt/live/$doms[0]/cert.pem"),
+			     glob("/etc/letsencrypt/live/$doms[0]-*/cert.pem"),
+			     glob("/usr/local/etc/letsencrypt/live/$doms[0]/cert.pem"),
 			     glob("/usr/local/etc/letsencrypt/live/$doms[0]-*/cert.pem"));
 		if (@fulls) {
 			my %stats = map { $_, [ stat($_) ] } @fulls;
@@ -474,6 +495,9 @@ else {
 
 # Run the after command
 FAILED:
+if ($miniserv_unauth) {
+	&cleanup_miniserv_acme_unauth($miniserv_unauth);
+	}
 if ($wellknown_new) {
 	&cleanup_wellknown($wellknown_new, $challenge_new);
 	}
@@ -482,6 +506,241 @@ if ($config{'letsencrypt_after'}) {
 	}
 
 return @rv;
+}
+
+# setup_miniserv_acme_unauth(webroot)
+# If webroot is miniserv's document root on port 80, temporarily add the ACME
+# challenge path to unauthenticated URLs. Returns a state object, or undef if
+# no temporary change was needed.
+sub setup_miniserv_acme_unauth
+{
+my ($webroot, $server) = @_;
+my %miniserv;
+&get_miniserv_config(\%miniserv) || return undef;
+return undef if (!$miniserv{'root'} || !$webroot);
+return undef if (!&same_file($webroot, $miniserv{'root'}));
+my $acme_unauth = '^/\.well-known/acme-challenge/';
+my $miniserv_config = &get_miniserv_config_file();
+my $changed = 0;
+my $state = {
+	'acme_unauth' => $acme_unauth,
+	'managed' => 1,
+	};
+&lock_file($miniserv_config);
+&get_miniserv_config(\%miniserv);
+my @unauth = grep { length($_) } split(/\s+/, $miniserv{'unauth'});
+if (&indexof($acme_unauth, @unauth) < 0) {
+	push(@unauth, $acme_unauth);
+	$miniserv{'unauth'} = join(" ", @unauth);
+	$state->{'added_unauth'} = 1;
+	$changed = 1;
+	}
+my $test_challenge = "$webroot/.well-known/acme-challenge/TEST";
+my $denyfile = $miniserv{'denyfile'};
+if (defined($denyfile) && length($denyfile) &&
+    $test_challenge =~ /$denyfile/) {
+	# Temporarily bypass denyfile checks for ACME challenge URLs.
+	$state->{'denyfile_old'} = $denyfile;
+	$miniserv{'denyfile'} =
+		"^(?!.*\\/\\.well-known\\/acme-challenge\\/).*(?:$denyfile)";
+	$changed = 1;
+	}
+if ($miniserv{'ssl_enforce'}) {
+	# ACME HTTP-01 must be reachable over plain HTTP without forcing redirect
+	# to HTTPS, otherwise some validators follow to a login page.
+	$state->{'ssl_enforce_old'} = $miniserv{'ssl_enforce'};
+	$miniserv{'ssl_enforce'} = 0;
+	$changed = 1;
+	}
+if ($server && defined($miniserv{'allow'}) && length($miniserv{'allow'})) {
+	my ($shost, $sport, $spage, $sssl) = &parse_http_url($server);
+	my @allow = grep { length($_) } split(/\s+/, $miniserv{'allow'});
+	if ($shost && @allow) {
+		my @sips;
+		if (defined(&to_ip46address)) {
+			@sips = &to_ip46address($shost);
+			}
+		else {
+			push(@sips, &to_ipaddress($shost))
+				if (defined(&to_ipaddress));
+			push(@sips, &to_ip6address($shost))
+				if (defined(&to_ip6address));
+			}
+		push(@sips, $shost);
+		my %done;
+		@sips = grep { $_ && !$done{$_}++ } @sips;
+		my %have = map { $_, 1 } @allow;
+		my @missing = grep { $_ && !$have{$_} } @sips;
+		if (@missing) {
+			$state->{'allow_old'} = $miniserv{'allow'};
+			push(@allow, @missing);
+			$miniserv{'allow'} = join(" ", @allow);
+			$changed = 1;
+			}
+		}
+	}
+if ($changed) {
+	&put_miniserv_config(\%miniserv);
+	&write_miniserv_acme_unauth_marker($state);
+	}
+&unlock_file($miniserv_config);
+if ($changed) {
+	&reload_miniserv(1);
+	return $state;
+	}
+return undef;
+}
+
+# cleanup_miniserv_acme_unauth(&state)
+# Reverts temporary miniserv unauth changes made by setup_miniserv_acme_unauth.
+sub cleanup_miniserv_acme_unauth
+{
+my ($state) = @_;
+return if (!$state);
+my %miniserv;
+my $changed = 0;
+my $miniserv_config = &get_miniserv_config_file();
+&lock_file($miniserv_config);
+&get_miniserv_config(\%miniserv);
+if ($state->{'added_unauth'} && $state->{'acme_unauth'}) {
+	my @unauth = grep { length($_) } split(/\s+/, $miniserv{'unauth'});
+	my @newunauth = grep { $_ ne $state->{'acme_unauth'} } @unauth;
+	if (scalar(@newunauth) != scalar(@unauth)) {
+		$changed = 1;
+		if (@newunauth) {
+			$miniserv{'unauth'} = join(" ", @newunauth);
+			}
+		else {
+			delete($miniserv{'unauth'});
+			}
+		}
+	}
+if (exists($state->{'denyfile_old'})) {
+	my $old = $state->{'denyfile_old'};
+	if (defined($old) && length($old)) {
+		if (!defined($miniserv{'denyfile'}) ||
+		    $miniserv{'denyfile'} ne $old) {
+			$miniserv{'denyfile'} = $old;
+			$changed = 1;
+			}
+		}
+	elsif (defined($miniserv{'denyfile'})) {
+		delete($miniserv{'denyfile'});
+		$changed = 1;
+		}
+	}
+if (exists($state->{'ssl_enforce_old'})) {
+	my $old = $state->{'ssl_enforce_old'};
+	if (!defined($miniserv{'ssl_enforce'}) ||
+	    $miniserv{'ssl_enforce'} ne $old) {
+		$miniserv{'ssl_enforce'} = $old;
+		$changed = 1;
+		}
+	}
+if (exists($state->{'allow_old'})) {
+	my $old = $state->{'allow_old'};
+	if (defined($old) && length($old)) {
+		if (!defined($miniserv{'allow'}) || $miniserv{'allow'} ne $old) {
+			$miniserv{'allow'} = $old;
+			$changed = 1;
+			}
+		}
+	elsif (defined($miniserv{'allow'})) {
+		delete($miniserv{'allow'});
+		$changed = 1;
+		}
+	}
+if ($changed) {
+	&put_miniserv_config(\%miniserv);
+	}
+&unlock_file($miniserv_config);
+if ($changed) {
+	&reload_miniserv(1);
+	}
+if ($state->{'managed'}) {
+	&unlink_file(&miniserv_acme_unauth_marker_file());
+	}
+}
+
+# cleanup_stale_miniserv_acme_unauth()
+# Removes any stale temporary miniserv ACME unauth entry left by an interrupted
+# previous run managed by Webmin.
+sub cleanup_stale_miniserv_acme_unauth
+{
+my $marker = &read_miniserv_acme_unauth_marker();
+return if (!$marker);
+if ($marker->{'pid'} =~ /^\d+$/ && kill(0, $marker->{'pid'})) {
+	# Another process is actively managing this temporary entry
+	return;
+	}
+$marker->{'managed'} = 1;
+&cleanup_miniserv_acme_unauth($marker);
+}
+
+# miniserv_acme_unauth_marker_file()
+# Returns the marker file used to track temporary miniserv ACME unauth updates.
+sub miniserv_acme_unauth_marker_file
+{
+return "$module_config_directory/letsencrypt-miniserv-acme-unauth";
+}
+
+# write_miniserv_acme_unauth_marker(&state)
+# Marks temporary miniserv ACME unauth change ownership for crash recovery.
+sub write_miniserv_acme_unauth_marker
+{
+my ($state) = @_;
+my $marker = &miniserv_acme_unauth_marker_file();
+&open_tempfile(MARKER, ">$marker");
+&print_tempfile(MARKER, "pid=$$\n");
+&print_tempfile(MARKER, "acme_unauth=$state->{'acme_unauth'}\n")
+	if ($state->{'acme_unauth'});
+&print_tempfile(MARKER, "added_unauth=".
+		       ($state->{'added_unauth'} ? 1 : 0)."\n");
+if (exists($state->{'denyfile_old'})) {
+	&print_tempfile(MARKER, "denyfile_old=".
+			       &encode_base64($state->{'denyfile_old'},
+					      'noeol')."\n");
+	}
+if (exists($state->{'ssl_enforce_old'})) {
+	&print_tempfile(MARKER, "ssl_enforce_old=$state->{'ssl_enforce_old'}\n");
+	}
+if (exists($state->{'allow_old'})) {
+	&print_tempfile(MARKER, "allow_old=".
+			       &encode_base64($state->{'allow_old'},
+					      'noeol')."\n");
+	}
+&close_tempfile(MARKER);
+&set_ownership_permissions(undef, undef, 0600, $marker);
+}
+
+# read_miniserv_acme_unauth_marker()
+# Returns marker details for temporary miniserv ACME unauth updates.
+sub read_miniserv_acme_unauth_marker
+{
+my $marker = &miniserv_acme_unauth_marker_file();
+return undef if (!-r $marker);
+my %rv = ( 'acme_unauth' => '^/\.well-known/acme-challenge/' );
+foreach my $line (split(/\r?\n/, &read_file_contents($marker))) {
+	if ($line =~ /^pid=(\d+)$/) {
+		$rv{'pid'} = $1;
+		}
+	elsif ($line =~ /^acme_unauth=(.*)$/) {
+		$rv{'acme_unauth'} = $1;
+		}
+	elsif ($line =~ /^added_unauth=(\d+)$/) {
+		$rv{'added_unauth'} = $1 ? 1 : 0;
+		}
+	elsif ($line =~ /^denyfile_old=(.*)$/) {
+		$rv{'denyfile_old'} = &decode_base64($1);
+		}
+	elsif ($line =~ /^ssl_enforce_old=(.*)$/) {
+		$rv{'ssl_enforce_old'} = $1;
+		}
+	elsif ($line =~ /^allow_old=(.*)$/) {
+		$rv{'allow_old'} = &decode_base64($1);
+		}
+	}
+return \%rv;
 }
 
 # cleanup_wellknown(wellknown, challenge)

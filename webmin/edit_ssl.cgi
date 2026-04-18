@@ -261,10 +261,10 @@ print ui_tabs_end_tab();
 
 # Let's Encrypt form
 print ui_tabs_start_tab("mode", "lets");
-print "$text{'ssl_letsdesc'}<p>\n";
 
 my $err = &check_letsencrypt();
 if ($err) {
+	print "$text{'ssl_letsdesc'}<p>\n";
 	print "<b>",&text('ssl_letserr', $err),"</b><p>\n";
 	print &get_letsencrypt_install_message(
 		"/$module_name/edit_ssl.cgi?mode=lets", $text{'ssl_title'});
@@ -273,7 +273,30 @@ if ($err) {
 	}
 else {
 	# Show form to create a cert
+	my $certbot_install_html;
+	my $certbot_ui;
+	if (!$letsencrypt_cmd) {
+		$certbot_install_html = &get_letsencrypt_install_message(
+			"/$module_name/edit_ssl.cgi?mode=lets",
+			$text{'ssl_title'});
+		$certbot_ui = $text{'ssl_certbot_missing'};
+		}
+	else {
+		my $certbot_ver = &get_certbot_major_version($letsencrypt_cmd);
+		$certbot_ui = $certbot_ver ? &text('ssl_certbot_okver',
+						   $certbot_ver)
+					   : $text{'ssl_certbot_ok'};
+		}
+	print "$text{'ssl_letsdesc'}<p>\n";
 	print "$text{'ssl_letsdesc2'}<p>\n";
+	print &ui_table_start(undef, undef, 2);
+	print &ui_table_row($text{'ssl_certbot'}, $certbot_ui);
+	if (!$letsencrypt_cmd && $certbot_install_html) {
+		print &ui_table_row("", $certbot_install_html);
+		}
+	print &ui_table_end();
+	print "<p>\n";
+
 	print &ui_form_start("letsencrypt.cgi");
 	print &ui_table_start($text{'ssl_letsheader'}, undef, 2);
 
@@ -287,13 +310,22 @@ else {
 
 	# Apache vhost or other path
 	my @opts;
+	my $miniserv_on_80 = $miniserv{'port'} =~ /(^|\s)80($|\s)/;
 
 	my $webroot = $config{'letsencrypt_webroot'};
 	my $hasapache = &foreign_installed("apache");
+	if (!$webroot && !$hasapache &&
+	    $miniserv{'root'} &&
+	    $miniserv{'port'} =~ /(^|\s)80($|\s)/ &&
+	    -d $miniserv{'root'}) {
+		# If Webmin itself is serving HTTP on port 80, default to its
+		# document root for HTTP challenge files.
+		$webroot = $miniserv{'root'};
+		}
 	my $mode = $webroot eq 'dns' ? 3 :
 		   $webroot ? 2 :
 		   $hasapache ? 0 :
-		   $letsencrypt_cmd ? 4 : 2;
+		   ($letsencrypt_cmd && !$miniserv_on_80) ? 4 : 2;
 	if ($hasapache) {
 		&foreign_require("apache");
 		my $conf = &apache::get_config();
@@ -322,11 +354,31 @@ else {
 	if ($letsencrypt_cmd && &foreign_installed("bind8")) {
 		push(@opts, [ 3, $text{'ssl_letsmode3'} ]);
 		}
-	if ($letsencrypt_cmd) {
+	if ($letsencrypt_cmd && !$miniserv_on_80) {
 		push(@opts, [ 4, $text{'ssl_letsmode4'} ]);
 		}
-	print &ui_table_row($text{'ssl_letsmode'},
-		&ui_radio_table("webroot_mode", $mode, \@opts));
+	my $letsmode_ui = &ui_radio_table("webroot_mode", $mode, \@opts);
+	if ($letsencrypt_cmd && $miniserv_on_80) {
+		$letsmode_ui .= "<br>\n".$text{'ssl_letsmode4webmin'};
+		}
+	print &ui_table_row($text{'ssl_letsmode'}, $letsmode_ui);
+	my @mode_hints;
+	push(@mode_hints, $miniserv_on_80 ? $text{'ssl_letsmode_hintbusy'}
+					  : $text{'ssl_letsmode_hintfree'});
+	if ($miniserv_on_80) {
+		if ($miniserv{'root'} && -d $miniserv{'root'}) {
+			push(@mode_hints,
+			     &text('ssl_letsmode_hintwebminroot',
+				   $miniserv{'root'}));
+			}
+		else {
+			push(@mode_hints, $text{'ssl_letsmode_hintwebminroot_def'});
+			}
+		}
+	push(@mode_hints, $text{'ssl_letsmode_hintrootsrv'});
+	push(@mode_hints, &text('ssl_letsmode_hintcheckurl', $doms[0]));
+	my $mode_hint = join("<br>\n", @mode_hints);
+	print &ui_table_row("", $mode_hint);
 
 	# Install in Webmin now?
 	print &ui_table_row($text{'ssl_usewebmin'},
@@ -344,11 +396,28 @@ else {
 			    [ 1, $text{'ssl_staging1'} ] ]));
 
 	# Optional custom ACME server URL
+	my $acme_desc = $text{'ssl_acmeserver_desc'};
+	if (!$letsencrypt_cmd) {
+		$acme_desc .= "<br>\n".$text{'ssl_acmeserver_nocertbot'};
+		}
 	print &ui_table_row($text{'ssl_acmeserver'},
-		&ui_textbox("acme_server", $config{'letsencrypt_server'}, 60).
-		"<br>\n".$text{'ssl_acmeserver_desc'});
+		&ui_textbox("acme_server", $config{'letsencrypt_server'}, 60,
+			    !$letsencrypt_cmd).
+		"<br>\n".$acme_desc);
+
+	# Optional ACME account email
+	print &ui_table_row($text{'ssl_acmeemail'},
+		&ui_textbox("acme_email", $config{'letsencrypt_email'}, 50).
+		"<br>\n".$text{'ssl_acmeemail_desc'});
 
 	# Renewal option
+	my $force = defined($config{'letsencrypt_force'}) ?
+		    $config{'letsencrypt_force'} : 1;
+	print &ui_table_row($text{'ssl_letsforce'},
+		&ui_yesno_radio("force", $force)."<br>\n".
+		$text{'ssl_letsforce_desc'});
+
+	# Renewal schedule
 	my $job = &find_letsencrypt_cron_job();
 	my $renew = $job && $job->{'months'} =~ /^\*\/(\d+)$/ ? $1 : undef;
 	print &ui_table_row($text{'ssl_letsrenew'},
@@ -356,7 +425,7 @@ else {
 
 	print &ui_table_end();
 	print &ui_form_end([ [ undef, $text{'ssl_letsok'} ],
-			     [ 'save', $text{'ssl_letsonly'} ] ]);
+			     [ 'save', $text{'ssl_letssave'} ] ]);
 	}
 
 print ui_tabs_end_tab();

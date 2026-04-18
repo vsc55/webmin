@@ -23,7 +23,9 @@ use Socket;
 
 our @cs_codes = ( 'cs_page', 'cs_text', 'cs_table', 'cs_header', 'cs_link' );
 our @cs_names = map { $text{$_} } @cs_codes;
-my $can_http_ssl = &can_use_http_ssl();
+my $can_http_ssl = defined(&can_use_http_ssl) ? &can_use_http_ssl()
+		  : defined(&main::can_use_http_ssl) ? &main::can_use_http_ssl()
+		  : 0;
 my $http_proto = $can_http_ssl ? "https" : "http";
 
 our $osdn_host = "prdownloads.sourceforge.net";
@@ -2720,23 +2722,30 @@ my $webroot = $config{'letsencrypt_webroot'};
 my $mode = $config{'letsencrypt_mode'} || "web";
 my $size = $config{'letsencrypt_size'};
 my $server = $config{'letsencrypt_server'};
+my $email = $config{'letsencrypt_email'};
+my $force = defined($config{'letsencrypt_force'}) ?
+	    $config{'letsencrypt_force'} : 1;
 my $usewebmin = !$config{'letsencrypt_nouse'};
 if (!@doms) {
 	print "No domains saved to renew cert for!\n";
 	return;
 	}
-if (!$webroot) {
-	print "No webroot saved to renew cert for!\n";
-	return;
-	}
-elsif (!-d $webroot) {
-	print "Webroot $webroot does not exist!\n";
-	return;
+if ($mode eq "web") {
+	if (!$webroot) {
+		print "No webroot saved to renew cert for!\n";
+		return;
+		}
+	elsif (!-d $webroot) {
+		print "Webroot $webroot does not exist!\n";
+		return;
+		}
 	}
 my ($ok, $cert, $key, $chain) = &request_letsencrypt_cert(\@doms, $webroot,
-							  undef, $size, $mode,
+							  $email, $size, $mode,
 							  undef, undef, undef,
-							  undef, $server);
+							  undef, $server,
+							  undef, undef, undef,
+							  $force);
 if (!$ok) {
 	print "Failed to renew certificate : $cert\n";
 	return;
