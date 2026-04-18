@@ -427,6 +427,11 @@ ssl_letserr=Unfortunately, Let's Encrypt cannot be used on your system : $1.
 ssl_letserr2=Alternately, check the <a href='$1'>module configuration</a> page to ensure you are using the correct path to the <tt>letsencrypt</tt> command.
 ssl_letsdesc2=This page can be used to request a new certificate, which will overwrite any other currently have configured in Webmin. However, the Let's Encrypt service requires that your ownership of the certificate domain be validated by checking that this system hosts the website for the domain. This is done by placing a small temporary file in the website's document directory.
 ssl_letsheader=Options for new SSL certificate
+ssl_letssec_cert=Certificate details
+ssl_letssec_valid=Validation method
+ssl_letssec_acme=ACME server and account
+ssl_letssec_renew=Renewal behavior
+ssl_letssec_apply=Apply in Webmin
 ssl_letsdoms=Hostnames for certificate
 ssl_subset=Skip unverifiable hostnames?
 ssl_letsmode=Let's Encrypt validation method

@@ -298,7 +298,7 @@ else {
 	print "<p>\n";
 
 	print &ui_form_start("letsencrypt.cgi");
-	print &ui_table_start($text{'ssl_letsheader'}, undef, 2);
+	print &ui_table_start($text{'ssl_letssec_cert'}, undef, 2);
 
 	# For domain names
 	my @doms = $config{'letsencrypt_doms'} ?
@@ -308,7 +308,14 @@ else {
 		&ui_checkbox("subset", 1, $text{'ssl_subset'},
 			     $config{'letsencrypt_subset'}));
 
+	# SSL key size (certificate options)
+	print &ui_table_row($text{'ssl_size'},
+		&ui_opt_textbox("size", undef, 6, $text{'default'}).
+				" ".$text{'ssl_bits'});
+	print &ui_table_end();
+
 	# Apache vhost or other path
+	print &ui_table_start($text{'ssl_letssec_valid'}, undef, 2);
 	my @opts;
 	my $miniserv_on_80 = $miniserv{'port'} =~ /(^|\s)80($|\s)/;
 
@@ -379,17 +386,10 @@ else {
 	push(@mode_hints, &text('ssl_letsmode_hintcheckurl', $doms[0]));
 	my $mode_hint = join("<br>\n", @mode_hints);
 	print &ui_table_row("", $mode_hint);
+	print &ui_table_end();
 
-	# Install in Webmin now?
-	print &ui_table_row($text{'ssl_usewebmin'},
-		&ui_yesno_radio("use", !$config{'letsencrypt_nouse'}));
-
-	# SSL key size
-	print &ui_table_row($text{'ssl_size'},
-		&ui_opt_textbox("size", undef, 6, $text{'default'}).
-				" ".$text{'ssl_bits'});
-
-	# Staging mode
+	# ACME server and account
+	print &ui_table_start($text{'ssl_letssec_acme'}, undef, 2);
 	print &ui_table_row($text{'ssl_staging'},
 		&ui_radio("staging", 0,
 			  [ [ 0, $text{'ssl_staging0'} ],
@@ -409,8 +409,10 @@ else {
 	print &ui_table_row($text{'ssl_acmeemail'},
 		&ui_textbox("acme_email", $config{'letsencrypt_email'}, 50).
 		"<br>\n".$text{'ssl_acmeemail_desc'});
+	print &ui_table_end();
 
-	# Renewal option
+	# Renewal options
+	print &ui_table_start($text{'ssl_letssec_renew'}, undef, 2);
 	my $force = defined($config{'letsencrypt_force'}) ?
 		    $config{'letsencrypt_force'} : 1;
 	print &ui_table_row($text{'ssl_letsforce'},
@@ -422,7 +424,12 @@ else {
 	my $renew = $job && $job->{'months'} =~ /^\*\/(\d+)$/ ? $1 : undef;
 	print &ui_table_row($text{'ssl_letsrenew'},
 		&ui_opt_textbox("renew", $renew, 4, $text{'ssl_letsnotrenew'}));
+	print &ui_table_end();
 
+	# Apply certificate in Webmin
+	print &ui_table_start($text{'ssl_letssec_apply'}, undef, 2);
+	print &ui_table_row($text{'ssl_usewebmin'},
+		&ui_yesno_radio("use", !$config{'letsencrypt_nouse'}));
 	print &ui_table_end();
 	print &ui_form_end([ [ undef, $text{'ssl_letsok'} ],
 			     [ 'save', $text{'ssl_letssave'} ] ]);
